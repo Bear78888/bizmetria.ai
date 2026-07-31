@@ -21,7 +21,7 @@ After this record merged through PR [#9](https://github.com/Bear78888/bizmetria.
 - `OPEN-001`, `OPEN-003`, and `OPEN-008` are closed;
 - `OPEN-002` and `OPEN-007` are closed for product-contract purposes while their legal copy and implementation remain assigned downstream;
 - `PS-003` becomes `READY`;
-- `G1` remains not passed until `PS-003` is independently reviewed and merged;
+- `G1` passes only after `PS-003` is independently reviewed and merged; that condition was satisfied by PR #10;
 - architecture, contracts, implementation, staging, and Stripe test-mode work may proceed;
 - live Stripe charges, real paid orders, and public paid availability remain disabled until every pre-live dependency in Section 4 is satisfied.
 
@@ -91,8 +91,8 @@ Sensitive personal details, credentials, tax IDs, payment information, or privat
 | Missing entity, support, staffing, qualified legal/tax review, and live Stripe credentials | VALIDLY DEFERRED — blocks live activation, not PS-003 or non-live build work |
 | Decision Log updated with approved entries | PASS — DEC-017 through DEC-026 are canonical through merged PR #9 |
 | `MC-003 — Product Decision Gate` | APPROVED — PR #9 merged and verified |
-| `PS-003` product requirements merged | IN REVIEW — branch `task/ws-02/PS-003-product-requirements-v1` |
-| `G1 — Product Baseline Approved` | NOT PASSED |
+| `PS-003` product requirements merged | APPROVED — PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10), merge SHA `68901a35e7f465ed4990881645847092e6fdd2d1` |
+| `G1 — Product Baseline Approved` | PASS — PS-003 merged, owner decisions recorded, and LS-001 available |
 
 ## 7. Completion procedure
 
@@ -105,7 +105,7 @@ Completion result:
 5. `OPEN-001`, `OPEN-002`, `OPEN-003`, `OPEN-007`, and `OPEN-008` have product-contract dispositions;
 6. PR #9 passed independent final review and merged;
 7. `PS-003` started from verified post-merge `main` SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb`;
-8. `G1` cannot pass until `PS-003` is reviewed and merged;
+8. `G1` passed after `PS-003` was independently reviewed and merged;
 9. no real charge or paid customer is accepted while a Section 4 pre-live dependency remains unmet.
 
 ## 8. Handoff Summary
@@ -119,4 +119,4 @@ Completion result:
 - **Authority blocker:** None for product requirements or non-live implementation.
 - **Confirmed live-launch blockers:** No legal entity/business address; support identity unassigned; tax, Refund Policy, and age-rule reviews not arranged; report reviewers and consultation providers unassigned; live Stripe credentials intentionally not provisioned.
 - **Checkpoint PR:** Merged [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
-- **Next action:** Independently review and merge `PS-003 — Product Requirements Baseline v1.0` without enabling real payments, then evaluate `G1`.
+- **Next action:** Execute `FA-001` and `PS-004` as the first post-G1 contracts without enabling real payments.

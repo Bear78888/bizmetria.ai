@@ -14,11 +14,9 @@
 
 ## Active task index
 
-| Workstream | Task ID | Owner | Branch | PR | Affected files | Start date | Status | Expected handoff |
-|---|---|---|---|---|---|---|---|---|
-| 02 — Product Strategy | `PS-003` | Product Strategy | `task/ws-02/PS-003-product-requirements-v1` | [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) | Product Requirements Baseline; global/control and WS01/02 state | 2026-07-31 | REVIEW | Independent review, merge, resulting `main` verification, and `G1` closeout |
+No execution task is active in the approved post-`G1` state. `FA-001` and `PS-004` are `READY`, not started; each requires its own branch and draft PR before becoming active. The service branch that publishes this closeout is historical when this record reaches `main`.
 
-`PS-001`, `LS-001`, `PS-002`, and `MC-003` are merged and approved. PS-003 owns the only active task branch. `G1` and Phase 2 remain gated until PS-003 merges and the resulting `main` is verified.
+`PS-001`, `LS-001`, `PS-002`, `MC-003`, and `PS-003` are merged and approved. `G1` is `PASS`. Live payment, real-order, and public-launch work remains blocked by the named pre-live gates.
 
 ## Non-active preserved branches
 
@@ -29,6 +27,7 @@
 - `task/ws-01/MC-003-owner-decision-gate` — merged through PR #9; historical.
 - `task/ws-02/PS-001-product-blueprint-v0-1` — merged through PR #5; historical.
 - `task/ws-02/PS-002-owner-decision-package` — merged through PR #8; historical.
+- `task/ws-02/PS-003-product-requirements-v1` — merged through PR #10; historical.
 - `task/ws-11/LS-001-legal-data-baseline` — merged through PR #6; historical.
 - `test/chatgpt-write-access` — preserved test branch; do not modify or delete.
 

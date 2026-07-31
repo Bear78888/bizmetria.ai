@@ -2,7 +2,7 @@
 
 **Workstream:** 11 — Legal, Privacy and Security
 **Status:** `APPROVED`
-**Last updated:** 2026-07-30
+**Last updated:** 2026-07-31
 **Current task:** `LS-001 — Legal and Data Inventory Baseline` complete; `LS-002` planned
 **Current branch:** None
 **Current PR:** None
@@ -21,7 +21,7 @@ No Legal, Privacy and Security execution task is in progress.
 
 ## Not started
 
-`LS-002 — Consent, Claims, and Data Requirements` remains gated on `G1`, `FA-001`, and `PS-004`.
+`LS-002 — Consent, Claims, and Data Requirements` remains gated on approved `FA-001` and `PS-004`; `G1` has passed.
 
 ## Open decisions
 
@@ -29,7 +29,7 @@ Refund Policy, jurisdiction-specific review, vendors/processors, and retention p
 
 ## Blockers
 
-`LS-002` remains dependency-blocked. Qualified review of flagged legal questions is still required before the applicable production gates; exact retention, jurisdiction, Refund Policy, and vendors remain open.
+`LS-002` remains dependency-blocked only on FA-001 and PS-004. Qualified review of flagged legal questions is still required before the applicable production gates; exact retention, jurisdiction, Refund Policy text, and vendors remain open.
 
 ## Dependencies
 
@@ -49,8 +49,8 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 
 ## Exact next action
 
-Supply the approved LS-001 constraints to PS-002 and wait for `G1`, approved `FA-001`, and approved `PS-004` before assigning LS-002.
+Supply LS-001 constraints to FA-001 and PS-004; assign LS-002 only after both contracts are approved.
 
 ## Latest session checkpoint
 
-On 2026-07-30, LS-001 was approved in verified `main` SHA `b6174f1325136bc69a9859925c570e5770972991`. No jurisdiction, legal conclusion, retention period, Refund Policy, vendor, processor role, or final legal text is approved by that result.
+On 2026-07-31, G1 passed after PS-003 merged at `68901a35e7f465ed4990881645847092e6fdd2d1`. No jurisdiction, legal conclusion, retention period, Refund Policy text, vendor role, or final legal text is approved by that result.

@@ -1,15 +1,19 @@
 # Handoff
 
 **Workstream:** 04 — Free Audit and Lead Scoring
-**Last updated:** 2026-07-30
+**Last updated:** 2026-07-31
 
 ## Goal of latest work
 
-Initialize the permanent GitHub operating context for this workstream.
+Hand the approved post-G1 baseline and recovered audit drafts into FA-001.
 
 ## Completed
 
 Canonical brief, state, queue, decision index, artifact index, handoff, changelog, and deliverables policy prepared under MC-001.
+
+- PS-003 independently reviewed and merged through PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) at `68901a35e7f465ed4990881645847092e6fdd2d1`.
+- `G1` passed and FA-001 became ready.
+- Recovered question and scoring documents remain preserved as unapproved inputs.
 
 ## Not completed
 
@@ -29,24 +33,24 @@ Detailed point table, Q09/Q10 lookup, incomplete answers, and display threshold.
 
 ## Blockers
 
-No undisclosed blocker. Ownership and dependencies are recorded in `CURRENT_STATE.md`.
+No FA-001 blocker. Production legal, tax, support, staffing, vendor/security, release, and live Stripe dependencies remain outside this contract and fail closed.
 
 ## Exact next action
 
-After Product Blueprint input is stable, assign a bounded FA-prefixed task to formalize and test TASK-002.
+Start FA-001 on `task/ws-04/FA-001-free-audit-score-contract` from verified post-G1 `main`.
 
 ## Handoff target
 
-Master Orchestrator and the next explicitly assigned temporary Workstream Chat.
+Free Audit and Lead Scoring executor for FA-001; later LS-002, AE-001, UX, Backend, and QA consumers.
 
 ## Branch
 
-`architecture/master-orchestrator-workstreams-v1`
+None; `architecture/master-orchestrator-workstreams-v1` is historical.
 
 ## PR
 
-[#2](https://github.com/Bear78888/bizmetria.ai/pull/2)
+None active. PS-003 source PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) is merged.
 
 ## Validation results
 
-PASS — all eight required elements, required sections, task prefixes, state fields, and relative links validated under MC-001.
+PASS — G1 dependency, approved PS-003 source, recovered-input presence, bounded target, acceptance vectors, concurrency scope, and live-payment boundary verified.

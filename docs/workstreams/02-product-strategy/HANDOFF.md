@@ -5,7 +5,7 @@
 
 ## Goal of latest work
 
-Convert the merged MC-003 decisions into the stable, testable `PS-003 — Product Requirements Baseline v1.0` and prepare the `G1` review.
+Close approved PS-003 and hand the stable baseline to `PS-004` and the other Phase 2 contracts.
 
 ## Completed
 
@@ -18,10 +18,12 @@ Convert the merged MC-003 decisions into the stable, testable `PS-003 — Produc
 - Verified and used merged MC-003 PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9), merge SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
 - Created `BIZMETRIA_PRODUCT_REQUIREMENTS_v1.0.md` with stable IDs, verification methods, product states, commercial/operating rules, and downstream ownership.
 - Defined Stripe test/live isolation, externalized-secret rules, webhook/idempotency requirements, and a fail-closed 14-item pre-live register.
+- Passed independent remote review and merged PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) at `68901a35e7f465ed4990881645847092e6fdd2d1`.
+- Recorded `G1` as `PASS` and made PS-004 ready.
 
 ## Not completed
 
-Independent review and merge of PS-003 remain incomplete. `G1` remains not passed. Pre-live entity, support, staffing, legal/tax, vendor/security, release, and credential evidence remain intentionally deferred.
+PS-004 and later Phase 2 contracts remain incomplete. Pre-live entity, support, staffing, legal/tax, vendor/security, release, and credential evidence remain intentionally deferred.
 
 ## Changed files
 
@@ -41,20 +43,20 @@ No Product Strategy technical blocker. Named pre-live dependencies remain explic
 
 ## Exact next action
 
-Independently review draft PR #10, merge it only after a clean gate, verify `main`, then record `G1` and start `FA-001` plus `PS-004`.
+Start PS-004 from verified post-G1 `main` on its scoped branch while FA-001 runs in its separate workstream.
 
 ## Handoff target
 
-Independent PS-003 reviewer, then Master Control for `G1` closeout.
+Product Strategy for `PS-004`; all downstream Phase 2 consumers for approved PS-003.
 
 ## Branch
 
-`task/ws-02/PS-003-product-requirements-v1`
+None; `task/ws-02/PS-003-product-requirements-v1` is historical.
 
 ## PR
 
-Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10). MC-003 source PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) merged at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
+Merged [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) at `68901a35e7f465ed4990881645847092e6fdd2d1`.
 
 ## Validation results
 
-PENDING full validation — requirement-ID uniqueness, approved-decision trace, downstream coverage, Stripe and live-gate safety, relative links, Markdown/diff checks, remote/local equality, and independent PR review.
+PASS — 162/162 unique requirement IDs, 14/14 live dependencies, DEC-001–DEC-026 trace, downstream coverage, Stripe and live-gate safety, 60 relative links, Markdown/diff checks, exact remote/local diff/tree equality, independent review, protected merge, and resulting `main` verification.

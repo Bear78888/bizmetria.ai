@@ -56,6 +56,14 @@
 - **Approved result:** D01-B/D02-A/D03-A/D04-B/D05-B/D06-B/D07-B/D08-A/D09-A, nationwide U.S. intent, confirmed operating calendar, and Stripe-ready test/live architecture.
 - **Review status:** Independently reviewed, merged, and verified. Pre-live dependencies remain enforceable launch blockers.
 
+## Gate `G1 — Product Baseline Approved`
+
+- **Status:** `PASS`
+- **Recorded:** 2026-07-31
+- **Evidence:** MC-003 and LS-001 approved; PS-003 independently reviewed and merged through PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10), merge SHA `68901a35e7f465ed4990881645847092e6fdd2d1`.
+- **Result:** `FA-001` and `PS-004` are `READY`; later Phase 2 tasks retain their named dependencies.
+- **Boundary:** No real payment, public paid launch, or live Stripe activation is authorized.
+
 ## Planned Master Control gates
 
 | Task | Purpose | Dependency |

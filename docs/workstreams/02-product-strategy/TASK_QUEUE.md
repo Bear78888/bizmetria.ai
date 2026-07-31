@@ -40,16 +40,32 @@
 
 ## `PS-003 — Product Requirements Baseline v1.0`
 
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Priority:** High
 - **Objective:** Incorporate approved MC-003 decisions into stable Phase 1 product requirements.
 - **Dependency:** Approved and merged `MC-003`, PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9), merge SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
 - **Expected output:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_PRODUCT_REQUIREMENTS_v1.0.md`.
 - **Required inputs:** DEC-001–DEC-026, Product Blueprint v0.1, Legal/Data Baseline v0.1, Owner Decision Package v0.1, and Owner Decision Record v0.1.
 - **Acceptance criteria:** Stable testable requirements for every approved product/commercial rule; explicit pre-live dependencies; Stripe test/live and secret boundaries; no unresolved Phase 1 ambiguity; complete Handoff Summary.
-- **Branch:** `task/ws-02/PS-003-product-requirements-v1`.
-- **PR:** Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10).
-- **Review status:** Published; independent PR review pending. `G1` is not passed.
+- **Historical branch:** `task/ws-02/PS-003-product-requirements-v1`.
+- **Evidence:** PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10), merge SHA `68901a35e7f465ed4990881645847092e6fdd2d1`.
+- **Review status:** Independently reviewed, merged, and verified; `G1` is `PASS`.
+
+
+## `PS-004 — Paid Assessment Content Contract`
+
+- **Status:** `READY`
+- **Priority:** High
+- **Objective:** Define the minimum necessary paid questionnaire and interview content required to produce the approved assessment deliverables.
+- **Required inputs:** Approved PS-003 Product Requirements Baseline v1.0, LS-001 Legal/Data Baseline v0.1, and `G1 — PASS`.
+- **Expected output:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_PAID_ASSESSMENT_CONTRACT_v1.0.md`.
+- **Must define:** Extended questionnaire, interview objectives, evidence requirements, required/optional fields, partial-completion and recovery behavior, completion criteria, language parity, and customer-facing scope.
+- **Acceptance criteria:** Supports every approved paid deliverable; collects no unnecessary data; every field has purpose/evidence metadata; `ASSESSMENT_INPUTS_COMPLETE` is deterministic; incomplete/contradictory evidence is explicit; Handoff Summary is complete.
+- **Dependencies:** `G1 — PASS`.
+- **Planned branch:** `task/ws-02/PS-004-paid-assessment-contract`.
+- **Owner:** Product Strategy.
+- **Concurrency:** May run with FA-001 because the target and local operating files do not overlap.
+- **Review status:** Not started; no branch or PR exists.
 
 
 ## Global portfolio reference

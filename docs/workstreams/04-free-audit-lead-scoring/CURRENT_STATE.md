@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 04 — Free Audit and Lead Scoring
-**Status:** `NOT STARTED`
-**Last updated:** 2026-07-30
-**Current task:** TASK-002 — Formal Free Audit Specification (global portfolio task; not assigned)
-**Current branch:** None for this workstream; see `../../control/ACTIVE_WORK.md` for cross-functional work
-**Current PR:** None for this workstream
+**Status:** `READY`
+**Last updated:** 2026-07-31
+**Current task:** `FA-001 — Free Audit and Score Contract` — `READY`
+**Current branch:** None
+**Current PR:** None
 
 ## Approved baseline
 
@@ -17,11 +17,11 @@ Two recovered draft specifications exist and are preserved for testing.
 
 ## In progress
 
-No workstream-specific task is in progress. MC-001 affects governance only.
+No workstream-specific task is in progress. FA-001 is ready but has no branch or PR.
 
 ## Not started
 
-Formal schema approval, calibration, bilingual copy, and deterministic regression tests.
+Formal schema approval, calibration, bilingual copy, and deterministic regression tests remain to be completed by FA-001.
 
 ## Open decisions
 
@@ -29,11 +29,11 @@ Detailed point table, Q09/Q10 lookup, incomplete answers, and display threshold.
 
 ## Blockers
 
-No hidden blocker is recorded. Unmet dependencies and unassigned ownership are shown explicitly.
+No blocker remains. `G1` passed after PS-003 merged through PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) at `68901a35e7f465ed4990881645847092e6fdd2d1`.
 
 ## Dependencies
 
-TASK-001, Legal constraints, UX requirements, and QA calibration.
+Approved PS-003 Product Requirements Baseline, approved LS-001 Legal/Data Baseline, recovered audit drafts, and `G1 — PASS`.
 
 ## Files currently relevant
 
@@ -49,8 +49,8 @@ TASK-001, Legal constraints, UX requirements, and QA calibration.
 
 ## Exact next action
 
-After Product Blueprint input is stable, assign a bounded FA-prefixed task to formalize and test TASK-002.
+Start FA-001 from verified post-G1 `main` on `task/ws-04/FA-001-free-audit-score-contract`.
 
 ## Latest session checkpoint
 
-On 2026-07-30, MC-001 created this evidence-based initial state from merged `main` at `300c01050820953d2769a91a77a39ae3edcd7f99`. No absent deliverable, assigned executor, deadline, or approval is implied.
+On 2026-07-31, `G1` passed and FA-001 became ready. The recovered detailed drafts remain unapproved inputs until FA-001 tests, approves, or replaces them.

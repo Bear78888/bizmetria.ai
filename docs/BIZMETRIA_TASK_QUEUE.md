@@ -95,14 +95,43 @@ As of: 2026-07-31
 ### `PS-003 — Product Requirements Baseline v1.0`
 
 - **Owner:** Product Strategy
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Dependency:** Approved and merged `MC-003`, merge SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
 - **Outcome:** Convert the approved decisions, customer journey, legal boundaries, Stripe-ready rule, KPIs, capacity, and pre-live deferrals into stable, testable product requirements.
 - **Target:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_PRODUCT_REQUIREMENTS_v1.0.md`.
-- **Branch:** `task/ws-02/PS-003-product-requirements-v1`.
-- **PR:** Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10).
-- **Guardrail:** `G1` remains not passed until PS-003 is independently reviewed and merged; no live payment activation is part of PS-003.
-- **Review status:** Published; independent review pending.
+- **Historical branch:** `task/ws-02/PS-003-product-requirements-v1`.
+- **Evidence:** PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10), merge SHA `68901a35e7f465ed4990881645847092e6fdd2d1`.
+- **Guardrail:** `G1` was not passed until PS-003 was independently reviewed and merged; no live payment activation was part of PS-003.
+- **Review status:** Independently reviewed, merged, and verified; no live payment activation was performed.
+
+## Gate `G1 — Product Baseline Approved`
+
+- **Status:** `PASS`
+- **Recorded:** 2026-07-31
+- **Evidence:** Approved MC-003, approved LS-001, and independently reviewed PS-003 merged through PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) at `68901a35e7f465ed4990881645847092e6fdd2d1`.
+- **Result:** Stable product requirements are available to every downstream Phase 2 contract.
+- **Guardrail:** `G1` authorizes contract work only; it does not activate live Stripe, real paid orders, or public paid availability.
+
+## Next execution window
+
+### `FA-001 — Free Audit and Score Contract`
+
+- **Owner:** Free Audit and Lead Scoring
+- **Status:** `READY`
+- **Dependency:** `G1 — PASS`.
+- **Target:** `docs/workstreams/04-free-audit-lead-scoring/deliverables/BIZMETRIA_FREE_AUDIT_CONTRACT_v1.0.md`.
+- **Outcome:** Canonical bilingual 11-question schema, deterministic point table, result-selection rules, locked-content boundary, and regression vectors.
+- **Planned branch:** `task/ws-04/FA-001-free-audit-score-contract`.
+
+### `PS-004 — Paid Assessment Content Contract`
+
+- **Owner:** Product Strategy
+- **Status:** `READY`
+- **Dependency:** `G1 — PASS`.
+- **Target:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_PAID_ASSESSMENT_CONTRACT_v1.0.md`.
+- **Outcome:** Extended questionnaire, interview objectives, evidence requirements, fields, partial-completion behavior, completion criteria, and customer-facing scope.
+- **Planned branch:** `task/ws-02/PS-004-paid-assessment-contract`.
+- **Concurrency:** May run with `FA-001`; target and operating files do not overlap.
 
 ## Planned delivery catalog
 
