@@ -265,6 +265,11 @@ Tasks may be paired only where their inputs and files do not overlap.
 
 Pass only when Phase 2 contracts are merged, versioned, mutually consistent, and accepted by their downstream consumers. Schema-breaking changes after this gate require explicit versioning and impact review.
 
+- **Status:** `NOT PASSED`
+- **Current evidence:** FA-001 merged through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12); PS-004 merged through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13).
+- **Next required task:** `LS-002 — Consent, Claims, and Data Requirements`. Later Phase 2 contracts retain their named dependencies.
+- **Boundary:** These approved inputs do not authorize live Stripe activation, real paid orders, or public paid launch.
+
 # Phase 3 — Experience, voice, architecture, and vendor decisions
 
 ## `UX-001 — Product Experience Architecture`
@@ -608,8 +613,9 @@ BizMetria receives status `AD READY` only when all conditions below are true:
 1. `MC-002` is merged and `G0` is `PASS` — complete.
 2. Assign `PS-001` and `LS-001` as the first two non-overlapping execution tasks — complete.
 3. Review and merge each result independently — complete through PR #5 and PR #6.
-4. Run `PS-002`, then `MC-003`, then `PS-003` — PS-002 is complete; MC-003 owner input is complete in PR #9; PS-003 is next after merge.
-5. Do not start Phase 2 implementation until `G1` passes.
+4. Run `PS-002`, then `MC-003`, then `PS-003` — complete through PR #10.
+5. Pass `G1`, then complete `FA-001` and `PS-004` independently — complete through PR #12 and PR #13.
+6. Run `LS-002` next; do not pass `G2` until every Phase 2 contract is merged and mutually consistent.
 
 ## Handoff Summary
 
@@ -618,7 +624,7 @@ BizMetria receives status `AD READY` only when all conditions below are true:
 - **Files changed:** Roadmap plus synchronized global and Workstream 01 governance records.
 - **Governance result:** Gate `G0` is `PASS`; `PS-001`, `LS-001`, and `PS-002` are `APPROVED`; MC-003 has explicit owner decisions and named pre-live deferrals pending PR #9 merge.
 - **Decisions approved:** No new product decision; `MC-001` and `DEC-016` are recognized as approved after PR #2 merge.
-- **Open questions:** `OPEN-001`, `OPEN-002`, `OPEN-003`, `OPEN-007`, and `OPEN-008` have MC-003 dispositions; `OPEN-004`, `OPEN-005`, `OPEN-006`, and `OPEN-009` remain routed to later gates.
+- **Open questions:** `OPEN-001`, `OPEN-002`, `OPEN-003`, `OPEN-007`, `OPEN-008`, and `OPEN-009` have approved dispositions; `OPEN-004`, `OPEN-005`, and `OPEN-006` remain routed to later gates.
 - **Dependencies:** Approved MC-001 architecture and merged recovery baseline.
 - **Validation:** Task-ID uniqueness, link resolution, dependency reachability, invariant scan, no secrets/personal data, and complete diff review passed before approval.
-- **Recommended next task:** Merge the reviewed MC-003 PR #9, then execute `PS-003 — Product Requirements Baseline v1.0` without enabling live payments.
+- **Recommended next task:** Execute `LS-002 — Consent, Claims, and Data Requirements` from the approved FA-001 and PS-004 inputs without enabling live payments.

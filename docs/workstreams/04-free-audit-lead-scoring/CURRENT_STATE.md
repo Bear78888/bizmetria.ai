@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 04 — Free Audit and Lead Scoring
-**Status:** `REVIEW`
+**Status:** `APPROVED`
 **Last updated:** 2026-07-31
-**Current task:** `FA-001 — Free Audit and Score Contract` — `REVIEW`
-**Current branch:** `task/ws-04/FA-001-free-audit-score-contract`
-**Current PR:** [#12](https://github.com/Bear78888/bizmetria.ai/pull/12)
+**Current task:** `FA-001 — Free Audit and Score Contract` — `APPROVED`
+**Current branch:** None; `task/ws-04/FA-001-free-audit-score-contract` is historical
+**Current PR:** None; PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12) is merged
 
 ## Approved baseline
 
@@ -17,7 +17,7 @@ The v1.0 contract now defines the bilingual 11-question schema, stable answer ID
 
 ## In progress
 
-FA-001 is undergoing review on its isolated task branch. It is not canonical until independent review and merge.
+No Workstream 04 task is in progress. FA-001 is canonical in `main`.
 
 ## Not started
 
@@ -25,11 +25,11 @@ Backend/frontend implementation, executable automated tests, and production lega
 
 ## Open decisions
 
-No v1 scoring decision remains open in the task branch. OPEN-009 closes only after the contract is merged and its status is synchronized. Public legal/consent copy, retention, vendors, and production activation remain downstream.
+No v1 scoring decision remains open. OPEN-009 is closed by `ai-opportunity-score/1.0.0`. Public legal/consent copy, retention, vendors, and production activation remain downstream.
 
 ## Blockers
 
-No content blocker. Independent PR review and merge are required. Production legal, tax, support, staffing, vendor/security, release, and live Stripe dependencies remain fail closed.
+No FA-001 blocker remains. Production legal, tax, support, staffing, vendor/security, release, and live Stripe dependencies remain fail closed.
 
 ## Dependencies
 
@@ -49,8 +49,8 @@ Approved PS-003 Product Requirements Baseline, approved LS-001 Legal/Data Baseli
 
 ## Exact next action
 
-Publish one draft PR, verify the complete remote diff and regression arithmetic, then merge only after the review gate passes.
+Supply the approved contract to LS-002, AE-001, UX, Backend, Analytics, and QA; do not alter score v1 without versioned impact review.
 
 ## Latest session checkpoint
 
-On 2026-07-31, FA-001 converted the recovered inputs into a 699-line v1.0 review contract with exact bilingual IDs and tested 0/24/25/44/45/64/65/79/80/100 vectors. No live payment or secret was introduced.
+On 2026-07-31, FA-001 passed independent remote review and merged through PR #12 at `97446522cf9eba8e63fe1b1887439fb77adabf5f`. OPEN-009 is closed; no live payment or secret was introduced.

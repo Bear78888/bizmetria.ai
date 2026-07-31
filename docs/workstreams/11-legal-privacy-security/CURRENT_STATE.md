@@ -1,9 +1,9 @@
 # Current State
 
 **Workstream:** 11 — Legal, Privacy and Security
-**Status:** `APPROVED`
+**Status:** `READY`
 **Last updated:** 2026-07-31
-**Current task:** `LS-001 — Legal and Data Inventory Baseline` complete; `LS-002` planned
+**Current task:** `LS-002 — Consent, Claims, and Data Requirements` — `READY`
 **Current branch:** None
 **Current PR:** None
 
@@ -15,13 +15,15 @@ Separate email/SMS consent, data minimization, non-financial score disclaimer, n
 
 A complete Legal and Data Inventory Baseline v0.1 was independently reviewed and merged through PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6) at `b6174f1325136bc69a9859925c570e5770972991`. It remains issue-spotting and implementable guardrails, not final legal advice.
 
+FA-001 merged through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), and PS-004 merged through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13). Both named LS-002 inputs are approved.
+
 ## In progress
 
 No Legal, Privacy and Security execution task is in progress.
 
 ## Not started
 
-`LS-002 — Consent, Claims, and Data Requirements` remains gated on approved `FA-001` and `PS-004`; `G1` has passed.
+`LS-002 — Consent, Claims, and Data Requirements` is ready; no branch or draft PR exists yet.
 
 ## Open decisions
 
@@ -29,11 +31,11 @@ Refund Policy, jurisdiction-specific review, vendors/processors, and retention p
 
 ## Blockers
 
-`LS-002` remains dependency-blocked only on FA-001 and PS-004. Qualified review of flagged legal questions is still required before the applicable production gates; exact retention, jurisdiction, Refund Policy text, and vendors remain open.
+No LS-002 dependency blocker remains. Qualified review of flagged legal questions is still required before the applicable production gates; exact retention, jurisdiction, Refund Policy text, and vendors remain open.
 
 ## Dependencies
 
-Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), merge SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`; current recovered customer journey. Later vendor contracts remain future inputs.
+`G1 — PASS`; approved FA-001 PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), merge SHA `97446522cf9eba8e63fe1b1887439fb77adabf5f`; approved PS-004 PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13), merge SHA `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b`. Later vendor contracts and qualified reviews remain future inputs.
 
 ## Files currently relevant
 
@@ -49,8 +51,8 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 
 ## Exact next action
 
-Supply LS-001 constraints to FA-001 and PS-004; assign LS-002 only after both contracts are approved.
+Start LS-002 from verified `main` on `task/ws-11/LS-002-consent-claims-data-requirements`.
 
 ## Latest session checkpoint
 
-On 2026-07-31, G1 passed after PS-003 merged at `68901a35e7f465ed4990881645847092e6fdd2d1`. No jurisdiction, legal conclusion, retention period, Refund Policy text, vendor role, or final legal text is approved by that result.
+On 2026-07-31, FA-001 and PS-004 merged and LS-002 became ready. No jurisdiction, legal conclusion, retention period, Refund Policy text, vendor role, or final legal text is approved by that dependency result.

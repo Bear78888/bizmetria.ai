@@ -5,7 +5,7 @@
 
 ## Goal of latest work
 
-Deliver the canonical paid questionnaire, interview evidence, recovery, and input-completion contract for independent review.
+Approve and hand off the canonical paid questionnaire, interview evidence, recovery, and input-completion contract.
 
 ## Completed
 
@@ -26,7 +26,7 @@ Deliver the canonical paid questionnaire, interview evidence, recovery, and inpu
 
 ## Not completed
 
-Independent PR review and merge. Later Phase 2 implementation contracts and all pre-live entity, support, staffing, legal/tax, vendor/security, release, and credential evidence remain intentionally deferred.
+Later Phase 2 implementation contracts and all pre-live entity, support, staffing, legal/tax, vendor/security, release, and credential evidence remain intentionally deferred.
 
 ## Changed files
 
@@ -42,23 +42,23 @@ No PS-004 content ambiguity remains. Production legal/recording text, enabled re
 
 ## Blockers
 
-Review and merge only. Named pre-live dependencies remain explicit and fail closed; none blocks contract, architecture, test-mode implementation, or staging work.
+No PS-004 contract blocker remains. Named pre-live dependencies remain explicit and fail closed; none blocks contract, architecture, test-mode implementation, or staging work.
 
 ## Exact next action
 
-Publish the draft PR, compare complete remote/local trees and diffs, run the independent review gate, and merge if clean.
+Supply the approved contract to LS-002 and later UX, Voice, Backend, Analysis, Report, Lifecycle, and QA consumers.
 
 ## Handoff target
 
-Independent reviewer, then LS-002, UX, Voice, Backend, Analysis, Report, Lifecycle, and QA consumers.
+LS-002, UX, Voice, Backend, Analysis, Report, Lifecycle, and QA consumers.
 
 ## Branch
 
-`task/ws-02/PS-004-paid-assessment-contract`
+None active; `task/ws-02/PS-004-paid-assessment-contract` is historical.
 
 ## PR
 
-[Draft PR #13](https://github.com/Bear78888/bizmetria.ai/pull/13)
+Merged PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13), merge SHA `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b`.
 
 ## Validation results
 

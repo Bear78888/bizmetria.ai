@@ -7,7 +7,7 @@
 
 ## `FA-001 — Free Audit and Score Contract`
 
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Priority:** High
 - **Objective:** Convert the recovered free-audit inputs and approved PS-003 boundaries into the canonical bilingual scoring contract.
 - **Required inputs:** `G1 — PASS`, approved PS-003, approved LS-001, `BIZMETRIA_FREE_AUDIT_QUESTIONS_RECOVERED_v0.1.md`, and `BIZMETRIA_AI_OPPORTUNITY_SCORE_RECOVERED_v0.1.md`.
@@ -18,7 +18,9 @@
 - **Planned branch:** `task/ws-04/FA-001-free-audit-score-contract`.
 - **Owner:** Free Audit and Lead Scoring.
 - **Concurrency:** May run with PS-004 because the targets and local operating files do not overlap.
-- **Review status:** Contract drafted and locally validated on `task/ws-04/FA-001-free-audit-score-contract`; under review in draft PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12).
+- **Historical branch:** `task/ws-04/FA-001-free-audit-score-contract`.
+- **Evidence:** PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), merge SHA `97446522cf9eba8e63fe1b1887439fb77adabf5f`.
+- **Review status:** Independently reviewed, merged, and verified; OPEN-009 is closed.
 
 
 ## Global portfolio reference
@@ -26,7 +28,7 @@
 - **ID:** `TASK-002`
 - **Status:** See [Global Task Queue](../../BIZMETRIA_TASK_QUEUE.md).
 - **Execution mapping:** `FA-001`.
-- **Assignment:** FA-001 is active on its isolated branch; the global reference remains historical until merge and closeout.
+- **Assignment:** FA-001 execution is complete; the global reference remains historical.
 - **Rule:** Execution occurs under FA-001; the global TASK-002 ID remains a historical portfolio reference.
 
 

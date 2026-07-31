@@ -54,7 +54,7 @@
 
 ## `PS-004 — Paid Assessment Content Contract`
 
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Priority:** High
 - **Objective:** Define the minimum necessary paid questionnaire and interview content required to produce the approved assessment deliverables.
 - **Required inputs:** Approved PS-003 Product Requirements Baseline v1.0, LS-001 Legal/Data Baseline v0.1, and `G1 — PASS`.
@@ -65,7 +65,9 @@
 - **Planned branch:** `task/ws-02/PS-004-paid-assessment-contract`.
 - **Owner:** Product Strategy.
 - **Concurrency:** May run with FA-001 because the target and local operating files do not overlap.
-- **Review status:** Contract drafted and locally validated on `task/ws-02/PS-004-paid-assessment-contract`; under review in draft PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13).
+- **Historical branch:** `task/ws-02/PS-004-paid-assessment-contract`.
+- **Evidence:** PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13), merge SHA `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b`.
+- **Review status:** Independently reviewed, merged, and verified.
 
 
 ## Global portfolio reference

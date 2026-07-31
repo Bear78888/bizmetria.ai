@@ -112,26 +112,39 @@ As of: 2026-07-31
 - **Result:** Stable product requirements are available to every downstream Phase 2 contract.
 - **Guardrail:** `G1` authorizes contract work only; it does not activate live Stripe, real paid orders, or public paid availability.
 
-## Next execution window
+## Phase 2 approved inputs and next execution
 
 ### `FA-001 — Free Audit and Score Contract`
 
 - **Owner:** Free Audit and Lead Scoring
-- **Status:** `READY`
+- **Status:** `APPROVED`
 - **Dependency:** `G1 — PASS`.
 - **Target:** `docs/workstreams/04-free-audit-lead-scoring/deliverables/BIZMETRIA_FREE_AUDIT_CONTRACT_v1.0.md`.
 - **Outcome:** Canonical bilingual 11-question schema, deterministic point table, result-selection rules, locked-content boundary, and regression vectors.
-- **Planned branch:** `task/ws-04/FA-001-free-audit-score-contract`.
+- **Historical branch:** `task/ws-04/FA-001-free-audit-score-contract`.
+- **Evidence:** PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), merge SHA `97446522cf9eba8e63fe1b1887439fb77adabf5f`.
+- **Review status:** Independently reviewed, merged, and verified; OPEN-009 is closed.
 
 ### `PS-004 — Paid Assessment Content Contract`
 
 - **Owner:** Product Strategy
-- **Status:** `READY`
+- **Status:** `APPROVED`
 - **Dependency:** `G1 — PASS`.
 - **Target:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_PAID_ASSESSMENT_CONTRACT_v1.0.md`.
 - **Outcome:** Extended questionnaire, interview objectives, evidence requirements, fields, partial-completion behavior, completion criteria, and customer-facing scope.
-- **Planned branch:** `task/ws-02/PS-004-paid-assessment-contract`.
-- **Concurrency:** May run with `FA-001`; target and operating files do not overlap.
+- **Historical branch:** `task/ws-02/PS-004-paid-assessment-contract`.
+- **Evidence:** PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13), merge SHA `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b`.
+- **Review status:** Independently reviewed, merged, and verified.
+
+### `LS-002 — Consent, Claims, and Data Requirements`
+
+- **Owner:** Legal, Privacy and Security.
+- **Status:** `READY`
+- **Dependencies:** `G1 — PASS` plus approved FA-001 and PS-004.
+- **Target:** `docs/workstreams/11-legal-privacy-security/deliverables/BIZMETRIA_CONSENT_CLAIMS_REQUIREMENTS_v1.0.md`.
+- **Outcome:** Implementable consent/notice requirements, data lifecycle and rights rules, approved/prohibited claims, production review triggers, and exact field-inventory adoption.
+- **Planned branch:** `task/ws-11/LS-002-consent-claims-data-requirements`.
+- **Boundary:** This task may define testable requirements and draft product copy, but cannot claim qualified legal approval or enable real payments/public launch.
 
 ## Planned delivery catalog
 

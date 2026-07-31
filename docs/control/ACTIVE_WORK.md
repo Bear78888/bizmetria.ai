@@ -14,9 +14,9 @@
 
 ## Active task index
 
-No execution task is active in the approved post-`G1` state. `FA-001` and `PS-004` are `READY`, not started; each requires its own branch and draft PR before becoming active. The service branch that publishes this closeout is historical when this record reaches `main`.
+No execution task is active in the approved post-FA-001/PS-004 state. `LS-002` is `READY` and requires its own branch and draft PR before becoming active. The service branch that publishes this closeout is historical when this record reaches `main`.
 
-`PS-001`, `LS-001`, `PS-002`, `MC-003`, and `PS-003` are merged and approved. `G1` is `PASS`. Live payment, real-order, and public-launch work remains blocked by the named pre-live gates.
+`PS-001`, `LS-001`, `PS-002`, `MC-003`, `PS-003`, `FA-001`, and `PS-004` are merged and approved. `G1` is `PASS`; `G2` is not passed. Live payment, real-order, and public-launch work remains blocked by the named pre-live gates.
 
 ## Non-active preserved branches
 
@@ -28,6 +28,10 @@ No execution task is active in the approved post-`G1` state. `FA-001` and `PS-00
 - `task/ws-02/PS-001-product-blueprint-v0-1` — merged through PR #5; historical.
 - `task/ws-02/PS-002-owner-decision-package` — merged through PR #8; historical.
 - `task/ws-02/PS-003-product-requirements-v1` — merged through PR #10; historical.
+- `task/ws-01/G1-product-baseline-closeout` — merged through PR #11; historical.
+- `task/ws-04/FA-001-free-audit-score-contract` — merged through PR #12; historical.
+- `task/ws-02/PS-004-paid-assessment-contract` — merged through PR #13; historical.
+- `task/ws-01/phase2-input-contracts-closeout` — service branch; historical when its closeout reaches `main`.
 - `task/ws-11/LS-001-legal-data-baseline` — merged through PR #6; historical.
 - `test/chatgpt-write-access` — preserved test branch; do not modify or delete.
 

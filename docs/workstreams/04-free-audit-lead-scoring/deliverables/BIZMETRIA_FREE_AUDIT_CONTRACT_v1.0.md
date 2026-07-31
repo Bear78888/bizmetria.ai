@@ -2,7 +2,7 @@
 
 **Task:** FA-001 — Free Audit and Score Contract \
 **Version:** 1.0.0 \
-**Status:** REVIEW \
+**Status:** APPROVED \
 **Owner workstream:** 04 — Free Audit and Lead Scoring \
 **Prepared:** 2026-07-31 \
 **Source baseline:** main at 76fa28e621d59a741f4adf663ed5176867f91b22 \
@@ -689,7 +689,7 @@ Every change MUST include:
 ## Handoff Summary
 
 - **Task:** FA-001 — Free Audit and Score Contract.
-- **Status:** REVIEW; requires independent PR review and merge before becoming canonical.
+- **Status:** APPROVED through independently reviewed PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), merge SHA `97446522cf9eba8e63fe1b1887439fb77adabf5f`.
 - **Files changed:** This deliverable and Workstream 04 operating records.
 - **Decisions proposed:** Promote the recovered point table with fixed Q09/Q10 lookups, strict duplicate rejection, all-eleven completion, zero-only area exclusion, and the bilingual v1 schema.
 - **Decisions approved:** Existing 11 topics, caps, score bands, exclusions, deterministic boundary, limited free result, and $299 one-time offer.
