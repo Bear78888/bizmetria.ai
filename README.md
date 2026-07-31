@@ -5,11 +5,11 @@ BizMetria.ai is a cross-industry business assessment platform that identifies pr
 ## Current confirmed status
 
 - Recovery PR [#1](https://github.com/Bear78888/bizmetria.ai/pull/1) was reviewed and merged.
-- Verified recovery baseline in `main`: `300c01050820953d2769a91a77a39ae3edcd7f99`.
-- `MC-001` is migrating governance to one Master Orchestrator and thirteen permanent GitHub workstreams.
-- Migration branch: `architecture/master-orchestrator-workstreams-v1`.
-- Draft migration PR: [#2](https://github.com/Bear78888/bizmetria.ai/pull/2).
-- Migration content remains unapproved until its draft PR is reviewed and merged.
+- `MC-001` architecture PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2) was independently reviewed and merged.
+- Verified current `main` after MC-001: `473ee6c042bd5224bec75dbc18fa803e9b148aa3`.
+- The one-Master/13-workstream operating system is now canonical.
+- `MC-002` Delivery Roadmap is in review in draft PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3) from `task/ws-01/MC-002-delivery-roadmap`.
+- Product execution has not started. After MC-002 approval, the first execution window is `PS-001` plus `LS-001`.
 
 ## Approved product foundation
 
@@ -40,6 +40,7 @@ Use this hierarchy:
 ## Master Orchestrator control system
 
 - [Control system map](docs/control/README.md)
+- [Delivery Roadmap](docs/control/DELIVERY_ROADMAP.md)
 - [Master Orchestrator Brief](docs/control/MASTER_ORCHESTRATOR_BRIEF.md)
 - [Master Continuation](docs/control/MASTER_CONTINUATION.md)
 - [Workstream Registry](docs/control/WORKSTREAM_REGISTRY.md)
@@ -80,7 +81,7 @@ Standard format:
 
 One task uses one temporary branch and one draft PR. Long-lived workstream branches are prohibited. A remote task branch is the canonical live-lock. Never write directly to `main`, reuse a merged task branch, force push, or self-merge.
 
-The fixed MC-001 migration branch is a one-time cross-functional exception.
+The completed fixed MC-001 migration branch was a one-time cross-functional exception.
 
 ## Starting work
 

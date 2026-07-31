@@ -1,23 +1,43 @@
 # Workstream Task Queue
 
-**Workstream:** 01 — Master Control
-**Task prefix:** `MC`
+**Workstream:** 01 — Master Control  
+**Task prefix:** `MC`  
 **Last updated:** 2026-07-30
 
+## `MC-001 — Master Orchestrator and Workstream Architecture Migration`
 
-## MC-001 — Master Orchestrator and Workstream Architecture Migration
+- **Status:** `APPROVED`
+- **Priority:** High
+- **Result:** One Master Orchestrator, thirteen persistent GitHub workstreams, temporary task branches/chats, control documents, live-lock rules, and continuity policy.
+- **Evidence:** PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), merge SHA `473ee6c042bd5224bec75dbc18fa803e9b148aa3`.
+- **Owner:** Master Orchestrator
+- **Review status:** Reviewed, explicitly authorized, and merged.
+
+## `MC-002 — Delivery Roadmap and Phase Gates`
 
 - **Status:** `REVIEW`
 - **Priority:** High
-- **Objective:** Replace the permanent-chat operating model with one Master Orchestrator and thirteen persistent GitHub workstreams.
-- **Required inputs:** Current `main`, global governance documents, all legacy chat briefs, existing workstream artifacts, branch and PR inventory.
-- **Expected outputs:** Ten control files, thirteen complete workstream structures, updated canonical governance/navigation, validation evidence, and one draft migration PR.
-- **Branch:** `architecture/master-orchestrator-workstreams-v1`
-- **Acceptance criteria:** All requirements in `docs/control/MIGRATION_REPORT.md`; Test A and Test B pass; no product decision changes; no self-merge.
-- **Dependencies:** Recovery PR #1 merged to `main` at `300c01050820953d2769a91a77a39ae3edcd7f99`.
+- **Objective:** Create the complete dependency-ordered route from approved governance to a bilingual production product ready for controlled advertising.
+- **Required inputs:** Approved MC-001 architecture, recovery product baseline, Decision Log, all workstream briefs/state, and the owner's phase-plan request.
+- **Expected outputs:** Canonical roadmap, gates `G0`–`G10`, task catalog, dependencies, targets, acceptance criteria, WIP rules, `AD READY` checklist, synchronized control/global/WS01 records, and one draft PR.
+- **Branch:** `task/ws-01/MC-002-delivery-roadmap`
+- **PR:** [Draft #3](https://github.com/Bear78888/bizmetria.ai/pull/3).
+- **Acceptance criteria:** Complete dependency chain; unique task IDs; no task can begin before inputs exist; all open decisions remain explicit; links/invariants/safety validation passes; no self-merge.
+- **Dependencies:** Approved `MC-001`, merge SHA `473ee6c042bd5224bec75dbc18fa803e9b148aa3`.
 - **Owner:** Master Orchestrator
-- **Review status:** Internal validation passed; independent PR review required.
+- **Review status:** Draft PR open; independent review and separate owner merge decision required.
 
+## Planned Master Control gates
+
+| Task | Purpose | Dependency |
+|---|---|---|
+| `MC-003` | Record the owner decisions needed to freeze the product baseline. | `PS-002` |
+| `MC-004` | Approve stack, vendors, cost envelope, account owners, and provisioning actions. | Phase 3 architecture/vendor inputs |
+| `MC-005` | Publish executable operations and support runbooks. | `G6`, reliability, and security work |
+| `MC-006` | Make the explicit pilot go/no-go decision. | Completed pilot, findings, and remediation |
+| `MC-007` | Record `AD READY` and the separate hold/stop/iterate/scale decision. | Stable controlled-launch evidence |
+
+Full definitions are canonical in [`../../control/DELIVERY_ROADMAP.md`](../../control/DELIVERY_ROADMAP.md).
 
 ## Required task record
 

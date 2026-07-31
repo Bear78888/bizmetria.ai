@@ -1,56 +1,63 @@
 # Current State
 
-**Workstream:** 01 — Master Control
-**Status:** `REVIEW`
-**Last updated:** 2026-07-30
-**Current task:** MC-001 — Master Orchestrator and Workstream Architecture Migration
-**Current branch:** architecture/master-orchestrator-workstreams-v1
-**Current PR:** [#2](https://github.com/Bear78888/bizmetria.ai/pull/2)
+**Workstream:** 01 — Master Control  
+**Status:** `REVIEW`  
+**Last updated:** 2026-07-30  
+**Current task:** `MC-002 — Delivery Roadmap and Phase Gates`  
+**Current branch:** `task/ws-01/MC-002-delivery-roadmap`  
+**Current PR:** [#3](https://github.com/Bear78888/bizmetria.ai/pull/3)
 
 ## Approved baseline
 
-TASK-000 governance baseline and DEC-001–DEC-015.
+- `TASK-000` governance recovery baseline.
+- DEC-001–DEC-016, with DEC-014 superseded by DEC-016.
+- `MC-001` operating system approved through PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), merge SHA `473ee6c042bd5224bec75dbc18fa803e9b148aa3`.
 
 ## Completed
 
-Recovery PR #1 was reviewed and merged; MC-001 was validated and opened as draft PR #2.
+- Recovery PR #1 merged.
+- MC-001 architecture PR #2 merged and resulting `main` verified.
+- MC-002 branch created from the verified merge SHA.
+- Delivery phases, gates, task dependencies, targets, acceptance criteria, WIP rules, and `AD READY` criteria drafted.
 
 ## In progress
 
-MC-001 is in draft PR #2 for independent review; it is not approved repository state.
+MC-002 is in draft PR #3 with the canonical roadmap and synchronized global/control/Workstream 01 state.
 
 ## Not started
 
-Independent review and explicit merge decision for MC-001.
+- Independent review and merge decision for MC-002.
+- `PS-001` and `LS-001`, which begin only after MC-002 approval and `G0`.
 
 ## Open decisions
 
-No new product decision. Governance migration becomes canonical only when its PR merges.
+No new product decision is approved by MC-002. `OPEN-001` through `OPEN-009` remain unresolved and are routed to explicit tasks/gates in the roadmap.
 
 ## Blockers
 
-No hidden blocker is recorded. Unmet dependencies and unassigned ownership are shown explicitly.
+No technical blocker is recorded. Downstream execution is gated on reviewed and merged MC-002.
 
 ## Dependencies
 
-All global governance documents and the actual GitHub branch/PR state.
+Approved MC-001 architecture, verified `main`, current product baseline, all workstream briefs/state, and the owner's phase-planning request.
 
-## Files currently relevant
+## Relevant files
 
-- `WORKSTREAM_BRIEF.md`
+- [`../../control/DELIVERY_ROADMAP.md`](../../control/DELIVERY_ROADMAP.md)
+- [`../../control/MASTER_CONTINUATION.md`](../../control/MASTER_CONTINUATION.md)
+- [`../../control/WORKSTREAM_REGISTRY.md`](../../control/WORKSTREAM_REGISTRY.md)
+- [`../../control/ACTIVE_WORK.md`](../../control/ACTIVE_WORK.md)
+- [`../../BIZMETRIA_PROJECT_STATUS.md`](../../BIZMETRIA_PROJECT_STATUS.md)
+- [`../../BIZMETRIA_TASK_QUEUE.md`](../../BIZMETRIA_TASK_QUEUE.md)
 - `TASK_QUEUE.md`
-- `DECISIONS.md`
 - `ARTIFACT_INDEX.md`
 - `HANDOFF.md`
 - `CHANGELOG.md`
-- `deliverables/README.md`
-- [Global Task Queue](../../BIZMETRIA_TASK_QUEUE.md)
-- [Active Work](../../control/ACTIVE_WORK.md)
 
 ## Exact next action
 
-Await independent review of draft PR #2 and an explicit merge decision; do not merge it.
+Independently review draft PR #3, resolve actionable feedback, and obtain a separate owner merge decision. Do not self-merge it.
 
 ## Latest session checkpoint
 
-On 2026-07-30, MC-001 created this evidence-based initial state from merged `main` at `300c01050820953d2769a91a77a39ae3edcd7f99`. No absent deliverable, assigned executor, deadline, or approval is implied.
+On 2026-07-30, MC-002 started from verified `main` at `473ee6c042bd5224bec75dbc18fa803e9b148aa3`. No unapproved owner decision, vendor, deadline, legal conclusion, or product promise is implied.

@@ -8,84 +8,65 @@ As of: 2026-07-30
 - A temporary Workstream Chat performs only its assigned task.
 - Every output is saved to GitHub with a Handoff Summary and draft PR.
 - Temporary Workstream Chats do not merge their own PRs.
-- `QUEUED` tasks may depend on the approval or re-creation of earlier tasks.
-- Standard execution IDs use the owning workstream prefix and standard branches use `task/ws-XX/PREFIX-###-short-description`.
-- Existing global `TASK-###` portfolio IDs remain unchanged; a bounded prefixed execution task is assigned when work actually begins.
+- A task becomes `READY` only when every named dependency is merged and verified.
+- Standard execution IDs use the owning workstream prefix and branches use `task/ws-XX/PREFIX-###-short-description`.
+- Existing global `TASK-###` recovery IDs remain historical portfolio references; the [Delivery Roadmap](control/DELIVERY_ROADMAP.md) supplies bounded execution IDs.
+- Default WIP is no more than two execution tasks plus one PR review.
 
-## MC-001 — Master Orchestrator and Workstream Architecture Migration
+## `MC-001 — Master Orchestrator and Workstream Architecture Migration`
 
-- Owner: Master Orchestrator
-- Status: **REVIEW**
-- Priority: High
-- Branch: `architecture/master-orchestrator-workstreams-v1`
-- PR: [draft #2](https://github.com/Bear78888/bizmetria.ai/pull/2)
-- Objective: Replace the permanent-chat operating model with one Master Orchestrator and thirteen permanent GitHub-backed workstreams, without changing product decisions.
-- Required inputs: merged recovery baseline, all global governance files, thirteen legacy chat briefs, existing workstream artifacts, actual branch/PR state.
-- Expected outputs: ten `docs/control/` files, 104 required workstream operating elements, legacy mapping, updated governance/navigation, validation evidence, and one draft PR.
-- Dependencies: Recovery PR #1 merged; verified `main` SHA `300c01050820953d2769a91a77a39ae3edcd7f99`.
-- Acceptance: all MC-001 validation checks and Acceptance Tests A/B pass; legacy files and test branch preserved; no self-merge.
-- Review status: internal validation passed; independent PR review required.
+- **Owner:** Master Orchestrator
+- **Status:** `APPROVED`
+- **Result:** One Master Orchestrator, thirteen permanent GitHub workstreams, temporary task branches/chats, control documents, live-lock rules, and continuity policy.
+- **Evidence:** PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), merge SHA `473ee6c042bd5224bec75dbc18fa803e9b148aa3`.
 
-## TASK-000 — Project Governance Baseline
+## `MC-002 — Delivery Roadmap and Phase Gates`
 
-- Owner: Master Control
-- Status: **APPROVED / RECOVERED**
-- Result: Master Brief, Coordination Protocol, GitHub workflow, Decision Log, Project Status, Task Queue, startup instructions, continuation context, and thirteen workstream briefs.
-- Acceptance: approved product facts preserved; uncertain detail labeled; GitHub-native governance restored.
+- **Owner:** Master Orchestrator
+- **Status:** `REVIEW`
+- **Priority:** High
+- **Branch:** `task/ws-01/MC-002-delivery-roadmap`
+- **PR:** [Draft #3](https://github.com/Bear78888/bizmetria.ai/pull/3)
+- **Objective:** Define the complete dependency-ordered path from the approved governance baseline to a bilingual production product ready for controlled advertising.
+- **Required inputs:** Approved MC-001 architecture, merged recovery product baseline, Decision Log, all workstream briefs/state, and the owner's requested phase plan.
+- **Expected outputs:** Canonical roadmap, gates `G0`–`G10`, bounded task catalog, targets, dependencies, acceptance criteria, WIP rules, `AD READY` checklist, and synchronized control/WS01 state.
+- **Target:** `docs/control/DELIVERY_ROADMAP.md`.
+- **Dependencies:** `MC-001`.
+- **Acceptance:** Every phase is executable in dependency order; downstream work cannot start without its inputs; no open product decision is silently resolved; links, task IDs, invariants, and safety checks pass.
+- **Review status:** Draft PR open; independent review and separate owner merge decision required.
 
-## TASK-001 — Product Blueprint v0.1
+## Next execution window after `G0`
 
-- Owner: Product Strategy
-- Status: **QUEUED / READY FOR BOUNDED ASSIGNMENT**
-- Target: `docs/workstreams/02-product-strategy/BIZMETRIA_PRODUCT_BLUEPRINT_v0.1.md`
-- Dependency: recovery baseline approved.
-- Assignment state: no `PS-###` execution task or temporary owner has been assigned.
-- Required outcome: re-create a complete Product Blueprint using current approved decisions; identify proposals separately from approvals; include a Handoff Summary.
-- Recovery note: the exact historical Product Blueprint text is unavailable in this repository and was not reconstructed from guesses.
+### `PS-001 — Product Blueprint v0.1`
 
-Acceptance criteria:
+- **Owner:** Product Strategy
+- **Status:** `READY AFTER G0`
+- **Target:** `docs/workstreams/02-product-strategy/BIZMETRIA_PRODUCT_BLUEPRINT_v0.1.md`
+- **Dependency:** MC-002 merged and `G0` recorded as passed.
+- **Outcome:** Current Product Blueprint covering customers, value, journey, free/paid boundary, paid deliverables, bilingual model, implementation boundary, operating assumptions, metrics, risks, and open decisions.
+- **Guardrail:** Do not reconstruct unavailable historical wording or approve open commercial/policy choices.
 
-- Covers target customer, value proposition, customer journey, free/paid boundary, paid deliverables, bilingual model, implementation boundary, lifecycle, risks, and open decisions.
-- Preserves $299 one-time pricing.
-- Does not resolve report timing, Refund Policy, consultation format, vendors, stack, promotions, or implementation pricing without approval.
-- Opens a draft PR and is not self-merged.
+### `LS-001 — Legal and Data Inventory Baseline`
 
-## TASK-002 — Formal Free Audit Specification
+- **Owner:** Legal, Privacy and Security
+- **Status:** `READY AFTER G0`
+- **Target:** `docs/workstreams/11-legal-privacy-security/deliverables/BIZMETRIA_LEGAL_DATA_BASELINE_v0.1.md`
+- **Dependency:** MC-002 merged and `G0` recorded as passed.
+- **Outcome:** Field-level data inventory, consent baseline, purpose/access/retention/deletion matrix, disclaimer inventory, and security/legal issue register.
+- **Concurrency:** May run in parallel with PS-001 because the file scope is separate and both use the same approved baseline.
 
-- Owner: Free Audit and Lead Scoring
-- Status: **QUEUED**
-- Targets:
-  - Canonical question schema.
-  - Tested score specification.
-  - Free-result selection rules.
-- Inputs: recovered Workstream 04 documents, Decision Log, approved Product Blueprint when available.
-- Dependency: TASK-001 review; may conduct isolated scoring tests earlier without changing approved product scope.
+## Planned delivery catalog
 
-Acceptance criteria:
+The full authoritative catalog—covering `PS`, `FA`, `UX`, `EN`, `ES`, `AE`, `RP`, `BE`, `LC`, `LS`, `MS`, `QA`, and later `MC` gates—is maintained in [`docs/control/DELIVERY_ROADMAP.md`](control/DELIVERY_ROADMAP.md). Do not copy the complete list here; use this queue for current and immediately next assignments.
 
-- English and Spanish share canonical IDs and output schema.
-- Score is deterministic and totals 0–100.
-- Point table is tested against boundary and identical-input cases.
-- Free result respects the information boundary and $299 offer.
+## Historical recovery references
 
-## TASK-003 — Product Experience Architecture
+- `TASK-000` — governance baseline: approved/recovered through PR #1.
+- `TASK-001` — historical Product Blueprint portfolio need: now executed as `PS-001`.
+- `TASK-002` — historical formal free-audit portfolio need: now executed as `FA-001`.
+- `TASK-003` — historical product-experience portfolio need: now executed as `UX-001`.
+- `TASK-004` — historical legal/data baseline need: now executed as `LS-001`.
 
-- Owner: Brand, Website and UX
-- Status: **QUEUED**
-- Outcome: end-to-end web and product UX for the free check, paid conversion, assessment, status, and delivery.
-- Dependencies: TASK-001 and stable TASK-002 schema.
+## Unscheduled operational follow-up
 
-## TASK-004 — Legal and Data Inventory Baseline
-
-- Owner: Legal, Privacy and Security
-- Status: **QUEUED**
-- Outcome: data inventory, consent model, retention/deletion baseline, disclaimer needs, and open Refund Policy requirements.
-- Dependencies: current customer journey and provisional data flows.
-
-## Unscheduled follow-ups
-
-- Select technical stack and vendors.
-- Define paid-report SLA and operational review checklist.
-- Approve consultation format.
-- Approve promotion calendar and implementation pricing.
-- Establish external repository mirror and Git bundle backup schedule.
+External repository mirror and Git bundle backup automation remains a separate authorized task under the Backup and Continuity Policy. It is not implied to be complete by MC-002.
