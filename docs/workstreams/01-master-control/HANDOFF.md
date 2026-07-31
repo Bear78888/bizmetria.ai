@@ -56,7 +56,7 @@ None; `task/ws-01/MC-003-owner-decision-gate` is historical.
 
 ## PR
 
-PS-003 merged through [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) at `68901a35e7f465ed4990881645847092e6fdd2d1`; G1 closeout service PR pending creation.
+PS-003 merged through [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) at `68901a35e7f465ed4990881645847092e6fdd2d1`; G1 closeout is recorded through service PR [#11](https://github.com/Bear78888/bizmetria.ai/pull/11).
 
 ## Validation results
 
