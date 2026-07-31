@@ -48,7 +48,7 @@ Master Orchestrator; after both Phase 1 drafts merge, Product Strategy for `PS-0
 
 ## PR
 
-Draft PR pending creation.
+Draft [#5](https://github.com/Bear78888/bizmetria.ai/pull/5).
 
 ## Validation results
 

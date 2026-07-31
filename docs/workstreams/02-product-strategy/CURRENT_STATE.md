@@ -5,7 +5,7 @@
 **Last updated:** 2026-07-30
 **Current task:** `PS-001 — Product Blueprint v0.1`
 **Current branch:** `task/ws-02/PS-001-product-blueprint-v0-1`
-**Current PR:** Draft PR pending creation
+**Current PR:** Draft [#5](https://github.com/Bear78888/bizmetria.ai/pull/5)
 
 ## Approved baseline
 

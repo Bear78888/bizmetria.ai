@@ -18,7 +18,7 @@
 - **Planned branch:** `task/ws-02/PS-001-product-blueprint-v0-1`
 - **Branch:** `task/ws-02/PS-001-product-blueprint-v0-1`
 - **Owner:** Product Strategy temporary executor
-- **Review status:** Complete draft prepared; draft PR pending creation and independent review.
+- **Review status:** Draft [#5](https://github.com/Bear78888/bizmetria.ai/pull/5) is open for independent review.
 
 
 ## `PS-002 — Owner Decision Package`
