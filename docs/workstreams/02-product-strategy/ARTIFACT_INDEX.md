@@ -6,6 +6,7 @@
 | Name | Version | Status | Path | Task ID | Owner | Approved date | Superseded by | Consumers |
 |---|---|---|---|---|---|---|---|---|
 | BizMetria Product Blueprint | v0.1 | Approved | [`BIZMETRIA_PRODUCT_BLUEPRINT_v0.1.md`](BIZMETRIA_PRODUCT_BLUEPRINT_v0.1.md) | PS-001 | Product Strategy | 2026-07-30 | None | UX, FA, EN, ES, AE, RP, BE, LC, LS, MS, QA, Master Control |
+| BizMetria Owner Decision Package | v0.1 | Review | [`deliverables/BIZMETRIA_OWNER_DECISION_PACKAGE_v0.1.md`](deliverables/BIZMETRIA_OWNER_DECISION_PACKAGE_v0.1.md) | PS-002 | Product Strategy / Master Control | — | None | Owner, Master Control, PS, LC, LS, MS, BE, RP, QA, Operations |
 
 
 ## Indexing rule

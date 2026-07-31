@@ -24,7 +24,7 @@
 
 ## `PS-002 — Owner Decision Package`
 
-- **Status:** `READY`
+- **Status:** `REVIEW`
 - **Priority:** High
 - **Objective:** Present independently answerable options, tradeoffs, recommendations, and downstream impact for the open owner-level product decisions.
 - **Required inputs:** Merged `PS-001` and `LS-001`.
@@ -32,8 +32,9 @@
 - **Must cover:** Report deadline, Refund Policy, consultation rules, implementation packages/prices, promotion rules, MVP KPIs, and capacity assumptions.
 - **Dependencies:** Approved `PS-001` and `LS-001`.
 - **Planned branch:** `task/ws-02/PS-002-owner-decision-package`
+- **Active branch:** `task/ws-02/PS-002-owner-decision-package`
 - **Owner:** Product Strategy, coordinated by Master Orchestrator.
-- **Review status:** Ready for assignment; both dependencies are merged and verified.
+- **Review status:** Draft PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) is open for independent review. No option is approved.
 
 
 ## Global portfolio reference
