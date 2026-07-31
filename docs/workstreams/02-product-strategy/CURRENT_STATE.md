@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 02 — Product Strategy
-**Status:** `READY`
+**Status:** `REVIEW`
 **Last updated:** 2026-07-30
 **Current task:** `PS-002 — Owner Decision Package`
-**Current branch:** None; task is ready but unassigned
-**Current PR:** None
+**Current branch:** `task/ws-02/PS-002-owner-decision-package`
+**Current PR:** Pending creation
 
 ## Approved baseline
 
@@ -17,19 +17,19 @@ A complete new Product Blueprint v0.1 was independently reviewed and merged thro
 
 ## In progress
 
-No Product Strategy execution task is in progress.
+`PS-002 — Owner Decision Package` is complete on its scoped task branch and awaiting independent draft-PR review. It provides independently answerable options, recommendations, tradeoffs, exact proposed rules, downstream impacts, KPI targets, capacity controls, and factual owner/legal confirmations.
 
 ## Not started
 
-`PS-002 — Owner Decision Package` is ready. `PS-003 — Product Requirements v1.0` remains gated on owner decisions recorded through `MC-003`.
+`MC-003 — Product Decision Gate` and `PS-003 — Product Requirements v1.0` remain gated. Neither starts until PS-002 is independently reviewed and merged.
 
 ## Open decisions
 
-Report delivery deadline, Refund Policy, consultation format, promotions, and implementation pricing.
+All choices in the Owner Decision Package remain proposals. `OPEN-001`–`OPEN-009` remain open under their existing routes.
 
 ## Blockers
 
-No technical blocker prevents PS-002. Owner-level commercial and policy questions remain intentionally open and require explicit decisions after the package is approved.
+No technical blocker prevents PS-002 review. Explicit owner choices, entity/jurisdiction facts, and qualified legal/tax review remain blockers for `MC-003` and `G1`.
 
 ## Dependencies
 
@@ -44,13 +44,14 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 - `HANDOFF.md`
 - `CHANGELOG.md`
 - `deliverables/README.md`
+- `deliverables/BIZMETRIA_OWNER_DECISION_PACKAGE_v0.1.md`
 - [Global Task Queue](../../BIZMETRIA_TASK_QUEUE.md)
 - [Active Work](../../control/ACTIVE_WORK.md)
 
 ## Exact next action
 
-Assign `PS-002` on `task/ws-02/PS-002-owner-decision-package` and create the independently answerable option package without approving any choice.
+Open and independently review the PS-002 draft PR. Merge only after confirming option completeness, proposal-versus-approval boundaries, legal qualifiers, downstream coverage, and repository invariants.
 
 ## Latest session checkpoint
 
-On 2026-07-30, PS-001 and LS-001 were approved in verified `main` SHA `b6174f1325136bc69a9859925c570e5770972991`; PS-002 became ready. No report deadline, Refund Policy, consultation rule, promotion rule, implementation price, vendor, or score-table decision is implied.
+On 2026-07-30, PS-002 was prepared from approved PS-001 and LS-001 on a branch created from verified `main` SHA `608ef46e382f86d557168ab2396b56e21e88cf75`. The package recommends choices but approves none.

@@ -16,14 +16,16 @@
 
 | Workstream | Task ID | Owner | Branch | PR | Affected files | Start date | Status | Expected handoff |
 |---|---|---|---|---|---|---|---|---|
+| 02 — Product Strategy | `PS-002` | Product Strategy / Master Control | `task/ws-02/PS-002-owner-decision-package` | Pending creation | Owner Decision Package; WS02 state/index/queue/handoff/changelog; global/control status | 2026-07-30 | REVIEW | Independently reviewed and merged decision package; then explicit owner answers through `MC-003` |
 
-No execution task is active. `PS-001` and `LS-001` are merged and approved. `PS-002` is ready for assignment; its execution branch does not exist yet.
+`PS-001` and `LS-001` are merged and approved. PS-002 owns the only active execution branch. Its proposals do not authorize `MC-003`, `PS-003`, or Phase 2 work.
 
 ## Non-active preserved branches
 
 - `architecture/master-orchestrator-workstreams-v1` — merged through PR #2; historical.
 - `recovery/restore-bizmetria-project` — merged through PR #1; historical.
 - `task/ws-01/MC-002-delivery-roadmap` — merged through PR #3; historical.
+- `task/ws-01/phase1-inputs-closeout` — merged through PR #7; historical.
 - `task/ws-02/PS-001-product-blueprint-v0-1` — merged through PR #5; historical.
 - `task/ws-11/LS-001-legal-data-baseline` — merged through PR #6; historical.
 - `test/chatgpt-write-access` — preserved test branch; do not modify or delete.

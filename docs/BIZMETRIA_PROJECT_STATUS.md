@@ -2,11 +2,11 @@
 
 **As of:** 2026-07-30  
 **Overall status:** `PHASE 1 IN PROGRESS` \
-**Verified `main` SHA:** `b6174f1325136bc69a9859925c570e5770972991`
+**Verified `main` SHA:** `608ef46e382f86d557168ab2396b56e21e88cf75`
 
 ## Current phase
 
-Recovery PR [#1](https://github.com/Bear78888/bizmetria.ai/pull/1), architecture PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), Delivery Roadmap PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), Product Blueprint PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), and Legal/Data Baseline PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6) are merged. `main` contains the approved governance, roadmap, product blueprint, and legal/data issue-spotting baseline.
+Recovery PR [#1](https://github.com/Bear78888/bizmetria.ai/pull/1), architecture PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), Delivery Roadmap PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), Product Blueprint PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), Legal/Data Baseline PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), and Phase 1 input closeout PR [#7](https://github.com/Bear78888/bizmetria.ai/pull/7) are merged. `main` contains the approved governance, roadmap, product blueprint, legal/data issue-spotting baseline, and synchronized Phase 1 input approvals.
 
 Gate `G0 — Governance Ready` is `PASS` because:
 
@@ -15,7 +15,7 @@ Gate `G0 — Governance Ready` is `PASS` because:
 - the Decision Log, Project Status, Task Queue, Registry, Active Work, Master Continuation, and Workstream 01 state are synchronized;
 - `PS-001` and `LS-001` were the only initial execution assignments and are now approved.
 
-`PS-002 — Owner Decision Package` is now the only ready execution task. It prepares options and recommendations but does not approve owner decisions. No Phase 2 implementation task is authorized before `MC-003` records the owner choices and `G1` passes.
+`PS-002 — Owner Decision Package` is the only active execution task and is being prepared for independent review. It recommends options but approves none. No Phase 2 implementation task is authorized before PS-002 merges, `MC-003` records owner choices, `PS-003` merges, and `G1` passes.
 
 ## Confirmed product baseline
 
@@ -39,7 +39,7 @@ Gate `G0 — Governance Ready` is `PASS` because:
 | G0 Governance Ready | Master Orchestrator | PASS | MC-001 and MC-002 merged; canonical status records synchronized |
 | PS-001 Product Blueprint v0.1 | Product Strategy | APPROVED | PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), merge SHA `21d223223180e7a7d617f28648674efb613c4a92` |
 | LS-001 Legal and Data Inventory Baseline | Legal, Privacy and Security | APPROVED | PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), merge SHA `b6174f1325136bc69a9859925c570e5770972991` |
-| PS-002 Owner Decision Package | Product Strategy / Master Control | READY | Both required inputs are approved; no active execution branch yet |
+| PS-002 Owner Decision Package | Product Strategy / Master Control | REVIEW | `task/ws-02/PS-002-owner-decision-package`; draft PR pending creation |
 | MC-003 Owner Decision Gate | Master Orchestrator / owner | PLANNED | Begins only after approved PS-002 |
 | FA-001 and all later delivery tasks | Applicable workstreams | PLANNED | Follow the dependencies and gates in the Delivery Roadmap |
 
@@ -67,7 +67,7 @@ The Decision Log and Delivery Roadmap name the task and gate responsible for eac
 
 ## Immediate next action
 
-Assign `PS-002` as one bounded Product Strategy task. It must present independently answerable options, tradeoffs, recommendations, and downstream effects for the owner decisions without silently approving them. Do not start `MC-003` until PS-002 is reviewed and merged, and do not start Phase 2 until `G1` passes.
+Independently review and merge the bounded PS-002 package without treating a recommendation as an owner decision. Then run `MC-003` with explicit owner option codes and required factual confirmations. Do not start Phase 2 until `PS-003` merges and `G1` passes.
 
 ## Operational safeguards
 

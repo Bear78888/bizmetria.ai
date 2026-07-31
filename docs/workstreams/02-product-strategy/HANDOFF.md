@@ -5,53 +5,53 @@
 
 ## Goal of latest work
 
-Close approved `PS-001` and hand off to `PS-002`.
+Prepare `PS-002 — Owner Decision Package` without approving owner choices.
 
 ## Completed
 
-- Created a new Product Blueprint from the current approved baseline.
-- Defined target customers, jobs, value, free/paid boundaries, paid deliverables, customer journey, bilingual parity, operating model, metrics, risks, acceptance tests, and downstream handoffs.
-- Preserved every approved commercial and product invariant.
-- Kept `OPEN-001`–`OPEN-009` unresolved and routed.
-- Independently reviewed and merged PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5) at `21d223223180e7a7d617f28648674efb613c4a92`.
-- Verified the blueprint in current `main`.
+- Created `BIZMETRIA_OWNER_DECISION_PACKAGE_v0.1.md`.
+- Defined independently answerable options `D01`–`D09`.
+- Added recommendations for report timing, refund logic, consultation, promotions, implementation pricing, MVP KPIs, capacity, geography, and age eligibility.
+- Added factual confirmations `F01`–`F10`, cross-decision consistency checks, and the `MC-003` acceptance checklist.
+- Preserved every approved product constraint and kept all selections explicitly proposed.
+- Used approved PS-001 and LS-001 from verified `main` SHA `608ef46e382f86d557168ab2396b56e21e88cf75`.
 
 ## Not completed
 
-`PS-002` has not started. Owner choices and `MC-003` remain incomplete.
+Independent PR review, merge, owner choices, required legal/tax facts, `MC-003`, `PS-003`, and `G1` remain incomplete.
 
 ## Changed files
 
-`BIZMETRIA_PRODUCT_BLUEPRINT_v0.1.md`, `CURRENT_STATE.md`, `TASK_QUEUE.md`, `ARTIFACT_INDEX.md`, `HANDOFF.md`, and `CHANGELOG.md`.
+Owner Decision Package plus Product Strategy and control/status records.
 
 ## Decisions used
 
-Existing `DEC-001`–`DEC-013`, `DEC-015`, and `DEC-016`; `DEC-014` remains superseded. No new product decision was approved.
+Existing `DEC-001`–`DEC-013`, `DEC-015`, and `DEC-016`; `DEC-014` remains superseded. `D01`–`D09` are recommendations only. No new decision was approved.
 
 ## Open questions
 
-`OPEN-001`–`OPEN-009`, including report timing, Refund Policy, consultation rules, promotions, implementation pricing, vendors, stack, and tested score mapping.
+`OPEN-001`–`OPEN-009` remain open. Owner choices `D01`–`D09` and factual confirmations `F01`–`F10` remain pending `MC-003`.
 
 ## Blockers
 
-No technical blocker. PS-002 is ready; explicit owner decisions remain a later gate.
+No technical blocker to review. Owner facts and qualified legal/tax review block `MC-003` where identified.
 
 ## Exact next action
 
-Master Orchestrator assigns PS-002 and enforces the proposal-versus-approval boundary.
+Open and independently review the PS-002 draft PR. After approval and merge, run `MC-003` with explicit owner answers.
 
 ## Handoff target
 
-Product Strategy executor for `PS-002`, coordinated by Master Orchestrator.
+Independent PS-002 reviewer, then the project owner and Master Orchestrator for `MC-003`.
 
 ## Branch
 
-None active. `task/ws-02/PS-001-product-blueprint-v0-1` is historical.
+`task/ws-02/PS-002-owner-decision-package`
 
 ## PR
 
-Merged [#5](https://github.com/Bear78888/bizmetria.ai/pull/5).
+Pending creation.
 
 ## Validation results
 
-PASS — full remote diff, approved-constraint trace, free/paid boundary, bilingual parity, downstream coverage, open-decision scan, relative links, changed-file scope, merge state, and resulting `main` verified.
+Local validation pending final publication checks: option completeness, approved-constraint trace, recommendation/approval separation, downstream coverage, legal-boundary scan, decision-ID uniqueness, relative links, and changed-file scope.

@@ -70,12 +70,12 @@ As of: 2026-07-30
 ### `PS-002 — Owner Decision Package`
 
 - **Owner:** Product Strategy, coordinated by Master Orchestrator
-- **Status:** `READY`
+- **Status:** `REVIEW`
 - **Target:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_OWNER_DECISION_PACKAGE_v0.1.md`
 - **Dependencies:** Approved `PS-001` and `LS-001`.
 - **Outcome:** Independently answerable options, tradeoffs, recommendations, and downstream impact for report timing, Refund Policy, consultation rules, implementation packages/prices, promotion rules, MVP KPIs, capacity assumptions, and related owner/legal triggers.
 - **Guardrail:** The package may recommend choices but cannot approve them. `OPEN-001`–`OPEN-009` remain open until their named tasks/gates close them.
-- **Assignment state:** No active execution branch yet; Master Orchestrator may assign this task now.
+- **Assignment state:** Active on `task/ws-02/PS-002-owner-decision-package`; draft PR pending creation and independent review.
 
 ### `MC-003 — Owner Decision Gate`
 
