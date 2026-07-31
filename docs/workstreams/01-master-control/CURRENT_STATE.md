@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 01 — Master Control  
-**Status:** `REVIEW`  
+**Status:** `APPROVED` \
 **Last updated:** 2026-07-30  
-**Current task:** `MC-002 — Delivery Roadmap and Phase Gates`  
-**Current branch:** `task/ws-01/MC-002-delivery-roadmap`  
-**Current PR:** [#3](https://github.com/Bear78888/bizmetria.ai/pull/3)
+**Current task:** Gate `G0 — Governance Ready` is `PASS`; no active MC execution task \
+**Current branch:** None \
+**Current PR:** None
 
 ## Approved baseline
 
@@ -17,17 +17,18 @@
 
 - Recovery PR #1 merged.
 - MC-001 architecture PR #2 merged and resulting `main` verified.
-- MC-002 branch created from the verified merge SHA.
-- Delivery phases, gates, task dependencies, targets, acceptance criteria, WIP rules, and `AD READY` criteria drafted.
+- Delivery phases, gates, task dependencies, targets, acceptance criteria, WIP rules, and `AD READY` criteria created.
+- MC-002 PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3) independently reviewed and merged at `713c17e2ca854ce65125d65382dedee3fcec6d9c`.
+- Canonical status records synchronized and `G0` recorded as `PASS`.
 
 ## In progress
 
-MC-002 is in draft PR #3 with the canonical roadmap and synchronized global/control/Workstream 01 state.
+No Master Control execution task is in progress.
 
 ## Not started
 
-- Independent review and merge decision for MC-002.
-- `PS-001` and `LS-001`, which begin only after MC-002 approval and `G0`.
+- `PS-001` and `LS-001` are `READY` but not yet assigned.
+- `MC-003` remains planned and depends on `PS-002`.
 
 ## Open decisions
 
@@ -35,7 +36,7 @@ No new product decision is approved by MC-002. `OPEN-001` through `OPEN-009` rem
 
 ## Blockers
 
-No technical blocker is recorded. Downstream execution is gated on reviewed and merged MC-002.
+No technical blocker prevents assignment of `PS-001` or `LS-001`. Later tasks remain gated by the Delivery Roadmap.
 
 ## Dependencies
 
@@ -56,8 +57,8 @@ Approved MC-001 architecture, verified `main`, current product baseline, all wor
 
 ## Exact next action
 
-Independently review draft PR #3, resolve actionable feedback, and obtain a separate owner merge decision. Do not self-merge it.
+Assign `PS-001` and `LS-001` as two separate bounded tasks, each with one temporary branch and one draft PR.
 
 ## Latest session checkpoint
 
-On 2026-07-30, MC-002 started from verified `main` at `473ee6c042bd5224bec75dbc18fa803e9b148aa3`. No unapproved owner decision, vendor, deadline, legal conclusion, or product promise is implied.
+On 2026-07-30, MC-002 was approved at verified `main` SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`, and `G0` passed. No unapproved owner decision, vendor, deadline, legal conclusion, or product promise is implied.

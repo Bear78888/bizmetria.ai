@@ -3,13 +3,13 @@
 **Workstream:** 02 — Product Strategy
 **Status:** `READY`
 **Last updated:** 2026-07-30
-**Current task:** TASK-001 — Product Blueprint v0.1 (global portfolio task; no PS-prefixed execution task assigned)
-**Current branch:** None for this workstream; see `../../control/ACTIVE_WORK.md` for cross-functional work
-**Current PR:** None for this workstream
+**Current task:** `PS-001 — Product Blueprint v0.1`
+**Current branch:** None; task is ready but unassigned
+**Current PR:** None
 
 ## Approved baseline
 
-Approved product foundation in the Master Brief and DEC-001–DEC-015.
+Approved product foundation in the Master Brief and DEC-001–DEC-016; approved Delivery Roadmap; gate `G0` is `PASS`.
 
 ## Completed
 
@@ -17,11 +17,11 @@ No approved Product Blueprint is present in this repository.
 
 ## In progress
 
-No workstream-specific task is in progress. MC-001 affects governance only.
+No workstream-specific task is in progress.
 
 ## Not started
 
-Re-create Product Blueprint v0.1 from current approved inputs.
+Execute `PS-001` and create Product Blueprint v0.1 from current approved inputs.
 
 ## Open decisions
 
@@ -29,11 +29,11 @@ Report delivery deadline, Refund Policy, consultation format, promotions, and im
 
 ## Blockers
 
-No hidden blocker is recorded. Unmet dependencies and unassigned ownership are shown explicitly.
+No dependency blocker is recorded. The temporary executor is `UNASSIGNED`, and no task branch exists yet.
 
 ## Dependencies
 
-Approved recovery baseline; owner decisions remain open where recorded.
+Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), merge SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`. Owner decisions remain open where recorded.
 
 ## Files currently relevant
 
@@ -49,8 +49,8 @@ Approved recovery baseline; owner decisions remain open where recorded.
 
 ## Exact next action
 
-Master Orchestrator assigns a bounded PS-prefixed execution task for global TASK-001.
+Master Orchestrator assigns `PS-001` on `task/ws-02/PS-001-product-blueprint-v0-1` with the roadmap target and acceptance criteria.
 
 ## Latest session checkpoint
 
-On 2026-07-30, MC-001 created this evidence-based initial state from merged `main` at `300c01050820953d2769a91a77a39ae3edcd7f99`. No absent deliverable, assigned executor, deadline, or approval is implied.
+On 2026-07-30, MC-002 was approved at verified `main` SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`, gate `G0` passed, and `PS-001` became `READY`. No absent deliverable, assigned executor, deadline, or open decision approval is implied.

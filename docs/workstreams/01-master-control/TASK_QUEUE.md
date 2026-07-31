@@ -15,17 +15,23 @@
 
 ## `MC-002 — Delivery Roadmap and Phase Gates`
 
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Priority:** High
 - **Objective:** Create the complete dependency-ordered route from approved governance to a bilingual production product ready for controlled advertising.
 - **Required inputs:** Approved MC-001 architecture, recovery product baseline, Decision Log, all workstream briefs/state, and the owner's phase-plan request.
 - **Expected outputs:** Canonical roadmap, gates `G0`–`G10`, task catalog, dependencies, targets, acceptance criteria, WIP rules, `AD READY` checklist, synchronized control/global/WS01 records, and one draft PR.
-- **Branch:** `task/ws-01/MC-002-delivery-roadmap`
-- **PR:** [Draft #3](https://github.com/Bear78888/bizmetria.ai/pull/3).
+- **Historical branch:** `task/ws-01/MC-002-delivery-roadmap`
+- **Evidence:** PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), merge SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`.
 - **Acceptance criteria:** Complete dependency chain; unique task IDs; no task can begin before inputs exist; all open decisions remain explicit; links/invariants/safety validation passes; no self-merge.
 - **Dependencies:** Approved `MC-001`, merge SHA `473ee6c042bd5224bec75dbc18fa803e9b148aa3`.
 - **Owner:** Master Orchestrator
-- **Review status:** Draft PR open; independent review and separate owner merge decision required.
+- **Review status:** Independently reviewed, explicitly authorized, merged, and verified.
+
+## Gate `G0 — Governance Ready`
+
+- **Status:** `PASS`
+- **Recorded:** 2026-07-30
+- **Evidence:** MC-001 and MC-002 merged and verified; canonical status records synchronized; `PS-001` and `LS-001` are the only initial execution assignments.
 
 ## Planned Master Control gates
 
