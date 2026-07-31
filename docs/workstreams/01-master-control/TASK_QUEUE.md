@@ -61,8 +61,16 @@
 - **Status:** `PASS`
 - **Recorded:** 2026-07-31
 - **Evidence:** MC-003 and LS-001 approved; PS-003 independently reviewed and merged through PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10), merge SHA `68901a35e7f465ed4990881645847092e6fdd2d1`.
-- **Result:** `FA-001` and `PS-004` are `READY`; later Phase 2 tasks retain their named dependencies.
+- **Result:** `FA-001` and `PS-004` became `READY` at G1 and are now `APPROVED`; `LS-002` is `READY`; later Phase 2 tasks retain their named dependencies.
 - **Boundary:** No real payment, public paid launch, or live Stripe activation is authorized.
+
+## Phase 2 input contracts checkpoint
+
+- **Status:** `PASS`
+- **Recorded:** 2026-07-31
+- **Evidence:** FA-001 independently reviewed and merged through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12) at `97446522cf9eba8e63fe1b1887439fb77adabf5f`; PS-004 independently reviewed and merged through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13) at `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b`.
+- **Result:** `OPEN-009` is `CLOSED`; `LS-002` is `READY`.
+- **Guardrail:** `G2` is not passed. Live payment, real paid orders, production data, and public launch remain blocked by their named dependencies.
 
 ## Planned Master Control gates
 

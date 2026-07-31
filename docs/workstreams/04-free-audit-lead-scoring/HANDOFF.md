@@ -5,7 +5,7 @@
 
 ## Goal of latest work
 
-Deliver the canonical bilingual free-audit and deterministic score contract for independent review.
+Approve and hand off the canonical bilingual free-audit and deterministic score contract.
 
 ## Completed
 
@@ -19,7 +19,7 @@ Canonical brief, state, queue, decision index, artifact index, handoff, changelo
 
 ## Not completed
 
-Independent PR review and merge. Executable application tests belong to downstream implementation/QA, and public legal/localization review remains a production gate.
+Executable application tests belong to downstream implementation/QA, and public legal/localization review remains a production gate.
 
 ## Changed files
 
@@ -31,27 +31,27 @@ Approved Product Requirements, Legal/Data Baseline, DEC-001–DEC-026, G1 PASS, 
 
 ## Open questions
 
-No v1 score-contract question remains. OPEN-009 closes only after merge and closeout. Legal notice/consent text, retention, vendors, and production activation remain downstream.
+No v1 score-contract question remains. OPEN-009 is closed. Legal notice/consent text, retention, vendors, and production activation remain downstream.
 
 ## Blockers
 
-Review and merge only. Production legal, tax, support, staffing, vendor/security, release, and live Stripe dependencies remain outside this contract and fail closed.
+No contract blocker remains. Production legal, tax, support, staffing, vendor/security, release, and live Stripe dependencies remain outside this contract and fail closed.
 
 ## Exact next action
 
-Publish the draft PR, compare the complete remote and local trees, run the independent review gate, and merge if clean.
+Supply the approved contract to LS-002 and later implementation/QA consumers.
 
 ## Handoff target
 
-Independent reviewer, then LS-002, AE-001, UX, Backend, Analytics, and QA consumers.
+LS-002, AE-001, UX, Backend, Analytics, and QA consumers.
 
 ## Branch
 
-`task/ws-04/FA-001-free-audit-score-contract`
+None active; `task/ws-04/FA-001-free-audit-score-contract` is historical.
 
 ## PR
 
-[Draft PR #12](https://github.com/Bear78888/bizmetria.ai/pull/12)
+Merged PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), merge SHA `97446522cf9eba8e63fe1b1887439fb77adabf5f`.
 
 ## Validation results
 

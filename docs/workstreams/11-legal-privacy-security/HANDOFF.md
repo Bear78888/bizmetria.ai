@@ -5,7 +5,7 @@
 
 ## Goal of latest work
 
-Close approved `LS-001` and hand off its constraints to PS-002 and later LS-002.
+Accept the approved FA-001 and PS-004 inputs and make LS-002 ready without claiming final legal approval.
 
 ## Completed
 
@@ -15,6 +15,9 @@ Close approved `LS-001` and hand off its constraints to PS-002 and later LS-002.
 - Added policy and security/privacy risk registers with explicit qualified-review triggers.
 - Independently reviewed and merged PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6) at `b6174f1325136bc69a9859925c570e5770972991`.
 - Verified the baseline in current `main`.
+- Received the approved bilingual free-audit/score contract through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12).
+- Received the approved paid questionnaire/interview/evidence contract through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13).
+- Verified all LS-002 dependencies and made the task ready.
 
 ## Not completed
 
@@ -22,11 +25,11 @@ Final policies, exact consent copy, retention periods, vendors, jurisdiction-spe
 
 ## Changed files
 
-`deliverables/BIZMETRIA_LEGAL_DATA_BASELINE_v0.1.md`, `CURRENT_STATE.md`, `TASK_QUEUE.md`, `ARTIFACT_INDEX.md`, `HANDOFF.md`, and `CHANGELOG.md`.
+LS-002 readiness synchronization in `CURRENT_STATE.md`, `TASK_QUEUE.md`, `HANDOFF.md`, and `CHANGELOG.md`; approved input contracts remain unchanged except for their closeout status.
 
 ## Decisions used
 
-Existing `DEC-001`–`DEC-013`, `DEC-015`, and `DEC-016`; `DEC-014` remains superseded. No new legal or commercial decision was approved.
+DEC-001–DEC-026, approved Product Requirements, FA-001, and PS-004. OPEN-009 is closed; no new legal conclusion is approved.
 
 ## Open questions
 
@@ -34,24 +37,24 @@ Refund Policy, entity/jurisdictions, voice consent, TCPA/email rules, age eligib
 
 ## Blockers
 
-LS-002 is dependency-gated on FA-001 and PS-004. Qualified counsel must review the flagged legal questions before relevant production gates.
+No dependency blocker remains for LS-002. Qualified counsel must review flagged legal questions before relevant production gates.
 
 ## Exact next action
 
-Use LS-001 in FA-001 and PS-004; wait for both contracts to merge before assigning LS-002.
+Start LS-002 on `task/ws-11/LS-002-consent-claims-data-requirements` from verified `main`.
 
 ## Handoff target
 
-FA-001 and PS-004 executors; later Legal, Privacy and Security for LS-002.
+Legal, Privacy and Security executor for LS-002; later Lifecycle, UX, Voice, Analysis, Backend, Report, and QA consumers.
 
 ## Branch
 
-None active. `task/ws-11/LS-001-legal-data-baseline` is historical.
+None active; `task/ws-11/LS-001-legal-data-baseline` is historical.
 
 ## PR
 
-Merged [#6](https://github.com/Bear78888/bizmetria.ai/pull/6).
+None active. Input PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12) and PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13) are merged.
 
 ## Validation results
 
-PASS — full remote diff, known-field coverage, purpose/access/retention/deletion review, separate-consent review, disclaimer map, security testability, open-decision scan, official-source check, relative links, changed-file scope, merge state, and resulting `main` verified.
+PASS — G1, FA-001, and PS-004 dependency evidence; field/evidence coverage; OPEN-009 closeout; G2 non-passage; pre-live legal/tax/vendor/retention blockers; and live-payment fail-closed boundary verified.

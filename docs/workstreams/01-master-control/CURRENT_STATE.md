@@ -3,8 +3,8 @@
 **Workstream:** 01 — Master Control  
 **Status:** `APPROVED` \
 **Last updated:** 2026-07-31 \
-**Current task:** `G1 — Product Baseline Approved` — `PASS` \
-**Current branch:** None in the approved post-G1 state \
+**Current task:** `Phase 2 input contracts checkpoint` — `PASS` \
+**Current branch:** None in the approved post-checkpoint state \
 **Current PR:** None
 
 ## Approved baseline
@@ -28,24 +28,27 @@
 - Explicit owner selections and the Stripe directive are recorded in the MC-003 decision record and Decision Log proposal.
 - MC-003 PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) was independently reviewed and merged at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
 - PS-003 PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) was independently reviewed and merged at `68901a35e7f465ed4990881645847092e6fdd2d1`.
-- `G1 — Product Baseline Approved` is `PASS`; `FA-001` and `PS-004` are `READY`.
+- `G1 — Product Baseline Approved` is `PASS`.
+- FA-001 was independently reviewed and merged through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12) at `97446522cf9eba8e63fe1b1887439fb77adabf5f`.
+- PS-004 was independently reviewed and merged through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13) at `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b`.
+- `OPEN-009` is closed; `LS-002` is `READY`; `G2` remains unpassed.
 
 ## In progress
 
-No Master Control or execution task branch is active in the approved post-G1 state.
+No Master Control or execution task branch is active in the approved post-checkpoint state.
 
 ## Not started
 
-- `FA-001` and `PS-004` are ready but not started.
+- `LS-002` is ready but not started.
 - `MC-004` and later Master Control gates remain dependency-gated.
 
 ## Open decisions
 
-`D01-B`, `D02-A`, `D03-A`, `D04-B`, `D05-B`, `D06-B`, `D07-B`, `D08-A`, and `D09-A` are approved. `OPEN-001`, `OPEN-002`, `OPEN-003`, `OPEN-007`, and `OPEN-008` have MC-003 dispositions; `OPEN-004`, `OPEN-005`, `OPEN-006`, and `OPEN-009` remain routed downstream.
+`D01-B`, `D02-A`, `D03-A`, `D04-B`, `D05-B`, `D06-B`, `D07-B`, `D08-A`, and `D09-A` are approved. `OPEN-001`, `OPEN-002`, `OPEN-003`, `OPEN-007`, `OPEN-008`, and `OPEN-009` have approved dispositions; `OPEN-004`, `OPEN-005`, and `OPEN-006` remain routed downstream.
 
 ## Blockers
 
-No technical or owner-authority blocker exists for `FA-001` or `PS-004`. Entity/address, support identity, legal/tax review, staffing, vendor/security evidence, release qualification, and live Stripe secrets remain pre-live blockers.
+No dependency blocker exists for `LS-002`. Entity/address, support identity, legal/tax review, staffing, vendor/security evidence, release qualification, and live Stripe secrets remain pre-live blockers.
 
 ## Dependencies
 
@@ -67,8 +70,8 @@ Approved MC-001 architecture, verified `main`, current product baseline, all wor
 
 ## Exact next action
 
-Start `FA-001` and `PS-004` from verified post-G1 `main` on separate task branches and draft PRs.
+Start `LS-002` from verified `main` on `task/ws-11/LS-002-consent-claims-data-requirements` and one draft PR.
 
 ## Latest session checkpoint
 
-On 2026-07-31, PS-003 merged at `68901a35e7f465ed4990881645847092e6fdd2d1` and `G1` passed; credentials remain external and live activation remains a final gated step.
+On 2026-07-31, FA-001 and PS-004 merged through PR #12/#13; OPEN-009 closed and LS-002 became ready. Credentials remain external and live activation remains a final gated step.

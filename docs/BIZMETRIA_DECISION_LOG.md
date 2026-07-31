@@ -47,7 +47,7 @@ This log records approved decisions recoverable from the available project conte
 | OPEN-006 | Which CRM and email vendor will be used? | Payments, CRM and Lifecycle | OPEN | `LC-001`, `BE-001` → `MC-004` |
 | OPEN-007 | What are the final promotion names, cadence, eligibility, and expiration rules? | Payments + Marketing | CLOSED FOR CONTRACT | DEC-020; `D04-B` approved, with exact implementation in `LC-001`. |
 | OPEN-008 | What are the implementation packages and prices? | Product Strategy | CLOSED | DEC-021; `D05-B` approved through `MC-003`. |
-| OPEN-009 | What tested detailed point table replaces or approves the recovered score baseline? | Free Audit and Lead Scoring | OPEN | `FA-001` → `G2` |
+| OPEN-009 | What tested detailed point table replaces or approves the recovered score baseline? | Free Audit and Lead Scoring | CLOSED | `ai-opportunity-score/1.0.0` approved through FA-001, PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), merge SHA `97446522cf9eba8e63fe1b1887439fb77adabf5f`. |
 
 ## Change rule
 

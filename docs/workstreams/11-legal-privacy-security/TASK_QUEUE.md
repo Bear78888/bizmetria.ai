@@ -25,14 +25,15 @@
 
 ## `LS-002 — Consent, Claims, and Data Requirements`
 
-- **Status:** `BLOCKED`
+- **Status:** `READY`
 - **Priority:** High
 - **Objective:** Convert the approved product, audit, and paid-assessment contracts into implementable consent text requirements, data lifecycle constraints, rights handling, and claims rules.
 - **Required inputs:** `G1 — PASS` plus approved `FA-001` and approved `PS-004`.
 - **Expected output:** `docs/workstreams/11-legal-privacy-security/deliverables/BIZMETRIA_CONSENT_CLAIMS_REQUIREMENTS_v1.0.md`.
-- **Dependencies:** Approved Product Requirements are available; free-audit and paid-assessment contracts remain pending.
+- **Dependencies:** `G1 — PASS`; FA-001 approved through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12); PS-004 approved through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13).
+- **Planned branch:** `task/ws-11/LS-002-consent-claims-data-requirements`.
 - **Owner:** Legal, Privacy and Security.
-- **Review status:** `G1` dependency passed; blocked until FA-001 and PS-004 merge.
+- **Review status:** All named dependencies merged and verified; no branch or PR exists yet.
 
 
 ## Global portfolio reference
@@ -40,7 +41,7 @@
 - **ID:** `TASK-004`
 - **Status:** See [Global Task Queue](../../BIZMETRIA_TASK_QUEUE.md).
 - **Execution mapping:** `LS-001`.
-- **Assignment:** Historical execution mapping complete through approved LS-001; LS-002 remains dependency-gated.
+- **Assignment:** Historical execution mapping complete through approved LS-001; LS-002 is the current ready task.
 - **Rule:** The global task ID remains a historical portfolio reference; work is performed and reviewed under `LS-001`.
 
 

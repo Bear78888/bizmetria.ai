@@ -1,12 +1,12 @@
 # BizMetria Project Status
 
 **As of:** 2026-07-31 \
-**Overall status:** `PHASE 2 READY — G1 PASS; FA-001 AND PS-004 READY` \
-**Verified `main` SHA:** `68901a35e7f465ed4990881645847092e6fdd2d1`
+**Overall status:** `PHASE 2 IN PROGRESS — FA-001 AND PS-004 APPROVED; LS-002 READY` \
+**Verified `main` SHA:** `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b`
 
 ## Current phase
 
-Recovery PR [#1](https://github.com/Bear78888/bizmetria.ai/pull/1), architecture PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), Delivery Roadmap PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), Product Blueprint PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), Legal/Data Baseline PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), Phase 1 input closeout PR [#7](https://github.com/Bear78888/bizmetria.ai/pull/7), Owner Decision Package PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), MC-003 owner decision PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9), and Product Requirements PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) are merged.
+Recovery PR [#1](https://github.com/Bear78888/bizmetria.ai/pull/1), architecture PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), Delivery Roadmap PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), Product Blueprint PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), Legal/Data Baseline PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), Phase 1 input closeout PR [#7](https://github.com/Bear78888/bizmetria.ai/pull/7), Owner Decision Package PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), MC-003 owner decision PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9), Product Requirements PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10), Free Audit Contract PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), and Paid Assessment Contract PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13) are merged.
 
 Gate `G0 — Governance Ready` is `PASS` because:
 
@@ -15,7 +15,7 @@ Gate `G0 — Governance Ready` is `PASS` because:
 - the Decision Log, Project Status, Task Queue, Registry, Active Work, Master Continuation, and Workstream 01 state are synchronized;
 - `PS-001` and `LS-001` were the only initial execution assignments and are now approved.
 
-`PS-003 — Product Requirements Baseline v1.0` was independently reviewed and merged. `G1 — Product Baseline Approved` is `PASS`: blocking owner decisions are recorded, LS-001 is approved, and every downstream Phase 2 task can quote stable requirements. `FA-001` and `PS-004` are the two authorized, non-overlapping next tasks. Missing entity, support, staffing, legal, tax, vendor/security, release, and live-credential facts remain fail-closed pre-live dependencies rather than blockers to these contracts.
+`G1 — Product Baseline Approved` is `PASS`. FA-001 and PS-004 were independently reviewed and merged: the free audit now has a canonical bilingual deterministic scoring contract, and the paid assessment has a minimized field/evidence and completion contract. `OPEN-009` is closed. `LS-002` is the single next dependency-ready task; `G2` is not passed. Missing entity, support, staffing, legal, tax, vendor/security, release, and live-credential facts remain fail-closed pre-live dependencies.
 
 ## Confirmed product baseline
 
@@ -47,15 +47,16 @@ Gate `G0 — Governance Ready` is `PASS` because:
 | MC-003 Owner Decision Gate | Master Orchestrator / owner | APPROVED | PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9), merge SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb` |
 | PS-003 Product Requirements Baseline v1.0 | Product Strategy | APPROVED | PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10), merge SHA `68901a35e7f465ed4990881645847092e6fdd2d1` |
 | G1 Product Baseline Approved | Master Orchestrator | PASS | MC-003, PS-003, and LS-001 merged and verified |
-| FA-001 Free Audit and Score Contract | Free Audit and Lead Scoring | READY | `G1` passed; no execution branch yet |
-| PS-004 Paid Assessment Content Contract | Product Strategy | READY | `G1` passed; no execution branch yet |
-| LS-002 and all later delivery tasks | Applicable workstreams | PLANNED | Follow the dependencies and gates in the Delivery Roadmap |
+| FA-001 Free Audit and Score Contract | Free Audit and Lead Scoring | APPROVED | PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), merge SHA `97446522cf9eba8e63fe1b1887439fb77adabf5f` |
+| PS-004 Paid Assessment Content Contract | Product Strategy | APPROVED | PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13), merge SHA `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b` |
+| LS-002 Consent, Claims, and Data Requirements | Legal, Privacy and Security | READY | G1, FA-001, and PS-004 approved |
+| G2 and later delivery tasks | Applicable workstreams | PLANNED | Follow named dependencies in the Delivery Roadmap |
 
 The complete sequence is in [`docs/control/DELIVERY_ROADMAP.md`](control/DELIVERY_ROADMAP.md); exact per-workstream state is in [`docs/control/WORKSTREAM_REGISTRY.md`](control/WORKSTREAM_REGISTRY.md).
 
 ## Recovered drafts
 
-Workstream 04 retains the recovered detailed free-audit field/options baseline and score mapping/result-selection baseline. They remain drafts until `FA-001` tests and approves or replaces them.
+Workstream 04 retains the recovered documents as historical evidence. Implementations MUST use the approved `free-audit-schema/1.0.0` and `ai-opportunity-score/1.0.0` contract from PR #12.
 
 ## Open decisions
 
@@ -64,14 +65,13 @@ The following remain unresolved and must not be silently approved:
 - technology stack except for the owner-approved Stripe payment boundary;
 - voice/telephony vendor;
 - CRM and email vendor;
-- final tested score point table;
 - exact customer-facing legal text, tax configuration, support identity, report-review staffing, and consultation staffing required before live operation.
 
 The Decision Log and Delivery Roadmap name the task and gate responsible for each item.
 
 ## Immediate next action
 
-Start `FA-001` and `PS-004` from verified post-G1 `main` on separate task branches and draft PRs. Preserve every pre-live dependency and keep Stripe in test mode until the final protected activation stage.
+Start `LS-002` from verified `main` on `task/ws-11/LS-002-consent-claims-data-requirements`. Preserve every pre-live dependency and keep Stripe in test mode until the final protected activation stage.
 
 ## Operational safeguards
 
