@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 04 — Free Audit and Lead Scoring
-**Status:** `READY`
+**Status:** `REVIEW`
 **Last updated:** 2026-07-31
-**Current task:** `FA-001 — Free Audit and Score Contract` — `READY`
-**Current branch:** None
-**Current PR:** None
+**Current task:** `FA-001 — Free Audit and Score Contract` — `REVIEW`
+**Current branch:** `task/ws-04/FA-001-free-audit-score-contract`
+**Current PR:** [#12](https://github.com/Bear78888/bizmetria.ai/pull/12)
 
 ## Approved baseline
 
@@ -13,23 +13,23 @@ Eleven topics, contact/consent boundary, score maxima, score bands, determinism,
 
 ## Completed
 
-Two recovered draft specifications exist and are preserved for testing.
+The v1.0 contract now defines the bilingual 11-question schema, stable answer IDs, validation, fixed point/domain rules, 0–100 score, result boundary, and exact regression vectors. The two recovered documents have been explicitly reconciled as historical inputs.
 
 ## In progress
 
-No workstream-specific task is in progress. FA-001 is ready but has no branch or PR.
+FA-001 is undergoing review on its isolated task branch. It is not canonical until independent review and merge.
 
 ## Not started
 
-Formal schema approval, calibration, bilingual copy, and deterministic regression tests remain to be completed by FA-001.
+Backend/frontend implementation, executable automated tests, and production legal/localization approval remain downstream.
 
 ## Open decisions
 
-Detailed point table, Q09/Q10 lookup, incomplete answers, and display threshold.
+No v1 scoring decision remains open in the task branch. OPEN-009 closes only after the contract is merged and its status is synchronized. Public legal/consent copy, retention, vendors, and production activation remain downstream.
 
 ## Blockers
 
-No blocker remains. `G1` passed after PS-003 merged through PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) at `68901a35e7f465ed4990881645847092e6fdd2d1`.
+No content blocker. Independent PR review and merge are required. Production legal, tax, support, staffing, vendor/security, release, and live Stripe dependencies remain fail closed.
 
 ## Dependencies
 
@@ -49,8 +49,8 @@ Approved PS-003 Product Requirements Baseline, approved LS-001 Legal/Data Baseli
 
 ## Exact next action
 
-Start FA-001 from verified post-G1 `main` on `task/ws-04/FA-001-free-audit-score-contract`.
+Publish one draft PR, verify the complete remote diff and regression arithmetic, then merge only after the review gate passes.
 
 ## Latest session checkpoint
 
-On 2026-07-31, `G1` passed and FA-001 became ready. The recovered detailed drafts remain unapproved inputs until FA-001 tests, approves, or replaces them.
+On 2026-07-31, FA-001 converted the recovered inputs into a 699-line v1.0 review contract with exact bilingual IDs and tested 0/24/25/44/45/64/65/79/80/100 vectors. No live payment or secret was introduced.
