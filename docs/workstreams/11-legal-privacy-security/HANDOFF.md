@@ -5,48 +5,51 @@
 
 ## Goal of latest work
 
-Initialize the permanent GitHub operating context for this workstream.
+Create the MVP Legal and Data Inventory Baseline under `LS-001`.
 
 ## Completed
 
-Canonical brief, state, queue, decision index, artifact index, handoff, changelog, and deliverables policy prepared under MC-001.
+- Created a field-level inventory across the current free, paid, voice, payment, analysis, report, lifecycle, analytics, support, and security journey.
+- Defined separate email/SMS and voice recording/transcription consent baselines.
+- Mapped notices, privacy requests, claims/disclaimers, security controls, vendor due diligence, and retention requirements.
+- Added policy and security/privacy risk registers with explicit qualified-review triggers.
 
 ## Not completed
 
-Data inventory, notices, retention/deletion, security baseline, and policy issue register.
+Independent review and approval/merge. Final policies, exact consent copy, retention periods, vendors, and jurisdiction-specific conclusions remain unapproved.
 
 ## Changed files
 
-The eight required operating elements in this workstream directory.
+`deliverables/BIZMETRIA_LEGAL_DATA_BASELINE_v0.1.md`, `CURRENT_STATE.md`, `TASK_QUEUE.md`, `ARTIFACT_INDEX.md`, `HANDOFF.md`, and `CHANGELOG.md`.
 
 ## Decisions used
 
-[DEC-001–DEC-015](../../BIZMETRIA_DECISION_LOG.md) and the explicit MC-001 governance-migration assignment. No new product decision was made.
+Existing `DEC-001`–`DEC-013`, `DEC-015`, and `DEC-016`; `DEC-014` remains superseded. No new legal or commercial decision was approved.
 
 ## Open questions
 
-Refund Policy, jurisdiction-specific review, vendors/processors, and retention periods.
+Refund Policy, entity/jurisdictions, voice consent, TCPA/email rules, age eligibility, privacy-law applicability, retention, vendors/processors, contracts, and incident obligations.
 
 ## Blockers
 
-No undisclosed blocker. Ownership and dependencies are recorded in `CURRENT_STATE.md`.
+No technical blocker. Qualified counsel must review the flagged legal questions before relevant production gates.
 
 ## Exact next action
 
-Master Orchestrator assigns a bounded LS-prefixed execution task for global TASK-004.
+Master Orchestrator reviews the complete draft PR, requests corrections or merges it with owner authority, and separately reviews `PS-001`.
 
 ## Handoff target
 
-Master Orchestrator and the next explicitly assigned temporary Workstream Chat.
+Master Orchestrator; then Product Strategy for `PS-002` and later Legal for `LS-002`.
 
 ## Branch
 
-`architecture/master-orchestrator-workstreams-v1`
+`task/ws-11/LS-001-legal-data-baseline`
 
 ## PR
 
-[#2](https://github.com/Bear78888/bizmetria.ai/pull/2)
+Draft PR pending creation.
 
 ## Validation results
 
-PASS — all eight required elements, required sections, task prefixes, state fields, and relative links validated under MC-001.
+PASS — known-field coverage, purpose/access/retention/deletion review, separate-consent review, disclaimer map, security testability, open-decision scan, official-source check, relative links, changed-file scope, and Handoff completeness.
