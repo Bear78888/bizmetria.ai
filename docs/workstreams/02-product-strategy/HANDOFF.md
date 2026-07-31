@@ -5,7 +5,7 @@
 
 ## Goal of latest work
 
-Hand the approved PS-002 options and explicit MC-003 selections into `PS-003 — Product Requirements Baseline v1.0`.
+Convert the merged MC-003 decisions into the stable, testable `PS-003 — Product Requirements Baseline v1.0` and prepare the `G1` review.
 
 ## Completed
 
@@ -15,18 +15,21 @@ Hand the approved PS-002 options and explicit MC-003 selections into `PS-003 —
 - Added factual confirmations `F01`–`F10`, cross-decision consistency checks, and the `MC-003` acceptance checklist.
 - Preserved every approved product constraint and kept all selections explicitly proposed.
 - Used approved PS-001 and LS-001 from verified `main` SHA `608ef46e382f86d557168ab2396b56e21e88cf75`.
+- Verified and used merged MC-003 PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9), merge SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
+- Created `BIZMETRIA_PRODUCT_REQUIREMENTS_v1.0.md` with stable IDs, verification methods, product states, commercial/operating rules, and downstream ownership.
+- Defined Stripe test/live isolation, externalized-secret rules, webhook/idempotency requirements, and a fail-closed 14-item pre-live register.
 
 ## Not completed
 
-Independent merge of MC-003 PR #9, PS-003, and `G1` remain incomplete. Pre-live entity, support, staffing, legal/tax, and credential provisioning remain intentionally deferred.
+Independent review and merge of PS-003 remain incomplete. `G1` remains not passed. Pre-live entity, support, staffing, legal/tax, vendor/security, release, and credential evidence remain intentionally deferred.
 
 ## Changed files
 
-Owner Decision Package plus Product Strategy and control/status records.
+Product Requirements Baseline plus synchronized Product Strategy, Master Control, and global/control state records.
 
 ## Decisions used
 
-Existing `DEC-001`–`DEC-016`; `DEC-014` remains superseded. MC-003 adds DEC-017–DEC-026 from explicit selections, including `D08-A` and Stripe as the payment processor.
+Approved `DEC-001`–`DEC-026`; `DEC-014` remains superseded. No new decision is proposed.
 
 ## Open questions
 
@@ -34,24 +37,24 @@ Existing `DEC-001`–`DEC-016`; `DEC-014` remains superseded. MC-003 adds DEC-01
 
 ## Blockers
 
-No Product Strategy technical blocker after PR #9 merges. Named pre-live dependencies must remain explicit in PS-003 and every downstream contract.
+No Product Strategy technical blocker. Named pre-live dependencies remain explicit and fail closed; none blocks contract, architecture, test-mode implementation, or staging work.
 
 ## Exact next action
 
-Merge reviewed MC-003 PR #9, then start PS-003 from the verified post-merge `main`.
+Independently review draft PR #10, merge it only after a clean gate, verify `main`, then record `G1` and start `FA-001` plus `PS-004`.
 
 ## Handoff target
 
-Product Strategy for `PS-003` after MC-003 merge.
+Independent PS-003 reviewer, then Master Control for `G1` closeout.
 
 ## Branch
 
-None active. `task/ws-02/PS-002-owner-decision-package` is historical.
+`task/ws-02/PS-003-product-requirements-v1`
 
 ## PR
 
-Merged [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) at `66be062629a9b11670d1b76d202a30474eff98f7`.
+Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10). MC-003 source PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) merged at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
 
 ## Validation results
 
-PASS — option completeness, approved-constraint trace, recommendation/approval separation, downstream coverage, legal-boundary scan, capacity arithmetic, decision-ID uniqueness, relative links, full remote/local diff equality, merge state, and resulting `main`.
+PENDING full validation — requirement-ID uniqueness, approved-decision trace, downstream coverage, Stripe and live-gate safety, relative links, Markdown/diff checks, remote/local equality, and independent PR review.

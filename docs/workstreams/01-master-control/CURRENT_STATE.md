@@ -1,16 +1,16 @@
 # Current State
 
 **Workstream:** 01 — Master Control  
-**Status:** `REVIEW — OWNER APPROVED` \
+**Status:** `APPROVED` \
 **Last updated:** 2026-07-31 \
-**Current task:** `MC-003 — Product Decision Gate` \
-**Current branch:** `task/ws-01/MC-003-owner-decision-gate` \
-**Current PR:** Draft [#9](https://github.com/Bear78888/bizmetria.ai/pull/9)
+**Current task:** `MC-003 — Product Decision Gate` — complete \
+**Current branch:** None; MC-003 branch is historical \
+**Current PR:** Merged [#9](https://github.com/Bear78888/bizmetria.ai/pull/9)
 
 ## Approved baseline
 
 - `TASK-000` governance recovery baseline.
-- DEC-001–DEC-026, with DEC-014 superseded by DEC-016; DEC-017–DEC-026 become canonical on PR #9 merge.
+- DEC-001–DEC-026, with DEC-014 superseded by DEC-016; DEC-017–DEC-026 are canonical after PR #9 merge.
 - `MC-001` operating system approved through PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), merge SHA `473ee6c042bd5224bec75dbc18fa803e9b148aa3`.
 
 ## Completed
@@ -26,14 +26,15 @@
 - PS-002 was independently reviewed and merged through PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) at `66be062629a9b11670d1b76d202a30474eff98f7`.
 - The Owner Decision Package is an approved input; it approves no owner choice.
 - Explicit owner selections and the Stripe directive are recorded in the MC-003 decision record and Decision Log proposal.
+- MC-003 PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) was independently reviewed and merged at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
 
 ## In progress
 
-MC-003 has a scoped remote branch and a complete owner-approved decision record. The branch awaits independent final review and merge.
+No Master Control task branch is active. Product Strategy is executing PS-003 from the verified post-MC-003 `main`.
 
 ## Not started
 
-- `PS-003` becomes `READY` when PR #9 merges.
+- `PS-003` is in review on `task/ws-02/PS-003-product-requirements-v1`.
 - `G1` remains not passed.
 
 ## Open decisions
@@ -64,8 +65,8 @@ Approved MC-001 architecture, verified `main`, current product baseline, all wor
 
 ## Exact next action
 
-Independently review and merge PR #9, verify the resulting `main`, and hand off to Product Strategy for PS-003.
+Review and merge PS-003, verify the resulting `main`, then record `G1` and authorize the first two Phase 2 tasks.
 
 ## Latest session checkpoint
 
-On 2026-07-31, the owner explicitly approved the recommendation bundle with `D08-A`, nationwide U.S. intent, `America/Los_Angeles` plus the federal-holiday calendar, and Stripe for eventual live payments. Credentials remain external and live activation remains a final gated step.
+On 2026-07-31, MC-003 merged at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`; credentials remain external and live activation remains a final gated step.

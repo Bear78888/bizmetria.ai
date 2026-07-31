@@ -15,7 +15,7 @@ It does not infer consent from prior requests to continue the project. A recomme
 
 The project owner supplied explicit authority on 2026-07-31. This record therefore closes the product-decision portion of `MC-003` and gives `PS-003` stable implementation inputs. Missing entity, support, staffing, tax, and legal-review facts are validly deferred as named pre-live dependencies; they do not authorize real charges or public commercial launch.
 
-After this record is merged:
+After this record merged through PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`:
 
 - `MC-003` is `APPROVED`;
 - `OPEN-001`, `OPEN-003`, and `OPEN-008` are closed;
@@ -89,9 +89,9 @@ Sensitive personal details, credentials, tax IDs, payment information, or privat
 | Explicit choice for `D01`–`D09` | PASS — `D01-B`, `D02-A`, `D03-A`, `D04-B`, `D05-B`, `D06-B`, `D07-B`, `D08-A`, `D09-A` |
 | Stable geography, timezone, commercial, capacity, and consultation implementation requirements | PASS |
 | Missing entity, support, staffing, qualified legal/tax review, and live Stripe credentials | VALIDLY DEFERRED — blocks live activation, not PS-003 or non-live build work |
-| Decision Log updated with approved entries | PASS — DEC-017 through DEC-026 proposed in this PR |
-| `MC-003 — Product Decision Gate` | APPROVED on merge of PR #9 |
-| `PS-003` product requirements merged | NOT STARTED — becomes READY after PR #9 merge |
+| Decision Log updated with approved entries | PASS — DEC-017 through DEC-026 are canonical through merged PR #9 |
+| `MC-003 — Product Decision Gate` | APPROVED — PR #9 merged and verified |
+| `PS-003` product requirements merged | IN REVIEW — branch `task/ws-02/PS-003-product-requirements-v1` |
 | `G1 — Product Baseline Approved` | NOT PASSED |
 
 ## 7. Completion procedure
@@ -103,20 +103,20 @@ Completion result:
 3. every missing professional/operational fact has an explicit owner category, safety effect, and pre-live trigger;
 4. DEC-017 through DEC-026 record the approved decisions and Stripe directive;
 5. `OPEN-001`, `OPEN-002`, `OPEN-003`, `OPEN-007`, and `OPEN-008` have product-contract dispositions;
-6. PR #9 still requires independent final review before merge;
-7. `PS-003` starts only from the verified post-merge `main`;
+6. PR #9 passed independent final review and merged;
+7. `PS-003` started from verified post-merge `main` SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb`;
 8. `G1` cannot pass until `PS-003` is reviewed and merged;
 9. no real charge or paid customer is accepted while a Section 4 pre-live dependency remains unmet.
 
 ## 8. Handoff Summary
 
 - **Task:** `MC-003 — Product Decision Gate`
-- **Status:** `APPROVED — pending independent PR review and merge`
+- **Status:** `APPROVED — independently reviewed and merged`
 - **Approved inputs:** PS-001, LS-001, and PS-002.
 - **Decisions approved by this checkpoint:** `D01-B`, `D02-A`, `D03-A`, `D04-B`, `D05-B`, `D06-B`, `D07-B`, `D08-A`, `D09-A`, plus Stripe as the eventual real-payment processor with externalized secrets and final-stage live activation.
 - **Open decisions:** `OPEN-004`, `OPEN-005`, `OPEN-006`, and `OPEN-009` remain routed to later gates. The Phase 1 product decisions are closed or given downstream implementation/legal dispositions.
 - **Technical blocker:** None.
 - **Authority blocker:** None for product requirements or non-live implementation.
 - **Confirmed live-launch blockers:** No legal entity/business address; support identity unassigned; tax, Refund Policy, and age-rule reviews not arranged; report reviewers and consultation providers unassigned; live Stripe credentials intentionally not provisioned.
-- **Checkpoint PR:** Draft [#9](https://github.com/Bear78888/bizmetria.ai/pull/9).
-- **Next action:** Independently review and merge PR #9, verify the resulting `main`, then execute `PS-003 — Product Requirements Baseline v1.0` without enabling real payments.
+- **Checkpoint PR:** Merged [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
+- **Next action:** Independently review and merge `PS-003 — Product Requirements Baseline v1.0` without enabling real payments, then evaluate `G1`.

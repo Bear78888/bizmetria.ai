@@ -1,15 +1,15 @@
 # Current State
 
 **Workstream:** 02 — Product Strategy
-**Status:** `READY`
+**Status:** `REVIEW`
 **Last updated:** 2026-07-31
-**Current task:** `PS-003 — Product Requirements Baseline v1.0` — ready after PR #9 merge
-**Current branch:** None; PS-002 branch is historical
-**Current PR:** None
+**Current task:** `PS-003 — Product Requirements Baseline v1.0`
+**Current branch:** `task/ws-02/PS-003-product-requirements-v1`
+**Current PR:** Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10)
 
 ## Approved baseline
 
-Approved product foundation in the Master Brief and DEC-001–DEC-026; approved Delivery Roadmap; gate `G0` is `PASS`. DEC-017–DEC-026 become canonical when MC-003 PR #9 merges.
+Approved product foundation in the Master Brief and DEC-001–DEC-026; approved Delivery Roadmap; gate `G0` is `PASS`. MC-003 was independently reviewed and merged through PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
 
 ## Completed
 
@@ -17,11 +17,11 @@ A complete new Product Blueprint v0.1 was independently reviewed and merged thro
 
 ## In progress
 
-No Product Strategy branch is active. Explicit owner selections are recorded in MC-003 PR #9 and provide the stable inputs for PS-003 after merge.
+PS-003 converts every approved product, commercial, operating, Stripe, and pre-live rule into stable testable requirements. The deliverable is published in draft PR #10 and awaits independent review.
 
 ## Not started
 
-`PS-003 — Product Requirements Baseline v1.0` is ready to start from the verified post-MC-003 `main`.
+Phase 2 tasks remain gated until PS-003 merges and `G1` passes.
 
 ## Open decisions
 
@@ -29,7 +29,7 @@ The owner selected D01-B/D02-A/D03-A/D04-B/D05-B/D06-B/D07-B/D08-A/D09-A. `OPEN-
 
 ## Blockers
 
-No Product Strategy blocker after PR #9 merges. Entity, support, staffing, legal/tax review, and live credentials are pre-live dependencies and must remain testable fail-closed requirements.
+No Product Strategy blocker. Entity, support, staffing, legal/tax review, vendor/security evidence, release qualification, and live credentials are explicit `LIVE-DEP` requirements that fail closed without blocking non-live work.
 
 ## Dependencies
 
@@ -50,8 +50,8 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 
 ## Exact next action
 
-After PR #9 merge, create the scoped PS-003 branch from the exact `main` SHA and write the complete Product Requirements Baseline v1.0 without enabling live payments.
+Perform independent remote review of draft PR #10 and merge only after all requirement and safety checks pass.
 
 ## Latest session checkpoint
 
-On 2026-07-31, explicit owner decisions were recorded in MC-003 PR #9, including nationwide U.S. intent, the operating calendar, and Stripe-ready architecture with final-stage live activation.
+On 2026-07-31, MC-003 PR #9 merged and PS-003 started from exact `main` SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
