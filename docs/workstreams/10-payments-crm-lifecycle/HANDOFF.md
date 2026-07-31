@@ -1,52 +1,54 @@
 # Handoff
 
 **Workstream:** 10 — Payments, CRM and Lifecycle
-**Last updated:** 2026-07-30
+**Last updated:** 2026-07-31
 
 ## Goal of latest work
 
-Initialize the permanent GitHub operating context for this workstream.
+Authorize LC-001 from exact approved commercial and legal/data inputs while preserving Stripe test/live isolation and every pre-live blocker.
 
 ## Completed
 
-Canonical brief, state, queue, decision index, artifact index, handoff, changelog, and deliverables policy prepared under MC-001.
+- Verified PS-003 PR #10 and LS-002 PR #15 as approved inputs.
+- Recorded LC-001 as `READY` with an exact artifact target, branch, behavior boundary, and acceptance criteria.
+- Preserved the $299 price, approved promotion/refund structure, nationwide intent, operating calendar, consent/suppression rules, Stripe as eventual processor, and final-stage secret provisioning.
 
 ## Not completed
 
-Checkout states, CRM model, consent-aware triggers, promotions, refunds, and reactivation.
+The lifecycle contract, implementation, provider/vendor ADRs, exact Refund Policy and tax treatment, entity/support/staffing setup, production security/release evidence, and protected live Stripe configuration are not complete.
 
 ## Changed files
 
-The eight required operating elements in this workstream directory.
+Workstream 10 state, task queue, handoff, and changelog as part of the LS-002 service closeout.
 
 ## Decisions used
 
-[DEC-001–DEC-015](../../BIZMETRIA_DECISION_LOG.md) and the explicit MC-001 governance-migration assignment. No new product decision was made.
+DEC-001–DEC-026 plus approved PS-003 and LS-002. Stripe is the intended processor; no credential, vendor sub-account, live mode, legal conclusion, or public nationwide claim is approved here.
 
 ## Open questions
 
-CRM/email vendor, Refund Policy, promotion names/timing, and implementation pricing.
+CRM/email/SMS vendors, exact Refund Policy text, tax configuration, support identity, promotion campaign details, consultation staffing, implementation-sales process, and production configuration.
 
 ## Blockers
 
-No undisclosed blocker. Ownership and dependencies are recorded in `CURRENT_STATE.md`.
+No dependency blocker for LC-001. Real charging remains fail closed until every applicable entity, policy, legal/tax, support, vendor/security, staffing, release, webhook, account-ownership, and live-secret gate passes.
 
 ## Exact next action
 
-Wait for approved lifecycle inputs; Master Orchestrator then assigns an LC-prefixed task.
+Start `LC-001` on `task/ws-10/LC-001-commercial-lifecycle-contract` and create its vendor-neutral commercial/lifecycle contract with Stripe test-mode behavior and placeholder environment-variable names only.
 
 ## Handoff target
 
-Master Orchestrator and the next explicitly assigned temporary Workstream Chat.
+Payments/CRM/Lifecycle task executor and independent reviewer; later UX, Backend, Marketing, QA, Operations, and Release consumers.
 
 ## Branch
 
-`architecture/master-orchestrator-workstreams-v1`
+None active; planned branch `task/ws-10/LC-001-commercial-lifecycle-contract`.
 
 ## PR
 
-[#2](https://github.com/Bear78888/bizmetria.ai/pull/2)
+None for LC-001; the service closeout is draft PR [#16](https://github.com/Bear78888/bizmetria.ai/pull/16).
 
 ## Validation results
 
-PASS — all eight required elements, required sections, task prefixes, state fields, and relative links validated under MC-001.
+PASS — named dependency merge evidence, target uniqueness, non-overlapping scope, nationwide/calendar requirements, consent/suppression rules, Stripe test/live boundary, secret exclusion, and pre-live gates verified.

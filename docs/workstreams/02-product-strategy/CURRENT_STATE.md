@@ -17,7 +17,7 @@ A complete new Product Blueprint v0.1 was independently reviewed and merged thro
 
 ## In progress
 
-No Product Strategy task is in progress. PS-004 is canonical in `main` and handed to LS-002 and later consumers.
+No Product Strategy task is in progress. PS-004 is canonical in `main`; LS-002 adopted it and merged through PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15), and AE-001 plus later consumers may now use it.
 
 ## Not started
 
@@ -50,8 +50,8 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 
 ## Exact next action
 
-Supply PS-004 to LS-002, UX, Voice, Backend, Analysis, Report, Lifecycle, and QA; preserve its versioned completion rule.
+Supply PS-004 to AE-001, UX, Voice, Backend, Report, Lifecycle, and QA; preserve its versioned completion rule and LS-002 constraints.
 
 ## Latest session checkpoint
 
-On 2026-07-31, PS-004 passed independent remote review and merged through PR #13 at `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b`. No Stripe credential or live activation was introduced.
+On 2026-07-31, LS-002 adopted PS-004 and merged through PR #15 at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`; AE-001 is now ready. No Stripe credential or live activation was introduced.

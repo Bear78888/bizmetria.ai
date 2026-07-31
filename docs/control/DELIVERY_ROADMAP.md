@@ -266,8 +266,8 @@ Tasks may be paired only where their inputs and files do not overlap.
 Pass only when Phase 2 contracts are merged, versioned, mutually consistent, and accepted by their downstream consumers. Schema-breaking changes after this gate require explicit versioning and impact review.
 
 - **Status:** `NOT PASSED`
-- **Current evidence:** FA-001 merged through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12); PS-004 merged through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13).
-- **Next required task:** `LS-002 — Consent, Claims, and Data Requirements`. Later Phase 2 contracts retain their named dependencies.
+- **Current evidence:** FA-001 merged through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12); PS-004 merged through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13); LS-002 merged through PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
+- **Next required tasks:** `LC-001 — Commercial and Lifecycle Contract` and `AE-001 — Analysis and Evidence Contract` may proceed independently. RP-001 and QA-001 retain their named dependencies.
 - **Boundary:** These approved inputs do not authorize live Stripe activation, real paid orders, or public paid launch.
 
 # Phase 3 — Experience, voice, architecture, and vendor decisions
@@ -615,7 +615,8 @@ BizMetria receives status `AD READY` only when all conditions below are true:
 3. Review and merge each result independently — complete through PR #5 and PR #6.
 4. Run `PS-002`, then `MC-003`, then `PS-003` — complete through PR #10.
 5. Pass `G1`, then complete `FA-001` and `PS-004` independently — complete through PR #12 and PR #13.
-6. Run `LS-002` next; do not pass `G2` until every Phase 2 contract is merged and mutually consistent.
+6. Complete `LS-002` — complete through PR #15.
+7. Run `LC-001` and `AE-001` independently, then RP-001 and QA-001 in dependency order; do not pass `G2` until every Phase 2 contract is merged and mutually consistent.
 
 ## Handoff Summary
 
@@ -627,4 +628,4 @@ BizMetria receives status `AD READY` only when all conditions below are true:
 - **Open questions:** `OPEN-001`, `OPEN-002`, `OPEN-003`, `OPEN-007`, `OPEN-008`, and `OPEN-009` have approved dispositions; `OPEN-004`, `OPEN-005`, and `OPEN-006` remain routed to later gates.
 - **Dependencies:** Approved MC-001 architecture and merged recovery baseline.
 - **Validation:** Task-ID uniqueness, link resolution, dependency reachability, invariant scan, no secrets/personal data, and complete diff review passed before approval.
-- **Recommended next task:** Execute `LS-002 — Consent, Claims, and Data Requirements` from the approved FA-001 and PS-004 inputs without enabling live payments.
+- **Recommended next task:** Execute `LC-001` and `AE-001` from approved inputs on separate branches without enabling live payments or production data.

@@ -16,6 +16,7 @@ Canonical brief, state, queue, decision index, artifact index, handoff, changelo
 - `BIZMETRIA_FREE_AUDIT_CONTRACT_v1.0.md` defines all 11 bilingual questions, stable IDs, validation, fixed Q09/Q10 lookups, point rules, score bands, locked boundaries, and regression vectors.
 - Required totals 0, 24/25, 44/45, 64/65, 79/80, and 100 reconcile exactly.
 - Recovered question and score documents are preserved as historical inputs and explicitly reconciled by the v1 contract.
+- LS-002 adopted the approved contract and merged through PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15); AE-001 is now dependency-ready.
 
 ## Not completed
 
@@ -39,11 +40,11 @@ No contract blocker remains. Production legal, tax, support, staffing, vendor/se
 
 ## Exact next action
 
-Supply the approved contract to LS-002 and later implementation/QA consumers.
+Supply the approved contract to AE-001 and later implementation/QA consumers.
 
 ## Handoff target
 
-LS-002, AE-001, UX, Backend, Analytics, and QA consumers.
+AE-001, UX, Backend, Analytics, and QA consumers.
 
 ## Branch
 

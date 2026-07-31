@@ -10,5 +10,6 @@
 | 2026-07-31 | MC-003 | Recorded explicit owner selections, nationwide U.S. scope, the operating calendar, Stripe payment architecture, and bounded pre-live deferrals; made PS-003 ready. | Decision record, Decision Log, and synchronized global/control and Workstream 01/02 state | [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) | APPROVED |
 | 2026-07-31 | G1 | Verified approved MC-003, LS-001, and PS-003; passed the Product Baseline gate and made FA-001 plus PS-004 ready without enabling live commerce. | Synchronized global/control and Workstream 01/02/04/11 state | [#11](https://github.com/Bear78888/bizmetria.ai/pull/11) | PASS |
 | 2026-07-31 | Phase 2 input checkpoint | Verified and approved FA-001 plus PS-004, closed OPEN-009, and made LS-002 ready without passing G2 or enabling live commerce. | Synchronized global/control and Workstream 01/02/04/11 state | [#14](https://github.com/Bear78888/bizmetria.ai/pull/14) | PASS |
+| 2026-07-31 | LS-002 contract checkpoint | Verified the independently merged consent/claims/data contract and made LC-001 plus AE-001 ready without passing G2 or enabling live commerce. | Synchronized global/control and Workstream 01/02/04/07/10/11 state | [#16](https://github.com/Bear78888/bizmetria.ai/pull/16) | PASS |
 
 Unverified historical activity is not reconstructed here.

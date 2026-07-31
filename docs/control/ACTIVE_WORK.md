@@ -14,9 +14,9 @@
 
 ## Active task index
 
-No execution task is active in the approved post-FA-001/PS-004 state. `LS-002` is `READY` and requires its own branch and draft PR before becoming active. The service branch that publishes this closeout is historical when this record reaches `main`.
+No execution task is active in the approved post-LS-002 state. `LC-001` and `AE-001` are `READY` and require separate scoped branches and draft PRs before becoming active. The service branch that publishes this closeout is historical when this record reaches `main`.
 
-`PS-001`, `LS-001`, `PS-002`, `MC-003`, `PS-003`, `FA-001`, and `PS-004` are merged and approved. `G1` is `PASS`; `G2` is not passed. Live payment, real-order, and public-launch work remains blocked by the named pre-live gates.
+`PS-001`, `LS-001`, `PS-002`, `MC-003`, `PS-003`, `FA-001`, `PS-004`, and `LS-002` are merged and approved. `G1` is `PASS`; `G2` is not passed. Live payment, real-order, production-data, and public-launch work remains blocked by the named pre-live gates.
 
 ## Non-active preserved branches
 
@@ -33,6 +33,8 @@ No execution task is active in the approved post-FA-001/PS-004 state. `LS-002` i
 - `task/ws-02/PS-004-paid-assessment-contract` — merged through PR #13; historical.
 - `task/ws-01/phase2-input-contracts-closeout` — service branch; historical when its closeout reaches `main`.
 - `task/ws-11/LS-001-legal-data-baseline` — merged through PR #6; historical.
+- `task/ws-11/LS-002-consent-claims-data-requirements` — merged through PR #15; historical.
+- `task/ws-01/LS-002-phase2-closeout` — service branch; historical when its closeout reaches `main`.
 - `test/chatgpt-write-access` — preserved test branch; do not modify or delete.
 
 ## Reconciliation procedure
