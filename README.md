@@ -2,72 +2,112 @@
 
 BizMetria.ai is a cross-industry business assessment platform that identifies practical AI and automation opportunities and turns them into a prioritized implementation roadmap.
 
+## Current confirmed status
+
+- Recovery PR [#1](https://github.com/Bear78888/bizmetria.ai/pull/1) was reviewed and merged.
+- Verified recovery baseline in `main`: `300c01050820953d2769a91a77a39ae3edcd7f99`.
+- `MC-001` is migrating governance to one Master Orchestrator and thirteen permanent GitHub workstreams.
+- Migration branch: `architecture/master-orchestrator-workstreams-v1`.
+- Draft migration PR: [#2](https://github.com/Bear78888/bizmetria.ai/pull/2).
+- Migration content remains unapproved until its draft PR is reviewed and merged.
+
 ## Approved product foundation
 
-- Brand: **BizMetria.ai**
-- Primary product: **BizMetria Business Assessment**
-- Price: **$299 one time**; this is not a subscription.
-- Implementation is not included in the $299 assessment and is sold separately.
-- Launch languages: **English and Spanish**.
-- English and Spanish use separate telephone numbers, one for each language.
-- Both language experiences share one backend for CRM, payments, analysis, reports, and administration.
-- The cold-traffic journey starts with a free **AI Opportunity Check**.
-- The free result reveals limited, useful information and directs the user to the full assessment.
-- An email sequence follows the free audit.
-- Discounts use Stripe Coupons and Promotion Codes. Allowed discount amounts are $49–$199 off $299; the $199 discount is reserved for late reactivation and is not advertised in advance.
-- Every paid report is manually reviewed before delivery during MVP.
-- English and Spanish versions use the same canonical IDs and output schemas.
+- Product: **BizMetria Business Assessment** for businesses across industries.
+- Price: **$299 one time**, not a subscription.
+- Implementation is separate and is not included in $299.
+- Launch languages: **English and Spanish**, with one separate telephone number per language and one shared backend.
+- Cold traffic starts with the free **AI Opportunity Check**.
+- The free result provides limited value and directs the user to the paid assessment.
+- Discounts use Stripe Coupons and Promotion Codes from $49 to $199 off; $199 is reserved for late reactivation and is not advertised in advance.
+- Every paid MVP report is manually reviewed before delivery.
 
-The approved paid-assessment baseline includes an extended questionnaire, an adaptive AI interview of up to approximately 45 minutes, personalized analysis, approximately 8–15 recommendations, an Impact vs. Effort Matrix, a 30–90 day roadmap, a professional PDF report, MVP manual review, and a results consultation.
+The complete product baseline and unresolved decisions are in the [Master Brief](docs/BIZMETRIA_MASTER_BRIEF_v1.0.md) and [Decision Log](docs/BIZMETRIA_DECISION_LOG.md).
 
-The report delivery deadline, final refund policy, exact consultation format, technology stack, telephony vendor, CRM/email vendor, final promotion names and timing, and implementation pricing remain open decisions.
+## Source of Truth
 
-## Documentation
+Merged `main` is the only approved repository state. Open branches and PRs are working context, not approved state.
 
-### Governance and continuity
+Use this hierarchy:
+
+1. Explicit current user instructions.
+2. Actual state of `Bear78888/bizmetria.ai`.
+3. Canonical documents merged to `main`.
+4. Approved merged deliverables and Decision Log history.
+5. Open branches and PRs as unapproved working context.
+6. Legacy briefs and recovered drafts as source material only.
+
+## Master Orchestrator control system
+
+- [Control system map](docs/control/README.md)
+- [Master Orchestrator Brief](docs/control/MASTER_ORCHESTRATOR_BRIEF.md)
+- [Master Continuation](docs/control/MASTER_CONTINUATION.md)
+- [Workstream Registry](docs/control/WORKSTREAM_REGISTRY.md)
+- [Active Work](docs/control/ACTIVE_WORK.md)
+- [GitHub Safe Operating Policy](docs/control/GITHUB_SAFE_OPERATING_POLICY.md)
+- [Backup and Continuity Policy](docs/control/BACKUP_AND_CONTINUITY_POLICY.md)
+- [Start a New Master Chat](docs/control/START_NEW_MASTER_CHAT.md)
+- [Start a Temporary Workstream Chat](docs/control/START_WORKSTREAM_CHAT.md)
+- [MC-001 Migration Report](docs/control/MIGRATION_REPORT.md)
+
+For continuity, begin with [Master Continuation](docs/control/MASTER_CONTINUATION.md); it links to the complete Required Startup Reading.
+
+## Thirteen permanent workstreams
+
+| # | Workstream | Prefix | Operating directory |
+|---:|---|---|---|
+| 01 | Master Control | `MC` | [`docs/workstreams/01-master-control/`](docs/workstreams/01-master-control/WORKSTREAM_BRIEF.md) |
+| 02 | Product Strategy | `PS` | [`docs/workstreams/02-product-strategy/`](docs/workstreams/02-product-strategy/WORKSTREAM_BRIEF.md) |
+| 03 | Brand, Website and UX | `UX` | [`docs/workstreams/03-brand-website-ux/`](docs/workstreams/03-brand-website-ux/WORKSTREAM_BRIEF.md) |
+| 04 | Free Audit and Lead Scoring | `FA` | [`docs/workstreams/04-free-audit-lead-scoring/`](docs/workstreams/04-free-audit-lead-scoring/WORKSTREAM_BRIEF.md) |
+| 05 | English Voice Analyst | `EN` | [`docs/workstreams/05-english-voice-analyst/`](docs/workstreams/05-english-voice-analyst/WORKSTREAM_BRIEF.md) |
+| 06 | Spanish Voice Analyst | `ES` | [`docs/workstreams/06-spanish-voice-analyst/`](docs/workstreams/06-spanish-voice-analyst/WORKSTREAM_BRIEF.md) |
+| 07 | AI Analysis Engine | `AE` | [`docs/workstreams/07-ai-analysis-engine/`](docs/workstreams/07-ai-analysis-engine/WORKSTREAM_BRIEF.md) |
+| 08 | Report and PDF System | `RP` | [`docs/workstreams/08-report-pdf-system/`](docs/workstreams/08-report-pdf-system/WORKSTREAM_BRIEF.md) |
+| 09 | Backend, Data and Integrations | `BE` | [`docs/workstreams/09-backend-data-integrations/`](docs/workstreams/09-backend-data-integrations/WORKSTREAM_BRIEF.md) |
+| 10 | Payments, CRM and Lifecycle | `LC` | [`docs/workstreams/10-payments-crm-lifecycle/`](docs/workstreams/10-payments-crm-lifecycle/WORKSTREAM_BRIEF.md) |
+| 11 | Legal, Privacy and Security | `LS` | [`docs/workstreams/11-legal-privacy-security/`](docs/workstreams/11-legal-privacy-security/WORKSTREAM_BRIEF.md) |
+| 12 | Marketing, Content and Sales | `MS` | [`docs/workstreams/12-marketing-content-sales/`](docs/workstreams/12-marketing-content-sales/WORKSTREAM_BRIEF.md) |
+| 13 | QA, Analytics and Release | `QA` | [`docs/workstreams/13-qa-analytics-release/`](docs/workstreams/13-qa-analytics-release/WORKSTREAM_BRIEF.md) |
+
+Each directory contains a canonical brief, current state, local task queue, local decisions, artifact index, handoff, changelog, and deliverables policy.
+
+## Task branches
+
+Standard format:
+
+`task/ws-XX/PREFIX-###-short-description`
+
+One task uses one temporary branch and one draft PR. Long-lived workstream branches are prohibited. A remote task branch is the canonical live-lock. Never write directly to `main`, reuse a merged task branch, force push, or self-merge.
+
+The fixed MC-001 migration branch is a one-time cross-functional exception.
+
+## Starting work
+
+- New or replacement Master Chat: use [Start a New Master Chat](docs/control/START_NEW_MASTER_CHAT.md).
+- Temporary specialist chat: Master Orchestrator fills and issues [Start a Temporary Workstream Chat](docs/control/START_WORKSTREAM_CHAT.md).
+
+No chat writes before verifying current `main`, real branches/PRs, live-lock, required inputs, allowed files, and acceptance criteria.
+
+## Governance documents
 
 - [Master Brief](docs/BIZMETRIA_MASTER_BRIEF_v1.0.md)
 - [Coordination Protocol](docs/BIZMETRIA_COORDINATION_PROTOCOL_v1.0.md)
 - [GitHub Collaboration Workflow](docs/BIZMETRIA_GITHUB_COLLABORATION_WORKFLOW_v1.0.md)
 - [Decision Log](docs/BIZMETRIA_DECISION_LOG.md)
 - [Project Status](docs/BIZMETRIA_PROJECT_STATUS.md)
-- [Task Queue](docs/BIZMETRIA_TASK_QUEUE.md)
-- [Chat Startup Instructions](docs/CHAT_STARTUP_INSTRUCTIONS.md)
-- [Continuation Context — 2026-07-30](docs/BIZMETRIA_CHAT_CONTINUATION_CONTEXT_2026-07-30.md)
+- [Global Task Queue](docs/BIZMETRIA_TASK_QUEUE.md)
 
-### Recovered specifications
+## Deliverables and recovered specifications
 
-- [Free Audit Questions — RECOVERED DRAFT](docs/workstreams/04-free-audit-lead-scoring/BIZMETRIA_FREE_AUDIT_QUESTIONS_RECOVERED_v0.1.md)
-- [AI Opportunity Score — RECOVERED DRAFT](docs/workstreams/04-free-audit-lead-scoring/BIZMETRIA_AI_OPPORTUNITY_SCORE_RECOVERED_v0.1.md)
-- Product Blueprint v0.1: pending exact re-creation under `TASK-001`; no substitute has been presented as approved.
+New deliverables belong in the relevant workstream's `deliverables/` directory and must be indexed in its `ARTIFACT_INDEX.md`. Existing approved/recovered files remain in place until a separate migration task explicitly moves them.
 
-## Thirteen working chats
+- [Free Audit Questions — Recovered Draft](docs/workstreams/04-free-audit-lead-scoring/BIZMETRIA_FREE_AUDIT_QUESTIONS_RECOVERED_v0.1.md)
+- [AI Opportunity Score — Recovered Baseline](docs/workstreams/04-free-audit-lead-scoring/BIZMETRIA_AI_OPPORTUNITY_SCORE_RECOVERED_v0.1.md)
+- Product Blueprint v0.1 is not present and must not be reconstructed as a historical original.
 
-1. [Master Control](docs/chat-briefs/01_MASTER_CONTROL.md)
-2. [Product Strategy](docs/chat-briefs/02_PRODUCT_STRATEGY.md)
-3. [Brand, Website and UX](docs/chat-briefs/03_BRAND_WEBSITE_UX.md)
-4. [Free Audit and Lead Scoring](docs/chat-briefs/04_FREE_AUDIT_LEAD_SCORING.md)
-5. [English Voice Analyst](docs/chat-briefs/05_ENGLISH_VOICE_ANALYST.md)
-6. [Spanish Voice Analyst](docs/chat-briefs/06_SPANISH_VOICE_ANALYST.md)
-7. [AI Analysis Engine](docs/chat-briefs/07_AI_ANALYSIS_ENGINE.md)
-8. [Report and PDF System](docs/chat-briefs/08_REPORT_PDF_SYSTEM.md)
-9. [Backend, Data and Integrations](docs/chat-briefs/09_BACKEND_DATA_INTEGRATIONS.md)
-10. [Payments, CRM and Lifecycle](docs/chat-briefs/10_PAYMENTS_CRM_LIFECYCLE.md)
-11. [Legal, Privacy and Security](docs/chat-briefs/11_LEGAL_PRIVACY_SECURITY.md)
-12. [Marketing, Content and Sales](docs/chat-briefs/12_MARKETING_CONTENT_SALES.md)
-13. [QA, Analytics and Release](docs/chat-briefs/13_QA_ANALYTICS_RELEASE.md)
+## Legacy compatibility
 
-## Starting a new working chat
+`docs/chat-briefs/` is preserved as legacy source material. Canonical workstream instructions are under `docs/workstreams/*/WORKSTREAM_BRIEF.md`; do not update both paths in parallel. The dated recovery continuation file is historical context, while `docs/control/MASTER_CONTINUATION.md` is the current operational snapshot.
 
-1. Open [Chat Startup Instructions](docs/CHAT_STARTUP_INSTRUCTIONS.md).
-2. Give the new chat its matching brief from `docs/chat-briefs/`.
-3. Instruct it to read the latest `main`, the Master Brief, Decision Log, Project Status, Task Queue, GitHub workflow, and its assigned brief.
-4. Assign only the relevant queued task.
-5. Require the full result and a Handoff Summary in the target file, a feature branch, and a draft PR.
-6. Do not allow a specialized chat to merge its own PR.
-
-## GitHub-native workflow
-
-Specialized chats read current `main`, take one assigned task from the Task Queue, create a feature branch, store the complete result in GitHub, include a Handoff Summary, and open a draft PR. They report only the PR number, branch, paths, status, and blockers. Master Control reviews the diff, requests corrections or merges it, and after approval updates the Decision Log, Project Status, Task Queue, and the next dependent assignment.
-
-Batch related files into one commit or the minimum practical number of commits. Maintain an external mirror and periodic Git bundle backup so that GitHub access loss does not destroy project continuity.
+Follow the [GitHub Safe Operating Policy](docs/control/GITHUB_SAFE_OPERATING_POLICY.md) for all automation and the [Backup and Continuity Policy](docs/control/BACKUP_AND_CONTINUITY_POLICY.md) for off-platform resilience.

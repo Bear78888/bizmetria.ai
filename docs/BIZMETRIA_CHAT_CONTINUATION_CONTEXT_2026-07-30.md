@@ -1,11 +1,13 @@
 # BizMetria Chat Continuation Context — 2026-07-30
 
-Status: **RECOVERED CONTINUATION BASELINE**  
+Status: **LEGACY RECOVERY SNAPSHOT — PRESERVED FOR HISTORY**
 Repository: `Bear78888/bizmetria.ai`
+
+> This dated file records the recovery state before MC-001. It is not the current startup source. Use [`docs/control/MASTER_CONTINUATION.md`](control/MASTER_CONTINUATION.md) for operational continuation and [`docs/control/START_NEW_MASTER_CHAT.md`](control/START_NEW_MASTER_CHAT.md) to start a replacement Master Chat.
 
 ## Why this file exists
 
-This document lets a new Master Control continue the project without reading the full historical chat. It records recoverable decisions, current structure, tasks, uncertainties, and repository practices. It is detailed but does not claim to reproduce unavailable historical files word for word.
+This document preserves the recoverable decisions, structure, tasks, uncertainties, and repository practices captured during the 2026-07-30 recovery. It is historical evidence and does not claim to reproduce unavailable files word for word.
 
 ## Recovery history
 

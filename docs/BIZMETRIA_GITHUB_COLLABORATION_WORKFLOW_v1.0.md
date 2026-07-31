@@ -9,28 +9,37 @@ No specialized workstream changes `main` directly. All work starts from current 
 ## Standard workflow
 
 1. Read current `main`.
-2. Read `docs/BIZMETRIA_TASK_QUEUE.md`.
-3. Read the Master Brief, Decision Log, Project Status, this workflow, and the assigned chat brief.
-4. Execute only the assigned task.
-5. Create a feature branch from current `main`.
-6. Save the complete result in the required GitHub path.
-7. Include a Handoff Summary in the main deliverable file.
-8. Validate paths, links, facts, and acceptance criteria.
-9. Open a draft PR targeting `main`.
-10. Report only the PR number/link, branch, file paths, status, and blockers.
-11. Do not merge the PR.
-12. Master Control reviews the complete diff, requests corrections, or merges it.
-13. After approval, Master Control updates the Decision Log, Project Status, Task Queue, and next dependent task.
+2. Read `docs/control/MASTER_CONTINUATION.md`, `docs/control/ACTIVE_WORK.md`, and the real remote branch/PR state.
+3. Read `docs/BIZMETRIA_TASK_QUEUE.md`.
+4. Read the Master Brief, Decision Log, Project Status, this workflow, the assigned workstream's `WORKSTREAM_BRIEF.md`, `CURRENT_STATE.md`, local `TASK_QUEUE.md`, `DECISIONS.md`, and `ARTIFACT_INDEX.md`.
+5. Verify no live-lock exists for the same task ID or overlapping files.
+6. Execute only the assigned task.
+7. Create a temporary task branch from current `main`.
+8. Save the complete result in the required GitHub path.
+9. Update affected workstream state/handoff/index files.
+10. Include a Handoff Summary in the main deliverable file.
+11. Validate paths, links, facts, and acceptance criteria.
+12. Open one draft PR targeting `main`.
+13. Report only the PR number/link, branch, file paths, status, and blockers.
+14. Do not merge the PR.
+15. Master Orchestrator reviews the complete diff, requests corrections, or merges it only with required authority.
+16. After approval, synchronize the affected global and local state records.
 
 ## Branch naming
 
-Preferred patterns:
+Standard task branch:
 
-- `workstream/<number>-<short-task>`
-- `recovery/<short-purpose>`
-- `fix/<short-purpose>`
+`task/ws-XX/PREFIX-###-short-description`
 
-One branch should represent one bounded task or one intentionally bundled recovery.
+Examples:
+
+- `task/ws-02/PS-001-product-blueprint`
+- `task/ws-04/FA-002-score-validation`
+- `task/ws-05/EN-001-interview-schema`
+
+One branch represents one bounded task, one workstream, and one draft PR. Permanent workstream branches and reuse of merged task branches are prohibited. A cross-functional branch requires explicit Master Orchestrator assignment, one coordinating owner, and an exact allowed-file list.
+
+`architecture/master-orchestrator-workstreams-v1` is a one-time authorized MC-001 exception.
 
 ## Commit policy
 
@@ -39,6 +48,8 @@ One branch should represent one bounded task or one intentionally bundled recove
 - Do not create one API commit per file.
 - Commit messages describe the outcome, not the chat activity.
 - Do not mix unrelated changes.
+- Do not force push.
+- Follow `docs/control/GITHUB_SAFE_OPERATING_POLICY.md`.
 
 ## Draft PR requirements
 
@@ -71,6 +82,7 @@ Every primary workstream deliverable must include a Handoff Summary covering tas
 - Do not present recovered drafts as exact historical originals.
 - Preserve existing files unless the task explicitly replaces them.
 - Leave the test branch `test/chatgpt-write-access` untouched unless a later, explicit cleanup task authorizes removal.
+- Treat a real remote task branch as the canonical live-lock and reconcile it with `docs/control/ACTIVE_WORK.md`.
 
 ## Recovery resilience
 

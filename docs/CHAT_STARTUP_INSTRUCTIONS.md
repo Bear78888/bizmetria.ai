@@ -1,85 +1,38 @@
 # BizMetria Chat Startup Instructions
 
-Status: **APPROVED / RECOVERED**
+**Status:** `LEGACY COMPATIBILITY ENTRYPOINT`
+**Last updated:** 2026-07-30
 
-## Start a specialized chat
+The former permanent-chat startup process has been replaced by one Master Orchestrator plus temporary task-scoped Workstream Chats.
 
-Use this startup prompt, replacing the bracketed values:
+Use the canonical control templates:
 
-```text
-You are the BizMetria [WORKSTREAM NAME] working chat.
+- New or replacement Master Chat: [`docs/control/START_NEW_MASTER_CHAT.md`](control/START_NEW_MASTER_CHAT.md)
+- Temporary specialist chat: [`docs/control/START_WORKSTREAM_CHAT.md`](control/START_WORKSTREAM_CHAT.md)
+- Permanent Master role: [`docs/control/MASTER_ORCHESTRATOR_BRIEF.md`](control/MASTER_ORCHESTRATOR_BRIEF.md)
+- Current recovery snapshot: [`docs/control/MASTER_CONTINUATION.md`](control/MASTER_CONTINUATION.md)
+- Safe GitHub policy: [`docs/control/GITHUB_SAFE_OPERATING_POLICY.md`](control/GITHUB_SAFE_OPERATING_POLICY.md)
 
-Repository: Bear78888/bizmetria.ai
-Assigned task: [TASK ID AND TITLE]
-Target path(s): [PATHS]
+## Required startup boundary
 
-Use the connected GitHub repository. Do not ask me to copy repository files into chat.
+Before any write, every chat must:
 
-Before working, read current main and fully read:
-- README.md
-- docs/BIZMETRIA_MASTER_BRIEF_v1.0.md
-- docs/BIZMETRIA_DECISION_LOG.md
-- docs/BIZMETRIA_PROJECT_STATUS.md
-- docs/BIZMETRIA_TASK_QUEUE.md
-- docs/BIZMETRIA_GITHUB_COLLABORATION_WORKFLOW_v1.0.md
-- docs/chat-briefs/[MATCHING BRIEF].md
-- all task-specific input files
+1. verify the actual current `main` SHA;
+2. inspect real remote branches and relevant PRs;
+3. reconcile live-locks with [`docs/control/ACTIVE_WORK.md`](control/ACTIVE_WORK.md);
+4. read the global governance documents;
+5. read the assigned workstream's canonical `WORKSTREAM_BRIEF.md`, `CURRENT_STATE.md`, local `TASK_QUEUE.md`, `DECISIONS.md`, and `ARTIFACT_INDEX.md`;
+6. read task-specific dependencies in full;
+7. confirm task ID, branch, allowed/prohibited files, deliverable, acceptance criteria, owner, and handoff target.
 
-Execute only the assigned task. Create a feature branch from current main.
-Save the complete result in the target file(s), include a Handoff Summary,
-open a draft PR to main, and do not merge it.
+## Operating boundary
 
-Do not invent unresolved decisions. Label proposals and recovered material.
-In the final response report only the PR number/link, branch, file paths,
-status, and open questions/blockers.
-```
+- One task uses one temporary branch and one draft PR.
+- Standard branch: `task/ws-XX/PREFIX-###-short-description`.
+- No permanent workstream branches.
+- No direct writes to `main`.
+- No self-merge or auto-merge.
+- No unrecorded decision, owner, deadline, approval, check, or historical claim.
+- Open branches and PRs are not approved state.
 
-## Start or restore Master Control
-
-Use:
-
-```text
-You are BizMetria Master Control.
-
-Repository: Bear78888/bizmetria.ai
-
-Read current main and fully read README, the Master Brief, Coordination
-Protocol, GitHub Collaboration Workflow, Decision Log, Project Status,
-Task Queue, Continuation Context, and all relevant workstream briefs.
-
-Treat merged main as the project record. Review draft PRs against their task
-and acceptance criteria. Request corrections or merge approved work. After
-approval, update Decision Log, Project Status, Task Queue, and assign the next
-dependent task. Do not invent owner decisions.
-```
-
-## Before assignment
-
-Master Control must confirm:
-
-- The task exists in the Task Queue.
-- The workstream and target path are correct.
-- Required dependencies are available.
-- Open decisions are explicitly listed.
-- The requested output can be reviewed independently.
-
-## Required workstream completion
-
-The primary deliverable must end with:
-
-```markdown
-## Handoff Summary
-- Task:
-- Status:
-- Files changed:
-- Decisions proposed:
-- Decisions approved:
-- Open questions:
-- Dependencies:
-- Validation performed:
-- Recommended next task:
-```
-
-## Merge boundary
-
-A specialized chat never merges its own PR. Master Control reviews and controls the merge and governance update.
+The recovered files under `docs/chat-briefs/` remain legacy source material. Canonical workstream instructions are under `docs/workstreams/*/WORKSTREAM_BRIEF.md`.
