@@ -47,7 +47,7 @@ None active; planned branch `task/ws-10/LC-001-commercial-lifecycle-contract`.
 
 ## PR
 
-None for LC-001; the service closeout PR is Pending creation.
+None for LC-001; the service closeout is draft PR [#16](https://github.com/Bear78888/bizmetria.ai/pull/16).
 
 ## Validation results
 

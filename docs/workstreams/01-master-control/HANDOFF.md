@@ -61,7 +61,7 @@ None; `task/ws-01/LS-002-phase2-closeout` is historical when this record reaches
 
 ## PR
 
-LS-002 merged through [#15](https://github.com/Bear78888/bizmetria.ai/pull/15); this service closeout PR is Pending creation.
+LS-002 merged through [#15](https://github.com/Bear78888/bizmetria.ai/pull/15); this service closeout is draft PR [#16](https://github.com/Bear78888/bizmetria.ai/pull/16).
 
 ## Validation results
 

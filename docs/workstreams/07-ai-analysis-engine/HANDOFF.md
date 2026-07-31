@@ -47,7 +47,7 @@ None active; planned branch `task/ws-07/AE-001-analysis-evidence-contract`.
 
 ## PR
 
-None for AE-001; the service closeout PR is Pending creation.
+None for AE-001; the service closeout is draft PR [#16](https://github.com/Bear78888/bizmetria.ai/pull/16).
 
 ## Validation results
 
