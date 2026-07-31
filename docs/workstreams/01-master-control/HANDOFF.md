@@ -59,7 +59,7 @@ None; `task/ws-01/phase2-input-contracts-closeout` is historical when this recor
 
 ## PR
 
-FA-001 merged through [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), PS-004 merged through [#13](https://github.com/Bear78888/bizmetria.ai/pull/13), and the service closeout PR is pending creation.
+FA-001 merged through [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), PS-004 merged through [#13](https://github.com/Bear78888/bizmetria.ai/pull/13), and the service closeout is in draft PR [#14](https://github.com/Bear78888/bizmetria.ai/pull/14).
 
 ## Validation results
 
