@@ -100,8 +100,9 @@ As of: 2026-07-31
 - **Outcome:** Convert the approved decisions, customer journey, legal boundaries, Stripe-ready rule, KPIs, capacity, and pre-live deferrals into stable, testable product requirements.
 - **Target:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_PRODUCT_REQUIREMENTS_v1.0.md`.
 - **Branch:** `task/ws-02/PS-003-product-requirements-v1`.
+- **PR:** Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10).
 - **Guardrail:** `G1` remains not passed until PS-003 is independently reviewed and merged; no live payment activation is part of PS-003.
-- **Review status:** Complete locally; publication and independent review pending.
+- **Review status:** Published; independent review pending.
 
 ## Planned delivery catalog
 

@@ -16,7 +16,7 @@
 
 | Workstream | Task ID | Owner | Branch | PR | Affected files | Start date | Status | Expected handoff |
 |---|---|---|---|---|---|---|---|---|
-| 02 — Product Strategy | `PS-003` | Product Strategy | `task/ws-02/PS-003-product-requirements-v1` | Pending creation | Product Requirements Baseline; global/control and WS01/02 state | 2026-07-31 | REVIEW | Independent review, merge, resulting `main` verification, and `G1` closeout |
+| 02 — Product Strategy | `PS-003` | Product Strategy | `task/ws-02/PS-003-product-requirements-v1` | [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) | Product Requirements Baseline; global/control and WS01/02 state | 2026-07-31 | REVIEW | Independent review, merge, resulting `main` verification, and `G1` closeout |
 
 `PS-001`, `LS-001`, `PS-002`, and `MC-003` are merged and approved. PS-003 owns the only active task branch. `G1` and Phase 2 remain gated until PS-003 merges and the resulting `main` is verified.
 

@@ -6,7 +6,8 @@
 **Owner:** Product Strategy \
 **Prepared:** 2026-07-31 \
 **Source `main`:** `acda4fb7c036660161b6f0ea4d09deed4143c7cb` \
-**Branch:** `task/ws-02/PS-003-product-requirements-v1`
+**Branch:** `task/ws-02/PS-003-product-requirements-v1` \
+**PR:** Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10)
 
 ## 1. Purpose and authority
 

@@ -6,7 +6,7 @@
 **Verified `main` SHA:** `acda4fb7c036660161b6f0ea4d09deed4143c7cb` \
 **Current task:** `PS-003 — Product Requirements Baseline v1.0` — `REVIEW` \
 **Current execution branch:** `task/ws-02/PS-003-product-requirements-v1` \
-**Current execution PR:** Pending creation
+**Current execution PR:** Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10)
 
 ## BizMetria in brief
 

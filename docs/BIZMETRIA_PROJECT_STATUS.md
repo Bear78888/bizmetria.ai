@@ -45,7 +45,7 @@ Gate `G0 — Governance Ready` is `PASS` because:
 | LS-001 Legal and Data Inventory Baseline | Legal, Privacy and Security | APPROVED | PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), merge SHA `b6174f1325136bc69a9859925c570e5770972991` |
 | PS-002 Owner Decision Package | Product Strategy / Master Control | APPROVED | PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), merge SHA `66be062629a9b11670d1b76d202a30474eff98f7` |
 | MC-003 Owner Decision Gate | Master Orchestrator / owner | APPROVED | PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9), merge SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb` |
-| PS-003 Product Requirements Baseline v1.0 | Product Strategy | REVIEW | `task/ws-02/PS-003-product-requirements-v1`; draft PR pending creation |
+| PS-003 Product Requirements Baseline v1.0 | Product Strategy | REVIEW | Draft PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10), branch `task/ws-02/PS-003-product-requirements-v1` |
 | FA-001 and all later delivery tasks | Applicable workstreams | PLANNED | Follow the dependencies and gates in the Delivery Roadmap |
 
 The complete sequence is in [`docs/control/DELIVERY_ROADMAP.md`](control/DELIVERY_ROADMAP.md); exact per-workstream state is in [`docs/control/WORKSTREAM_REGISTRY.md`](control/WORKSTREAM_REGISTRY.md).

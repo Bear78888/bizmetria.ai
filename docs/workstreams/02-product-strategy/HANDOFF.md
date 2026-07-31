@@ -21,7 +21,7 @@ Convert the merged MC-003 decisions into the stable, testable `PS-003 — Produc
 
 ## Not completed
 
-Publication, independent review, and merge of PS-003 remain incomplete. `G1` remains not passed. Pre-live entity, support, staffing, legal/tax, vendor/security, release, and credential evidence remain intentionally deferred.
+Independent review and merge of PS-003 remain incomplete. `G1` remains not passed. Pre-live entity, support, staffing, legal/tax, vendor/security, release, and credential evidence remain intentionally deferred.
 
 ## Changed files
 
@@ -41,7 +41,7 @@ No Product Strategy technical blocker. Named pre-live dependencies remain explic
 
 ## Exact next action
 
-Publish and independently review PS-003, merge it only after a clean gate, verify `main`, then record `G1` and start `FA-001` plus `PS-004`.
+Independently review draft PR #10, merge it only after a clean gate, verify `main`, then record `G1` and start `FA-001` plus `PS-004`.
 
 ## Handoff target
 
@@ -53,7 +53,7 @@ Independent PS-003 reviewer, then Master Control for `G1` closeout.
 
 ## PR
 
-Pending creation. MC-003 source PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) merged at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
+Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10). MC-003 source PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) merged at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
 
 ## Validation results
 

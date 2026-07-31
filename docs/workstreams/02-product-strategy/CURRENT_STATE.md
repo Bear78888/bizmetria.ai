@@ -5,7 +5,7 @@
 **Last updated:** 2026-07-31
 **Current task:** `PS-003 — Product Requirements Baseline v1.0`
 **Current branch:** `task/ws-02/PS-003-product-requirements-v1`
-**Current PR:** Pending creation
+**Current PR:** Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10)
 
 ## Approved baseline
 
@@ -17,7 +17,7 @@ A complete new Product Blueprint v0.1 was independently reviewed and merged thro
 
 ## In progress
 
-PS-003 converts every approved product, commercial, operating, Stripe, and pre-live rule into stable testable requirements. The deliverable is complete locally and awaits publication and independent review.
+PS-003 converts every approved product, commercial, operating, Stripe, and pre-live rule into stable testable requirements. The deliverable is published in draft PR #10 and awaits independent review.
 
 ## Not started
 
@@ -50,7 +50,7 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 
 ## Exact next action
 
-Publish the scoped PS-003 branch and draft PR, perform independent remote review, and merge only after all requirement and safety checks pass.
+Perform independent remote review of draft PR #10 and merge only after all requirement and safety checks pass.
 
 ## Latest session checkpoint
 

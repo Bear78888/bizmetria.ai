@@ -48,7 +48,8 @@
 - **Required inputs:** DEC-001–DEC-026, Product Blueprint v0.1, Legal/Data Baseline v0.1, Owner Decision Package v0.1, and Owner Decision Record v0.1.
 - **Acceptance criteria:** Stable testable requirements for every approved product/commercial rule; explicit pre-live dependencies; Stripe test/live and secret boundaries; no unresolved Phase 1 ambiguity; complete Handoff Summary.
 - **Branch:** `task/ws-02/PS-003-product-requirements-v1`.
-- **Review status:** Complete locally; publication and independent PR review pending. `G1` is not passed.
+- **PR:** Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10).
+- **Review status:** Published; independent PR review pending. `G1` is not passed.
 
 
 ## Global portfolio reference
