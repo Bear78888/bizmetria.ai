@@ -48,7 +48,7 @@ Master Orchestrator; then Product Strategy for `PS-002` and later Legal for `LS-
 
 ## PR
 
-Draft PR pending creation.
+Draft [#6](https://github.com/Bear78888/bizmetria.ai/pull/6).
 
 ## Validation results
 

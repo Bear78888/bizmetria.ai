@@ -5,7 +5,7 @@
 **Last updated:** 2026-07-30
 **Current task:** `LS-001 — Legal and Data Inventory Baseline`
 **Current branch:** `task/ws-11/LS-001-legal-data-baseline`
-**Current PR:** Draft PR pending creation
+**Current PR:** Draft [#6](https://github.com/Bear78888/bizmetria.ai/pull/6)
 
 ## Approved baseline
 

@@ -19,7 +19,7 @@
 - **Planned branch:** `task/ws-11/LS-001-legal-data-baseline`
 - **Branch:** `task/ws-11/LS-001-legal-data-baseline`
 - **Owner:** Legal, Privacy and Security temporary executor
-- **Review status:** Complete draft prepared; draft PR pending creation and independent review.
+- **Review status:** Draft [#6](https://github.com/Bear78888/bizmetria.ai/pull/6) is open for independent review.
 
 
 ## `LS-002 — Consent, Claims, and Data Requirements`
