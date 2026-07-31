@@ -16,7 +16,7 @@
 
 | Workstream | Task ID | Owner | Branch | PR | Affected files | Start date | Status | Expected handoff |
 |---|---|---|---|---|---|---|---|---|
-| 02 — Product Strategy | `PS-002` | Product Strategy / Master Control | `task/ws-02/PS-002-owner-decision-package` | Pending creation | Owner Decision Package; WS02 state/index/queue/handoff/changelog; global/control status | 2026-07-30 | REVIEW | Independently reviewed and merged decision package; then explicit owner answers through `MC-003` |
+| 02 — Product Strategy | `PS-002` | Product Strategy / Master Control | `task/ws-02/PS-002-owner-decision-package` | [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) | Owner Decision Package; WS02 state/index/queue/handoff/changelog; global/control status | 2026-07-30 | REVIEW | Independently reviewed and merged decision package; then explicit owner answers through `MC-003` |
 
 `PS-001` and `LS-001` are merged and approved. PS-002 owns the only active execution branch. Its proposals do not authorize `MC-003`, `PS-003`, or Phase 2 work.
 

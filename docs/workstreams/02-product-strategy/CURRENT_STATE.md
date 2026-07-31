@@ -5,7 +5,7 @@
 **Last updated:** 2026-07-30
 **Current task:** `PS-002 — Owner Decision Package`
 **Current branch:** `task/ws-02/PS-002-owner-decision-package`
-**Current PR:** Pending creation
+**Current PR:** Draft [#8](https://github.com/Bear78888/bizmetria.ai/pull/8)
 
 ## Approved baseline
 

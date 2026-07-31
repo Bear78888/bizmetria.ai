@@ -75,7 +75,7 @@ As of: 2026-07-30
 - **Dependencies:** Approved `PS-001` and `LS-001`.
 - **Outcome:** Independently answerable options, tradeoffs, recommendations, and downstream impact for report timing, Refund Policy, consultation rules, implementation packages/prices, promotion rules, MVP KPIs, capacity assumptions, and related owner/legal triggers.
 - **Guardrail:** The package may recommend choices but cannot approve them. `OPEN-001`–`OPEN-009` remain open until their named tasks/gates close them.
-- **Assignment state:** Active on `task/ws-02/PS-002-owner-decision-package`; draft PR pending creation and independent review.
+- **Assignment state:** Active on `task/ws-02/PS-002-owner-decision-package`; draft PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) is open for independent review.
 
 ### `MC-003 — Owner Decision Gate`
 

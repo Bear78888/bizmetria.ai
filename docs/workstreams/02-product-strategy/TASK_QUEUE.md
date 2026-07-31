@@ -34,7 +34,7 @@
 - **Planned branch:** `task/ws-02/PS-002-owner-decision-package`
 - **Active branch:** `task/ws-02/PS-002-owner-decision-package`
 - **Owner:** Product Strategy, coordinated by Master Orchestrator.
-- **Review status:** Decision package prepared; draft PR pending creation and independent review. No option is approved.
+- **Review status:** Draft PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) is open for independent review. No option is approved.
 
 
 ## Global portfolio reference

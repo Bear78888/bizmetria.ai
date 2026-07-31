@@ -39,7 +39,7 @@ Gate `G0 — Governance Ready` is `PASS` because:
 | G0 Governance Ready | Master Orchestrator | PASS | MC-001 and MC-002 merged; canonical status records synchronized |
 | PS-001 Product Blueprint v0.1 | Product Strategy | APPROVED | PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), merge SHA `21d223223180e7a7d617f28648674efb613c4a92` |
 | LS-001 Legal and Data Inventory Baseline | Legal, Privacy and Security | APPROVED | PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), merge SHA `b6174f1325136bc69a9859925c570e5770972991` |
-| PS-002 Owner Decision Package | Product Strategy / Master Control | REVIEW | `task/ws-02/PS-002-owner-decision-package`; draft PR pending creation |
+| PS-002 Owner Decision Package | Product Strategy / Master Control | REVIEW | Draft PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) on `task/ws-02/PS-002-owner-decision-package` |
 | MC-003 Owner Decision Gate | Master Orchestrator / owner | PLANNED | Begins only after approved PS-002 |
 | FA-001 and all later delivery tasks | Applicable workstreams | PLANNED | Follow the dependencies and gates in the Delivery Roadmap |
 

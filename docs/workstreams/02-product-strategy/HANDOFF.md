@@ -50,7 +50,7 @@ Independent PS-002 reviewer, then the project owner and Master Orchestrator for 
 
 ## PR
 
-Pending creation.
+Draft [#8](https://github.com/Bear78888/bizmetria.ai/pull/8).
 
 ## Validation results
 
