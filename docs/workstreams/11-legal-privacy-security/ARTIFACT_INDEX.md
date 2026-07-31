@@ -5,7 +5,7 @@
 
 | Name | Version | Status | Path | Task ID | Owner | Approved date | Superseded by | Consumers |
 |---|---|---|---|---|---|---|---|---|
-| BizMetria Legal and Data Baseline | v0.1 | Review | [`deliverables/BIZMETRIA_LEGAL_DATA_BASELINE_v0.1.md`](deliverables/BIZMETRIA_LEGAL_DATA_BASELINE_v0.1.md) | LS-001 | Legal, Privacy and Security | Not approved | None | All customer-facing and implementation workstreams |
+| BizMetria Legal and Data Baseline | v0.1 | Approved | [`deliverables/BIZMETRIA_LEGAL_DATA_BASELINE_v0.1.md`](deliverables/BIZMETRIA_LEGAL_DATA_BASELINE_v0.1.md) | LS-001 | Legal, Privacy and Security | 2026-07-30 | None | All customer-facing and implementation workstreams |
 
 
 ## Indexing rule

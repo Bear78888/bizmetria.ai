@@ -5,7 +5,7 @@
 
 ## Goal of latest work
 
-Create the MVP Legal and Data Inventory Baseline under `LS-001`.
+Close approved `LS-001` and hand off its constraints to PS-002 and later LS-002.
 
 ## Completed
 
@@ -13,10 +13,12 @@ Create the MVP Legal and Data Inventory Baseline under `LS-001`.
 - Defined separate email/SMS and voice recording/transcription consent baselines.
 - Mapped notices, privacy requests, claims/disclaimers, security controls, vendor due diligence, and retention requirements.
 - Added policy and security/privacy risk registers with explicit qualified-review triggers.
+- Independently reviewed and merged PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6) at `b6174f1325136bc69a9859925c570e5770972991`.
+- Verified the baseline in current `main`.
 
 ## Not completed
 
-Independent review and approval/merge. Final policies, exact consent copy, retention periods, vendors, and jurisdiction-specific conclusions remain unapproved.
+Final policies, exact consent copy, retention periods, vendors, jurisdiction-specific conclusions, and qualified legal review remain incomplete.
 
 ## Changed files
 
@@ -32,24 +34,24 @@ Refund Policy, entity/jurisdictions, voice consent, TCPA/email rules, age eligib
 
 ## Blockers
 
-No technical blocker. Qualified counsel must review the flagged legal questions before relevant production gates.
+LS-002 is dependency-gated. Qualified counsel must review the flagged legal questions before relevant production gates.
 
 ## Exact next action
 
-Master Orchestrator reviews the complete draft PR, requests corrections or merges it with owner authority, and separately reviews `PS-001`.
+Use LS-001 in PS-002; wait for `G1`, FA-001, and PS-004 before assigning LS-002.
 
 ## Handoff target
 
-Master Orchestrator; then Product Strategy for `PS-002` and later Legal for `LS-002`.
+Product Strategy for PS-002; later Legal, Privacy and Security for LS-002.
 
 ## Branch
 
-`task/ws-11/LS-001-legal-data-baseline`
+None active. `task/ws-11/LS-001-legal-data-baseline` is historical.
 
 ## PR
 
-Draft [#6](https://github.com/Bear78888/bizmetria.ai/pull/6).
+Merged [#6](https://github.com/Bear78888/bizmetria.ai/pull/6).
 
 ## Validation results
 
-PASS — known-field coverage, purpose/access/retention/deletion review, separate-consent review, disclaimer map, security testability, open-decision scan, official-source check, relative links, changed-file scope, and Handoff completeness.
+PASS — full remote diff, known-field coverage, purpose/access/retention/deletion review, separate-consent review, disclaimer map, security testability, open-decision scan, official-source check, relative links, changed-file scope, merge state, and resulting `main` verified.

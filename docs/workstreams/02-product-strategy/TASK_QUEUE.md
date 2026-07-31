@@ -7,7 +7,7 @@
 
 ## `PS-001 — Product Blueprint v0.1`
 
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Priority:** High
 - **Objective:** Create the complete current Product Blueprint as a new version, not as a reconstruction of unavailable historical wording.
 - **Required inputs:** Approved Master Brief and Decision Log; approved Delivery Roadmap; recovered product baseline; all relevant open-decision entries; gate `G0`.
@@ -16,22 +16,24 @@
 - **Acceptance criteria:** Preserve every approved product constraint; separate proposals from approved facts; provide actionable downstream inputs; do not silently approve any open commercial or policy decision.
 - **Dependencies:** `G0` — `PASS`.
 - **Planned branch:** `task/ws-02/PS-001-product-blueprint-v0-1`
-- **Branch:** `task/ws-02/PS-001-product-blueprint-v0-1`
-- **Owner:** Product Strategy temporary executor
-- **Review status:** Draft [#5](https://github.com/Bear78888/bizmetria.ai/pull/5) is open for independent review.
+- **Historical branch:** `task/ws-02/PS-001-product-blueprint-v0-1`
+- **Owner:** Product Strategy
+- **Evidence:** PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), merge SHA `21d223223180e7a7d617f28648674efb613c4a92`.
+- **Review status:** Independently reviewed, explicitly authorized, merged, and verified.
 
 
 ## `PS-002 — Owner Decision Package`
 
-- **Status:** `PLANNED`
+- **Status:** `READY`
 - **Priority:** High
 - **Objective:** Present independently answerable options, tradeoffs, recommendations, and downstream impact for the open owner-level product decisions.
 - **Required inputs:** Merged `PS-001` and `LS-001`.
 - **Expected output:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_OWNER_DECISION_PACKAGE_v0.1.md`.
 - **Must cover:** Report deadline, Refund Policy, consultation rules, implementation packages/prices, promotion rules, MVP KPIs, and capacity assumptions.
 - **Dependencies:** Approved `PS-001` and `LS-001`.
+- **Planned branch:** `task/ws-02/PS-002-owner-decision-package`
 - **Owner:** Product Strategy, coordinated by Master Orchestrator.
-- **Review status:** Blocked until both dependencies merge.
+- **Review status:** Ready for assignment; both dependencies are merged and verified.
 
 
 ## Global portfolio reference
@@ -39,7 +41,7 @@
 - **ID:** `TASK-001`
 - **Status:** See [Global Task Queue](../../BIZMETRIA_TASK_QUEUE.md).
 - **Execution mapping:** `PS-001`.
-- **Assignment:** The execution task is ready; no temporary executor is currently registered.
+- **Assignment:** Historical execution mapping complete through approved PS-001; current Product Strategy task is PS-002.
 - **Rule:** The global task ID remains a historical portfolio reference; work is performed and reviewed under `PS-001`.
 
 

@@ -2,7 +2,7 @@
 
 **Task:** `LS-001 — Legal and Data Inventory Baseline` \
 **Version:** `v0.1` \
-**Status:** `REVIEW` \
+**Status:** `APPROVED` \
 **Owner workstream:** 11 — Legal, Privacy and Security \
 **Prepared:** 2026-07-30 \
 **Source baseline:** `main` at `9f589ba69aaa202ddb5890cfc9a5d56890b85dc8`
@@ -495,11 +495,11 @@ These sources do not replace advice for BizMetria’s actual entity, vendors, ju
 ## 17. Handoff Summary
 
 - **Task:** `LS-001 — Legal and Data Inventory Baseline`
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Files changed:** Legal/Data baseline plus Workstream 11 state, task queue, artifact index, handoff, and changelog.
 - **Decisions proposed:** Data classification, role/access baseline, field-inventory metadata, consent evidence model, rights workflow, vendor checklist, security controls, and policy/risk registers for downstream review.
 - **Decisions approved:** Existing product constraints in `DEC-001`–`DEC-013`, `DEC-015`, and `DEC-016`; no new legal or commercial decision.
 - **Open questions:** Refund Policy, entity/jurisdictions, recording/transcription consent, TCPA/email treatment, age eligibility, CCPA/other-state applicability, exact retention, vendor contracts/roles, and incident obligations.
 - **Dependencies:** Approved `G0`, Master Brief, Decision Log, recovered journey and fields, parallel `PS-001`; later `PS-004`, `FA-001`, vendor ADRs, and owner decisions.
 - **Validation performed:** Known-field coverage, purpose/access/retention/deletion matrix review, separate-consent review, disclaimer-surface map, security control testability, open-decision scan, official-source check, and Handoff completeness.
-- **Recommended next task:** Independently review and merge `LS-001`; use it with approved `PS-001` for `PS-002`, then develop implementable `LS-002 — Consent, Claims, and Data Requirements`.
+- **Recommended next task:** Use the approved LS-001 baseline with PS-001 for `PS-002`; then develop `LS-002 — Consent, Claims, and Data Requirements` only after its named dependencies are approved.

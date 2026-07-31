@@ -17,13 +17,15 @@
 | Workstream | Task ID | Owner | Branch | PR | Affected files | Start date | Status | Expected handoff |
 |---|---|---|---|---|---|---|---|---|
 
-No execution task is active. Gate `G0` has passed, and `PS-001` plus `LS-001` are ready for separate assignment. Their branches do not exist yet.
+No execution task is active. `PS-001` and `LS-001` are merged and approved. `PS-002` is ready for assignment; its execution branch does not exist yet.
 
 ## Non-active preserved branches
 
 - `architecture/master-orchestrator-workstreams-v1` — merged through PR #2; historical.
 - `recovery/restore-bizmetria-project` — merged through PR #1; historical.
 - `task/ws-01/MC-002-delivery-roadmap` — merged through PR #3; historical.
+- `task/ws-02/PS-001-product-blueprint-v0-1` — merged through PR #5; historical.
+- `task/ws-11/LS-001-legal-data-baseline` — merged through PR #6; historical.
 - `test/chatgpt-write-access` — preserved test branch; do not modify or delete.
 
 ## Reconciliation procedure

@@ -3,10 +3,10 @@
 **Repository:** `Bear78888/bizmetria.ai`  
 **Current phase:** Phase 1 — Product and policy baseline \
 **Last updated:** 2026-07-30  
-**Verified `main` SHA:** `713c17e2ca854ce65125d65382dedee3fcec6d9c` \
-**Current tasks:** `PS-001` and `LS-001` — `READY / UNASSIGNED` \
-**Current branches:** None for `PS-001` or `LS-001` \
-**Current PRs:** None for `PS-001` or `LS-001`
+**Verified `main` SHA:** `b6174f1325136bc69a9859925c570e5770972991` \
+**Current task:** `PS-002 — Owner Decision Package` — `READY / UNASSIGNED` \
+**Current execution branch:** None \
+**Current execution PR:** None
 
 ## BizMetria in brief
 
@@ -31,8 +31,10 @@ PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2) approved `MC-001` and 
 - `MC-001`: `APPROVED`; architecture is canonical in `main`.
 - `MC-002`: `APPROVED`; the canonical dependency-ordered roadmap is in `main`.
 - `G0 — Governance Ready`: `PASS`.
-- Workstream 02: `READY` for assignment of `PS-001`.
-- Workstream 11: `READY` for assignment of `LS-001`; it may run in parallel with `PS-001`.
+- `PS-001`: `APPROVED`; Product Blueprint v0.1 merged through PR #5.
+- `LS-001`: `APPROVED`; Legal and Data Baseline v0.1 merged through PR #6.
+- Workstream 02: `READY` for assignment of `PS-002`.
+- Workstream 11: latest result approved; `LS-002` remains dependency-gated.
 - All other implementation tasks remain `PLANNED` behind named phase gates.
 - Workstream 04 preserves two recovered draft inputs; formal `FA-001` work has not started.
 
@@ -41,8 +43,9 @@ See the [Delivery Roadmap](DELIVERY_ROADMAP.md) for the complete critical path a
 ## Active work
 
 - No execution task is active.
-- `PS-001` and `LS-001` are ready but remain unassigned; neither has a branch or PR.
+- `PS-002` is ready but remains unassigned; it has no execution branch or PR.
 - The merged recovery, architecture, and MC-002 branches are historical, not live-locks.
+- The PS-001 and LS-001 branches are historical after PR #5 and PR #6 merged.
 - `test/chatgpt-write-access` remains preserved and untouched.
 
 ## Latest completed actions
@@ -51,16 +54,17 @@ See the [Delivery Roadmap](DELIVERY_ROADMAP.md) for the complete critical path a
 - Architecture PR #2 was independently checked, authorized, and merged.
 - Ten delivery phases, gates `G0`–`G10`, task dependencies, acceptance criteria, operating limits, and the `AD READY` checklist were defined.
 - Delivery Roadmap PR #3 was independently checked, authorized, and merged.
-- New `main` SHA was verified as `713c17e2ca854ce65125d65382dedee3fcec6d9c`.
-- Canonical status records were synchronized and `G0` was recorded as `PASS`.
+- Product Blueprint PR #5 was independently checked, authorized, and merged at `21d223223180e7a7d617f28648674efb613c4a92`.
+- Legal/Data Baseline PR #6 was independently checked, updated non-destructively to current `main`, authorized, and merged at `b6174f1325136bc69a9859925c570e5770972991`.
+- Both Phase 1 inputs were verified in `main`; no open owner or legal decision was silently approved.
 
 ## Current blockers
 
-No technical blocker prevents `PS-001` or `LS-001`. Their temporary executors remain `UNASSIGNED`. All later work remains gated by the Delivery Roadmap.
+No technical blocker prevents `PS-002`. Owner decisions remain intentionally unresolved until PS-002 is approved and `MC-003` records explicit choices. All Phase 2 work remains gated.
 
 ## Exact next action
 
-Assign `PS-001` and `LS-001` as two separate bounded tasks with exact allowed files and acceptance criteria. Create one temporary branch and one draft PR per task; do not self-merge either result.
+Assign `PS-002` as a bounded Product Strategy task with one temporary branch and one draft PR. The package must keep recommendations distinct from approvals and route every legal or qualified-review trigger explicitly.
 
 ## Required Startup Reading
 

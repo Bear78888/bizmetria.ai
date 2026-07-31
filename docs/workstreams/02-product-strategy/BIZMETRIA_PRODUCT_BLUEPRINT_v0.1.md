@@ -2,7 +2,7 @@
 
 **Task:** `PS-001 — Product Blueprint v0.1` \
 **Version:** `v0.1` \
-**Status:** `REVIEW` \
+**Status:** `APPROVED` \
 **Owner workstream:** 02 — Product Strategy \
 **Prepared:** 2026-07-30 \
 **Source baseline:** `main` at `9f589ba69aaa202ddb5890cfc9a5d56890b85dc8`
@@ -492,11 +492,11 @@ No item in this table is approved by this document.
 ## 18. Handoff Summary
 
 - **Task:** `PS-001 — Product Blueprint v0.1`
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Files changed:** Product Blueprint plus Workstream 02 state, task queue, artifact index, handoff, and changelog.
 - **Decisions proposed:** None approved here. The blueprint proposes typed evidence states, a role model, quality requirements, metric definitions, and decision-package structure as downstream requirements subject to review.
 - **Decisions approved:** Existing `DEC-001`–`DEC-013`, `DEC-015`, and `DEC-016`; `DEC-014` remains superseded.
 - **Open questions:** `OPEN-001`–`OPEN-009`, with Product Strategy focus on `OPEN-001`, `OPEN-002`, `OPEN-003`, `OPEN-007`, and `OPEN-008`.
 - **Dependencies:** Approved `G0`, Master Brief, Decision Log, recovered free-audit and score drafts, and current legal/data baseline work running separately as `LS-001`.
 - **Validation performed:** Approved-constraint trace, free/paid boundary review, bilingual parity review, downstream coverage review, open-decision scan, and Handoff completeness review.
-- **Recommended next task:** Independently review and merge `PS-001`; independently review and merge `LS-001`; then execute `PS-002 — Owner Decision Package`.
+- **Recommended next task:** Execute `PS-002 — Owner Decision Package` from the approved PS-001 and LS-001 inputs; preserve every decision as open until `MC-003`.
