@@ -5,7 +5,7 @@
 **Last updated:** 2026-07-30  
 **Current task:** `MC-003 — Product Decision Gate` \
 **Current branch:** `task/ws-01/MC-003-owner-decision-gate` \
-**Current PR:** Pending creation
+**Current PR:** Draft [#9](https://github.com/Bear78888/bizmetria.ai/pull/9)
 
 ## Approved baseline
 

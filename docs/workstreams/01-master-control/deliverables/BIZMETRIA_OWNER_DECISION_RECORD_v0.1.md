@@ -129,4 +129,5 @@ After owner input:
 - **Open decisions:** `D01`–`D09` and `F01`–`F10`.
 - **Technical blocker:** None.
 - **Authority blocker:** Owner selections, business facts, and named professional reviews.
+- **Checkpoint PR:** Draft [#9](https://github.com/Bear78888/bizmetria.ai/pull/9).
 - **Next action:** Obtain the minimal owner response, update this record and the Decision Log, then evaluate MC-003.

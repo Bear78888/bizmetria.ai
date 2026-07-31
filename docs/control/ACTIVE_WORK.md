@@ -16,7 +16,7 @@
 
 | Workstream | Task ID | Owner | Branch | PR | Affected files | Start date | Status | Expected handoff |
 |---|---|---|---|---|---|---|---|---|
-| 01 — Master Control | `MC-003` | Project owner / Master Orchestrator | `task/ws-01/MC-003-owner-decision-gate` | Pending creation | Owner Decision Record; Decision Log after owner input; global/control and WS01/02 state | 2026-07-30 | BLOCKED | Explicit owner selections/facts, qualified-review state, complete decision record, and independently reviewed PR |
+| 01 — Master Control | `MC-003` | Project owner / Master Orchestrator | `task/ws-01/MC-003-owner-decision-gate` | [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) | Owner Decision Record; Decision Log after owner input; global/control and WS01/02 state | 2026-07-30 | BLOCKED | Explicit owner selections/facts, qualified-review state, complete decision record, and independently reviewed PR |
 
 `PS-001`, `LS-001`, and `PS-002` are merged and approved. MC-003 owns the only active branch and is blocked on explicit authority inputs. `PS-003`, `G1`, and Phase 2 remain gated.
 

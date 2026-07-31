@@ -6,7 +6,7 @@
 **Verified `main` SHA:** `66be062629a9b11670d1b76d202a30474eff98f7` \
 **Current task:** `MC-003 — Product Decision Gate` — `BLOCKED / AWAITING OWNER` \
 **Current execution branch:** `task/ws-01/MC-003-owner-decision-gate` \
-**Current execution PR:** Pending creation
+**Current execution PR:** Draft [#9](https://github.com/Bear78888/bizmetria.ai/pull/9)
 
 ## BizMetria in brief
 

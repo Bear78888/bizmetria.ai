@@ -49,7 +49,7 @@
 - **Required inputs:** Approved PS-002 plus owner selections `D01`–`D09` and factual/review confirmations `F01`–`F10`.
 - **Expected output:** `docs/workstreams/01-master-control/deliverables/BIZMETRIA_OWNER_DECISION_RECORD_v0.1.md`, updated Decision Log, synchronized state, and a reviewable gate result.
 - **Active branch:** `task/ws-01/MC-003-owner-decision-gate`.
-- **Current PR:** Pending creation.
+- **Current PR:** Draft [#9](https://github.com/Bear78888/bizmetria.ai/pull/9).
 - **Acceptance criteria:** No authority is inferred; selected rules are internally consistent; qualified-review dependencies are explicit; blocking open decisions are closed or validly deferred; PS-003 receives stable requirements.
 - **Dependencies:** Approved PS-002, PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), merge SHA `66be062629a9b11670d1b76d202a30474eff98f7`.
 - **Owner:** Project owner and Master Orchestrator.

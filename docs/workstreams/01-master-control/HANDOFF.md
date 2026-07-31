@@ -51,7 +51,7 @@ Project owner and Master Orchestrator for MC-003.
 
 ## PR
 
-Pending creation. Approved source package: PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8).
+Draft [#9](https://github.com/Bear78888/bizmetria.ai/pull/9). Approved source package: PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8).
 
 ## Validation results
 

@@ -40,7 +40,7 @@ Gate `G0 — Governance Ready` is `PASS` because:
 | PS-001 Product Blueprint v0.1 | Product Strategy | APPROVED | PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), merge SHA `21d223223180e7a7d617f28648674efb613c4a92` |
 | LS-001 Legal and Data Inventory Baseline | Legal, Privacy and Security | APPROVED | PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), merge SHA `b6174f1325136bc69a9859925c570e5770972991` |
 | PS-002 Owner Decision Package | Product Strategy / Master Control | APPROVED | PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), merge SHA `66be062629a9b11670d1b76d202a30474eff98f7` |
-| MC-003 Owner Decision Gate | Master Orchestrator / owner | BLOCKED | `task/ws-01/MC-003-owner-decision-gate`; explicit owner input required |
+| MC-003 Owner Decision Gate | Master Orchestrator / owner | BLOCKED | Draft PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9); explicit owner input required |
 | FA-001 and all later delivery tasks | Applicable workstreams | PLANNED | Follow the dependencies and gates in the Delivery Roadmap |
 
 The complete sequence is in [`docs/control/DELIVERY_ROADMAP.md`](control/DELIVERY_ROADMAP.md); exact per-workstream state is in [`docs/control/WORKSTREAM_REGISTRY.md`](control/WORKSTREAM_REGISTRY.md).
