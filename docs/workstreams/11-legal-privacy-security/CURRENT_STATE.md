@@ -3,13 +3,13 @@
 **Workstream:** 11 — Legal, Privacy and Security
 **Status:** `READY`
 **Last updated:** 2026-07-30
-**Current task:** TASK-004 — Legal and Data Inventory Baseline (global portfolio task; not assigned)
-**Current branch:** None for this workstream; see `../../control/ACTIVE_WORK.md` for cross-functional work
-**Current PR:** None for this workstream
+**Current task:** `LS-001 — Legal and Data Inventory Baseline`
+**Current branch:** None; task is ready but unassigned
+**Current PR:** None
 
 ## Approved baseline
 
-Separate email/SMS consent, data minimization, non-financial score disclaimer, and no secrets/production personal data in GitHub.
+Separate email/SMS consent, data minimization, non-financial score disclaimer, no secrets/production personal data in GitHub, approved Delivery Roadmap, and gate `G0` as `PASS`.
 
 ## Completed
 
@@ -17,11 +17,11 @@ No approved legal/data inventory baseline is recorded.
 
 ## In progress
 
-No workstream-specific task is in progress. MC-001 affects governance only.
+No workstream-specific task is in progress.
 
 ## Not started
 
-Data inventory, notices, retention/deletion, security baseline, and policy issue register.
+Execute `LS-001`: field-level data inventory, consent baseline, purpose/access/retention/deletion matrix, disclaimer inventory, policy issue register, and security-risk register.
 
 ## Open decisions
 
@@ -29,11 +29,11 @@ Refund Policy, jurisdiction-specific review, vendors/processors, and retention p
 
 ## Blockers
 
-No hidden blocker is recorded. Unmet dependencies and unassigned ownership are shown explicitly.
+No dependency blocker is recorded. The temporary executor is `UNASSIGNED`, and no task branch exists yet.
 
 ## Dependencies
 
-Current customer journey and provisional data flows; later vendor contracts.
+Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), merge SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`; current recovered customer journey. Later vendor contracts remain future inputs.
 
 ## Files currently relevant
 
@@ -49,8 +49,8 @@ Current customer journey and provisional data flows; later vendor contracts.
 
 ## Exact next action
 
-Master Orchestrator assigns a bounded LS-prefixed execution task for global TASK-004.
+Master Orchestrator assigns `LS-001` on `task/ws-11/LS-001-legal-data-baseline` with the roadmap target and acceptance criteria.
 
 ## Latest session checkpoint
 
-On 2026-07-30, MC-001 created this evidence-based initial state from merged `main` at `300c01050820953d2769a91a77a39ae3edcd7f99`. No absent deliverable, assigned executor, deadline, or approval is implied.
+On 2026-07-30, MC-002 was approved at verified `main` SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`, gate `G0` passed, and `LS-001` became `READY`. No absent deliverable, assigned executor, deadline, or legal approval is implied.

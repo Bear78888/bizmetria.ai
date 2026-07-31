@@ -16,12 +16,14 @@
 
 | Workstream | Task ID | Owner | Branch | PR | Affected files | Start date | Status | Expected handoff |
 |---|---|---|---|---|---|---|---|---|
-| 01 Master Control | MC-002 | Master Orchestrator | `task/ws-01/MC-002-delivery-roadmap` | [#3](https://github.com/Bear78888/bizmetria.ai/pull/3) | `README.md`; `docs/BIZMETRIA_DECISION_LOG.md`; `docs/BIZMETRIA_PROJECT_STATUS.md`; `docs/BIZMETRIA_TASK_QUEUE.md`; selected `docs/control/**`; selected state/index files under `docs/workstreams/01-master-control/**` | 2026-07-30 | REVIEW | Independent review and separate owner merge decision; no self-merge |
+
+No execution task is active. Gate `G0` has passed, and `PS-001` plus `LS-001` are ready for separate assignment. Their branches do not exist yet.
 
 ## Non-active preserved branches
 
 - `architecture/master-orchestrator-workstreams-v1` — merged through PR #2; historical.
 - `recovery/restore-bizmetria-project` — merged through PR #1; historical.
+- `task/ws-01/MC-002-delivery-roadmap` — merged through PR #3; historical.
 - `test/chatgpt-write-access` — preserved test branch; do not modify or delete.
 
 ## Reconciliation procedure

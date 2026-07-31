@@ -86,8 +86,9 @@ PR #2 was reviewed, explicitly authorized by the owner, and merged without rewri
 
 - Human-readable status indexes can become stale; real remote branches and PRs remain authoritative live-lock evidence.
 - Backup policy exists, but no real external mirror or bundle was created by MC-001.
-- `MC-002` must establish the dependency-ordered delivery roadmap.
-- `PS-001` and `LS-001` begin only after MC-002 approval.
+- `MC-002` established the dependency-ordered delivery roadmap through approved PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), merge SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`.
+- Gate `G0` is `PASS`; `PS-001` and `LS-001` are ready for separate assignment.
+- All later work remains subject to the named dependencies and gates in the Delivery Roadmap.
 
 ## Rollback approach
 

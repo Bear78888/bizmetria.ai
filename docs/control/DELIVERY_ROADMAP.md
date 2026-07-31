@@ -1,12 +1,12 @@
 # BizMetria Delivery Roadmap
 
 **Task:** `MC-002 — Delivery Roadmap and Phase Gates`  
-**Status:** `REVIEW`  
+**Status:** `APPROVED` \
 **Owner:** Master Orchestrator  
 **Last updated:** 2026-07-30  
-**Verified starting `main` SHA:** `473ee6c042bd5224bec75dbc18fa803e9b148aa3`  
-**Planning branch:** `task/ws-01/MC-002-delivery-roadmap`  
-**Draft PR:** [#3](https://github.com/Bear78888/bizmetria.ai/pull/3)
+**Verified approval `main` SHA:** `713c17e2ca854ce65125d65382dedee3fcec6d9c` \
+**Historical planning branch:** `task/ws-01/MC-002-delivery-roadmap` \
+**Approval evidence:** PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3)
 
 ## Purpose
 
@@ -125,13 +125,18 @@ flowchart TD
 
 ## `MC-002 — Delivery Roadmap and Phase Gates`
 
+- **Status:** `APPROVED`
 - **Owner:** Master Orchestrator
 - **Output:** This roadmap plus synchronized global and Workstream 01 state.
 - **Dependencies:** `MC-001`.
 - **Acceptance:** Every delivery phase, task, dependency, target, exit criterion, owner gate, and `AD READY` condition is explicit; no open product decision is silently resolved.
 - **Target:** `docs/control/DELIVERY_ROADMAP.md`.
+- **Evidence:** PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), merge SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`.
 
 ## Gate `G0 — Governance Ready`
+
+**Status:** `PASS` \
+**Recorded:** 2026-07-30
 
 Pass only when:
 
@@ -139,6 +144,8 @@ Pass only when:
 - `MC-002` is reviewed and merged;
 - the Decision Log, Project Status, Task Queue, Registry, Active Work, Master Continuation, and Workstream 01 state agree;
 - `PS-001` and `LS-001` are the only initial execution assignments.
+
+All four conditions are satisfied. `PS-001` and `LS-001` are `READY`; no later task is authorized to start before its named dependencies and gate pass.
 
 # Phase 1 — Product and policy baseline
 
@@ -591,8 +598,8 @@ BizMetria receives status `AD READY` only when all conditions below are true:
 
 ## Immediate execution sequence after `MC-002`
 
-1. Merge `MC-002` after independent review and owner authorization.
-2. Start `PS-001` and `LS-001` as the first two non-overlapping execution tasks.
+1. `MC-002` is merged and `G0` is `PASS`.
+2. Assign `PS-001` and `LS-001` as the first two non-overlapping execution tasks.
 3. Review and merge each result independently.
 4. Run `PS-002`, then `MC-003`, then `PS-003`.
 5. Do not start Phase 2 implementation until `G1` passes.
@@ -600,11 +607,11 @@ BizMetria receives status `AD READY` only when all conditions below are true:
 ## Handoff Summary
 
 - **Task:** `MC-002 — Delivery Roadmap and Phase Gates`
-- **Status:** Review in draft PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3).
+- **Status:** Approved through PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), merge SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`.
 - **Files changed:** Roadmap plus synchronized global and Workstream 01 governance records.
-- **Decisions proposed:** Dependency gates, task catalog, WIP limit, and `AD READY` checklist.
+- **Governance result:** Gate `G0` is `PASS`; `PS-001` and `LS-001` are `READY`.
 - **Decisions approved:** No new product decision; `MC-001` and `DEC-016` are recognized as approved after PR #2 merge.
 - **Open questions:** `OPEN-001` through `OPEN-009` remain unresolved and are routed through Phase 1 or the relevant later gate.
-- **Dependencies:** Merge SHA `473ee6c042bd5224bec75dbc18fa803e9b148aa3`.
-- **Validation required:** Task-ID uniqueness, link resolution, dependency reachability, invariant scan, no secrets/personal data, complete diff review.
-- **Recommended next task:** `PS-001` and `LS-001` after `MC-002` approval.
+- **Dependencies:** Approved MC-001 architecture and merged recovery baseline.
+- **Validation:** Task-ID uniqueness, link resolution, dependency reachability, invariant scan, no secrets/personal data, and complete diff review passed before approval.
+- **Recommended next tasks:** Assign `PS-001` and `LS-001` on separate temporary branches.
