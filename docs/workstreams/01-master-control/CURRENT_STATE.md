@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 01 — Master Control
-**Status:** `IN PROGRESS`
+**Status:** `REVIEW`
 **Last updated:** 2026-07-30
 **Current task:** MC-001 — Master Orchestrator and Workstream Architecture Migration
 **Current branch:** architecture/master-orchestrator-workstreams-v1
-**Current PR:** PENDING CREATION
+**Current PR:** [#2](https://github.com/Bear78888/bizmetria.ai/pull/2)
 
 ## Approved baseline
 
@@ -13,15 +13,15 @@ TASK-000 governance baseline and DEC-001–DEC-015.
 
 ## Completed
 
-Recovery PR #1 was reviewed and merged; the recovery baseline is now in `main`.
+Recovery PR #1 was reviewed and merged; MC-001 was validated and opened as draft PR #2.
 
 ## In progress
 
-MC-001 is creating the permanent orchestration and workstream operating system.
+MC-001 is in draft PR #2 for independent review; it is not approved repository state.
 
 ## Not started
 
-Independent review and merge decision for MC-001.
+Independent review and explicit merge decision for MC-001.
 
 ## Open decisions
 
@@ -49,7 +49,7 @@ All global governance documents and the actual GitHub branch/PR state.
 
 ## Exact next action
 
-Complete MC-001 validation, open the draft migration PR, and request review without merging it.
+Await independent review of draft PR #2 and an explicit merge decision; do not merge it.
 
 ## Latest session checkpoint
 

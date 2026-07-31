@@ -16,7 +16,7 @@
 
 | Workstream | Task ID | Owner | Branch | PR | Affected files | Start date | Status | Expected handoff |
 |---|---|---|---|---|---|---|---|---|
-| 01 Master Control (cross-functional) | MC-001 | Master Orchestrator | `architecture/master-orchestrator-workstreams-v1` | PENDING CREATION | `README.md`; selected global governance files; `docs/control/**`; `docs/chat-briefs/README.md`; required operating files under all `docs/workstreams/**` directories | 2026-07-30 | IN PROGRESS | Validated draft PR for independent review; no self-merge |
+| 01 Master Control (cross-functional) | MC-001 | Master Orchestrator | `architecture/master-orchestrator-workstreams-v1` | [#2](https://github.com/Bear78888/bizmetria.ai/pull/2) | `README.md`; selected global governance files; `docs/control/**`; `docs/chat-briefs/README.md`; required operating files under all `docs/workstreams/**` directories | 2026-07-30 | REVIEW | Validated draft PR for independent review; no self-merge |
 
 ## Reconciliation procedure
 

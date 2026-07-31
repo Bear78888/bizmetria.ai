@@ -15,9 +15,10 @@ As of: 2026-07-30
 ## MC-001 — Master Orchestrator and Workstream Architecture Migration
 
 - Owner: Master Orchestrator
-- Status: **IN PROGRESS**
+- Status: **REVIEW**
 - Priority: High
 - Branch: `architecture/master-orchestrator-workstreams-v1`
+- PR: [draft #2](https://github.com/Bear78888/bizmetria.ai/pull/2)
 - Objective: Replace the permanent-chat operating model with one Master Orchestrator and thirteen permanent GitHub-backed workstreams, without changing product decisions.
 - Required inputs: merged recovery baseline, all global governance files, thirteen legacy chat briefs, existing workstream artifacts, actual branch/PR state.
 - Expected outputs: ten `docs/control/` files, 104 required workstream operating elements, legacy mapping, updated governance/navigation, validation evidence, and one draft PR.

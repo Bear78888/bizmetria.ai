@@ -6,7 +6,7 @@
 
 | Name | Version | Status | Path | Task ID | Owner | Approved date | Superseded by | Consumers |
 |---|---|---|---|---|---|---|---|---|
-| Master Orchestrator Workstream Operating System | v1 | Draft / in progress | [`docs/control/`](../../control/README.md) | MC-001 | Master Orchestrator | Not approved; pending PR review | None | All workstreams |
+| Master Orchestrator Workstream Operating System | v1 | Review | [`docs/control/`](../../control/README.md) | MC-001 | Master Orchestrator | Not approved; pending PR review | None | All workstreams |
 
 
 ## Indexing rule

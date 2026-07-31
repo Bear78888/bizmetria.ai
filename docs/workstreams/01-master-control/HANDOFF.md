@@ -13,7 +13,7 @@ Recovery Gate completed; migration branch created; 124 changed files and 340 rel
 
 ## Not completed
 
-Draft PR creation, independent review, and merge.
+Independent review and explicit merge decision.
 
 ## Changed files
 
@@ -33,7 +33,7 @@ No undisclosed blocker. Ownership and dependencies are recorded in `CURRENT_STAT
 
 ## Exact next action
 
-Finish validation and open the draft migration PR.
+Await independent review of draft PR #2; do not merge it.
 
 ## Handoff target
 
@@ -45,7 +45,7 @@ Independent reviewer / product owner through the migration PR.
 
 ## PR
 
-PENDING CREATION
+[#2](https://github.com/Bear78888/bizmetria.ai/pull/2)
 
 ## Validation results
 

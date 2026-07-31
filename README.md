@@ -8,6 +8,7 @@ BizMetria.ai is a cross-industry business assessment platform that identifies pr
 - Verified recovery baseline in `main`: `300c01050820953d2769a91a77a39ae3edcd7f99`.
 - `MC-001` is migrating governance to one Master Orchestrator and thirteen permanent GitHub workstreams.
 - Migration branch: `architecture/master-orchestrator-workstreams-v1`.
+- Draft migration PR: [#2](https://github.com/Bear78888/bizmetria.ai/pull/2).
 - Migration content remains unapproved until its draft PR is reviewed and merged.
 
 ## Approved product foundation

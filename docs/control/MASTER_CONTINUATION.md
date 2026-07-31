@@ -26,7 +26,7 @@ One Master Orchestrator coordinates thirteen permanent workstream directories. T
 
 ## Aggregate workstream status
 
-- Workstream 01: `IN PROGRESS` on MC-001.
+- Workstream 01: `REVIEW` on MC-001 in draft PR #2.
 - Workstream 02: `READY` for a bounded assignment derived from global TASK-001.
 - Workstream 11: `READY` for a bounded assignment derived from global TASK-004.
 - Workstreams 03–10, 12, and 13: `NOT STARTED`; see Registry for dependencies.
@@ -36,7 +36,7 @@ See [`WORKSTREAM_REGISTRY.md`](WORKSTREAM_REGISTRY.md) for exact per-workstream 
 
 ## Active tasks
 
-- `MC-001` — architecture migration, owner `Master Orchestrator`, status `IN PROGRESS`.
+- `MC-001` — architecture migration, owner `Master Orchestrator`, status `REVIEW`.
 - Global `TASK-001` — Product Blueprint v0.1, ready for bounded Product Strategy assignment after MC-001 review/merge.
 - Global `TASK-002`, `TASK-003`, and `TASK-004` remain queued as recorded in the [Global Task Queue](../BIZMETRIA_TASK_QUEUE.md).
 
@@ -48,7 +48,7 @@ See [`WORKSTREAM_REGISTRY.md`](WORKSTREAM_REGISTRY.md) for exact per-workstream 
 
 ## Open PRs
 
-- MC-001 migration PR: PENDING CREATION.
+- MC-001 migration PR: [#2](https://github.com/Bear78888/bizmetria.ai/pull/2).
 
 ## Latest approved decisions
 
@@ -60,6 +60,8 @@ DEC-001–DEC-015 are recorded in the [Decision Log](../BIZMETRIA_DECISION_LOG.m
 - New `main` SHA verified as `300c01050820953d2769a91a77a39ae3edcd7f99`.
 - Post-merge files, branches, PRs, legacy briefs, and existing workstream artifacts were inventoried.
 - Migration branch was created from the verified SHA.
+- All 124 changed files, 340 relative links, and Acceptance Tests A/B passed validation.
+- Draft PR #2 was opened for independent review.
 
 ## Current blockers
 
@@ -67,7 +69,7 @@ No technical blocker is recorded. MC-001 requires independent review and explici
 
 ## Exact next recommended action
 
-Complete MC-001 validation, open its draft PR, record the PR metadata, and hand it to the user/independent reviewer without merging.
+Await independent review of draft PR #2 and an explicit owner merge decision. Do not merge it.
 
 ## Required Startup Reading
 

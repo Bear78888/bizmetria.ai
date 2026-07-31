@@ -5,7 +5,7 @@
 **Migration date:** 2026-07-30
 **Base SHA:** `300c01050820953d2769a91a77a39ae3edcd7f99`
 **Branch:** `architecture/master-orchestrator-workstreams-v1`
-**Draft PR:** PENDING CREATION
+**Draft PR:** [#2](https://github.com/Bear78888/bizmetria.ai/pull/2)
 
 ## Original state
 

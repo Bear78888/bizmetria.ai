@@ -45,7 +45,7 @@ Master Orchestrator and the next explicitly assigned temporary Workstream Chat.
 
 ## PR
 
-PENDING CREATION
+[#2](https://github.com/Bear78888/bizmetria.ai/pull/2)
 
 ## Validation results
 

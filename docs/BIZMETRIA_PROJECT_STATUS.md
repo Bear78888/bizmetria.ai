@@ -1,7 +1,7 @@
 # BizMetria Project Status
 
 **As of:** 2026-07-30
-**Overall status:** `ARCHITECTURE MIGRATION IN PROGRESS`
+**Overall status:** `ARCHITECTURE MIGRATION IN REVIEW`
 **Verified main SHA:** `300c01050820953d2769a91a77a39ae3edcd7f99`
 
 ## Current phase
@@ -41,7 +41,7 @@ These remain labeled and require Workstream 04 testing and approval.
 
 | Task | Owner | Status | Branch / dependency |
 |---|---|---|---|
-| MC-001 Master Orchestrator and Workstream Architecture Migration | Master Orchestrator | IN PROGRESS | `architecture/master-orchestrator-workstreams-v1` |
+| MC-001 Master Orchestrator and Workstream Architecture Migration | Master Orchestrator | REVIEW | [draft PR #2](https://github.com/Bear78888/bizmetria.ai/pull/2) from `architecture/master-orchestrator-workstreams-v1` |
 | TASK-000 Project Governance Baseline | Master Control | APPROVED / RECOVERED | Merged through PR #1 |
 | TASK-001 Product Blueprint v0.1 | Product Strategy | QUEUED / READY FOR BOUNDED ASSIGNMENT | Recovery baseline merged; no PS-prefixed execution task assigned |
 | TASK-002 Formal Free Audit Specification | Free Audit and Lead Scoring | QUEUED | Depends on stable TASK-001 input; isolated tests may be planned separately |
@@ -66,7 +66,7 @@ The following remain unresolved and must not be silently approved:
 
 ## Immediate next action
 
-Complete MC-001 validation, open one draft PR, record its factual metadata, and hand it to an independent reviewer/user without merging it.
+Await independent review of [draft PR #2](https://github.com/Bear78888/bizmetria.ai/pull/2) and an explicit owner merge decision. Do not merge it.
 
 ## Operational safeguards
 

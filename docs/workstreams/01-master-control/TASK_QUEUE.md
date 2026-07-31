@@ -7,7 +7,7 @@
 
 ## MC-001 — Master Orchestrator and Workstream Architecture Migration
 
-- **Status:** `IN PROGRESS`
+- **Status:** `REVIEW`
 - **Priority:** High
 - **Objective:** Replace the permanent-chat operating model with one Master Orchestrator and thirteen persistent GitHub workstreams.
 - **Required inputs:** Current `main`, global governance documents, all legacy chat briefs, existing workstream artifacts, branch and PR inventory.
