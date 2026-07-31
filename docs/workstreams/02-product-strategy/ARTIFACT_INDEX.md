@@ -3,12 +3,9 @@
 **Workstream:** 02 — Product Strategy
 **Last updated:** 2026-07-30
 
-
-No existing deliverable is recorded for this workstream.
-
 | Name | Version | Status | Path | Task ID | Owner | Approved date | Superseded by | Consumers |
 |---|---|---|---|---|---|---|---|---|
-| None | — | — | — | — | — | — | — | — |
+| BizMetria Product Blueprint | v0.1 | Review | [`BIZMETRIA_PRODUCT_BLUEPRINT_v0.1.md`](BIZMETRIA_PRODUCT_BLUEPRINT_v0.1.md) | PS-001 | Product Strategy | Not approved | None | UX, FA, EN, ES, AE, RP, BE, LC, LS, MS, QA, Master Control |
 
 
 ## Indexing rule
