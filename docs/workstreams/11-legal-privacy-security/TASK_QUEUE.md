@@ -7,7 +7,7 @@
 
 ## `LS-001 — Legal and Data Inventory Baseline`
 
-- **Status:** `READY`
+- **Status:** `REVIEW`
 - **Priority:** High
 - **Objective:** Create the MVP legal, privacy, security, and field-level data baseline needed for later product and architecture decisions.
 - **Required inputs:** Approved Master Brief and Decision Log; approved Delivery Roadmap; current recovered customer journey; known contact/consent and assessment inputs; gate `G0`.
@@ -17,8 +17,21 @@
 - **Dependencies:** `G0` — `PASS`; current recovered customer journey.
 - **Concurrency:** May run in parallel with `PS-001` because the target files do not overlap.
 - **Planned branch:** `task/ws-11/LS-001-legal-data-baseline`
-- **Owner:** `UNASSIGNED`
-- **Review status:** Not started; no branch or PR exists.
+- **Branch:** `task/ws-11/LS-001-legal-data-baseline`
+- **Owner:** Legal, Privacy and Security temporary executor
+- **Review status:** Draft [#6](https://github.com/Bear78888/bizmetria.ai/pull/6) is open for independent review.
+
+
+## `LS-002 — Consent, Claims, and Data Requirements`
+
+- **Status:** `PLANNED`
+- **Priority:** High
+- **Objective:** Convert the approved product, audit, and paid-assessment contracts into implementable consent text requirements, data lifecycle constraints, rights handling, and claims rules.
+- **Required inputs:** `G1`, approved `FA-001`, and approved `PS-004`.
+- **Expected output:** `docs/workstreams/11-legal-privacy-security/deliverables/BIZMETRIA_CONSENT_CLAIMS_REQUIREMENTS_v1.0.md`.
+- **Dependencies:** Approved Product Requirements, free-audit contract, and paid-assessment contract.
+- **Owner:** Legal, Privacy and Security.
+- **Review status:** Blocked until dependencies merge.
 
 
 ## Global portfolio reference

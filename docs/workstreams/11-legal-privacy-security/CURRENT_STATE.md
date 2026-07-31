@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 11 — Legal, Privacy and Security
-**Status:** `READY`
+**Status:** `REVIEW`
 **Last updated:** 2026-07-30
 **Current task:** `LS-001 — Legal and Data Inventory Baseline`
-**Current branch:** None; task is ready but unassigned
-**Current PR:** None
+**Current branch:** `task/ws-11/LS-001-legal-data-baseline`
+**Current PR:** Draft [#6](https://github.com/Bear78888/bizmetria.ai/pull/6)
 
 ## Approved baseline
 
@@ -13,15 +13,15 @@ Separate email/SMS consent, data minimization, non-financial score disclaimer, n
 
 ## Completed
 
-No approved legal/data inventory baseline is recorded.
+A complete Legal and Data Inventory Baseline v0.1 has been prepared for review. It is issue-spotting and implementable guardrails, not final legal advice.
 
 ## In progress
 
-No workstream-specific task is in progress.
+`LS-001` is in review. The draft covers field-level data, purposes/access/retention/deletion treatment, separate consent, notices/disclaimers, privacy requests, security controls, vendor due diligence, and legal/security issue registers.
 
 ## Not started
 
-Execute `LS-001`: field-level data inventory, consent baseline, purpose/access/retention/deletion matrix, disclaimer inventory, policy issue register, and security-risk register.
+`LS-002 — Consent, Claims, and Data Requirements` remains gated on `G1`, `FA-001`, and `PS-004`.
 
 ## Open decisions
 
@@ -29,7 +29,7 @@ Refund Policy, jurisdiction-specific review, vendors/processors, and retention p
 
 ## Blockers
 
-No dependency blocker is recorded. The temporary executor is `UNASSIGNED`, and no task branch exists yet.
+No technical blocker is recorded. Independent review and qualified review of flagged legal questions are required; exact retention, jurisdiction, Refund Policy, and vendors remain open.
 
 ## Dependencies
 
@@ -49,8 +49,8 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 
 ## Exact next action
 
-Master Orchestrator assigns `LS-001` on `task/ws-11/LS-001-legal-data-baseline` with the roadmap target and acceptance criteria.
+Independently review the `LS-001` draft PR for inventory coverage, implementability, official-source accuracy, open issues, and non-legal-advice boundary; request corrections or merge with owner authority.
 
 ## Latest session checkpoint
 
-On 2026-07-30, MC-002 was approved at verified `main` SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`, gate `G0` passed, and `LS-001` became `READY`. No absent deliverable, assigned executor, deadline, or legal approval is implied.
+On 2026-07-30, `LS-001` started from verified `main` SHA `9f589ba69aaa202ddb5890cfc9a5d56890b85dc8`. No jurisdiction, legal conclusion, retention period, Refund Policy, vendor, or processor role is approved by the draft.
