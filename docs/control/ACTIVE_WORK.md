@@ -16,9 +16,9 @@
 
 | Workstream | Task ID | Owner | Branch | PR | Affected files | Start date | Status | Expected handoff |
 |---|---|---|---|---|---|---|---|---|
-| 01 — Master Control | `MC-003` | Project owner / Master Orchestrator | `task/ws-01/MC-003-owner-decision-gate` | [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) | Owner Decision Record; Decision Log; global/control and WS01/02 state | 2026-07-30 | REVIEW | Independent final review and merge of explicit owner decisions and valid pre-live deferrals |
+| 02 — Product Strategy | `PS-003` | Product Strategy | `task/ws-02/PS-003-product-requirements-v1` | Pending creation | Product Requirements Baseline; global/control and WS01/02 state | 2026-07-31 | REVIEW | Independent review, merge, resulting `main` verification, and `G1` closeout |
 
-`PS-001`, `LS-001`, and `PS-002` are merged and approved. MC-003 owns the only active branch and has received explicit owner authority. On PR #9 merge, the branch becomes historical and `PS-003` becomes the next live-lock candidate. `G1` and Phase 2 remain gated until PS-003 merges.
+`PS-001`, `LS-001`, `PS-002`, and `MC-003` are merged and approved. PS-003 owns the only active task branch. `G1` and Phase 2 remain gated until PS-003 merges and the resulting `main` is verified.
 
 ## Non-active preserved branches
 
@@ -26,6 +26,7 @@
 - `recovery/restore-bizmetria-project` — merged through PR #1; historical.
 - `task/ws-01/MC-002-delivery-roadmap` — merged through PR #3; historical.
 - `task/ws-01/phase1-inputs-closeout` — merged through PR #7; historical.
+- `task/ws-01/MC-003-owner-decision-gate` — merged through PR #9; historical.
 - `task/ws-02/PS-001-product-blueprint-v0-1` — merged through PR #5; historical.
 - `task/ws-02/PS-002-owner-decision-package` — merged through PR #8; historical.
 - `task/ws-11/LS-001-legal-data-baseline` — merged through PR #6; historical.

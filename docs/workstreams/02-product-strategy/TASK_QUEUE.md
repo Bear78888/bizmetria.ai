@@ -40,14 +40,15 @@
 
 ## `PS-003 — Product Requirements Baseline v1.0`
 
-- **Status:** `READY AFTER PR #9 MERGE`
+- **Status:** `REVIEW`
 - **Priority:** High
 - **Objective:** Incorporate approved MC-003 decisions into stable Phase 1 product requirements.
-- **Dependency:** Approved and merged `MC-003`, PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9).
+- **Dependency:** Approved and merged `MC-003`, PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9), merge SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
 - **Expected output:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_PRODUCT_REQUIREMENTS_v1.0.md`.
 - **Required inputs:** DEC-001–DEC-026, Product Blueprint v0.1, Legal/Data Baseline v0.1, Owner Decision Package v0.1, and Owner Decision Record v0.1.
 - **Acceptance criteria:** Stable testable requirements for every approved product/commercial rule; explicit pre-live dependencies; Stripe test/live and secret boundaries; no unresolved Phase 1 ambiguity; complete Handoff Summary.
-- **Review status:** Not started; owner decisions are complete and become canonical when PR #9 merges.
+- **Branch:** `task/ws-02/PS-003-product-requirements-v1`.
+- **Review status:** Complete locally; publication and independent PR review pending. `G1` is not passed.
 
 
 ## Global portfolio reference

@@ -82,24 +82,26 @@ As of: 2026-07-31
 ### `MC-003 — Owner Decision Gate`
 
 - **Owner:** Master Orchestrator and project owner
-- **Status:** `APPROVED ON MERGE`
+- **Status:** `APPROVED`
 - **Dependency:** Approved `PS-002`.
 - **Outcome:** Record explicit owner decisions, update the Decision Log, freeze Product Requirements v1.0 through `PS-003`, and evaluate `G1`.
 - **Historical branch after merge:** `task/ws-01/MC-003-owner-decision-gate`.
-- **Evidence:** PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9).
+- **Evidence:** PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9), merge SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
 - **Target:** `docs/workstreams/01-master-control/deliverables/BIZMETRIA_OWNER_DECISION_RECORD_v0.1.md`.
 - **Approved selections:** `D01-B`, `D02-A`, `D03-A`, `D04-B`, `D05-B`, `D06-B`, `D07-B`, `D08-A`, and `D09-A`; Stripe approved for eventual live one-time payments.
 - **Deferrals:** Entity/address, support identity, tax/legal review, staffing, and live Stripe credentials are named pre-live dependencies. They do not block PS-003 or non-live build/staging work and do block real charging and public paid launch.
-- **Review status:** Explicit owner authority recorded; pending independent final PR review and merge.
+- **Review status:** Independently reviewed, merged, and verified.
 
 ### `PS-003 — Product Requirements Baseline v1.0`
 
 - **Owner:** Product Strategy
-- **Status:** `READY AFTER PR #9 MERGE`
-- **Dependency:** Approved and merged `MC-003`.
+- **Status:** `REVIEW`
+- **Dependency:** Approved and merged `MC-003`, merge SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
 - **Outcome:** Convert the approved decisions, customer journey, legal boundaries, Stripe-ready rule, KPIs, capacity, and pre-live deferrals into stable, testable product requirements.
 - **Target:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_PRODUCT_REQUIREMENTS_v1.0.md`.
+- **Branch:** `task/ws-02/PS-003-product-requirements-v1`.
 - **Guardrail:** `G1` remains not passed until PS-003 is independently reviewed and merged; no live payment activation is part of PS-003.
+- **Review status:** Complete locally; publication and independent review pending.
 
 ## Planned delivery catalog
 

@@ -1,12 +1,12 @@
 # BizMetria Project Status
 
 **As of:** 2026-07-31 \
-**Overall status:** `PHASE 1 — OWNER DECISIONS APPROVED; PS-003 READY` \
-**Verified `main` SHA:** `66be062629a9b11670d1b76d202a30474eff98f7`
+**Overall status:** `PHASE 1 — PS-003 IN REVIEW; G1 PENDING` \
+**Verified `main` SHA:** `acda4fb7c036660161b6f0ea4d09deed4143c7cb`
 
 ## Current phase
 
-Recovery PR [#1](https://github.com/Bear78888/bizmetria.ai/pull/1), architecture PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), Delivery Roadmap PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), Product Blueprint PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), Legal/Data Baseline PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), Phase 1 input closeout PR [#7](https://github.com/Bear78888/bizmetria.ai/pull/7), and Owner Decision Package PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) are merged.
+Recovery PR [#1](https://github.com/Bear78888/bizmetria.ai/pull/1), architecture PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), Delivery Roadmap PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), Product Blueprint PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), Legal/Data Baseline PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), Phase 1 input closeout PR [#7](https://github.com/Bear78888/bizmetria.ai/pull/7), Owner Decision Package PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), and MC-003 owner decision PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) are merged.
 
 Gate `G0 — Governance Ready` is `PASS` because:
 
@@ -15,7 +15,7 @@ Gate `G0 — Governance Ready` is `PASS` because:
 - the Decision Log, Project Status, Task Queue, Registry, Active Work, Master Continuation, and Workstream 01 state are synchronized;
 - `PS-001` and `LS-001` were the only initial execution assignments and are now approved.
 
-`PS-002 — Owner Decision Package` is approved. The owner explicitly approved the Phase 1 commercial and operating choices through `MC-003`, with nationwide U.S. geography and Stripe as the eventual real-payment processor. Missing entity, support, staffing, legal, tax, and live-credential facts are pre-live blockers rather than blockers to contracts, architecture, implementation, or staging. `PS-003` is the next authorized task; Phase 2 remains gated until it merges and `G1` passes.
+`PS-002 — Owner Decision Package` and `MC-003 — Owner Decision Gate` are approved. The owner explicitly approved nationwide U.S. geography and Stripe as the eventual real-payment processor. Missing entity, support, staffing, legal, tax, vendor/security, release, and live-credential facts are fail-closed pre-live dependencies rather than blockers to contracts, architecture, implementation, or staging. `PS-003` is in review; Phase 2 remains gated until it merges and `G1` passes.
 
 ## Confirmed product baseline
 
@@ -44,8 +44,8 @@ Gate `G0 — Governance Ready` is `PASS` because:
 | PS-001 Product Blueprint v0.1 | Product Strategy | APPROVED | PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), merge SHA `21d223223180e7a7d617f28648674efb613c4a92` |
 | LS-001 Legal and Data Inventory Baseline | Legal, Privacy and Security | APPROVED | PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), merge SHA `b6174f1325136bc69a9859925c570e5770972991` |
 | PS-002 Owner Decision Package | Product Strategy / Master Control | APPROVED | PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), merge SHA `66be062629a9b11670d1b76d202a30474eff98f7` |
-| MC-003 Owner Decision Gate | Master Orchestrator / owner | APPROVED ON MERGE | PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9); explicit owner decisions and pre-live deferrals recorded |
-| PS-003 Product Requirements Baseline v1.0 | Product Strategy | READY AFTER PR #9 MERGE | Approved MC-003 decision record |
+| MC-003 Owner Decision Gate | Master Orchestrator / owner | APPROVED | PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9), merge SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb` |
+| PS-003 Product Requirements Baseline v1.0 | Product Strategy | REVIEW | `task/ws-02/PS-003-product-requirements-v1`; draft PR pending creation |
 | FA-001 and all later delivery tasks | Applicable workstreams | PLANNED | Follow the dependencies and gates in the Delivery Roadmap |
 
 The complete sequence is in [`docs/control/DELIVERY_ROADMAP.md`](control/DELIVERY_ROADMAP.md); exact per-workstream state is in [`docs/control/WORKSTREAM_REGISTRY.md`](control/WORKSTREAM_REGISTRY.md).
@@ -68,7 +68,7 @@ The Decision Log and Delivery Roadmap name the task and gate responsible for eac
 
 ## Immediate next action
 
-Independently review and merge PR #9, verify the resulting `main`, and start `PS-003 — Product Requirements Baseline v1.0`. Preserve every pre-live dependency and keep Stripe in test mode until the final protected activation stage.
+Publish and independently review `PS-003 — Product Requirements Baseline v1.0`, merge only after a clean gate, verify `main`, and record `G1`. Preserve every pre-live dependency and keep Stripe in test mode until the final protected activation stage.
 
 ## Operational safeguards
 

@@ -43,18 +43,18 @@
 
 ## `MC-003 — Product Decision Gate`
 
-- **Status:** `APPROVED ON MERGE`
+- **Status:** `APPROVED`
 - **Priority:** High
 - **Objective:** Record explicit owner decisions from the approved PS-002 package, update the Decision Log, and provide stable inputs for PS-003.
 - **Required inputs:** Approved PS-002 plus owner selections and bounded dispositions for `F01`–`F10` — complete in PR #9.
 - **Expected output:** `docs/workstreams/01-master-control/deliverables/BIZMETRIA_OWNER_DECISION_RECORD_v0.1.md`, updated Decision Log, synchronized state, and a reviewable gate result.
 - **Historical branch after merge:** `task/ws-01/MC-003-owner-decision-gate`.
-- **Evidence:** PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9).
+- **Evidence:** PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9), merge SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
 - **Acceptance criteria:** No authority is inferred; selected rules are internally consistent; qualified-review dependencies are explicit; blocking open decisions are closed or validly deferred; PS-003 receives stable requirements.
 - **Dependencies:** Approved PS-002, PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), merge SHA `66be062629a9b11670d1b76d202a30474eff98f7`.
 - **Owner:** Project owner and Master Orchestrator.
 - **Approved result:** D01-B/D02-A/D03-A/D04-B/D05-B/D06-B/D07-B/D08-A/D09-A, nationwide U.S. intent, confirmed operating calendar, and Stripe-ready test/live architecture.
-- **Review status:** Owner authority complete; pending independent final PR review and merge. Pre-live dependencies remain enforceable launch blockers.
+- **Review status:** Independently reviewed, merged, and verified. Pre-live dependencies remain enforceable launch blockers.
 
 ## Planned Master Control gates
 
