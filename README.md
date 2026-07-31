@@ -8,7 +8,7 @@ BizMetria.ai is a cross-industry business assessment platform that identifies pr
 - `MC-001` architecture PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2) was independently reviewed and merged.
 - Verified current `main` after MC-001: `473ee6c042bd5224bec75dbc18fa803e9b148aa3`.
 - The one-Master/13-workstream operating system is now canonical.
-- `MC-002` is preparing the dependency-ordered Delivery Roadmap on `task/ws-01/MC-002-delivery-roadmap`.
+- `MC-002` Delivery Roadmap is in review in draft PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3) from `task/ws-01/MC-002-delivery-roadmap`.
 - Product execution has not started. After MC-002 approval, the first execution window is `PS-001` plus `LS-001`.
 
 ## Approved product foundation

@@ -6,7 +6,7 @@
 **Verified `main` SHA:** `473ee6c042bd5224bec75dbc18fa803e9b148aa3`  
 **Current task:** `MC-002 — Delivery Roadmap and Phase Gates`  
 **Current branch:** `task/ws-01/MC-002-delivery-roadmap`  
-**Current PR:** `PENDING CREATION`
+**Current PR:** [#3](https://github.com/Bear78888/bizmetria.ai/pull/3)
 
 ## BizMetria in brief
 
@@ -29,7 +29,7 @@ PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2) approved `MC-001` and 
 ## Current delivery state
 
 - `MC-001`: `APPROVED`; architecture is canonical in `main`.
-- `MC-002`: `IN PROGRESS`; canonical dependency-ordered roadmap is being prepared.
+- `MC-002`: `REVIEW`; canonical dependency-ordered roadmap is in draft PR #3.
 - Workstream 02: `READY` to start `PS-001` after `MC-002` approval.
 - Workstream 11: `READY` to start `LS-001` after `MC-002` approval.
 - All other implementation tasks remain `PLANNED` behind named phase gates.
@@ -39,7 +39,7 @@ See the [Delivery Roadmap](DELIVERY_ROADMAP.md) for the complete critical path a
 
 ## Active work
 
-- `MC-002` — owner `Master Orchestrator`, branch `task/ws-01/MC-002-delivery-roadmap`, PR pending creation.
+- `MC-002` — owner `Master Orchestrator`, branch `task/ws-01/MC-002-delivery-roadmap`, draft PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3).
 - No other execution task is active.
 - The merged recovery and architecture branches are historical, not live-locks.
 - `test/chatgpt-write-access` remains preserved and untouched.
@@ -58,7 +58,7 @@ No technical blocker is recorded. `MC-002` must pass validation, independent rev
 
 ## Exact next action
 
-Validate the complete `MC-002` change set, open one draft PR, and hand it to an independent reviewer. Do not merge it in the same execution session.
+Independently review draft PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), resolve any actionable feedback, and obtain a separate owner merge decision. Do not self-merge it.
 
 ## Required Startup Reading
 

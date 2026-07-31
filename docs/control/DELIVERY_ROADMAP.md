@@ -1,11 +1,12 @@
 # BizMetria Delivery Roadmap
 
 **Task:** `MC-002 — Delivery Roadmap and Phase Gates`  
-**Status:** `DRAFT`  
+**Status:** `REVIEW`  
 **Owner:** Master Orchestrator  
 **Last updated:** 2026-07-30  
 **Verified starting `main` SHA:** `473ee6c042bd5224bec75dbc18fa803e9b148aa3`  
-**Planning branch:** `task/ws-01/MC-002-delivery-roadmap`
+**Planning branch:** `task/ws-01/MC-002-delivery-roadmap`  
+**Draft PR:** [#3](https://github.com/Bear78888/bizmetria.ai/pull/3)
 
 ## Purpose
 
@@ -599,7 +600,7 @@ BizMetria receives status `AD READY` only when all conditions below are true:
 ## Handoff Summary
 
 - **Task:** `MC-002 — Delivery Roadmap and Phase Gates`
-- **Status:** Draft pending PR review.
+- **Status:** Review in draft PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3).
 - **Files changed:** Roadmap plus synchronized global and Workstream 01 governance records.
 - **Decisions proposed:** Dependency gates, task catalog, WIP limit, and `AD READY` checklist.
 - **Decisions approved:** No new product decision; `MC-001` and `DEC-016` are recognized as approved after PR #2 merge.

@@ -23,17 +23,17 @@ As of: 2026-07-30
 ## `MC-002 — Delivery Roadmap and Phase Gates`
 
 - **Owner:** Master Orchestrator
-- **Status:** `IN PROGRESS`
+- **Status:** `REVIEW`
 - **Priority:** High
 - **Branch:** `task/ws-01/MC-002-delivery-roadmap`
-- **PR:** Pending creation
+- **PR:** [Draft #3](https://github.com/Bear78888/bizmetria.ai/pull/3)
 - **Objective:** Define the complete dependency-ordered path from the approved governance baseline to a bilingual production product ready for controlled advertising.
 - **Required inputs:** Approved MC-001 architecture, merged recovery product baseline, Decision Log, all workstream briefs/state, and the owner's requested phase plan.
 - **Expected outputs:** Canonical roadmap, gates `G0`–`G10`, bounded task catalog, targets, dependencies, acceptance criteria, WIP rules, `AD READY` checklist, and synchronized control/WS01 state.
 - **Target:** `docs/control/DELIVERY_ROADMAP.md`.
 - **Dependencies:** `MC-001`.
 - **Acceptance:** Every phase is executable in dependency order; downstream work cannot start without its inputs; no open product decision is silently resolved; links, task IDs, invariants, and safety checks pass.
-- **Review status:** Draft PR pending creation; independent review required.
+- **Review status:** Draft PR open; independent review and separate owner merge decision required.
 
 ## Next execution window after `G0`
 

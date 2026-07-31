@@ -38,7 +38,7 @@ No technical blocker. Downstream execution is gated on MC-002 review and merge.
 
 ## Exact next action
 
-Validate and open the MC-002 draft PR; then obtain independent review. Do not self-merge.
+Independently review draft PR #3, resolve actionable feedback, and obtain a separate owner merge decision. Do not self-merge.
 
 ## Handoff target
 
@@ -50,7 +50,7 @@ Independent reviewer / product owner through the MC-002 draft PR.
 
 ## PR
 
-Pending creation.
+[#3](https://github.com/Bear78888/bizmetria.ai/pull/3)
 
 ## Validation required
 

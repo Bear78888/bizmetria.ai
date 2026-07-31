@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 01 — Master Control  
-**Status:** `IN PROGRESS`  
+**Status:** `REVIEW`  
 **Last updated:** 2026-07-30  
 **Current task:** `MC-002 — Delivery Roadmap and Phase Gates`  
 **Current branch:** `task/ws-01/MC-002-delivery-roadmap`  
-**Current PR:** `PENDING CREATION`
+**Current PR:** [#3](https://github.com/Bear78888/bizmetria.ai/pull/3)
 
 ## Approved baseline
 
@@ -22,7 +22,7 @@
 
 ## In progress
 
-MC-002 synchronizes the canonical roadmap with global control records and Workstream 01 state.
+MC-002 is in draft PR #3 with the canonical roadmap and synchronized global/control/Workstream 01 state.
 
 ## Not started
 
@@ -56,7 +56,7 @@ Approved MC-001 architecture, verified `main`, current product baseline, all wor
 
 ## Exact next action
 
-Validate the MC-002 change set, open its draft PR, and hand it to an independent reviewer. Do not merge it in the same execution session.
+Independently review draft PR #3, resolve actionable feedback, and obtain a separate owner merge decision. Do not self-merge it.
 
 ## Latest session checkpoint
 

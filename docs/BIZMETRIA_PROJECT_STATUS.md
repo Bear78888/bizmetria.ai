@@ -1,7 +1,7 @@
 # BizMetria Project Status
 
 **As of:** 2026-07-30  
-**Overall status:** `DELIVERY ROADMAP IN PROGRESS`  
+**Overall status:** `DELIVERY ROADMAP IN REVIEW`  
 **Verified `main` SHA:** `473ee6c042bd5224bec75dbc18fa803e9b148aa3`
 
 ## Current phase
@@ -37,7 +37,7 @@ The MC-002 roadmap remains proposed repository state until its draft PR is revie
 | Task | Owner | Status | Branch / dependency |
 |---|---|---|---|
 | MC-001 Master Orchestrator and Workstream Architecture Migration | Master Orchestrator | APPROVED | PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), merge SHA `473ee6c042bd5224bec75dbc18fa803e9b148aa3` |
-| MC-002 Delivery Roadmap and Phase Gates | Master Orchestrator | IN PROGRESS | `task/ws-01/MC-002-delivery-roadmap`; draft PR pending creation |
+| MC-002 Delivery Roadmap and Phase Gates | Master Orchestrator | REVIEW | Draft PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3) from `task/ws-01/MC-002-delivery-roadmap` |
 | PS-001 Product Blueprint v0.1 | Product Strategy | READY AFTER G0 | Starts only after MC-002 merges |
 | LS-001 Legal and Data Inventory Baseline | Legal, Privacy and Security | READY AFTER G0 | Starts only after MC-002 merges; may run in parallel with PS-001 |
 | FA-001 and all later delivery tasks | Applicable workstreams | PLANNED | Follow the dependencies and gates in the Delivery Roadmap |
@@ -66,7 +66,7 @@ The Decision Log and Delivery Roadmap name the task and gate responsible for eac
 
 ## Immediate next action
 
-Validate MC-002, open one draft PR from `task/ws-01/MC-002-delivery-roadmap`, and request independent review. Do not begin PS-001 or LS-001 until MC-002 is merged and `G0` passes.
+Independently review draft PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), resolve actionable feedback, and obtain a separate owner merge decision. Do not begin PS-001 or LS-001 until MC-002 is merged and `G0` passes.
 
 ## Operational safeguards
 
