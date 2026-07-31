@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 11 — Legal, Privacy and Security
-**Status:** `READY`
+**Status:** `REVIEW`
 **Last updated:** 2026-07-31
-**Current task:** `LS-002 — Consent, Claims, and Data Requirements` — `READY`
-**Current branch:** None
-**Current PR:** None
+**Current task:** `LS-002 — Consent, Claims, and Data Requirements` — `REVIEW`
+**Current branch:** `task/ws-11/LS-002-consent-claims-data-requirements`
+**Current PR:** Draft PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15)
 
 ## Approved baseline
 
@@ -19,11 +19,11 @@ FA-001 merged through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12
 
 ## In progress
 
-No Legal, Privacy and Security execution task is in progress.
+`LS-002` is complete as a review candidate on `task/ws-11/LS-002-consent-claims-data-requirements`. It defines versioned purpose/consent evidence, suppression, customer notice surfaces, semantic English/Spanish copy modules, claims rules, exact field adoption, stored data classes, rights handling, retention fail-closed behavior, review triggers, and acceptance vectors.
 
 ## Not started
 
-`LS-002 — Consent, Claims, and Data Requirements` is ready; no branch or draft PR exists yet.
+Independent review, draft PR publication, and merge of `LS-002` are not complete. `LC-001`, `AE-001`, and their downstream tasks remain behind the named dependency.
 
 ## Open decisions
 
@@ -31,7 +31,7 @@ Refund Policy, jurisdiction-specific review, vendors/processors, and retention p
 
 ## Blockers
 
-No LS-002 dependency blocker remains. Qualified review of flagged legal questions is still required before the applicable production gates; exact retention, jurisdiction, Refund Policy text, and vendors remain open.
+No specification dependency blocker remains. Qualified review of flagged legal questions is still required before applicable production gates; entity/address, support path, exact retention, nationwide applicability, Refund Policy, SMS/voice treatment, vendors, staffing, security/release evidence, and protected Stripe live activation remain open.
 
 ## Dependencies
 
@@ -51,8 +51,8 @@ No LS-002 dependency blocker remains. Qualified review of flagged legal question
 
 ## Exact next action
 
-Start LS-002 from verified `main` on `task/ws-11/LS-002-consent-claims-data-requirements`.
+Independently review the exact remote diff in draft PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) and merge only if all requirements and fail-closed boundaries pass.
 
 ## Latest session checkpoint
 
-On 2026-07-31, FA-001 and PS-004 merged and LS-002 became ready. No jurisdiction, legal conclusion, retention period, Refund Policy text, vendor role, or final legal text is approved by that dependency result.
+On 2026-07-31, LS-002 was prepared from verified main `71a925375cfc4232f6ca87b6b744938a43608855`. Official FTC, FCC, CPPA, California Attorney General, and California statutory sources were rechecked. The document remains implementation issue-spotting; no jurisdiction, legal conclusion, retention period, Refund Policy text, vendor role, final legal copy, or live-payment authorization was approved.
