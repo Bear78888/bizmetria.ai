@@ -1,6 +1,6 @@
 # Active Work
 
-**Last updated:** 2026-07-30
+**Last updated:** 2026-07-31
 
 ## Live-lock rules
 
@@ -16,9 +16,9 @@
 
 | Workstream | Task ID | Owner | Branch | PR | Affected files | Start date | Status | Expected handoff |
 |---|---|---|---|---|---|---|---|---|
-| 01 — Master Control | `MC-003` | Project owner / Master Orchestrator | `task/ws-01/MC-003-owner-decision-gate` | [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) | Owner Decision Record; Decision Log after owner input; global/control and WS01/02 state | 2026-07-30 | BLOCKED | Explicit owner selections/facts, qualified-review state, complete decision record, and independently reviewed PR |
+| 01 — Master Control | `MC-003` | Project owner / Master Orchestrator | `task/ws-01/MC-003-owner-decision-gate` | [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) | Owner Decision Record; Decision Log; global/control and WS01/02 state | 2026-07-30 | REVIEW | Independent final review and merge of explicit owner decisions and valid pre-live deferrals |
 
-`PS-001`, `LS-001`, and `PS-002` are merged and approved. MC-003 owns the only active branch and is blocked on explicit authority inputs. `PS-003`, `G1`, and Phase 2 remain gated.
+`PS-001`, `LS-001`, and `PS-002` are merged and approved. MC-003 owns the only active branch and has received explicit owner authority. On PR #9 merge, the branch becomes historical and `PS-003` becomes the next live-lock candidate. `G1` and Phase 2 remain gated until PS-003 merges.
 
 ## Non-active preserved branches
 

@@ -2,7 +2,7 @@
 
 **Workstream:** 02 — Product Strategy
 **Task prefix:** `PS`
-**Last updated:** 2026-07-30
+**Last updated:** 2026-07-31
 
 
 ## `PS-001 — Product Blueprint v0.1`
@@ -40,12 +40,14 @@
 
 ## `PS-003 — Product Requirements Baseline v1.0`
 
-- **Status:** `BLOCKED`
+- **Status:** `READY AFTER PR #9 MERGE`
 - **Priority:** High
 - **Objective:** Incorporate approved MC-003 decisions into stable Phase 1 product requirements.
-- **Dependency:** Approved `MC-003`.
+- **Dependency:** Approved and merged `MC-003`, PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9).
 - **Expected output:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_PRODUCT_REQUIREMENTS_v1.0.md`.
-- **Review status:** Not started; explicit owner decisions are missing.
+- **Required inputs:** DEC-001–DEC-026, Product Blueprint v0.1, Legal/Data Baseline v0.1, Owner Decision Package v0.1, and Owner Decision Record v0.1.
+- **Acceptance criteria:** Stable testable requirements for every approved product/commercial rule; explicit pre-live dependencies; Stripe test/live and secret boundaries; no unresolved Phase 1 ambiguity; complete Handoff Summary.
+- **Review status:** Not started; owner decisions are complete and become canonical when PR #9 merges.
 
 
 ## Global portfolio reference
@@ -53,7 +55,7 @@
 - **ID:** `TASK-001`
 - **Status:** See [Global Task Queue](../../BIZMETRIA_TASK_QUEUE.md).
 - **Execution mapping:** `PS-001`.
-- **Assignment:** Historical execution mapping complete through approved PS-001; current Product Strategy task is PS-002.
+- **Assignment:** Historical execution mapping complete through approved PS-001; current Product Strategy task is PS-003 after MC-003 merge.
 - **Rule:** The global task ID remains a historical portfolio reference; work is performed and reviewed under `PS-001`.
 
 

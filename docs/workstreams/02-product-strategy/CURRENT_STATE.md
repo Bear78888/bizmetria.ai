@@ -1,15 +1,15 @@
 # Current State
 
 **Workstream:** 02 — Product Strategy
-**Status:** `APPROVED`
-**Last updated:** 2026-07-30
-**Current task:** None; next is `PS-003 — Product Requirements Baseline v1.0`
+**Status:** `READY`
+**Last updated:** 2026-07-31
+**Current task:** `PS-003 — Product Requirements Baseline v1.0` — ready after PR #9 merge
 **Current branch:** None; PS-002 branch is historical
 **Current PR:** None
 
 ## Approved baseline
 
-Approved product foundation in the Master Brief and DEC-001–DEC-016; approved Delivery Roadmap; gate `G0` is `PASS`.
+Approved product foundation in the Master Brief and DEC-001–DEC-026; approved Delivery Roadmap; gate `G0` is `PASS`. DEC-017–DEC-026 become canonical when MC-003 PR #9 merges.
 
 ## Completed
 
@@ -17,19 +17,19 @@ A complete new Product Blueprint v0.1 was independently reviewed and merged thro
 
 ## In progress
 
-No Product Strategy task is in progress. PS-002 is approved as a recommendation package; no owner selection was approved by that merge.
+No Product Strategy branch is active. Explicit owner selections are recorded in MC-003 PR #9 and provide the stable inputs for PS-003 after merge.
 
 ## Not started
 
-`PS-003 — Product Requirements Baseline v1.0` remains gated on approved MC-003.
+`PS-003 — Product Requirements Baseline v1.0` is ready to start from the verified post-MC-003 `main`.
 
 ## Open decisions
 
-All choices in the Owner Decision Package remain proposals. `OPEN-001`–`OPEN-009` remain open under their existing routes.
+The owner selected D01-B/D02-A/D03-A/D04-B/D05-B/D06-B/D07-B/D08-A/D09-A. `OPEN-004`, `OPEN-005`, `OPEN-006`, and `OPEN-009` remain routed downstream; Phase 1 product questions have dispositions.
 
 ## Blockers
 
-No Product Strategy technical blocker. Explicit owner choices, entity/jurisdiction facts, and qualified legal/tax review block MC-003 and therefore PS-003/G1.
+No Product Strategy blocker after PR #9 merges. Entity, support, staffing, legal/tax review, and live credentials are pre-live dependencies and must remain testable fail-closed requirements.
 
 ## Dependencies
 
@@ -50,8 +50,8 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 
 ## Exact next action
 
-Wait for approved MC-003, then start PS-003 from the verified post-gate `main`.
+After PR #9 merge, create the scoped PS-003 branch from the exact `main` SHA and write the complete Product Requirements Baseline v1.0 without enabling live payments.
 
 ## Latest session checkpoint
 
-On 2026-07-30, PS-002 was independently reviewed and merged at `66be062629a9b11670d1b76d202a30474eff98f7`. MC-003 now owns decision intake; no recommendation is an owner selection.
+On 2026-07-31, explicit owner decisions were recorded in MC-003 PR #9, including nationwide U.S. intent, the operating calendar, and Stripe-ready architecture with final-stage live activation.

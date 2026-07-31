@@ -1,25 +1,27 @@
 # Handoff
 
 **Workstream:** 01 — Master Control  
-**Last updated:** 2026-07-30
+**Last updated:** 2026-07-31
 
 ## Goal of latest work
 
-Open `MC-003` from the approved PS-002 input without inferring owner authority.
+Complete `MC-003` from explicit owner authority and hand stable requirements to PS-003 without enabling live commerce.
 
 ## Completed
 
 - Independently reviewed and merged PS-002 through PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8).
 - Verified `main` SHA `66be062629a9b11670d1b76d202a30474eff98f7`.
 - Created a bounded MC-003 branch and Owner Decision Record.
-- Copied the nine recommendations and ten factual confirmations as unresolved fields.
-- Kept the Decision Log, PS-003, and G1 unchanged.
+- Recorded `D01-B`, `D02-A`, `D03-A`, `D04-B`, `D05-B`, `D06-B`, `D07-B`, `D08-A`, and `D09-A` from explicit owner instructions.
+- Recorded all 50 U.S. states plus D.C., `America/Los_Angeles`, the U.S. federal-holiday calendar, and Stripe as the eventual real-payment processor.
+- Added DEC-017–DEC-026 and explicit pre-live deferrals for entity, support, staffing, legal/tax review, and protected live credentials.
+- Preserved `G1` as not passed until PS-003 merges.
 
 ## Not completed
 
-- Owner selections `D01`–`D09`.
-- Factual/professional-review confirmations `F01`–`F10`.
-- Decision Log updates, MC-003 approval, PS-003, and G1.
+- Independent final PR #9 review and merge.
+- PS-003 and `G1`.
+- Pre-live entity, support, staffing, legal/tax, and credential provisioning work.
 
 ## Changed files
 
@@ -27,23 +29,23 @@ Owner Decision Record plus synchronized global/control and Workstream 01/02 reco
 
 ## Decisions used
 
-DEC-001–DEC-016 and approved PS-002 recommendations as input only. No new product, commercial, legal, tax, jurisdiction, staffing, or vendor decision was made.
+DEC-001–DEC-016, approved PS-002 recommendations, and explicit 2026-07-31 owner instructions. New approved entries are DEC-017–DEC-026; none claims a completed legal or tax review.
 
 ## Open questions
 
-`OPEN-001` through `OPEN-009` remain unresolved. MC-003 additionally awaits `D01`–`D09` and `F01`–`F10`.
+`OPEN-004`, `OPEN-005`, `OPEN-006`, and `OPEN-009` remain unresolved. Phase 1 product questions have decisions or downstream legal/implementation dispositions.
 
 ## Blockers
 
-No technical blocker. Explicit owner authority and named review/factual inputs are missing.
+No technical or authority blocker for PR #9 or PS-003. Named pre-live dependencies block real charging and public paid launch.
 
 ## Exact next action
 
-Obtain the minimal owner response recorded in `BIZMETRIA_OWNER_DECISION_RECORD_v0.1.md`.
+Independently review and merge PR #9, verify `main`, then start PS-003.
 
 ## Handoff target
 
-Project owner and Master Orchestrator for MC-003.
+Independent MC-003 reviewer, then Product Strategy for PS-003.
 
 ## Branch
 
@@ -55,4 +57,4 @@ Draft [#9](https://github.com/Bear78888/bizmetria.ai/pull/9). Approved source pa
 
 ## Validation results
 
-PASS for checkpoint creation — PR #8 merge and SHA verified; all nine decisions and ten factual confirmations remain unresolved; Decision Log unchanged; PS-003 and G1 remain gated.
+PASS pending final remote gate — explicit selections recorded, `D08-A` override preserved, deferrals bounded to pre-live activation, Decision Log IDs unique, Stripe secrets prohibited, PS-003 ready only after merge, and `G1` remains not passed.

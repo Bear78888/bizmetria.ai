@@ -1,12 +1,12 @@
 # Workstream Registry
 
-**Last updated:** 2026-07-30  
+**Last updated:** 2026-07-31 \
 **Status vocabulary:** `NOT STARTED`, `READY`, `IN PROGRESS`, `REVIEW`, `APPROVED`, `BLOCKED`, `PAUSED`, `DEPRECATED`
 
 | Number | Name | Prefix | Status | Current / next task | Owner | Active branch | Open PR | Latest approved result | Dependencies | Exact next action |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 01 | [Master Control](../workstreams/01-master-control/CURRENT_STATE.md) | `MC` | `BLOCKED` | `MC-003` — Product Decision Gate | Project owner / Master Orchestrator | `task/ws-01/MC-003-owner-decision-gate` | [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) | `PS-002`, PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) | Explicit owner selections and required facts/reviews. | Obtain `D01`–`D09` and `F01`–`F10`; do not infer authority. |
-| 02 | [Product Strategy](../workstreams/02-product-strategy/CURRENT_STATE.md) | `PS` | `APPROVED` | `PS-003` — Product Requirements Baseline v1.0 | Product Strategy | None | None | `PS-002`, PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) | Approved `MC-003`. | Wait for explicit owner decisions and approved MC-003. |
+| 01 | [Master Control](../workstreams/01-master-control/CURRENT_STATE.md) | `MC` | `REVIEW` | `MC-003` — Product Decision Gate | Project owner / Master Orchestrator | `task/ws-01/MC-003-owner-decision-gate` | [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) | Owner-approved D01–D09 dispositions and Stripe directive in PR #9 | Independent PR review and merge. | Merge only after final consistency, deferral, and secret-safety checks pass. |
+| 02 | [Product Strategy](../workstreams/02-product-strategy/CURRENT_STATE.md) | `PS` | `READY` | `PS-003` — Product Requirements Baseline v1.0 | Product Strategy | None | None | `PS-002`, PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) | Merged `MC-003` PR #9. | Start PS-003 from the verified post-merge `main`; keep live payments disabled. |
 | 03 | [Brand, Website and UX](../workstreams/03-brand-website-ux/CURRENT_STATE.md) | `UX` | `NOT STARTED` | `UX-001` — Product Experience Architecture | UNASSIGNED | None | None | NOT RECORDED | `G2`. | Wait for approved contracts. |
 | 04 | [Free Audit and Lead Scoring](../workstreams/04-free-audit-lead-scoring/CURRENT_STATE.md) | `FA` | `NOT STARTED` | `FA-001` — Free Audit and Score Contract | UNASSIGNED | None | None | Approved score structure; recovered detailed drafts remain unapproved | `G1`. | Wait for approved product baseline, then formalize and test the audit contract. |
 | 05 | [English Voice Analyst](../workstreams/05-english-voice-analyst/CURRENT_STATE.md) | `EN` | `NOT STARTED` | `EN-001` — English Voice Conversation Specification | UNASSIGNED | None | None | NOT RECORDED | Phase 2 product, analysis, and legal contracts. | Wait for upstream contracts. |
