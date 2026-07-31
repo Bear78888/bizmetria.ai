@@ -5,50 +5,57 @@
 
 ## Goal of latest work
 
-Authorize LC-001 from exact approved commercial and legal/data inputs while preserving Stripe test/live isolation and every pre-live blocker.
+Convert approved PS-003 and LS-002 inputs into a deterministic commercial/lifecycle contract that is Stripe-ready without requiring or exposing live credentials.
 
 ## Completed
 
-- Verified PS-003 PR #10 and LS-002 PR #15 as approved inputs.
-- Recorded LC-001 as `READY` with an exact artifact target, branch, behavior boundary, and acceptance criteria.
-- Preserved the $299 price, approved promotion/refund structure, nationwide intent, operating calendar, consent/suppression rules, Stripe as eventual processor, and final-stage secret provisioning.
+- Verified PS-003 PR #10 and LS-002 PR #15 from source main `5dd223f8e11509ec305b2791c3b15c43ca33e097`.
+- Created `BIZMETRIA_LIFECYCLE_CONTRACT_v1.0.md`.
+- Fixed `$299` one-time pricing and exact `$49/$99/$149/$199` discount calculations.
+- Defined versioned commercial snapshots, tax fail-closed behavior, Stripe adapter and hosted-payment boundaries.
+- Defined a multi-clause live activation predicate where keys alone cannot enable real checkout.
+- Defined checkout, order, payment, entitlement, refund, CRM, consultation, and implementation-opportunity states.
+- Defined webhook signature/replay/idempotency/reconciliation behavior and environment-scoped identifiers.
+- Defined controlled promotions, atomic capacity reservations, federal-holiday SLA calculations, customer holds, refunds, consent/suppression precedence, and EN/ES message classes.
+- Added upstream requirement traceability, minimized event/error contracts, a 14-item pre-live bundle, and 50 acceptance vectors.
+- Preserved every entity, support, legal/tax, retention, vendor/security, staffing, release, and protected Stripe live dependency.
 
 ## Not completed
 
-The lifecycle contract, implementation, provider/vendor ADRs, exact Refund Policy and tax treatment, entity/support/staffing setup, production security/release evidence, and protected live Stripe configuration are not complete.
+Independent review and merge are incomplete. Implementation, provider/vendor ADRs, exact Refund Policy and tax treatment, entity/support/staffing setup, production security/release evidence, and protected live Stripe configuration remain incomplete.
 
 ## Changed files
 
-Workstream 10 state, task queue, handoff, and changelog as part of the LS-002 service closeout.
+LC-001 deliverable plus `CURRENT_STATE.md`, `TASK_QUEUE.md`, `ARTIFACT_INDEX.md`, `HANDOFF.md`, and `CHANGELOG.md`.
 
 ## Decisions used
 
-DEC-001–DEC-026 plus approved PS-003 and LS-002. Stripe is the intended processor; no credential, vendor sub-account, live mode, legal conclusion, or public nationwide claim is approved here.
+DEC-001–DEC-026, approved Product Requirements v1.0, LS-002, and the owner Stripe directive. No vendor, account, credential, legal conclusion, tax configuration, or live activation is approved.
 
 ## Open questions
 
-CRM/email/SMS vendors, exact Refund Policy text, tax configuration, support identity, promotion campaign details, consultation staffing, implementation-sales process, and production configuration.
+Legal entity/address, support identity, qualified nationwide/tax/refund/age review, final EN/ES policies/copy, retention periods, CRM/email/SMS/scheduling vendors, sender identities, consultation staffing, refund authority, security/release evidence, and exact protected Stripe live configuration.
 
 ## Blockers
 
-No dependency blocker for LC-001. Real charging remains fail closed until every applicable entity, policy, legal/tax, support, vendor/security, staffing, release, webhook, account-ownership, and live-secret gate passes.
+No contract dependency blocker remains. Live checkout and real fulfillment stay fail closed until every applicable pre-live dependency and implementation/release test passes.
 
 ## Exact next action
 
-Start `LC-001` on `task/ws-10/LC-001-commercial-lifecycle-contract` and create its vendor-neutral commercial/lifecycle contract with Stripe test-mode behavior and placeholder environment-variable names only.
+Run the six-file local gate, publish one draft PR, compare the exact remote tree/diff, and merge only after the independent gate passes.
 
 ## Handoff target
 
-Payments/CRM/Lifecycle task executor and independent reviewer; later UX, Backend, Marketing, QA, Operations, and Release consumers.
+Independent LC-001 reviewer; later UX, Backend, Marketing, Report, Legal/Security, QA, Operations, and Release consumers.
 
 ## Branch
 
-None active; planned branch `task/ws-10/LC-001-commercial-lifecycle-contract`.
+`task/ws-10/LC-001-commercial-lifecycle-contract`.
 
 ## PR
 
-None for LC-001; the service closeout is draft PR [#16](https://github.com/Bear78888/bizmetria.ai/pull/16).
+Pending creation.
 
 ## Validation results
 
-PASS — named dependency merge evidence, target uniqueness, non-overlapping scope, nationwide/calendar requirements, consent/suppression rules, Stripe test/live boundary, secret exclusion, and pre-live gates verified.
+CONTENT PASS — upstream traceability, commercial math, domain/state separation, Stripe test/live/secret boundaries, activation predicate, webhook/idempotency/replay paths, promotion windows/caps, capacity concurrency and stop/reopen rules, federal-holiday SLA, refund decisions, consent/suppression, consultation/implementation separation, KPI/data minimization, 50 vectors, and pre-live fail-closed behavior. Exact diff/link/secret checks remain before publication.
