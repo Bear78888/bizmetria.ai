@@ -6,6 +6,7 @@
 
 | Document | Purpose |
 |---|---|
+| [`DELIVERY_ROADMAP.md`](DELIVERY_ROADMAP.md) | Dependency-ordered plan, task catalog, phase gates, and `AD READY` definition. |
 | [`MASTER_ORCHESTRATOR_BRIEF.md`](MASTER_ORCHESTRATOR_BRIEF.md) | Permanent role, authority, startup, assignment, review, merge, conflict, and handoff rules. |
 | [`MASTER_CONTINUATION.md`](MASTER_CONTINUATION.md) | Compact current snapshot for restoring the project in a new Master Chat. |
 | [`WORKSTREAM_REGISTRY.md`](WORKSTREAM_REGISTRY.md) | Structured index of all thirteen workstreams. |
@@ -32,13 +33,14 @@
 
 1. Use [`START_NEW_MASTER_CHAT.md`](START_NEW_MASTER_CHAT.md).
 2. Read [`MASTER_CONTINUATION.md`](MASTER_CONTINUATION.md) and every item in its Required Startup Reading.
-3. Verify the current `main` SHA, branches, PRs, and checks.
-4. Reconcile [`ACTIVE_WORK.md`](ACTIVE_WORK.md) with real remote branches.
-5. Do not write until startup review is complete.
+3. Read [`DELIVERY_ROADMAP.md`](DELIVERY_ROADMAP.md) for the approved dependency path.
+4. Verify the current `main` SHA, branches, PRs, and checks.
+5. Reconcile [`ACTIVE_WORK.md`](ACTIVE_WORK.md) with real remote branches.
+6. Do not write until startup review is complete.
 
 ## Start a temporary Workstream Chat
 
-1. Master Orchestrator selects one approved task and verifies its dependencies.
+1. Master Orchestrator selects one approved task and verifies its roadmap gate and dependencies.
 2. Master Orchestrator checks remote branches/PRs for a live-lock.
 3. Use [`START_WORKSTREAM_CHAT.md`](START_WORKSTREAM_CHAT.md) with exact allowed/prohibited files and acceptance criteria.
 4. The temporary chat works on one task branch, updates the local workstream state/handoff, and opens one draft PR.
@@ -62,6 +64,7 @@
 
 ## State update rules
 
+- Global delivery order and gates: [`DELIVERY_ROADMAP.md`](DELIVERY_ROADMAP.md).
 - Global portfolio priority and dependencies: [`BIZMETRIA_TASK_QUEUE.md`](../BIZMETRIA_TASK_QUEUE.md).
 - Global decisions: [`BIZMETRIA_DECISION_LOG.md`](../BIZMETRIA_DECISION_LOG.md).
 - Aggregate status: [`BIZMETRIA_PROJECT_STATUS.md`](../BIZMETRIA_PROJECT_STATUS.md).
@@ -72,4 +75,4 @@
 - Active remote locks: actual branches first, then [`ACTIVE_WORK.md`](ACTIVE_WORK.md) as an index.
 - Project recovery snapshot: [`MASTER_CONTINUATION.md`](MASTER_CONTINUATION.md).
 
-Update the canonical detail once and use links in secondary indexes. Do not create competing decision, task, or state records.
+Update the canonical detail once and use links in secondary indexes. Do not create competing decision, task, state, or roadmap records.
