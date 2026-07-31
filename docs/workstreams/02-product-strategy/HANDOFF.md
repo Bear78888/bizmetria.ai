@@ -5,7 +5,7 @@
 
 ## Goal of latest work
 
-Close approved PS-003 and hand the stable baseline to `PS-004` and the other Phase 2 contracts.
+Deliver the canonical paid questionnaire, interview evidence, recovery, and input-completion contract for independent review.
 
 ## Completed
 
@@ -20,43 +20,46 @@ Close approved PS-003 and hand the stable baseline to `PS-004` and the other Pha
 - Defined Stripe test/live isolation, externalized-secret rules, webhook/idempotency requirements, and a fail-closed 14-item pre-live register.
 - Passed independent remote review and merged PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) at `68901a35e7f465ed4990881645847092e6fdd2d1`.
 - Recorded `G1` as `PASS` and made PS-004 ready.
+- Created `BIZMETRIA_PAID_ASSESSMENT_CONTRACT_v1.0.md` with stable fields, required/optional rules, ten interview objectives, typed evidence, recovery states, mandatory core, and a server-owned completion predicate.
+- Mapped every approved paid deliverable to its minimum evidence coverage.
+- Added 22 deterministic acceptance vectors and explicit test/live, analytics, prohibited-data, and live-payment boundaries.
 
 ## Not completed
 
-PS-004 and later Phase 2 contracts remain incomplete. Pre-live entity, support, staffing, legal/tax, vendor/security, release, and credential evidence remain intentionally deferred.
+Independent PR review and merge. Later Phase 2 implementation contracts and all pre-live entity, support, staffing, legal/tax, vendor/security, release, and credential evidence remain intentionally deferred.
 
 ## Changed files
 
-Product Requirements Baseline plus synchronized Product Strategy, Master Control, and global/control state records.
+One new substantive deliverable plus `CURRENT_STATE.md`, `TASK_QUEUE.md`, `HANDOFF.md`, `ARTIFACT_INDEX.md`, and `CHANGELOG.md`.
 
 ## Decisions used
 
-Approved `DEC-001`–`DEC-026`; `DEC-014` remains superseded. No new decision is proposed.
+Approved DEC-001–DEC-026, Product Requirements v1.0, Product Blueprint v0.1, Legal/Data Baseline v0.1, G1 PASS, and merged FA-001. The task proposes only the detailed PS-004 content contract.
 
 ## Open questions
 
-`OPEN-004`, `OPEN-005`, `OPEN-006`, and `OPEN-009` remain open. Phase 1 product questions have approved or downstream dispositions.
+No PS-004 content ambiguity remains. Production legal/recording text, enabled recovery route, retention schedule, vendors, and operations configuration remain downstream.
 
 ## Blockers
 
-No Product Strategy technical blocker. Named pre-live dependencies remain explicit and fail closed; none blocks contract, architecture, test-mode implementation, or staging work.
+Review and merge only. Named pre-live dependencies remain explicit and fail closed; none blocks contract, architecture, test-mode implementation, or staging work.
 
 ## Exact next action
 
-Start PS-004 from verified post-G1 `main` on its scoped branch while FA-001 runs in its separate workstream.
+Publish the draft PR, compare complete remote/local trees and diffs, run the independent review gate, and merge if clean.
 
 ## Handoff target
 
-Product Strategy for `PS-004`; all downstream Phase 2 consumers for approved PS-003.
+Independent reviewer, then LS-002, UX, Voice, Backend, Analysis, Report, Lifecycle, and QA consumers.
 
 ## Branch
 
-None; `task/ws-02/PS-003-product-requirements-v1` is historical.
+`task/ws-02/PS-004-paid-assessment-contract`
 
 ## PR
 
-Merged [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) at `68901a35e7f465ed4990881645847092e6fdd2d1`.
+[Draft PR #13](https://github.com/Bear78888/bizmetria.ai/pull/13)
 
 ## Validation results
 
-PASS — 162/162 unique requirement IDs, 14/14 live dependencies, DEC-001–DEC-026 trace, downstream coverage, Stripe and live-gate safety, 60 relative links, Markdown/diff checks, exact remote/local diff/tree equality, independent review, protected merge, and resulting `main` verification.
+PASS — field-purpose/evidence coverage, required/optional distinction, ten objective closures, mandatory-core trace to all paid outputs, 22 acceptance vectors, bilingual structural parity, immutable completion/SLA boundary, analytics redaction, prohibited-data controls, test/live separation, and live-payment fail-closed review.
