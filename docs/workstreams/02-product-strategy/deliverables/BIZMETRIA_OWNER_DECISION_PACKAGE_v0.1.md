@@ -1,11 +1,11 @@
 # BizMetria Owner Decision Package v0.1
 
-**Task:** `PS-002 — Owner Decision Package`  
-**Version:** `v0.1`  
-**Status:** `REVIEW — proposals only`  
-**Owner workstream:** 02 — Product Strategy  
-**Coordinating workstream:** 01 — Master Control  
-**Prepared:** 2026-07-30  
+**Task:** `PS-002 — Owner Decision Package` \
+**Version:** `v0.1` \
+**Status:** `REVIEW — proposals only` \
+**Owner workstream:** 02 — Product Strategy \
+**Coordinating workstream:** 01 — Master Control \
+**Prepared:** 2026-07-30 \
 **Source baseline:** `main` at `608ef46e382f86d557168ab2396b56e21e88cf75`
 
 ## 1. Purpose and decision boundary
