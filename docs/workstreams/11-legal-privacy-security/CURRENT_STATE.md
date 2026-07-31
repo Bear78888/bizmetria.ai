@@ -5,7 +5,7 @@
 **Last updated:** 2026-07-31
 **Current task:** `LS-002 — Consent, Claims, and Data Requirements` — `REVIEW`
 **Current branch:** `task/ws-11/LS-002-consent-claims-data-requirements`
-**Current PR:** Pending creation
+**Current PR:** Draft PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15)
 
 ## Approved baseline
 
@@ -51,7 +51,7 @@ No specification dependency blocker remains. Qualified review of flagged legal q
 
 ## Exact next action
 
-Publish one draft PR for the six-file LS-002 package, independently review the exact remote diff, and merge only if all requirements and fail-closed boundaries pass.
+Independently review the exact remote diff in draft PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) and merge only if all requirements and fail-closed boundaries pass.
 
 ## Latest session checkpoint
 

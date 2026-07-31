@@ -44,7 +44,7 @@ No content dependency blocker remains for LS-002 review. Qualified counsel must 
 
 ## Exact next action
 
-Publish one draft PR, verify the exact six-file remote diff, and merge only after independent review. After approval, start `LC-001` and `AE-001` under their separate branches.
+Independently verify the exact six-file diff in draft PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) and merge only after the gate passes. After approval, start `LC-001` and `AE-001` under their separate branches.
 
 ## Handoff target
 
@@ -56,7 +56,7 @@ Independent LS-002 reviewer; later Lifecycle, Analysis, Report, QA, UX, Voice, B
 
 ## PR
 
-Draft PR pending creation. Input PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12) and PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13) are merged.
+Draft PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) is open. Input PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12) and PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13) are merged.
 
 ## Validation results
 

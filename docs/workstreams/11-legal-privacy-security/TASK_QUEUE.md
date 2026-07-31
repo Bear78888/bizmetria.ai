@@ -33,7 +33,7 @@
 - **Dependencies:** `G1 — PASS`; FA-001 approved through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12); PS-004 approved through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13).
 - **Planned branch:** `task/ws-11/LS-002-consent-claims-data-requirements`.
 - **Owner:** Legal, Privacy and Security.
-- **Evidence:** Review candidate on `task/ws-11/LS-002-consent-claims-data-requirements`; draft PR pending creation.
+- **Evidence:** Draft PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) on `task/ws-11/LS-002-consent-claims-data-requirements`.
 - **Acceptance criteria:** Every customer-facing surface and stored data class has an implementable requirement; all 44 paid fields and all free/contact/consent fields are adopted; consent purposes remain separate; claims are classified; rights/retention behavior fails closed; unresolved legal conclusions and live dependencies remain explicit.
 - **Review status:** Content and local operating records prepared; independent remote review and merge pending.
 
