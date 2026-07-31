@@ -145,7 +145,7 @@ Pass only when:
 - the Decision Log, Project Status, Task Queue, Registry, Active Work, Master Continuation, and Workstream 01 state agree;
 - `PS-001` and `LS-001` are the only initial execution assignments.
 
-All four conditions were satisfied when G0 passed. `PS-001` and `LS-001` are now `APPROVED` through PR #5 and PR #6; `PS-002` is `READY`. No later task is authorized to start before its named dependencies and gate pass.
+All four conditions were satisfied when G0 passed. `PS-001` and `LS-001` are `APPROVED` through PR #5 and PR #6; `PS-002` is `APPROVED` through PR #8. Explicit owner selections and valid pre-live deferrals are recorded in MC-003 PR #9; after that PR merges, `PS-003` is the only authorized next task. No later task is authorized before its named dependencies and gate pass.
 
 # Phase 1 — Product and policy baseline
 
@@ -188,6 +188,7 @@ The first concurrency window contains two non-overlapping tasks: `PS-001` and `L
 - **Dependencies:** `PS-002`.
 - **Output:** Explicit owner decisions recorded in the Decision Log; unresolved non-blocking items are deferred with an owner and trigger date.
 - **Acceptance:** Checkout, fulfillment, consultation, refund handling, promotions, implementation boundary, and MVP KPIs have enough approved detail for implementation.
+- **Decision result:** `D01-B`, `D02-A`, `D03-A`, `D04-B`, `D05-B`, `D06-B`, `D07-B`, `D08-A`, and `D09-A`; Stripe is approved for real one-time payments with test/live separation and final-stage secret provisioning. Entity, support, staffing, tax, and legal-review facts are explicit pre-live dependencies rather than Phase 2 design blockers.
 
 ## `PS-003 — Product Requirements Baseline v1.0`
 
@@ -601,7 +602,7 @@ BizMetria receives status `AD READY` only when all conditions below are true:
 1. `MC-002` is merged and `G0` is `PASS` — complete.
 2. Assign `PS-001` and `LS-001` as the first two non-overlapping execution tasks — complete.
 3. Review and merge each result independently — complete through PR #5 and PR #6.
-4. Run `PS-002`, then `MC-003`, then `PS-003` — `PS-002` is next.
+4. Run `PS-002`, then `MC-003`, then `PS-003` — PS-002 is complete; MC-003 owner input is complete in PR #9; PS-003 is next after merge.
 5. Do not start Phase 2 implementation until `G1` passes.
 
 ## Handoff Summary
@@ -609,9 +610,9 @@ BizMetria receives status `AD READY` only when all conditions below are true:
 - **Task:** `MC-002 — Delivery Roadmap and Phase Gates`
 - **Status:** Approved through PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), merge SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`.
 - **Files changed:** Roadmap plus synchronized global and Workstream 01 governance records.
-- **Governance result:** Gate `G0` is `PASS`; `PS-001` and `LS-001` are `APPROVED`; `PS-002` is `READY`.
+- **Governance result:** Gate `G0` is `PASS`; `PS-001`, `LS-001`, and `PS-002` are `APPROVED`; MC-003 has explicit owner decisions and named pre-live deferrals pending PR #9 merge.
 - **Decisions approved:** No new product decision; `MC-001` and `DEC-016` are recognized as approved after PR #2 merge.
-- **Open questions:** `OPEN-001` through `OPEN-009` remain unresolved and are routed through Phase 1 or the relevant later gate.
+- **Open questions:** `OPEN-001`, `OPEN-002`, `OPEN-003`, `OPEN-007`, and `OPEN-008` have MC-003 dispositions; `OPEN-004`, `OPEN-005`, `OPEN-006`, and `OPEN-009` remain routed to later gates.
 - **Dependencies:** Approved MC-001 architecture and merged recovery baseline.
 - **Validation:** Task-ID uniqueness, link resolution, dependency reachability, invariant scan, no secrets/personal data, and complete diff review passed before approval.
-- **Recommended next task:** Assign `PS-002 — Owner Decision Package` on its temporary Product Strategy branch.
+- **Recommended next task:** Merge the reviewed MC-003 PR #9, then execute `PS-003 — Product Requirements Baseline v1.0` without enabling live payments.

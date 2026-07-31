@@ -1,11 +1,11 @@
 # Handoff
 
 **Workstream:** 02 — Product Strategy
-**Last updated:** 2026-07-30
+**Last updated:** 2026-07-31
 
 ## Goal of latest work
 
-Prepare `PS-002 — Owner Decision Package` without approving owner choices.
+Hand the approved PS-002 options and explicit MC-003 selections into `PS-003 — Product Requirements Baseline v1.0`.
 
 ## Completed
 
@@ -18,7 +18,7 @@ Prepare `PS-002 — Owner Decision Package` without approving owner choices.
 
 ## Not completed
 
-Independent PR review, merge, owner choices, required legal/tax facts, `MC-003`, `PS-003`, and `G1` remain incomplete.
+Independent merge of MC-003 PR #9, PS-003, and `G1` remain incomplete. Pre-live entity, support, staffing, legal/tax, and credential provisioning remain intentionally deferred.
 
 ## Changed files
 
@@ -26,32 +26,32 @@ Owner Decision Package plus Product Strategy and control/status records.
 
 ## Decisions used
 
-Existing `DEC-001`–`DEC-013`, `DEC-015`, and `DEC-016`; `DEC-014` remains superseded. `D01`–`D09` are recommendations only. No new decision was approved.
+Existing `DEC-001`–`DEC-016`; `DEC-014` remains superseded. MC-003 adds DEC-017–DEC-026 from explicit selections, including `D08-A` and Stripe as the payment processor.
 
 ## Open questions
 
-`OPEN-001`–`OPEN-009` remain open. Owner choices `D01`–`D09` and factual confirmations `F01`–`F10` remain pending `MC-003`.
+`OPEN-004`, `OPEN-005`, `OPEN-006`, and `OPEN-009` remain open. Phase 1 product questions have approved or downstream dispositions.
 
 ## Blockers
 
-No technical blocker to review. Owner facts and qualified legal/tax review block `MC-003` where identified.
+No Product Strategy technical blocker after PR #9 merges. Named pre-live dependencies must remain explicit in PS-003 and every downstream contract.
 
 ## Exact next action
 
-Open and independently review the PS-002 draft PR. After approval and merge, run `MC-003` with explicit owner answers.
+Merge reviewed MC-003 PR #9, then start PS-003 from the verified post-merge `main`.
 
 ## Handoff target
 
-Independent PS-002 reviewer, then the project owner and Master Orchestrator for `MC-003`.
+Product Strategy for `PS-003` after MC-003 merge.
 
 ## Branch
 
-`task/ws-02/PS-002-owner-decision-package`
+None active. `task/ws-02/PS-002-owner-decision-package` is historical.
 
 ## PR
 
-Draft [#8](https://github.com/Bear78888/bizmetria.ai/pull/8).
+Merged [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) at `66be062629a9b11670d1b76d202a30474eff98f7`.
 
 ## Validation results
 
-Local validation pending final publication checks: option completeness, approved-constraint trace, recommendation/approval separation, downstream coverage, legal-boundary scan, decision-ID uniqueness, relative links, and changed-file scope.
+PASS — option completeness, approved-constraint trace, recommendation/approval separation, downstream coverage, legal-boundary scan, capacity arithmetic, decision-ID uniqueness, relative links, full remote/local diff equality, merge state, and resulting `main`.

@@ -1,35 +1,35 @@
 # Current State
 
 **Workstream:** 02 — Product Strategy
-**Status:** `REVIEW`
-**Last updated:** 2026-07-30
-**Current task:** `PS-002 — Owner Decision Package`
-**Current branch:** `task/ws-02/PS-002-owner-decision-package`
-**Current PR:** Draft [#8](https://github.com/Bear78888/bizmetria.ai/pull/8)
+**Status:** `READY`
+**Last updated:** 2026-07-31
+**Current task:** `PS-003 — Product Requirements Baseline v1.0` — ready after PR #9 merge
+**Current branch:** None; PS-002 branch is historical
+**Current PR:** None
 
 ## Approved baseline
 
-Approved product foundation in the Master Brief and DEC-001–DEC-016; approved Delivery Roadmap; gate `G0` is `PASS`.
+Approved product foundation in the Master Brief and DEC-001–DEC-026; approved Delivery Roadmap; gate `G0` is `PASS`. DEC-017–DEC-026 become canonical when MC-003 PR #9 merges.
 
 ## Completed
 
-A complete new Product Blueprint v0.1 was independently reviewed and merged through PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5) at `21d223223180e7a7d617f28648674efb613c4a92`. It is not represented as the unavailable historical original.
+A complete new Product Blueprint v0.1 was independently reviewed and merged through PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5) at `21d223223180e7a7d617f28648674efb613c4a92`. The Owner Decision Package v0.1 was independently reviewed and merged through PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) at `66be062629a9b11670d1b76d202a30474eff98f7`.
 
 ## In progress
 
-`PS-002 — Owner Decision Package` is complete on its scoped task branch and awaiting independent draft-PR review. It provides independently answerable options, recommendations, tradeoffs, exact proposed rules, downstream impacts, KPI targets, capacity controls, and factual owner/legal confirmations.
+No Product Strategy branch is active. Explicit owner selections are recorded in MC-003 PR #9 and provide the stable inputs for PS-003 after merge.
 
 ## Not started
 
-`MC-003 — Product Decision Gate` and `PS-003 — Product Requirements v1.0` remain gated. Neither starts until PS-002 is independently reviewed and merged.
+`PS-003 — Product Requirements Baseline v1.0` is ready to start from the verified post-MC-003 `main`.
 
 ## Open decisions
 
-All choices in the Owner Decision Package remain proposals. `OPEN-001`–`OPEN-009` remain open under their existing routes.
+The owner selected D01-B/D02-A/D03-A/D04-B/D05-B/D06-B/D07-B/D08-A/D09-A. `OPEN-004`, `OPEN-005`, `OPEN-006`, and `OPEN-009` remain routed downstream; Phase 1 product questions have dispositions.
 
 ## Blockers
 
-No technical blocker prevents PS-002 review. Explicit owner choices, entity/jurisdiction facts, and qualified legal/tax review remain blockers for `MC-003` and `G1`.
+No Product Strategy blocker after PR #9 merges. Entity, support, staffing, legal/tax review, and live credentials are pre-live dependencies and must remain testable fail-closed requirements.
 
 ## Dependencies
 
@@ -50,8 +50,8 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 
 ## Exact next action
 
-Open and independently review the PS-002 draft PR. Merge only after confirming option completeness, proposal-versus-approval boundaries, legal qualifiers, downstream coverage, and repository invariants.
+After PR #9 merge, create the scoped PS-003 branch from the exact `main` SHA and write the complete Product Requirements Baseline v1.0 without enabling live payments.
 
 ## Latest session checkpoint
 
-On 2026-07-30, PS-002 was prepared from approved PS-001 and LS-001 on a branch created from verified `main` SHA `608ef46e382f86d557168ab2396b56e21e88cf75`. The package recommends choices but approves none.
+On 2026-07-31, explicit owner decisions were recorded in MC-003 PR #9, including nationwide U.S. intent, the operating calendar, and Stripe-ready architecture with final-stage live activation.
