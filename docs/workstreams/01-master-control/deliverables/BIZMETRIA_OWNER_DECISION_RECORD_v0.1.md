@@ -74,7 +74,9 @@ These values cannot be inferred from the decision bundle.
 | `F09` | Primary and backup report reviewers plus weekly available hours | `AWAITING OWNER` | BLOCKED |
 | `F10` | Consultation provider(s), language coverage, and bookable hours | `AWAITING OWNER` | BLOCKED |
 
-Owner input recorded on 2026-07-31 confirms that no legal entity exists and the tax, Refund Policy, and age-eligibility reviews have not been organized. These facts are recorded as launch blockers; they are not treated as completed review or as permission to accept real payments.\n\nSensitive personal details, credentials, tax IDs, payment information, or private counsel documents must not be committed to GitHub. The record needs only business-facing facts and a reference to completed professional review.
+Owner input recorded on 2026-07-31 confirms that no legal entity exists and the tax, Refund Policy, and age-eligibility reviews have not been organized. These facts are recorded as launch blockers; they are not treated as completed review or as permission to accept real payments.
+
+Sensitive personal details, credentials, tax IDs, payment information, or private counsel documents must not be committed to GitHub. The record needs only business-facing facts and a reference to completed professional review.
 
 ## 5. Minimal owner response template
 
@@ -128,6 +130,7 @@ After owner input:
 - **Decisions approved by this checkpoint:** None.
 - **Open decisions:** `D01`–`D09`; unresolved facts `F03`–`F05`, `F09`, and `F10`.
 - **Technical blocker:** None.
-- **Authority blocker:** Owner selections `D01`–`D09` and unresolved operational facts `F03`–`F05`, `F09`, and `F10`.\n- **Confirmed launch blockers:** No legal entity or public business address (`F01`–`F02`); tax, Refund Policy, and age-rule reviews are not arranged (`F06`–`F08`).
+- **Authority blocker:** Owner selections `D01`–`D09` and unresolved operational facts `F03`–`F05`, `F09`, and `F10`.
+- **Confirmed launch blockers:** No legal entity or public business address (`F01`–`F02`); tax, Refund Policy, and age-rule reviews are not arranged (`F06`–`F08`).
 - **Checkpoint PR:** Draft [#9](https://github.com/Bear78888/bizmetria.ai/pull/9).
 - **Next action:** Obtain the minimal owner response, update this record and the Decision Log, then evaluate MC-003.
