@@ -1,39 +1,39 @@
 # Current State
 
 **Workstream:** 10 — Payments, CRM and Lifecycle
-**Status:** `NOT STARTED`
-**Last updated:** 2026-07-30
-**Current task:** None
-**Current branch:** None for this workstream; see `../../control/ACTIVE_WORK.md` for cross-functional work
-**Current PR:** None for this workstream
+**Status:** `READY`
+**Last updated:** 2026-07-31
+**Current task:** `LC-001 — Commercial and Lifecycle Contract` — `READY`
+**Current branch:** None; planned `task/ws-10/LC-001-commercial-lifecycle-contract`
+**Current PR:** None
 
 ## Approved baseline
 
-$299 one-time checkout, Stripe codes, $49–$199 discount range, late-reactivation-only $199, and separate implementation.
+$299 one-time checkout, Stripe as the eventual processor, Stripe promotion codes, $49–$199 discount range, late-reactivation-only $199, separate implementation offers, nationwide U.S. intent, `America/Los_Angeles`, and U.S. federal-holiday exclusions for the five-business-day report SLA.
 
 ## Completed
 
-No approved lifecycle/payment specification is recorded.
+Both named LC-001 inputs are approved: PS-003 through PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) and LS-002 through PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
 
 ## In progress
 
-No workstream-specific task is in progress. MC-001 affects governance only.
+No task branch is active. LC-001 is ready for a scoped specification branch.
 
 ## Not started
 
-Checkout states, CRM model, consent-aware triggers, promotions, refunds, and reactivation.
+The commercial/lifecycle contract, checkout/entitlement implementation, Stripe adapter, CRM/vendor selection, messaging integrations, refund operations, consultation scheduling, and implementation-sales workflow.
 
 ## Open decisions
 
-CRM/email vendor, Refund Policy, promotion names/timing, and implementation pricing.
+CRM/email/SMS vendors, exact qualified Refund Policy text, promotion names/timing, tax configuration, support identity, and implementation-sales operating details. Stripe is approved as the eventual real-payment processor; live credentials are intentionally deferred to the final protected activation stage.
 
 ## Blockers
 
-No hidden blocker is recorded. Unmet dependencies and unassigned ownership are shown explicitly.
+No dependency blocker remains for LC-001. Real charging and public paid launch remain blocked by entity/account ownership, support, legal/tax review, exact policies, vendors/security, staffing, release qualification, webhook verification, and protected Stripe live secrets.
 
 ## Dependencies
 
-Product Blueprint, audit/contact schema, UX, Backend, Legal, Marketing, and QA.
+Approved PS-003 and LS-002. UX, Backend, Marketing, QA, and vendor work consume LC-001 later; they are not inputs required to start this contract.
 
 ## Files currently relevant
 
@@ -49,8 +49,8 @@ Product Blueprint, audit/contact schema, UX, Backend, Legal, Marketing, and QA.
 
 ## Exact next action
 
-Wait for approved lifecycle inputs; Master Orchestrator then assigns an LC-prefixed task.
+Start LC-001 from verified `main` on `task/ws-10/LC-001-commercial-lifecycle-contract`, author `deliverables/BIZMETRIA_LIFECYCLE_CONTRACT_v1.0.md`, keep Stripe test-mode only with placeholder environment-variable names, and open one draft PR.
 
 ## Latest session checkpoint
 
-On 2026-07-30, MC-001 created this evidence-based initial state from merged `main` at `300c01050820953d2769a91a77a39ae3edcd7f99`. No absent deliverable, assigned executor, deadline, or approval is implied.
+On 2026-07-31, LS-002 merged through PR #15. LC-001 became dependency-ready; no credential, live payment, real order, or production customer data was introduced.

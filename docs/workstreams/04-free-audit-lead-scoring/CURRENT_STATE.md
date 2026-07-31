@@ -49,8 +49,8 @@ Approved PS-003 Product Requirements Baseline, approved LS-001 Legal/Data Baseli
 
 ## Exact next action
 
-Supply the approved contract to LS-002, AE-001, UX, Backend, Analytics, and QA; do not alter score v1 without versioned impact review.
+Supply the approved contract to AE-001, UX, Backend, Analytics, and QA; LS-002 already adopted it. Do not alter score v1 without versioned impact review.
 
 ## Latest session checkpoint
 
-On 2026-07-31, FA-001 passed independent remote review and merged through PR #12 at `97446522cf9eba8e63fe1b1887439fb77adabf5f`. OPEN-009 is closed; no live payment or secret was introduced.
+On 2026-07-31, LS-002 adopted FA-001 and merged through PR #15 at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`; AE-001 is now ready. OPEN-009 remains closed; no live payment or secret was introduced.

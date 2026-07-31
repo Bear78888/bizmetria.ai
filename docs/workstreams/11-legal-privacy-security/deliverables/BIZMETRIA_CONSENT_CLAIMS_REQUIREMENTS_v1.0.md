@@ -2,12 +2,12 @@
 
 **Task:** LS-002 — Consent, Claims, and Data Requirements \
 **Version:** 1.0.0 \
-**Status:** REVIEW \
+**Status:** APPROVED \
 **Owner workstream:** 11 — Legal, Privacy and Security \
 **Prepared:** 2026-07-31 \
 **Source baseline:** main at 71a925375cfc4232f6ca87b6b744938a43608855 \
-**Branch:** task/ws-11/LS-002-consent-claims-data-requirements \
-**Pull request:** [#15](https://github.com/Bear78888/bizmetria.ai/pull/15)
+**Historical branch:** task/ws-11/LS-002-consent-claims-data-requirements \
+**Pull request:** [#15](https://github.com/Bear78888/bizmetria.ai/pull/15), merge SHA `a60597ebd3a17c06c923150fb9cf76f24c3a437c`
 
 ## 1. Purpose, authority, and legal status
 
@@ -647,11 +647,11 @@ QA MUST map every normative ID in this contract to automated, manual, qualified-
 ## Handoff Summary
 
 - **Task:** LS-002 — Consent, Claims, and Data Requirements.
-- **Status:** REVIEW in draft PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) on `task/ws-11/LS-002-consent-claims-data-requirements`.
+- **Status:** APPROVED through independently reviewed PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15), merge SHA `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
 - **Files changed:** This deliverable and five Workstream 11 operating records.
 - **Decisions proposed:** Versioned consent-purpose/evidence registry, suppression precedence, customer-surface registry, semantic EN/ES copy modules, claims matrix, exact field adoption, data-class registry, rights workflow, retention blockers, vendor/review triggers, and 30 acceptance vectors.
 - **Decisions approved:** Existing product decisions, all-50-states-plus-D.C. intended geography, America/Los_Angeles/federal-holiday calendar, Stripe as eventual processor, and test/live fail-closed boundaries. This task adds no legal approval.
 - **Open questions:** Entity/address, support path, final Terms/Privacy/Refund and consent copy, nationwide applicability, SMS/voice classifications, recording recovery route, exact retention, vendors/processors, tax treatment, staffing, security/release evidence, and protected live Stripe configuration.
 - **Dependencies:** G1 PASS; approved FA-001 PR #12; approved PS-004 PR #13; approved LS-001 and PS-003.
 - **Validation performed:** Surface/data-class/field coverage, exact 44-field parity, consent-state separation, claims review, privacy-rights and retention fail-closed review, official-source recheck, bilingual semantic parity review, Stripe secret/live-boundary review, 11 relative links with no missing target, and clean Markdown diff.
-- **Recommended next task:** Independently review and merge LS-002; then begin LC-001 and AE-001, followed by RP-001 and QA-001 according to their named dependencies. G2 remains not passed until all Phase 2 contracts are approved.
+- **Recommended next task:** Begin LC-001 and AE-001 on separate branches, followed by RP-001 and QA-001 according to their named dependencies. G2 remains not passed until all Phase 2 contracts are approved.

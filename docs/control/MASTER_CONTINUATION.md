@@ -3,8 +3,8 @@
 **Repository:** `Bear78888/bizmetria.ai`  
 **Current phase:** Phase 2 — Canonical product and system contracts \
 **Last updated:** 2026-07-31 \
-**Verified `main` SHA:** `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b` \
-**Current task:** `LS-002 — Consent, Claims, and Data Requirements` — `READY` \
+**Verified `main` SHA:** `a60597ebd3a17c06c923150fb9cf76f24c3a437c` \
+**Current task:** `LC-001 and AE-001` — `READY` \
 **Current execution branch:** None \
 **Current execution PR:** None
 
@@ -41,7 +41,9 @@ PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2) approved `MC-001` and 
 - `G1 — Product Baseline Approved`: `PASS`.
 - Workstream 02: `PS-004` is `APPROVED` through PR #13.
 - Workstream 04: `FA-001` is `APPROVED` through PR #12; OPEN-009 is closed.
-- Workstream 11: `LS-002` is `READY` because G1, FA-001, and PS-004 are approved.
+- Workstream 11: `LS-002` is `APPROVED` through PR #15 at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
+- Workstream 10: `LC-001` is `READY` because PS-003 and LS-002 are approved.
+- Workstream 07: `AE-001` is `READY` because FA-001, PS-004, and LS-002 are approved.
 - `G2` and all later tasks remain `PLANNED` behind named dependencies and phase gates.
 - Workstream 04 preserves two recovered inputs as historical evidence; implementations use the approved v1 contract.
 
@@ -49,7 +51,7 @@ See the [Delivery Roadmap](DELIVERY_ROADMAP.md) for the complete critical path a
 
 ## Active work
 
-- No execution task is active after the two input-contract merges. `LS-002` is the single next ready task.
+- No execution task is active after LS-002 merge. `LC-001` and `AE-001` are the two next ready tasks with non-overlapping workstream files.
 - Entity/address, support identity, legal/tax review, report-review staffing, consultation staffing, and live Stripe credentials are explicit pre-live dependencies; they do not block PS-003, architecture, implementation, or staging.
 - The merged recovery, architecture, and MC-002 branches are historical, not live-locks.
 - The PS-001 and LS-001 branches are historical after PR #5 and PR #6 merged.
@@ -69,15 +71,16 @@ See the [Delivery Roadmap](DELIVERY_ROADMAP.md) for the complete critical path a
 - Gate `G1` passed.
 - FA-001 created the bilingual deterministic free-audit/score contract, passed independent review, and merged through PR #12 at `97446522cf9eba8e63fe1b1887439fb77adabf5f`.
 - PS-004 created the minimized paid questionnaire, interview/evidence, recovery, and completion contract, passed independent review, and merged through PR #13 at `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b`.
-- OPEN-009 is closed and LS-002 is ready; G2 remains unpassed.
+- OPEN-009 is closed; LS-002 is approved; LC-001 and AE-001 are ready; G2 remains unpassed.
+- LS-002 defined consent, claims, field/data-class adoption, rights, retention, and review triggers and merged through PR #15 at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
 
 ## Current blockers
 
-No dependency blocker remains for `LS-002`. Missing entity/operations facts and qualified legal/tax/vendor/security/release evidence still block live Stripe activation, real paid orders, and public paid launch.
+No dependency blocker remains for `LC-001` or `AE-001`. Missing entity/operations facts and qualified legal/tax/vendor/security/release evidence still block live Stripe activation, real paid orders, production customer data, and public paid launch.
 
 ## Exact next action
 
-Start `LS-002` from verified `main` on `task/ws-11/LS-002-consent-claims-data-requirements` and one draft PR. Keep payment integration in Stripe test mode and preserve every pre-live dependency.
+Start `LC-001` on `task/ws-10/LC-001-commercial-lifecycle-contract` and `AE-001` on `task/ws-07/AE-001-analysis-evidence-contract` from verified `main`, each with one draft PR. Keep payment integration in Stripe test mode, use synthetic data only, and preserve every pre-live dependency.
 
 ## Required Startup Reading
 

@@ -25,17 +25,17 @@
 
 ## `LS-002 — Consent, Claims, and Data Requirements`
 
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Priority:** High
 - **Objective:** Convert the approved product, audit, and paid-assessment contracts into implementable consent text requirements, data lifecycle constraints, rights handling, and claims rules.
 - **Required inputs:** `G1 — PASS` plus approved `FA-001` and approved `PS-004`.
 - **Expected output:** `docs/workstreams/11-legal-privacy-security/deliverables/BIZMETRIA_CONSENT_CLAIMS_REQUIREMENTS_v1.0.md`.
 - **Dependencies:** `G1 — PASS`; FA-001 approved through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12); PS-004 approved through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13).
-- **Planned branch:** `task/ws-11/LS-002-consent-claims-data-requirements`.
+- **Historical branch:** `task/ws-11/LS-002-consent-claims-data-requirements`.
 - **Owner:** Legal, Privacy and Security.
-- **Evidence:** Draft PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) on `task/ws-11/LS-002-consent-claims-data-requirements`.
+- **Evidence:** PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15), merge SHA `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
 - **Acceptance criteria:** Every customer-facing surface and stored data class has an implementable requirement; all 44 paid fields and all free/contact/consent fields are adopted; consent purposes remain separate; claims are classified; rights/retention behavior fails closed; unresolved legal conclusions and live dependencies remain explicit.
-- **Review status:** Content and local operating records prepared; independent remote review and merge pending.
+- **Review status:** Independently reviewed, merged, and verified; no final legal advice or live authorization implied.
 
 
 ## Global portfolio reference
@@ -43,7 +43,7 @@
 - **ID:** `TASK-004`
 - **Status:** See [Global Task Queue](../../BIZMETRIA_TASK_QUEUE.md).
 - **Execution mapping:** `LS-001`.
-- **Assignment:** Historical execution mapping complete through approved LS-001; LS-002 is the current ready task.
+- **Assignment:** Historical execution mapping complete through approved LS-001 and LS-002.
 - **Rule:** The global task ID remains a historical portfolio reference; work is performed and reviewed under `LS-001`.
 
 

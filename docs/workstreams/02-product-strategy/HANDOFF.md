@@ -23,6 +23,7 @@ Approve and hand off the canonical paid questionnaire, interview evidence, recov
 - Created `BIZMETRIA_PAID_ASSESSMENT_CONTRACT_v1.0.md` with stable fields, required/optional rules, ten interview objectives, typed evidence, recovery states, mandatory core, and a server-owned completion predicate.
 - Mapped every approved paid deliverable to its minimum evidence coverage.
 - Added 22 deterministic acceptance vectors and explicit test/live, analytics, prohibited-data, and live-payment boundaries.
+- LS-002 adopted the approved contract and merged through PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15); AE-001 and later consumers are now unblocked according to their named dependencies.
 
 ## Not completed
 
@@ -46,11 +47,11 @@ No PS-004 contract blocker remains. Named pre-live dependencies remain explicit 
 
 ## Exact next action
 
-Supply the approved contract to LS-002 and later UX, Voice, Backend, Analysis, Report, Lifecycle, and QA consumers.
+Supply the approved contract to AE-001 and later UX, Voice, Backend, Report, Lifecycle, and QA consumers.
 
 ## Handoff target
 
-LS-002, UX, Voice, Backend, Analysis, Report, Lifecycle, and QA consumers.
+AE-001, UX, Voice, Backend, Report, Lifecycle, and QA consumers.
 
 ## Branch
 

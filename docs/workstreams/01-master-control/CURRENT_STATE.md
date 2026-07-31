@@ -3,8 +3,8 @@
 **Workstream:** 01 — Master Control  
 **Status:** `APPROVED` \
 **Last updated:** 2026-07-31 \
-**Current task:** `Phase 2 input contracts checkpoint` — `PASS` \
-**Current branch:** None in the approved post-checkpoint state \
+**Current task:** `LS-002 contract checkpoint` — `PASS` \
+**Current branch:** None in the approved post-LS-002 state \
 **Current PR:** None
 
 ## Approved baseline
@@ -31,15 +31,17 @@
 - `G1 — Product Baseline Approved` is `PASS`.
 - FA-001 was independently reviewed and merged through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12) at `97446522cf9eba8e63fe1b1887439fb77adabf5f`.
 - PS-004 was independently reviewed and merged through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13) at `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b`.
-- `OPEN-009` is closed; `LS-002` is `READY`; `G2` remains unpassed.
+- `OPEN-009` is closed.
+- `LS-002` was independently reviewed and merged through PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
+- `LC-001` and `AE-001` are `READY`; `G2` remains unpassed.
 
 ## In progress
 
-No Master Control or execution task branch is active in the approved post-checkpoint state.
+No Master Control or execution task branch is active in the approved post-LS-002 state.
 
 ## Not started
 
-- `LS-002` is ready but not started.
+- `LC-001` and `AE-001` are ready but not started.
 - `MC-004` and later Master Control gates remain dependency-gated.
 
 ## Open decisions
@@ -48,7 +50,7 @@ No Master Control or execution task branch is active in the approved post-checkp
 
 ## Blockers
 
-No dependency blocker exists for `LS-002`. Entity/address, support identity, legal/tax review, staffing, vendor/security evidence, release qualification, and live Stripe secrets remain pre-live blockers.
+No dependency blocker exists for `LC-001` or `AE-001`. Entity/address, support identity, legal/tax review, staffing, vendor/security evidence, release qualification, and live Stripe secrets remain pre-live blockers.
 
 ## Dependencies
 
@@ -70,8 +72,8 @@ Approved MC-001 architecture, verified `main`, current product baseline, all wor
 
 ## Exact next action
 
-Start `LS-002` from verified `main` on `task/ws-11/LS-002-consent-claims-data-requirements` and one draft PR.
+Start `LC-001` and `AE-001` from verified `main` on separate scoped branches and draft PRs. Use Stripe test-mode contracts only and synthetic data.
 
 ## Latest session checkpoint
 
-On 2026-07-31, FA-001 and PS-004 merged through PR #12/#13; OPEN-009 closed and LS-002 became ready. Credentials remain external and live activation remains a final gated step.
+On 2026-07-31, LS-002 passed independent review and merged through PR #15; LC-001 and AE-001 became ready. Credentials remain external and live activation remains a final gated step.

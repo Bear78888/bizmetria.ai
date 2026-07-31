@@ -139,12 +139,34 @@ As of: 2026-07-31
 ### `LS-002 — Consent, Claims, and Data Requirements`
 
 - **Owner:** Legal, Privacy and Security.
-- **Status:** `READY`
+- **Status:** `APPROVED`
 - **Dependencies:** `G1 — PASS` plus approved FA-001 and PS-004.
 - **Target:** `docs/workstreams/11-legal-privacy-security/deliverables/BIZMETRIA_CONSENT_CLAIMS_REQUIREMENTS_v1.0.md`.
 - **Outcome:** Implementable consent/notice requirements, data lifecycle and rights rules, approved/prohibited claims, production review triggers, and exact field-inventory adoption.
-- **Planned branch:** `task/ws-11/LS-002-consent-claims-data-requirements`.
+- **Historical branch:** `task/ws-11/LS-002-consent-claims-data-requirements`.
 - **Boundary:** This task may define testable requirements and draft product copy, but cannot claim qualified legal approval or enable real payments/public launch.
+- **Evidence:** PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15), merge SHA `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
+- **Review status:** Independently reviewed, merged, and verified; qualified legal review and every pre-live dependency remain separate.
+
+### `LC-001 — Commercial and Lifecycle Contract`
+
+- **Owner:** Payments, CRM and Lifecycle.
+- **Status:** `READY`
+- **Dependencies:** Approved PS-003 and approved LS-002.
+- **Target:** `docs/workstreams/10-payments-crm-lifecycle/deliverables/BIZMETRIA_LIFECYCLE_CONTRACT_v1.0.md`.
+- **Outcome:** Deterministic pricing, discount, checkout, payment/order, CRM, consent-aware messaging, refund, reactivation, consultation, and implementation-interest states.
+- **Planned branch:** `task/ws-10/LC-001-commercial-lifecycle-contract`.
+- **Boundary:** Stripe test mode and synthetic data only; no vendor selection, live secret, real charge, final Refund Policy, or public paid activation.
+
+### `AE-001 — Analysis and Evidence Contract`
+
+- **Owner:** AI Analysis Engine.
+- **Status:** `READY`
+- **Dependencies:** Approved FA-001, PS-004, and LS-002.
+- **Target:** `docs/workstreams/07-ai-analysis-engine/deliverables/BIZMETRIA_ANALYSIS_CONTRACT_v1.0.md`.
+- **Outcome:** Language-neutral evidence/input/output schemas, confidence and uncertainty, traceable recommendations, prioritization, matrix/roadmap rules, prohibited-claim handling, and human-review handoff.
+- **Planned branch:** `task/ws-07/AE-001-analysis-evidence-contract`.
+- **Boundary:** No model/vendor selection or production customer data; every material claim remains traceable and every report remains human-review gated.
 
 ## Planned delivery catalog
 

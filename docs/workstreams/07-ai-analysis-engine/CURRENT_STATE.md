@@ -1,39 +1,39 @@
 # Current State
 
 **Workstream:** 07 — AI Analysis Engine
-**Status:** `NOT STARTED`
-**Last updated:** 2026-07-30
-**Current task:** None
-**Current branch:** None for this workstream; see `../../control/ACTIVE_WORK.md` for cross-functional work
-**Current PR:** None for this workstream
+**Status:** `READY`
+**Last updated:** 2026-07-31
+**Current task:** `AE-001 — Analysis and Evidence Contract` — `READY`
+**Current branch:** None; planned `task/ws-07/AE-001-analysis-evidence-contract`
+**Current PR:** None
 
 ## Approved baseline
 
-Personalized analysis, ~8–15 recommendations, matrix, roadmap, evidence discipline, and manual review gate.
+Personalized analysis, approximately 8–15 recommendations, matrix, roadmap, evidence discipline, manual review gate, approved FA-001 score contract, approved PS-004 paid-input contract, and approved LS-002 consent/claims/data requirements.
 
 ## Completed
 
-No approved analysis-engine specification is recorded.
+All named AE-001 inputs are approved: FA-001 through PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), PS-004 through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13), and LS-002 through PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
 
 ## In progress
 
-No workstream-specific task is in progress. MC-001 affects governance only.
+No task branch is active. AE-001 is ready for a scoped specification branch.
 
 ## Not started
 
-Input/output schemas, evidence model, prioritization, evaluation, and reviewer handoff.
+The analysis/evidence contract, executable engine, provider selection, evaluation harness, and reviewer operations.
 
 ## Open decisions
 
-Technology/model stack and detailed recommendation methodology.
+Technology/model vendor, prompt/runtime design, final recommendation methodology, evaluation thresholds, and production cost envelope. AE-001 must define vendor-neutral behavior and fail-closed evidence rules without selecting these values.
 
 ## Blockers
 
-No hidden blocker is recorded. Unmet dependencies and unassigned ownership are shown explicitly.
+No dependency blocker remains for AE-001. Provider/vendor approval, production data, staffing, security/release evidence, and live configuration remain downstream blockers.
 
 ## Dependencies
 
-Product Blueprint, audit/voice schemas, Report contract, Backend, Legal, and QA.
+Approved FA-001, PS-004, and LS-002. Report and Backend consume AE-001 later; they are not inputs required to start this contract.
 
 ## Files currently relevant
 
@@ -49,8 +49,8 @@ Product Blueprint, audit/voice schemas, Report contract, Backend, Legal, and QA.
 
 ## Exact next action
 
-Wait for approved upstream contracts; Master Orchestrator then assigns an AE-prefixed specification task.
+Start AE-001 from verified `main` on `task/ws-07/AE-001-analysis-evidence-contract`, author `deliverables/BIZMETRIA_ANALYSIS_CONTRACT_v1.0.md`, use synthetic fixtures only, and open one draft PR.
 
 ## Latest session checkpoint
 
-On 2026-07-30, MC-001 created this evidence-based initial state from merged `main` at `300c01050820953d2769a91a77a39ae3edcd7f99`. No absent deliverable, assigned executor, deadline, or approval is implied.
+On 2026-07-31, LS-002 merged through PR #15. AE-001 became dependency-ready; no provider, secret, production data, or live execution was introduced.
