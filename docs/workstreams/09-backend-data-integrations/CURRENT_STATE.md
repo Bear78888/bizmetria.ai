@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 09 — Backend, Data and Integrations
-**Status:** `IN PROGRESS`
+**Status:** `REVIEW`
 **Last updated:** 2026-07-31
 **Current task:** `BE-002 — Platform Foundation`
 **Current branch:** `task/ws-09/BE-002-platform-foundation`
-**Current PR:** Pending creation
+**Current PR:** Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18)
 
 ## Confirmed starting point
 

@@ -4,9 +4,9 @@
 **Current phase:** Sandbox implementation — Platform Foundation \
 **Last updated:** 2026-07-31 \
 **Verified starting `main` SHA:** `7677bee1b0791bb4f954f058aa9e959d4796985a` \
-**Current task:** `BE-002 — Platform Foundation` — `IN PROGRESS` \
+**Current task:** `BE-002 — Platform Foundation` — `REVIEW` \
 **Current execution branch:** `task/ws-09/BE-002-platform-foundation` \
-**Current execution PR:** Pending creation
+**Current execution PR:** Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18)
 
 ## BizMetria in brief
 
@@ -44,7 +44,7 @@ PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2) approved `MC-001` and 
 - Workstream 11: `LS-002` is `APPROVED` through PR #15 at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
 - Workstream 10: `LC-001` is `APPROVED` through PR #17 at `7677bee1b0791bb4f954f058aa9e959d4796985a`.
 - Workstream 07: `AE-001` is `READY` because FA-001, PS-004, and LS-002 are approved.
-- Workstream 09: `BE-002` is `IN PROGRESS` under the owner's 2026-07-31 technical implementation directive; AE-001 is not its dependency.
+- Workstream 09: `BE-002` is `REVIEW` in draft PR #18 under the owner's 2026-07-31 technical implementation directive; AE-001 is not its dependency.
 - `G2` and all later tasks remain `PLANNED` behind named dependencies and phase gates.
 - Workstream 04 preserves two recovered inputs as historical evidence; implementations use the approved v1 contract.
 

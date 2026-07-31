@@ -16,7 +16,7 @@
 
 | Task | Status | Branch | PR | Scope |
 |---|---|---|---|---|
-| `BE-002 — Platform Foundation` | IN PROGRESS | `task/ws-09/BE-002-platform-foundation` | Pending creation | Next.js, TypeScript, environment validation, Supabase Auth/RLS/Storage, CI/tests, native preview verification |
+| `BE-002 — Platform Foundation` | REVIEW | `task/ws-09/BE-002-platform-foundation` | Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) | Next.js, TypeScript, environment validation, Supabase Auth/RLS/Storage, CI/tests, native preview verification |
 
 `LC-001` is merged through PR #17. `AE-001` remains unfinished on a remote branch with no task commit and is not a blocker for BE-002. `G2` is not passed. Live payment, real-order, production-data, production communications, and public-launch work remain blocked by the named pre-live gates.
 

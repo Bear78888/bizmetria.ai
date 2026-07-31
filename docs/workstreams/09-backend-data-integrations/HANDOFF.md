@@ -10,7 +10,7 @@ BE-002 establishes the first executable application: Next.js App Router, strict 
 ## Branch and PR
 
 - Branch: `task/ws-09/BE-002-platform-foundation`
-- PR: Pending creation
+- PR: Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18)
 - Base: verified `main` at `7677bee1b0791bb4f954f058aa9e959d4796985a`
 
 ## Remaining gate

@@ -3,9 +3,9 @@
 **Workstream:** 01 — Master Control  
 **Status:** `APPROVED` \
 **Last updated:** 2026-07-31 \
-**Current task:** `BE-002 Platform Foundation oversight` — `IN PROGRESS` \
+**Current task:** `BE-002 Platform Foundation oversight` — `REVIEW` \
 **Current branch:** `task/ws-09/BE-002-platform-foundation` \
-**Current PR:** Pending creation
+**Current PR:** Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18)
 
 ## Approved baseline
 

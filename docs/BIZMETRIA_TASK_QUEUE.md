@@ -173,13 +173,13 @@ As of: 2026-07-31
 ### `BE-002 — Platform Foundation`
 
 - **Owner:** Backend, Data and Integrations / Master Orchestrator.
-- **Status:** `IN PROGRESS`
+- **Status:** `REVIEW`
 - **Priority:** Critical
 - **Dependency:** Verified remote `main` at `7677bee1b0791bb4f954f058aa9e959d4796985a`; AE-001 is explicitly not a blocker.
 - **Branch:** `task/ws-09/BE-002-platform-foundation`.
 - **Outcome:** Executable Next.js/strict-TypeScript foundation, environment validation, Supabase schema/migrations, Auth, RLS, private Storage, synthetic seed, CI/test foundation, and successful native preview evidence.
 - **Boundary:** Synthetic/sandbox only; no live Stripe, real payments, production Retell numbers/email/data, production Supabase changes, or final-domain launch.
-- **Review status:** Local validation in progress; PR pending creation.
+- **Review status:** Local gate passed; draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) awaits remote CI, Vercel Preview, and Supabase integration evidence.
 
 ## Planned delivery catalog
 

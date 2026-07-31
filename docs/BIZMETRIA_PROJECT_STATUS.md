@@ -1,7 +1,7 @@
 # BizMetria Project Status
 
 **As of:** 2026-07-31 \
-**Overall status:** `SANDBOX IMPLEMENTATION — PLATFORM FOUNDATION IN PROGRESS` \
+**Overall status:** `SANDBOX IMPLEMENTATION — PLATFORM FOUNDATION IN REVIEW` \
 **Verified starting `main` SHA:** `7677bee1b0791bb4f954f058aa9e959d4796985a`
 
 ## Current phase
@@ -52,7 +52,7 @@ Gate `G0 — Governance Ready` is `PASS` because:
 | LS-002 Consent, Claims, and Data Requirements | Legal, Privacy and Security | APPROVED | PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15), merge SHA `a60597ebd3a17c06c923150fb9cf76f24c3a437c` |
 | LC-001 Commercial and Lifecycle Contract | Payments, CRM and Lifecycle | APPROVED | PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17), merge SHA `7677bee1b0791bb4f954f058aa9e959d4796985a` |
 | AE-001 Analysis and Evidence Contract | AI Analysis Engine | READY | FA-001, PS-004, and LS-002 approved |
-| BE-002 Platform Foundation | Backend, Data and Integrations | IN PROGRESS | `task/ws-09/BE-002-platform-foundation`; PR pending creation |
+| BE-002 Platform Foundation | Backend, Data and Integrations | REVIEW | Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) |
 | G2 and later delivery tasks | Applicable workstreams | PLANNED | Follow named dependencies in the Delivery Roadmap |
 
 The complete sequence is in [`docs/control/DELIVERY_ROADMAP.md`](control/DELIVERY_ROADMAP.md); exact per-workstream state is in [`docs/control/WORKSTREAM_REGISTRY.md`](control/WORKSTREAM_REGISTRY.md).
