@@ -7,7 +7,7 @@
 **Prepared:** 2026-07-31 \
 **Source baseline:** main at 97446522cf9eba8e63fe1b1887439fb77adabf5f \
 **Branch:** task/ws-02/PS-004-paid-assessment-contract \
-**Pull request:** Pending creation
+**Pull request:** [#13](https://github.com/Bear78888/bizmetria.ai/pull/13)
 
 ## 1. Purpose and authority
 

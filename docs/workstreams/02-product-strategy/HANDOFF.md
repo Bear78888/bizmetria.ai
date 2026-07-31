@@ -58,7 +58,7 @@ Independent reviewer, then LS-002, UX, Voice, Backend, Analysis, Report, Lifecyc
 
 ## PR
 
-Pending creation.
+[Draft PR #13](https://github.com/Bear78888/bizmetria.ai/pull/13)
 
 ## Validation results
 

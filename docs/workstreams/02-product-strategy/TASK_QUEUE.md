@@ -65,7 +65,7 @@
 - **Planned branch:** `task/ws-02/PS-004-paid-assessment-contract`.
 - **Owner:** Product Strategy.
 - **Concurrency:** May run with FA-001 because the target and local operating files do not overlap.
-- **Review status:** Contract drafted and locally validated on `task/ws-02/PS-004-paid-assessment-contract`; draft PR pending creation.
+- **Review status:** Contract drafted and locally validated on `task/ws-02/PS-004-paid-assessment-contract`; under review in draft PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13).
 
 
 ## Global portfolio reference

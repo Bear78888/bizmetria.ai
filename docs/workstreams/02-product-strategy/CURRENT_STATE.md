@@ -5,7 +5,7 @@
 **Last updated:** 2026-07-31
 **Current task:** `PS-004 — Paid Assessment Content Contract` — `REVIEW`
 **Current branch:** `task/ws-02/PS-004-paid-assessment-contract`
-**Current PR:** Pending creation
+**Current PR:** [#13](https://github.com/Bear78888/bizmetria.ai/pull/13)
 
 ## Approved baseline
 
