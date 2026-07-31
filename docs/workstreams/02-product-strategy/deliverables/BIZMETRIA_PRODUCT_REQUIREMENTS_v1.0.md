@@ -2,12 +2,12 @@
 
 **Task:** `PS-003 — Product Requirements Baseline v1.0` \
 **Version:** `v1.0` \
-**Status:** `REVIEW` \
+**Status:** `APPROVED` \
 **Owner:** Product Strategy \
 **Prepared:** 2026-07-31 \
 **Source `main`:** `acda4fb7c036660161b6f0ea4d09deed4143c7cb` \
 **Branch:** `task/ws-02/PS-003-product-requirements-v1` \
-**PR:** Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10)
+**PR:** Merged [#10](https://github.com/Bear78888/bizmetria.ai/pull/10), merge SHA `68901a35e7f465ed4990881645847092e6fdd2d1`
 
 ## 1. Purpose and authority
 
@@ -508,7 +508,7 @@ The release system MUST evaluate the gate from recorded configuration/evidence. 
 | Entity, support, staffing, legal/tax, vendor/security, release, and credential dependencies fail closed | PASS |
 | Stack, voice, CRM/email, and detailed scoring choices remain routed rather than guessed | PASS |
 | Every downstream Phase 2 contract can cite stable product requirements | PASS |
-| `G1 — Product Baseline Approved` | `PENDING` until this artifact is independently reviewed, merged, and resulting `main` verified |
+| `G1 — Product Baseline Approved` | `PASS` — independently reviewed, merged through PR #10, and resulting `main` verified |
 
 ## 25. Change control
 
@@ -523,11 +523,11 @@ After approval:
 ## 26. Handoff Summary
 
 - **Task:** `PS-003 — Product Requirements Baseline v1.0`
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Files changed:** This requirements baseline plus synchronized Product Strategy, Master Control, and global/control state records.
 - **Decisions proposed:** None.
 - **Decisions approved and implemented:** `DEC-001`–`DEC-026`, including `D01-B`, `D02-A`, `D03-A`, `D04-B`, `D05-B`, `D06-B`, `D07-B`, `D08-A`, `D09-A`, and Stripe as the eventual real-payment processor.
 - **Open questions:** `OPEN-004`, `OPEN-005`, `OPEN-006`, and `OPEN-009` remain assigned to their approved downstream tasks. Exact legal text, retention periods, vendor terms, and pre-live facts remain gated.
 - **Dependencies:** Approved `PS-001`, `LS-001`, `PS-002`, merged `MC-003`, and Decision Log through `DEC-026`.
-- **Validation required:** Requirement-ID uniqueness; approved-decision trace; cross-domain consistency; bilingual and score invariants; Stripe/test-live/secret safety; relative links; Markdown/diff checks; downstream coverage; independent PR review.
-- **Recommended next action:** Independently review and merge `PS-003`, verify the resulting `main`, record `G1` as passed, then start `FA-001` and `PS-004` as the two non-overlapping Phase 2 tasks.
+- **Validation performed:** 162/162 unique requirement IDs; DEC-001–DEC-026 trace; cross-domain consistency; bilingual and score invariants; Stripe/test-live/secret safety; 60 relative links; Markdown/diff checks; downstream coverage; exact remote/local equality; independent PR review; protected merge; resulting `main` verification.
+- **Recommended next action:** Start `FA-001` and `PS-004` as the two non-overlapping Phase 2 tasks.

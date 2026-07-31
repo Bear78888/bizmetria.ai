@@ -1,7 +1,7 @@
 # Handoff
 
 **Workstream:** 11 — Legal, Privacy and Security
-**Last updated:** 2026-07-30
+**Last updated:** 2026-07-31
 
 ## Goal of latest work
 
@@ -34,15 +34,15 @@ Refund Policy, entity/jurisdictions, voice consent, TCPA/email rules, age eligib
 
 ## Blockers
 
-LS-002 is dependency-gated. Qualified counsel must review the flagged legal questions before relevant production gates.
+LS-002 is dependency-gated on FA-001 and PS-004. Qualified counsel must review the flagged legal questions before relevant production gates.
 
 ## Exact next action
 
-Use LS-001 in PS-002; wait for `G1`, FA-001, and PS-004 before assigning LS-002.
+Use LS-001 in FA-001 and PS-004; wait for both contracts to merge before assigning LS-002.
 
 ## Handoff target
 
-Product Strategy for PS-002; later Legal, Privacy and Security for LS-002.
+FA-001 and PS-004 executors; later Legal, Privacy and Security for LS-002.
 
 ## Branch
 

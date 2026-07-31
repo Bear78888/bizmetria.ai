@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 02 — Product Strategy
-**Status:** `REVIEW`
+**Status:** `READY`
 **Last updated:** 2026-07-31
-**Current task:** `PS-003 — Product Requirements Baseline v1.0`
-**Current branch:** `task/ws-02/PS-003-product-requirements-v1`
-**Current PR:** Draft [#10](https://github.com/Bear78888/bizmetria.ai/pull/10)
+**Current task:** `PS-004 — Paid Assessment Content Contract` — `READY`
+**Current branch:** None; PS-003 branch is historical
+**Current PR:** None
 
 ## Approved baseline
 
@@ -17,11 +17,11 @@ A complete new Product Blueprint v0.1 was independently reviewed and merged thro
 
 ## In progress
 
-PS-003 converts every approved product, commercial, operating, Stripe, and pre-live rule into stable testable requirements. The deliverable is published in draft PR #10 and awaits independent review.
+No Product Strategy task is in progress. PS-003 is approved and PS-004 is ready.
 
 ## Not started
 
-Phase 2 tasks remain gated until PS-003 merges and `G1` passes.
+`PS-004 — Paid Assessment Content Contract` is ready; no branch or draft PR exists yet.
 
 ## Open decisions
 
@@ -29,7 +29,7 @@ The owner selected D01-B/D02-A/D03-A/D04-B/D05-B/D06-B/D07-B/D08-A/D09-A. `OPEN-
 
 ## Blockers
 
-No Product Strategy blocker. Entity, support, staffing, legal/tax review, vendor/security evidence, release qualification, and live credentials are explicit `LIVE-DEP` requirements that fail closed without blocking non-live work.
+No Product Strategy blocker. Entity, support, staffing, legal/tax review, vendor/security evidence, release qualification, and live credentials remain explicit `LIVE-DEP` requirements that fail closed without blocking PS-004.
 
 ## Dependencies
 
@@ -50,8 +50,8 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 
 ## Exact next action
 
-Perform independent remote review of draft PR #10 and merge only after all requirement and safety checks pass.
+Start PS-004 from verified post-G1 `main` on `task/ws-02/PS-004-paid-assessment-contract` and keep its scope separate from FA-001.
 
 ## Latest session checkpoint
 
-On 2026-07-31, MC-003 PR #9 merged and PS-003 started from exact `main` SHA `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
+On 2026-07-31, PS-003 merged through PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) at `68901a35e7f465ed4990881645847092e6fdd2d1`; `G1` passed and PS-004 became ready.

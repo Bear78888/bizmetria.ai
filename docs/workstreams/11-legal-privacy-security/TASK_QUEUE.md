@@ -2,7 +2,7 @@
 
 **Workstream:** 11 — Legal, Privacy and Security
 **Task prefix:** `LS`
-**Last updated:** 2026-07-30
+**Last updated:** 2026-07-31
 
 
 ## `LS-001 — Legal and Data Inventory Baseline`
@@ -25,14 +25,14 @@
 
 ## `LS-002 — Consent, Claims, and Data Requirements`
 
-- **Status:** `PLANNED`
+- **Status:** `BLOCKED`
 - **Priority:** High
 - **Objective:** Convert the approved product, audit, and paid-assessment contracts into implementable consent text requirements, data lifecycle constraints, rights handling, and claims rules.
-- **Required inputs:** `G1`, approved `FA-001`, and approved `PS-004`.
+- **Required inputs:** `G1 — PASS` plus approved `FA-001` and approved `PS-004`.
 - **Expected output:** `docs/workstreams/11-legal-privacy-security/deliverables/BIZMETRIA_CONSENT_CLAIMS_REQUIREMENTS_v1.0.md`.
-- **Dependencies:** Approved Product Requirements, free-audit contract, and paid-assessment contract.
+- **Dependencies:** Approved Product Requirements are available; free-audit and paid-assessment contracts remain pending.
 - **Owner:** Legal, Privacy and Security.
-- **Review status:** Blocked until dependencies merge.
+- **Review status:** `G1` dependency passed; blocked until FA-001 and PS-004 merge.
 
 
 ## Global portfolio reference

@@ -3,9 +3,9 @@
 **Workstream:** 01 — Master Control  
 **Status:** `APPROVED` \
 **Last updated:** 2026-07-31 \
-**Current task:** `MC-003 — Product Decision Gate` — complete \
-**Current branch:** None; MC-003 branch is historical \
-**Current PR:** Merged [#9](https://github.com/Bear78888/bizmetria.ai/pull/9)
+**Current task:** `G1 — Product Baseline Approved` — `PASS` \
+**Current branch:** None in the approved post-G1 state \
+**Current PR:** None
 
 ## Approved baseline
 
@@ -27,15 +27,17 @@
 - The Owner Decision Package is an approved input; it approves no owner choice.
 - Explicit owner selections and the Stripe directive are recorded in the MC-003 decision record and Decision Log proposal.
 - MC-003 PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9) was independently reviewed and merged at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`.
+- PS-003 PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) was independently reviewed and merged at `68901a35e7f465ed4990881645847092e6fdd2d1`.
+- `G1 — Product Baseline Approved` is `PASS`; `FA-001` and `PS-004` are `READY`.
 
 ## In progress
 
-No Master Control task branch is active. Product Strategy is executing PS-003 from the verified post-MC-003 `main`.
+No Master Control or execution task branch is active in the approved post-G1 state.
 
 ## Not started
 
-- `PS-003` is in review on `task/ws-02/PS-003-product-requirements-v1`.
-- `G1` remains not passed.
+- `FA-001` and `PS-004` are ready but not started.
+- `MC-004` and later Master Control gates remain dependency-gated.
 
 ## Open decisions
 
@@ -43,7 +45,7 @@ No Master Control task branch is active. Product Strategy is executing PS-003 fr
 
 ## Blockers
 
-No technical or owner-authority blocker exists. Entity/address, support identity, legal/tax review, staffing, and live Stripe secrets are documented pre-live blockers; they do not block PS-003 or non-live implementation.
+No technical or owner-authority blocker exists for `FA-001` or `PS-004`. Entity/address, support identity, legal/tax review, staffing, vendor/security evidence, release qualification, and live Stripe secrets remain pre-live blockers.
 
 ## Dependencies
 
@@ -65,8 +67,8 @@ Approved MC-001 architecture, verified `main`, current product baseline, all wor
 
 ## Exact next action
 
-Review and merge PS-003, verify the resulting `main`, then record `G1` and authorize the first two Phase 2 tasks.
+Start `FA-001` and `PS-004` from verified post-G1 `main` on separate task branches and draft PRs.
 
 ## Latest session checkpoint
 
-On 2026-07-31, MC-003 merged at `acda4fb7c036660161b6f0ea4d09deed4143c7cb`; credentials remain external and live activation remains a final gated step.
+On 2026-07-31, PS-003 merged at `68901a35e7f465ed4990881645847092e6fdd2d1` and `G1` passed; credentials remain external and live activation remains a final gated step.
