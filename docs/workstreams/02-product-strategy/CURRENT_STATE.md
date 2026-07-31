@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 02 — Product Strategy
-**Status:** `READY`
+**Status:** `REVIEW`
 **Last updated:** 2026-07-31
-**Current task:** `PS-004 — Paid Assessment Content Contract` — `READY`
-**Current branch:** None; PS-003 branch is historical
-**Current PR:** None
+**Current task:** `PS-004 — Paid Assessment Content Contract` — `REVIEW`
+**Current branch:** `task/ws-02/PS-004-paid-assessment-contract`
+**Current PR:** Pending creation
 
 ## Approved baseline
 
@@ -17,19 +17,19 @@ A complete new Product Blueprint v0.1 was independently reviewed and merged thro
 
 ## In progress
 
-No Product Strategy task is in progress. PS-003 is approved and PS-004 is ready.
+PS-004 is under review on its isolated task branch. The 666-line contract defines the paid questionnaire, interview/evidence boundary, recovery behavior, and deterministic input-completion predicate.
 
 ## Not started
 
-`PS-004 — Paid Assessment Content Contract` is ready; no branch or draft PR exists yet.
+Executable UX, Voice, Backend, Analysis, Report, Lifecycle, and QA implementations remain downstream.
 
 ## Open decisions
 
-The owner selected D01-B/D02-A/D03-A/D04-B/D05-B/D06-B/D07-B/D08-A/D09-A. `OPEN-004`, `OPEN-005`, `OPEN-006`, and `OPEN-009` remain routed downstream; Phase 1 product questions have dispositions.
+No PS-004 content decision remains open in the task branch. Production legal/recording text, enabled recovery route, exact retention, vendors, and operating configuration remain downstream. OPEN-009 was resolved by merged FA-001 and awaits central closeout synchronization.
 
 ## Blockers
 
-No Product Strategy blocker. Entity, support, staffing, legal/tax review, vendor/security evidence, release qualification, and live credentials remain explicit `LIVE-DEP` requirements that fail closed without blocking PS-004.
+Independent PR review and merge are required. Entity, support, staffing, legal/tax review, vendor/security evidence, release qualification, and live credentials remain explicit `LIVE-DEP` requirements that fail closed.
 
 ## Dependencies
 
@@ -50,8 +50,8 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 
 ## Exact next action
 
-Start PS-004 from verified post-G1 `main` on `task/ws-02/PS-004-paid-assessment-contract` and keep its scope separate from FA-001.
+Publish one draft PR, verify the complete remote diff and deterministic completion truth table, then merge only after the review gate passes.
 
 ## Latest session checkpoint
 
-On 2026-07-31, PS-003 merged through PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10) at `68901a35e7f465ed4990881645847092e6fdd2d1`; `G1` passed and PS-004 became ready.
+On 2026-07-31, PS-004 produced a versioned field/evidence inventory, ten interview objectives, 22 acceptance vectors, and a pure ASSESSMENT_INPUTS_COMPLETE predicate. No Stripe credential or live activation was introduced.
