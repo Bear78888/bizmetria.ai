@@ -7,7 +7,7 @@
 **Prepared:** 2026-07-31 \
 **Source baseline:** main at 5dd223f8e11509ec305b2791c3b15c43ca33e097 \
 **Branch:** task/ws-10/LC-001-commercial-lifecycle-contract \
-**Pull request:** Pending creation
+**Pull request:** [#17](https://github.com/Bear78888/bizmetria.ai/pull/17)
 
 ## 1. Purpose and authority
 
@@ -632,7 +632,7 @@ QA MUST trace every `LC-*` requirement and vector to automated, manual, qualifie
 ## Handoff Summary
 
 - **Task:** LC-001 — Commercial and Lifecycle Contract.
-- **Status:** REVIEW on `task/ws-10/LC-001-commercial-lifecycle-contract`; PR pending creation.
+- **Status:** REVIEW in draft PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17) on `task/ws-10/LC-001-commercial-lifecycle-contract`.
 - **Files changed:** This deliverable and five Workstream 10 operating records.
 - **Decisions proposed:** Vendor-neutral payment/lifecycle domains, exact promotion and price calculations, Stripe adapter/configuration boundary, activation predicate, state machines, capacity reservation, federal-holiday SLA algorithm, refund workflow, CRM projection, consent-aware trigger matrix, consultation/implementation separation, error codes, and 50 acceptance vectors.
 - **Decisions approved:** Existing `$299` one-time assessment, Stripe processor, promotion ladder, staged refund product rule, 30-minute consultation, separate implementation offers, capacity, all-50-states-plus-D.C. intent, operating calendar, and final-stage live secrets. LC-001 adds no legal/tax/vendor/live approval.

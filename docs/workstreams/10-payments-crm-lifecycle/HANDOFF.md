@@ -54,7 +54,7 @@ Independent LC-001 reviewer; later UX, Backend, Marketing, Report, Legal/Securit
 
 ## PR
 
-Pending creation.
+Draft PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17).
 
 ## Validation results
 

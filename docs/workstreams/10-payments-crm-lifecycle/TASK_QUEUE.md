@@ -16,7 +16,7 @@
 - **Dependencies:** PS-003 approved through PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10); LS-002 approved through PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15).
 - **Branch:** `task/ws-10/LC-001-commercial-lifecycle-contract`.
 - **Owner:** Payments, CRM and Lifecycle.
-- **Evidence:** `deliverables/BIZMETRIA_LIFECYCLE_CONTRACT_v1.0.md`; draft PR pending creation.
+- **Evidence:** `deliverables/BIZMETRIA_LIFECYCLE_CONTRACT_v1.0.md` in draft PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17).
 - **Review status:** Content and five operating records prepared; local validation, independent remote review, and merge pending.
 
 New local tasks must use `LC-###`, must not reuse an existing ID, and must link to any related global portfolio task.

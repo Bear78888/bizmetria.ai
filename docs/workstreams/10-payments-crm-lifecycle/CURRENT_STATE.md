@@ -5,7 +5,7 @@
 **Last updated:** 2026-07-31
 **Current task:** `LC-001 — Commercial and Lifecycle Contract` — `REVIEW`
 **Current branch:** `task/ws-10/LC-001-commercial-lifecycle-contract`
-**Current PR:** Pending creation
+**Current PR:** Draft PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17)
 
 ## Approved baseline
 
