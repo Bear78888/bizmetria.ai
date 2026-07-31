@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 11 — Legal, Privacy and Security
-**Status:** `REVIEW`
+**Status:** `APPROVED`
 **Last updated:** 2026-07-30
-**Current task:** `LS-001 — Legal and Data Inventory Baseline`
-**Current branch:** `task/ws-11/LS-001-legal-data-baseline`
-**Current PR:** Draft [#6](https://github.com/Bear78888/bizmetria.ai/pull/6)
+**Current task:** `LS-001 — Legal and Data Inventory Baseline` complete; `LS-002` planned
+**Current branch:** None
+**Current PR:** None
 
 ## Approved baseline
 
@@ -13,11 +13,11 @@ Separate email/SMS consent, data minimization, non-financial score disclaimer, n
 
 ## Completed
 
-A complete Legal and Data Inventory Baseline v0.1 has been prepared for review. It is issue-spotting and implementable guardrails, not final legal advice.
+A complete Legal and Data Inventory Baseline v0.1 was independently reviewed and merged through PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6) at `b6174f1325136bc69a9859925c570e5770972991`. It remains issue-spotting and implementable guardrails, not final legal advice.
 
 ## In progress
 
-`LS-001` is in review. The draft covers field-level data, purposes/access/retention/deletion treatment, separate consent, notices/disclaimers, privacy requests, security controls, vendor due diligence, and legal/security issue registers.
+No Legal, Privacy and Security execution task is in progress.
 
 ## Not started
 
@@ -29,7 +29,7 @@ Refund Policy, jurisdiction-specific review, vendors/processors, and retention p
 
 ## Blockers
 
-No technical blocker is recorded. Independent review and qualified review of flagged legal questions are required; exact retention, jurisdiction, Refund Policy, and vendors remain open.
+`LS-002` remains dependency-blocked. Qualified review of flagged legal questions is still required before the applicable production gates; exact retention, jurisdiction, Refund Policy, and vendors remain open.
 
 ## Dependencies
 
@@ -49,8 +49,8 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 
 ## Exact next action
 
-Independently review the `LS-001` draft PR for inventory coverage, implementability, official-source accuracy, open issues, and non-legal-advice boundary; request corrections or merge with owner authority.
+Supply the approved LS-001 constraints to PS-002 and wait for `G1`, approved `FA-001`, and approved `PS-004` before assigning LS-002.
 
 ## Latest session checkpoint
 
-On 2026-07-30, `LS-001` started from verified `main` SHA `9f589ba69aaa202ddb5890cfc9a5d56890b85dc8`. No jurisdiction, legal conclusion, retention period, Refund Policy, vendor, or processor role is approved by the draft.
+On 2026-07-30, LS-001 was approved in verified `main` SHA `b6174f1325136bc69a9859925c570e5770972991`. No jurisdiction, legal conclusion, retention period, Refund Policy, vendor, processor role, or final legal text is approved by that result.

@@ -7,7 +7,7 @@
 
 ## `LS-001 — Legal and Data Inventory Baseline`
 
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Priority:** High
 - **Objective:** Create the MVP legal, privacy, security, and field-level data baseline needed for later product and architecture decisions.
 - **Required inputs:** Approved Master Brief and Decision Log; approved Delivery Roadmap; current recovered customer journey; known contact/consent and assessment inputs; gate `G0`.
@@ -17,9 +17,10 @@
 - **Dependencies:** `G0` — `PASS`; current recovered customer journey.
 - **Concurrency:** May run in parallel with `PS-001` because the target files do not overlap.
 - **Planned branch:** `task/ws-11/LS-001-legal-data-baseline`
-- **Branch:** `task/ws-11/LS-001-legal-data-baseline`
-- **Owner:** Legal, Privacy and Security temporary executor
-- **Review status:** Draft [#6](https://github.com/Bear78888/bizmetria.ai/pull/6) is open for independent review.
+- **Historical branch:** `task/ws-11/LS-001-legal-data-baseline`
+- **Owner:** Legal, Privacy and Security
+- **Evidence:** PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), merge SHA `b6174f1325136bc69a9859925c570e5770972991`.
+- **Review status:** Independently reviewed, explicitly authorized, merged, and verified.
 
 
 ## `LS-002 — Consent, Claims, and Data Requirements`
@@ -39,7 +40,7 @@
 - **ID:** `TASK-004`
 - **Status:** See [Global Task Queue](../../BIZMETRIA_TASK_QUEUE.md).
 - **Execution mapping:** `LS-001`.
-- **Assignment:** The execution task is ready; no temporary executor is currently registered.
+- **Assignment:** Historical execution mapping complete through approved LS-001; LS-002 remains dependency-gated.
 - **Rule:** The global task ID remains a historical portfolio reference; work is performed and reviewed under `LS-001`.
 
 

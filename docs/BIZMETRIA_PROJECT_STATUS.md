@@ -1,21 +1,21 @@
 # BizMetria Project Status
 
 **As of:** 2026-07-30  
-**Overall status:** `PHASE 1 READY` \
-**Verified `main` SHA:** `713c17e2ca854ce65125d65382dedee3fcec6d9c`
+**Overall status:** `PHASE 1 IN PROGRESS` \
+**Verified `main` SHA:** `b6174f1325136bc69a9859925c570e5770972991`
 
 ## Current phase
 
-Recovery PR [#1](https://github.com/Bear78888/bizmetria.ai/pull/1), architecture PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), and Delivery Roadmap PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3) are merged. `main` contains the approved recovery baseline, the canonical one-Master/thirteen-workstream operating system, and the dependency-ordered delivery roadmap.
+Recovery PR [#1](https://github.com/Bear78888/bizmetria.ai/pull/1), architecture PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), Delivery Roadmap PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), Product Blueprint PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), and Legal/Data Baseline PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6) are merged. `main` contains the approved governance, roadmap, product blueprint, and legal/data issue-spotting baseline.
 
 Gate `G0 — Governance Ready` is `PASS` because:
 
 - `MC-001` is merged and verified;
 - `MC-002` is independently reviewed, merged, and verified;
 - the Decision Log, Project Status, Task Queue, Registry, Active Work, Master Continuation, and Workstream 01 state are synchronized;
-- `PS-001` and `LS-001` are the only initial execution assignments.
+- `PS-001` and `LS-001` were the only initial execution assignments and are now approved.
 
-Phase 1 may now begin. No product implementation task beyond the two initial assignments is authorized.
+`PS-002 — Owner Decision Package` is now the only ready execution task. It prepares options and recommendations but does not approve owner decisions. No Phase 2 implementation task is authorized before `MC-003` records the owner choices and `G1` passes.
 
 ## Confirmed product baseline
 
@@ -37,8 +37,10 @@ Phase 1 may now begin. No product implementation task beyond the two initial ass
 | MC-001 Master Orchestrator and Workstream Architecture Migration | Master Orchestrator | APPROVED | PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), merge SHA `473ee6c042bd5224bec75dbc18fa803e9b148aa3` |
 | MC-002 Delivery Roadmap and Phase Gates | Master Orchestrator | APPROVED | PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), merge SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c` |
 | G0 Governance Ready | Master Orchestrator | PASS | MC-001 and MC-002 merged; canonical status records synchronized |
-| PS-001 Product Blueprint v0.1 | Product Strategy | READY | `G0` passed; no active branch or assigned executor yet |
-| LS-001 Legal and Data Inventory Baseline | Legal, Privacy and Security | READY | `G0` passed; no active branch or assigned executor yet; may run in parallel with PS-001 |
+| PS-001 Product Blueprint v0.1 | Product Strategy | APPROVED | PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), merge SHA `21d223223180e7a7d617f28648674efb613c4a92` |
+| LS-001 Legal and Data Inventory Baseline | Legal, Privacy and Security | APPROVED | PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), merge SHA `b6174f1325136bc69a9859925c570e5770972991` |
+| PS-002 Owner Decision Package | Product Strategy / Master Control | READY | Both required inputs are approved; no active execution branch yet |
+| MC-003 Owner Decision Gate | Master Orchestrator / owner | PLANNED | Begins only after approved PS-002 |
 | FA-001 and all later delivery tasks | Applicable workstreams | PLANNED | Follow the dependencies and gates in the Delivery Roadmap |
 
 The complete sequence is in [`docs/control/DELIVERY_ROADMAP.md`](control/DELIVERY_ROADMAP.md); exact per-workstream state is in [`docs/control/WORKSTREAM_REGISTRY.md`](control/WORKSTREAM_REGISTRY.md).
@@ -65,7 +67,7 @@ The Decision Log and Delivery Roadmap name the task and gate responsible for eac
 
 ## Immediate next action
 
-Assign `PS-001` and `LS-001` as two separate bounded tasks with non-overlapping file scopes, one temporary branch and one draft PR each. They may run in parallel under the existing WIP limit. Do not start `PS-002` or any Phase 2 task until the dependencies in the Delivery Roadmap are merged and the applicable gate passes.
+Assign `PS-002` as one bounded Product Strategy task. It must present independently answerable options, tradeoffs, recommendations, and downstream effects for the owner decisions without silently approving them. Do not start `MC-003` until PS-002 is reviewed and merged, and do not start Phase 2 until `G1` passes.
 
 ## Operational safeguards
 

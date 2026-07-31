@@ -5,7 +5,7 @@
 
 | Name | Version | Status | Path | Task ID | Owner | Approved date | Superseded by | Consumers |
 |---|---|---|---|---|---|---|---|---|
-| BizMetria Product Blueprint | v0.1 | Review | [`BIZMETRIA_PRODUCT_BLUEPRINT_v0.1.md`](BIZMETRIA_PRODUCT_BLUEPRINT_v0.1.md) | PS-001 | Product Strategy | Not approved | None | UX, FA, EN, ES, AE, RP, BE, LC, LS, MS, QA, Master Control |
+| BizMetria Product Blueprint | v0.1 | Approved | [`BIZMETRIA_PRODUCT_BLUEPRINT_v0.1.md`](BIZMETRIA_PRODUCT_BLUEPRINT_v0.1.md) | PS-001 | Product Strategy | 2026-07-30 | None | UX, FA, EN, ES, AE, RP, BE, LC, LS, MS, QA, Master Control |
 
 
 ## Indexing rule

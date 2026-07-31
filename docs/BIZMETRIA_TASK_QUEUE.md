@@ -41,27 +41,48 @@ As of: 2026-07-30
 - **Recorded:** 2026-07-30
 - **Evidence:** MC-001 and MC-002 are merged and verified; the required canonical status records agree; `PS-001` and `LS-001` are the only initial execution assignments.
 
-## Current execution window
+## Phase 1 approved inputs
 
 ### `PS-001 — Product Blueprint v0.1`
 
 - **Owner:** Product Strategy
-- **Status:** `READY`
+- **Status:** `APPROVED`
 - **Target:** `docs/workstreams/02-product-strategy/BIZMETRIA_PRODUCT_BLUEPRINT_v0.1.md`
 - **Dependency:** `G0` passed.
 - **Outcome:** Current Product Blueprint covering customers, value, journey, free/paid boundary, paid deliverables, bilingual model, implementation boundary, operating assumptions, metrics, risks, and open decisions.
 - **Guardrail:** Do not reconstruct unavailable historical wording or approve open commercial/policy choices.
-- **Assignment state:** No active branch or temporary executor; Master Orchestrator may assign this task now.
+- **Evidence:** PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), merge SHA `21d223223180e7a7d617f28648674efb613c4a92`.
+- **Review status:** Independently reviewed, explicitly authorized, merged, and verified.
 
 ### `LS-001 — Legal and Data Inventory Baseline`
 
 - **Owner:** Legal, Privacy and Security
-- **Status:** `READY`
+- **Status:** `APPROVED`
 - **Target:** `docs/workstreams/11-legal-privacy-security/deliverables/BIZMETRIA_LEGAL_DATA_BASELINE_v0.1.md`
 - **Dependency:** `G0` passed.
 - **Outcome:** Field-level data inventory, consent baseline, purpose/access/retention/deletion matrix, disclaimer inventory, and security/legal issue register.
 - **Concurrency:** May run in parallel with PS-001 because the file scope is separate and both use the same approved baseline.
-- **Assignment state:** No active branch or temporary executor; Master Orchestrator may assign this task now.
+- **Evidence:** PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), merge SHA `b6174f1325136bc69a9859925c570e5770972991`.
+- **Review status:** Independently reviewed, explicitly authorized, merged, and verified.
+
+## Current execution window
+
+### `PS-002 — Owner Decision Package`
+
+- **Owner:** Product Strategy, coordinated by Master Orchestrator
+- **Status:** `READY`
+- **Target:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_OWNER_DECISION_PACKAGE_v0.1.md`
+- **Dependencies:** Approved `PS-001` and `LS-001`.
+- **Outcome:** Independently answerable options, tradeoffs, recommendations, and downstream impact for report timing, Refund Policy, consultation rules, implementation packages/prices, promotion rules, MVP KPIs, capacity assumptions, and related owner/legal triggers.
+- **Guardrail:** The package may recommend choices but cannot approve them. `OPEN-001`–`OPEN-009` remain open until their named tasks/gates close them.
+- **Assignment state:** No active execution branch yet; Master Orchestrator may assign this task now.
+
+### `MC-003 — Owner Decision Gate`
+
+- **Owner:** Master Orchestrator and project owner
+- **Status:** `PLANNED`
+- **Dependency:** Approved `PS-002`.
+- **Outcome:** Record explicit owner decisions, update the Decision Log, freeze Product Requirements v1.0 through `PS-003`, and evaluate `G1`.
 
 ## Planned delivery catalog
 
