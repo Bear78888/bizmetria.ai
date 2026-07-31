@@ -51,7 +51,7 @@ Independent reviewer, then LS-002, AE-001, UX, Backend, Analytics, and QA consum
 
 ## PR
 
-Pending creation.
+[Draft PR #12](https://github.com/Bear78888/bizmetria.ai/pull/12)
 
 ## Validation results
 

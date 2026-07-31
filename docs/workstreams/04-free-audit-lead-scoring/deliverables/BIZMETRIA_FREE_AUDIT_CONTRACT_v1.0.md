@@ -7,7 +7,7 @@
 **Prepared:** 2026-07-31 \
 **Source baseline:** main at 76fa28e621d59a741f4adf663ed5176867f91b22 \
 **Branch:** task/ws-04/FA-001-free-audit-score-contract \
-**Pull request:** Pending creation
+**Pull request:** [#12](https://github.com/Bear78888/bizmetria.ai/pull/12)
 
 ## 1. Purpose and authority
 

@@ -18,7 +18,7 @@
 - **Planned branch:** `task/ws-04/FA-001-free-audit-score-contract`.
 - **Owner:** Free Audit and Lead Scoring.
 - **Concurrency:** May run with PS-004 because the targets and local operating files do not overlap.
-- **Review status:** Contract drafted and locally validated on `task/ws-04/FA-001-free-audit-score-contract`; draft PR pending creation.
+- **Review status:** Contract drafted and locally validated on `task/ws-04/FA-001-free-audit-score-contract`; under review in draft PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12).
 
 
 ## Global portfolio reference

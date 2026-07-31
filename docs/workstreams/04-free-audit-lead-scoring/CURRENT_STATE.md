@@ -5,7 +5,7 @@
 **Last updated:** 2026-07-31
 **Current task:** `FA-001 — Free Audit and Score Contract` — `REVIEW`
 **Current branch:** `task/ws-04/FA-001-free-audit-score-contract`
-**Current PR:** Pending creation
+**Current PR:** [#12](https://github.com/Bear78888/bizmetria.ai/pull/12)
 
 ## Approved baseline
 
