@@ -20,8 +20,9 @@ This log records approved decisions recoverable from the available project conte
 | DEC-011 | Discounts use Stripe Coupons and Promotion Codes. | APPROVED / RECOVERED | Vendor choice applies to discount mechanism only. |
 | DEC-012 | Discounts range from $49 to $199 off $299; $199 is late-reactivation-only and is not advertised in advance. | APPROVED / RECOVERED | Final campaign timing and names unresolved. |
 | DEC-013 | Every paid report receives manual review during MVP before delivery. | APPROVED / RECOVERED | Review checklist remains to be specified. |
-| DEC-014 | Work is organized through thirteen specialized chats. | APPROVED / RECOVERED | Master Control plus twelve specialist workstreams. |
+| DEC-014 | Work was recovered as thirteen specialized chats. | SUPERSEDED BY DEC-016 ON MIGRATION MERGE | Preserved as the legacy operating model; functional scope remains thirteen workstreams. |
 | DEC-015 | GitHub-native handoffs are mandatory. | APPROVED / RECOVERED | Deliverable in file, Handoff Summary, draft PR, no self-merge. |
+| DEC-016 | One Master Orchestrator coordinates thirteen permanent GitHub workstream directories; specialized chats are temporary task executors, and permanent workstream branches are prohibited. | APPROVED BY OWNER — EFFECTIVE WHEN MC-001 MERGES | Explicit architecture-migration instruction. `main` remains the only approved repository state. |
 
 ## Open decision register
 

@@ -4,7 +4,7 @@ Status: **APPROVED / RECOVERED**
 
 ## Objective
 
-Coordinate thirteen specialized ChatGPT workstreams through GitHub without losing decisions, duplicating work, or allowing chat-only outputs to become the project record.
+Coordinate one Master Orchestrator and thirteen permanent GitHub workstreams without losing decisions, duplicating work, or allowing chat-only outputs to become the project record. Specialized chats are temporary task executors, not permanent project state.
 
 ## Roles
 
@@ -16,6 +16,7 @@ Coordinate thirteen specialized ChatGPT workstreams through GitHub without losin
 
 ### Master Control
 
+- Operates as the Master Orchestrator under `docs/control/MASTER_ORCHESTRATOR_BRIEF.md`.
 - Reads the full current project state.
 - Owns Task Queue sequencing and dependencies.
 - Assigns one bounded task to the correct workstream.
@@ -24,7 +25,13 @@ Coordinate thirteen specialized ChatGPT workstreams through GitHub without losin
 - After approval, updates the Decision Log, Project Status, Task Queue, and next assignment.
 - Does not invent unresolved owner decisions.
 
-### Specialized workstream
+### Permanent workstream
+
+- Stores its canonical brief, current state, detailed queue, local decisions, artifact index, handoff, changelog, and deliverables policy under `docs/workstreams/`.
+- Has no permanent Git branch.
+- Receives work only through a bounded task assignment.
+
+### Temporary Workstream Chat
 
 - Reads current `main` and required inputs.
 - Executes only the assigned Task Queue item.
@@ -32,10 +39,13 @@ Coordinate thirteen specialized ChatGPT workstreams through GitHub without losin
 - Includes a Handoff Summary in the deliverable.
 - Opens a draft PR and does not merge it.
 - Escalates missing decisions as open questions rather than assumptions.
+- Uses one temporary task branch and one draft PR, and may modify only the assigned files.
 
 ## Single source of truth
 
 Merged files in `main` are the operating record. A chat message, local file, or unmerged branch is not an approved source of truth. The Decision Log is the authoritative register of approved product decisions.
+
+Actual remote task branches are canonical live-locks. `docs/control/ACTIVE_WORK.md` is a human-readable index that must be reconciled with GitHub.
 
 ## Assignment packet
 
@@ -83,6 +93,15 @@ Master Control verifies:
 9. Cross-workstream dependencies are explicit.
 
 The outcome is either requested changes or approval/merge by Master Control. Specialized chats never merge their own PRs.
+
+## Workstream and branch model
+
+- The project has exactly thirteen permanent workstream directories.
+- Standard task branches use `task/ws-XX/PREFIX-###-short-description`.
+- One task uses one workstream, one temporary branch, and one draft PR.
+- Long-lived workstream branches are prohibited.
+- Cross-functional work requires one coordinating owner and an exact allowed-file list.
+- The one-time MC-001 architecture branch is an explicitly authorized migration exception.
 
 ## Dependency handling
 

@@ -96,7 +96,11 @@ Industry, name, email, phone, preferred language, and promotion code do not affe
 
 ## Operating architecture
 
-The project is divided into thirteen working chats, each governed by a dedicated brief. Master Control owns coordination, review, and post-approval governance updates. Specialized chats own only assigned tasks and may not merge their own PRs.
+The project uses one **Master Orchestrator** and thirteen permanent GitHub-backed workstreams. Each workstream keeps its canonical brief, current state, local task queue, local decisions, artifact index, handoff, changelog, and deliverables policy under `docs/workstreams/`.
+
+Specialized chats are temporary executors for one bounded task. They use one temporary task branch and one draft PR, may modify only the assigned files, and may not merge their own work. Long-lived workstream branches are prohibited. `main` remains the only approved repository state.
+
+Global orchestration is defined in [`docs/control/`](control/README.md). The recovered files in `docs/chat-briefs/` are preserved as legacy source material and are not parallel canonical workstream instructions.
 
 ## Open decisions
 
