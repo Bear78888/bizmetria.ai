@@ -151,12 +151,14 @@ As of: 2026-07-31
 ### `LC-001 — Commercial and Lifecycle Contract`
 
 - **Owner:** Payments, CRM and Lifecycle.
-- **Status:** `READY`
+- **Status:** `APPROVED`
 - **Dependencies:** Approved PS-003 and approved LS-002.
 - **Target:** `docs/workstreams/10-payments-crm-lifecycle/deliverables/BIZMETRIA_LIFECYCLE_CONTRACT_v1.0.md`.
 - **Outcome:** Deterministic pricing, discount, checkout, payment/order, CRM, consent-aware messaging, refund, reactivation, consultation, and implementation-interest states.
-- **Planned branch:** `task/ws-10/LC-001-commercial-lifecycle-contract`.
+- **Historical branch:** `task/ws-10/LC-001-commercial-lifecycle-contract`.
 - **Boundary:** Stripe test mode and synthetic data only; no vendor selection, live secret, real charge, final Refund Policy, or public paid activation.
+- **Evidence:** PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17), merge SHA `7677bee1b0791bb4f954f058aa9e959d4796985a`.
+- **Review status:** Independently reviewed, merged, and verified from current GitHub.
 
 ### `AE-001 — Analysis and Evidence Contract`
 
@@ -167,6 +169,17 @@ As of: 2026-07-31
 - **Outcome:** Language-neutral evidence/input/output schemas, confidence and uncertainty, traceable recommendations, prioritization, matrix/roadmap rules, prohibited-claim handling, and human-review handoff.
 - **Planned branch:** `task/ws-07/AE-001-analysis-evidence-contract`.
 - **Boundary:** No model/vendor selection or production customer data; every material claim remains traceable and every report remains human-review gated.
+
+### `BE-002 — Platform Foundation`
+
+- **Owner:** Backend, Data and Integrations / Master Orchestrator.
+- **Status:** `IN PROGRESS`
+- **Priority:** Critical
+- **Dependency:** Verified remote `main` at `7677bee1b0791bb4f954f058aa9e959d4796985a`; AE-001 is explicitly not a blocker.
+- **Branch:** `task/ws-09/BE-002-platform-foundation`.
+- **Outcome:** Executable Next.js/strict-TypeScript foundation, environment validation, Supabase schema/migrations, Auth, RLS, private Storage, synthetic seed, CI/test foundation, and successful native preview evidence.
+- **Boundary:** Synthetic/sandbox only; no live Stripe, real payments, production Retell numbers/email/data, production Supabase changes, or final-domain launch.
+- **Review status:** Local validation in progress; PR pending creation.
 
 ## Planned delivery catalog
 

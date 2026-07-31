@@ -20,9 +20,9 @@ Convert approved PS-003 and LS-002 inputs into a deterministic commercial/lifecy
 - Added upstream requirement traceability, minimized event/error contracts, a 14-item pre-live bundle, and 50 acceptance vectors.
 - Preserved every entity, support, legal/tax, retention, vendor/security, staffing, release, and protected Stripe live dependency.
 
-## Not completed
+## Approval evidence
 
-Independent review and merge are incomplete. Implementation, provider/vendor ADRs, exact Refund Policy and tax treatment, entity/support/staffing setup, production security/release evidence, and protected live Stripe configuration remain incomplete.
+Independent review completed and PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17) merged at `7677bee1b0791bb4f954f058aa9e959d4796985a`. Implementation, provider/vendor ADRs, exact Refund Policy and tax treatment, entity/support/staffing setup, production security/release evidence, and protected live Stripe configuration remain incomplete.
 
 ## Changed files
 
@@ -42,11 +42,11 @@ No contract dependency blocker remains. Live checkout and real fulfillment stay 
 
 ## Exact next action
 
-Run the six-file local gate, publish one draft PR, compare the exact remote tree/diff, and merge only after the independent gate passes.
+Consume the approved contract in sandbox implementation while preserving all activation gates.
 
 ## Handoff target
 
-Independent LC-001 reviewer; later UX, Backend, Marketing, Report, Legal/Security, QA, Operations, and Release consumers.
+UX, Backend, Marketing, Report, Legal/Security, QA, Operations, and Release consumers.
 
 ## Branch
 
@@ -54,8 +54,8 @@ Independent LC-001 reviewer; later UX, Backend, Marketing, Report, Legal/Securit
 
 ## PR
 
-Draft PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17).
+Merged PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17).
 
 ## Validation results
 
-CONTENT PASS — upstream traceability, commercial math, domain/state separation, Stripe test/live/secret boundaries, activation predicate, webhook/idempotency/replay paths, promotion windows/caps, capacity concurrency and stop/reopen rules, federal-holiday SLA, refund decisions, consent/suppression, consultation/implementation separation, KPI/data minimization, 50 vectors, and pre-live fail-closed behavior. Exact diff/link/secret checks remain before publication.
+PASS — content, remote diff, links, secret boundaries, and pre-live fail-closed behavior were reviewed before merge.

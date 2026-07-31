@@ -1,56 +1,33 @@
 # Current State
 
 **Workstream:** 09 — Backend, Data and Integrations
-**Status:** `NOT STARTED`
-**Last updated:** 2026-07-30
-**Current task:** None
-**Current branch:** None for this workstream; see `../../control/ACTIVE_WORK.md` for cross-functional work
-**Current PR:** None for this workstream
+**Status:** `IN PROGRESS`
+**Last updated:** 2026-07-31
+**Current task:** `BE-002 — Platform Foundation`
+**Current branch:** `task/ws-09/BE-002-platform-foundation`
+**Current PR:** Pending creation
 
-## Approved baseline
+## Confirmed starting point
 
-One shared backend, separate language numbers, canonical IDs, and vendor-neutral boundaries.
-
-## Completed
-
-No approved technical architecture is recorded.
+Remote `main` was verified at `7677bee1b0791bb4f954f058aa9e959d4796985a`; no PR was open when BE-002 began. MC-003, PS-003, FA-001, PS-004, LS-002, and LC-001 were already merged and are not being repeated. AE-001 remains unfinished but does not block Platform Foundation under the owner's current technical directive.
 
 ## In progress
 
-No workstream-specific task is in progress. MC-001 affects governance only.
+Production-grade Next.js/TypeScript foundation, scoped environment validation, Supabase migration, Auth, RLS, private Storage, synthetic seed data, CI, unit/integration tests, browser smoke tests, and native preview verification.
 
-## Not started
+## Safety boundary
 
-Domain model, APIs/events, state machines, adapters, observability, and failure recovery.
+Only synthetic/sandbox operation is authorized. Stripe live mode, real payments, production Retell numbers, production email, production Supabase changes, and final-domain publication are not part of BE-002.
 
-## Open decisions
+## Acceptance gate
 
-Technology stack, telephony, CRM/email vendors, hosting, and implementation choices.
-
-## Blockers
-
-No hidden blocker is recorded. Unmet dependencies and unassigned ownership are shown explicitly.
-
-## Dependencies
-
-Approved contracts from product, audit, voice, analysis, report, lifecycle, legal, and QA.
-
-## Files currently relevant
-
-- `WORKSTREAM_BRIEF.md`
-- `TASK_QUEUE.md`
-- `DECISIONS.md`
-- `ARTIFACT_INDEX.md`
-- `HANDOFF.md`
-- `CHANGELOG.md`
-- `deliverables/README.md`
-- [Global Task Queue](../../BIZMETRIA_TASK_QUEUE.md)
-- [Active Work](../../control/ACTIVE_WORK.md)
+- strict typecheck, formatting, lint, unit/integration tests, and production build pass;
+- GitHub CI passes;
+- Vercel Preview is `Ready` and bilingual/auth/health surfaces respond;
+- native Supabase preview validation succeeds when available;
+- RLS and private-storage policies are present and migration-contract tests pass;
+- no secret value is present in Git history or output.
 
 ## Exact next action
 
-Wait for stable product/data contracts; Master Orchestrator then assigns a BE-prefixed architecture task.
-
-## Latest session checkpoint
-
-On 2026-07-30, MC-001 created this evidence-based initial state from merged `main` at `300c01050820953d2769a91a77a39ae3edcd7f99`. No absent deliverable, assigned executor, deadline, or approval is implied.
+Publish the verified implementation as one draft PR, update its metadata once with the PR number, and run the remote acceptance gate without applying production Supabase changes.

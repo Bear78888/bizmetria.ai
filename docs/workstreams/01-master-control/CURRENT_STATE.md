@@ -3,9 +3,9 @@
 **Workstream:** 01 — Master Control  
 **Status:** `APPROVED` \
 **Last updated:** 2026-07-31 \
-**Current task:** `LS-002 contract checkpoint` — `PASS` \
-**Current branch:** None in the approved post-LS-002 state \
-**Current PR:** None
+**Current task:** `BE-002 Platform Foundation oversight` — `IN PROGRESS` \
+**Current branch:** `task/ws-09/BE-002-platform-foundation` \
+**Current PR:** Pending creation
 
 ## Approved baseline
 
@@ -33,15 +33,15 @@
 - PS-004 was independently reviewed and merged through PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13) at `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b`.
 - `OPEN-009` is closed.
 - `LS-002` was independently reviewed and merged through PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
-- `LC-001` and `AE-001` are `READY`; `G2` remains unpassed.
+- `LC-001` merged through PR #17 at `7677bee1b0791bb4f954f058aa9e959d4796985a`; `AE-001` remains unfinished; `G2` remains unpassed.
 
 ## In progress
 
-No Master Control or execution task branch is active in the approved post-LS-002 state.
+BE-002 is active under the owner's 2026-07-31 technical implementation directive.
 
 ## Not started
 
-- `LC-001` and `AE-001` are ready but not started.
+- `AE-001` is ready but unfinished; it is not a dependency of BE-002.
 - `MC-004` and later Master Control gates remain dependency-gated.
 
 ## Open decisions
@@ -50,7 +50,7 @@ No Master Control or execution task branch is active in the approved post-LS-002
 
 ## Blockers
 
-No dependency blocker exists for `LC-001` or `AE-001`. Entity/address, support identity, legal/tax review, staffing, vendor/security evidence, release qualification, and live Stripe secrets remain pre-live blockers.
+No dependency blocker exists for BE-002 preview work. AE-001 remains a separate unfinished contract. Entity/address, support identity, legal/tax review, staffing, vendor/security evidence, release qualification, and live Stripe secrets remain pre-live blockers.
 
 ## Dependencies
 
@@ -72,7 +72,7 @@ Approved MC-001 architecture, verified `main`, current product baseline, all wor
 
 ## Exact next action
 
-Start `LC-001` and `AE-001` from verified `main` on separate scoped branches and draft PRs. Use Stripe test-mode contracts only and synthetic data.
+Publish and remotely validate BE-002. Require CI and Vercel Preview; use synthetic data and do not apply production Supabase changes without explicit permission.
 
 ## Latest session checkpoint
 

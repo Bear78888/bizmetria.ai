@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 10 — Payments, CRM and Lifecycle
-**Status:** `REVIEW`
+**Status:** `APPROVED`
 **Last updated:** 2026-07-31
-**Current task:** `LC-001 — Commercial and Lifecycle Contract` — `REVIEW`
-**Current branch:** `task/ws-10/LC-001-commercial-lifecycle-contract`
-**Current PR:** Draft PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17)
+**Current task:** `LC-001 — Commercial and Lifecycle Contract` — `APPROVED`
+**Current branch:** None; historical `task/ws-10/LC-001-commercial-lifecycle-contract`
+**Current PR:** Merged PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17)
 
 ## Approved baseline
 
@@ -17,11 +17,11 @@ Both named LC-001 inputs are approved: PS-003 through PR [#10](https://github.co
 
 ## In progress
 
-LC-001 is complete as a review candidate on `task/ws-10/LC-001-commercial-lifecycle-contract`. It defines money and promotion math, Stripe test/live isolation and activation, payment/order/entitlement states, capacity, federal-holiday SLA, refunds, CRM projections, consent-aware communications, consultation, separate implementation opportunities, error codes, and 50 acceptance vectors.
+No LC-001 work remains active. The contract merged through PR #17 at `7677bee1b0791bb4f954f058aa9e959d4796985a`.
 
 ## Not started
 
-Independent review, draft PR publication, and merge of LC-001 are not complete. Checkout/entitlement implementation, concrete Stripe configuration, CRM/vendor selection, messaging integrations, refund operations, consultation scheduling, and implementation-sales workflow remain downstream.
+Checkout/entitlement implementation, concrete Stripe test configuration, CRM/vendor selection, messaging integrations, refund operations, consultation scheduling, and implementation-sales workflow remain downstream.
 
 ## Open decisions
 
@@ -29,7 +29,7 @@ CRM/email/SMS vendors, exact qualified Refund Policy text, promotion names/timin
 
 ## Blockers
 
-No content dependency blocker remains for LC-001 review. Real charging and public paid launch remain blocked by entity/account ownership, support, legal/tax review, exact policies, vendors/security, staffing, release qualification, verified implementation, and protected Stripe live secrets.
+No contract blocker remains. Real charging and public paid launch remain blocked by entity/account ownership, support, legal/tax review, exact policies, vendors/security, staffing, release qualification, verified implementation, and protected Stripe live secrets.
 
 ## Dependencies
 
@@ -49,7 +49,7 @@ Approved PS-003 and LS-002. UX, Backend, Marketing, QA, and vendor work consume 
 
 ## Exact next action
 
-Validate and publish the six-file LC-001 review candidate in one draft PR; merge only after independent remote review passes.
+Consume the approved contract in sandbox implementation; keep every pre-live gate fail closed.
 
 ## Latest session checkpoint
 

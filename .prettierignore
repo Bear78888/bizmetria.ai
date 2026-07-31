@@ -1,0 +1,10 @@
+.next/
+node_modules/
+coverage/
+playwright-report/
+test-results/
+docs/
+README.md
+next-env.d.ts
+supabase/migrations/
+package-lock.json
