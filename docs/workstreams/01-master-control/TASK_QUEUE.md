@@ -41,11 +41,24 @@
 - **Next authorized task:** `PS-002 — Owner Decision Package`.
 - **Guardrail:** This checkpoint approves the two input documents only. It does not pass `G1` or resolve any owner, legal, vendor, timing, promotion, implementation-pricing, or score-table decision.
 
+## `MC-003 — Product Decision Gate`
+
+- **Status:** `BLOCKED`
+- **Priority:** High
+- **Objective:** Record explicit owner decisions from the approved PS-002 package, update the Decision Log, and provide stable inputs for PS-003.
+- **Required inputs:** Approved PS-002 plus owner selections `D01`–`D09` and factual/review confirmations `F01`–`F10`.
+- **Expected output:** `docs/workstreams/01-master-control/deliverables/BIZMETRIA_OWNER_DECISION_RECORD_v0.1.md`, updated Decision Log, synchronized state, and a reviewable gate result.
+- **Active branch:** `task/ws-01/MC-003-owner-decision-gate`.
+- **Current PR:** Pending creation.
+- **Acceptance criteria:** No authority is inferred; selected rules are internally consistent; qualified-review dependencies are explicit; blocking open decisions are closed or validly deferred; PS-003 receives stable requirements.
+- **Dependencies:** Approved PS-002, PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), merge SHA `66be062629a9b11670d1b76d202a30474eff98f7`.
+- **Owner:** Project owner and Master Orchestrator.
+- **Review status:** Blocked checkpoint; no owner selection has been received or approved.
+
 ## Planned Master Control gates
 
 | Task | Purpose | Dependency |
 |---|---|---|
-| `MC-003` | Record the owner decisions needed to freeze the product baseline. | Approved `PS-002` |
 | `MC-004` | Approve stack, vendors, cost envelope, account owners, and provisioning actions. | Phase 3 architecture/vendor inputs |
 | `MC-005` | Publish executable operations and support runbooks. | `G6`, reliability, and security work |
 | `MC-006` | Make the explicit pilot go/no-go decision. | Completed pilot, findings, and remediation |

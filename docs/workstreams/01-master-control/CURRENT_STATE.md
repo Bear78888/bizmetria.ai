@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 01 — Master Control  
-**Status:** `APPROVED` \
+**Status:** `BLOCKED` \
 **Last updated:** 2026-07-30  
-**Current task:** Coordinate `PS-002`; no active MC execution task \
-**Current branch:** None \
-**Current PR:** None
+**Current task:** `MC-003 — Product Decision Gate` \
+**Current branch:** `task/ws-01/MC-003-owner-decision-gate` \
+**Current PR:** Pending creation
 
 ## Approved baseline
 
@@ -22,24 +22,26 @@
 - Canonical status records synchronized and `G0` recorded as `PASS`.
 - `PS-001` independently reviewed and merged through PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5) at `21d223223180e7a7d617f28648674efb613c4a92`.
 - `LS-001` independently reviewed and merged through PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6) at `b6174f1325136bc69a9859925c570e5770972991`.
-- Both Phase 1 inputs are approved and `PS-002` is ready.
+- Both Phase 1 inputs are approved.
+- PS-002 was independently reviewed and merged through PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) at `66be062629a9b11670d1b76d202a30474eff98f7`.
+- The Owner Decision Package is an approved input; it approves no owner choice.
 
 ## In progress
 
-No Master Control execution task is in progress.
+MC-003 has a scoped remote branch and a blocked decision record. No decision has been copied into the global Decision Log.
 
 ## Not started
 
-- `PS-002` is `READY` but not yet assigned.
-- `MC-003` remains planned and depends on `PS-002`.
+- `PS-003` remains gated on approved MC-003.
+- `G1` remains not passed.
 
 ## Open decisions
 
-No new product decision is approved by MC-002. `OPEN-001` through `OPEN-009` remain unresolved and are routed to explicit tasks/gates in the roadmap.
+`D01`–`D09` and `F01`–`F10` are awaiting explicit input. `OPEN-001` through `OPEN-009` remain unresolved under their existing routes.
 
 ## Blockers
 
-No technical blocker prevents assignment of `PS-002`. Owner decisions and all later tasks remain gated by the Delivery Roadmap.
+No technical blocker exists. Owner selections, business-facing entity/operations facts, and the state of qualified legal/tax reviews block MC-003.
 
 ## Dependencies
 
@@ -57,11 +59,12 @@ Approved MC-001 architecture, verified `main`, current product baseline, all wor
 - `ARTIFACT_INDEX.md`
 - `HANDOFF.md`
 - `CHANGELOG.md`
+- `deliverables/BIZMETRIA_OWNER_DECISION_RECORD_v0.1.md`
 
 ## Exact next action
 
-Assign `PS-002` as one bounded Product Strategy task with one temporary branch and one draft PR.
+Obtain the minimal owner response in the MC-003 decision record. Update the record and Decision Log only from explicit answers, then run independent review.
 
 ## Latest session checkpoint
 
-On 2026-07-30, PS-001 and LS-001 were approved and merged; verified `main` is `b6174f1325136bc69a9859925c570e5770972991`. PS-002 is ready. No unapproved owner decision, vendor, deadline, legal conclusion, or product promise is implied.
+On 2026-07-30, PS-002 was approved and merged; verified `main` is `66be062629a9b11670d1b76d202a30474eff98f7`. MC-003 is active but blocked. No recommendation, general continuation instruction, vendor, deadline, or legal conclusion is treated as approved.

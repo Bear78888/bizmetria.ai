@@ -70,19 +70,25 @@ As of: 2026-07-30
 ### `PS-002 — Owner Decision Package`
 
 - **Owner:** Product Strategy, coordinated by Master Orchestrator
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Target:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_OWNER_DECISION_PACKAGE_v0.1.md`
 - **Dependencies:** Approved `PS-001` and `LS-001`.
 - **Outcome:** Independently answerable options, tradeoffs, recommendations, and downstream impact for report timing, Refund Policy, consultation rules, implementation packages/prices, promotion rules, MVP KPIs, capacity assumptions, and related owner/legal triggers.
 - **Guardrail:** The package may recommend choices but cannot approve them. `OPEN-001`–`OPEN-009` remain open until their named tasks/gates close them.
-- **Assignment state:** Active on `task/ws-02/PS-002-owner-decision-package`; draft PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) is open for independent review.
+- **Historical branch:** `task/ws-02/PS-002-owner-decision-package`.
+- **Evidence:** PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), merge SHA `66be062629a9b11670d1b76d202a30474eff98f7`.
+- **Review status:** Independently reviewed, merged, and verified; the package approves no option.
 
 ### `MC-003 — Owner Decision Gate`
 
 - **Owner:** Master Orchestrator and project owner
-- **Status:** `PLANNED`
+- **Status:** `BLOCKED`
 - **Dependency:** Approved `PS-002`.
 - **Outcome:** Record explicit owner decisions, update the Decision Log, freeze Product Requirements v1.0 through `PS-003`, and evaluate `G1`.
+- **Active branch:** `task/ws-01/MC-003-owner-decision-gate`.
+- **Target:** `docs/workstreams/01-master-control/deliverables/BIZMETRIA_OWNER_DECISION_RECORD_v0.1.md`.
+- **Required owner input:** `D01`–`D09` selections and business-facing confirmations `F01`–`F10`.
+- **Guardrail:** A recommendation or general instruction to continue is not approval of a commercial, policy, legal, tax, jurisdiction, staffing, or service-level choice.
 
 ## Planned delivery catalog
 

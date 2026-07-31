@@ -2,7 +2,7 @@
 
 **Task:** `PS-002 — Owner Decision Package` \
 **Version:** `v0.1` \
-**Status:** `REVIEW — proposals only` \
+**Status:** `APPROVED — recommendations only` \
 **Owner workstream:** 02 — Product Strategy \
 **Coordinating workstream:** 01 — Master Control \
 **Prepared:** 2026-07-30 \
@@ -577,11 +577,12 @@ It remains unapproved until `MC-003`.
 ## 18. Handoff Summary
 
 - **Task:** `PS-002 — Owner Decision Package`
-- **Status:** `REVIEW — proposals only`
+- **Status:** `APPROVED — recommendations only`
 - **Files changed:** This decision package plus synchronized Product Strategy and control records.
 - **Decisions proposed:** Options `D01`–`D09`, recommendations, KPI targets, capacity model, factual confirmation checklist, and cross-decision checks.
 - **Decisions approved:** None.
 - **Open questions:** Every decision and factual confirmation in this package remains pending `MC-003`; `OPEN-004`, `OPEN-005`, `OPEN-006`, and `OPEN-009` remain routed to later architecture or contract tasks.
 - **Dependencies:** Approved `PS-001`, approved `LS-001`, and verified `main` SHA `608ef46e382f86d557168ab2396b56e21e88cf75`.
-- **Validation required:** Approved-constraint trace, option completeness, independent answerability, downstream coverage, legal-boundary review, cross-decision consistency, relative-link validation, and full diff review.
+- **Validation performed:** Approved-constraint trace, option completeness, independent answerability, downstream coverage, legal-boundary review, capacity arithmetic, cross-decision consistency, relative links, full remote/local diff equality, and clean PR gate.
+- **Approval evidence:** PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), merge SHA `66be062629a9b11670d1b76d202a30474eff98f7`.
 - **Recommended next task:** Independently review and merge `PS-002`; then run `MC-003` with explicit owner answers and factual confirmations.

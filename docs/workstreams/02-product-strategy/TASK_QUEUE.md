@@ -24,7 +24,7 @@
 
 ## `PS-002 — Owner Decision Package`
 
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Priority:** High
 - **Objective:** Present independently answerable options, tradeoffs, recommendations, and downstream impact for the open owner-level product decisions.
 - **Required inputs:** Merged `PS-001` and `LS-001`.
@@ -32,9 +32,20 @@
 - **Must cover:** Report deadline, Refund Policy, consultation rules, implementation packages/prices, promotion rules, MVP KPIs, and capacity assumptions.
 - **Dependencies:** Approved `PS-001` and `LS-001`.
 - **Planned branch:** `task/ws-02/PS-002-owner-decision-package`
-- **Active branch:** `task/ws-02/PS-002-owner-decision-package`
+- **Historical branch:** `task/ws-02/PS-002-owner-decision-package`
 - **Owner:** Product Strategy, coordinated by Master Orchestrator.
-- **Review status:** Draft PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) is open for independent review. No option is approved.
+- **Evidence:** PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), merge SHA `66be062629a9b11670d1b76d202a30474eff98f7`.
+- **Review status:** Independently reviewed, merged, and verified. No option is approved by the package.
+
+
+## `PS-003 — Product Requirements Baseline v1.0`
+
+- **Status:** `BLOCKED`
+- **Priority:** High
+- **Objective:** Incorporate approved MC-003 decisions into stable Phase 1 product requirements.
+- **Dependency:** Approved `MC-003`.
+- **Expected output:** `docs/workstreams/02-product-strategy/deliverables/BIZMETRIA_PRODUCT_REQUIREMENTS_v1.0.md`.
+- **Review status:** Not started; explicit owner decisions are missing.
 
 
 ## Global portfolio reference

@@ -16,9 +16,9 @@
 
 | Workstream | Task ID | Owner | Branch | PR | Affected files | Start date | Status | Expected handoff |
 |---|---|---|---|---|---|---|---|---|
-| 02 — Product Strategy | `PS-002` | Product Strategy / Master Control | `task/ws-02/PS-002-owner-decision-package` | [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) | Owner Decision Package; WS02 state/index/queue/handoff/changelog; global/control status | 2026-07-30 | REVIEW | Independently reviewed and merged decision package; then explicit owner answers through `MC-003` |
+| 01 — Master Control | `MC-003` | Project owner / Master Orchestrator | `task/ws-01/MC-003-owner-decision-gate` | Pending creation | Owner Decision Record; Decision Log after owner input; global/control and WS01/02 state | 2026-07-30 | BLOCKED | Explicit owner selections/facts, qualified-review state, complete decision record, and independently reviewed PR |
 
-`PS-001` and `LS-001` are merged and approved. PS-002 owns the only active execution branch. Its proposals do not authorize `MC-003`, `PS-003`, or Phase 2 work.
+`PS-001`, `LS-001`, and `PS-002` are merged and approved. MC-003 owns the only active branch and is blocked on explicit authority inputs. `PS-003`, `G1`, and Phase 2 remain gated.
 
 ## Non-active preserved branches
 
@@ -27,6 +27,7 @@
 - `task/ws-01/MC-002-delivery-roadmap` — merged through PR #3; historical.
 - `task/ws-01/phase1-inputs-closeout` — merged through PR #7; historical.
 - `task/ws-02/PS-001-product-blueprint-v0-1` — merged through PR #5; historical.
+- `task/ws-02/PS-002-owner-decision-package` — merged through PR #8; historical.
 - `task/ws-11/LS-001-legal-data-baseline` — merged through PR #6; historical.
 - `test/chatgpt-write-access` — preserved test branch; do not modify or delete.
 

@@ -18,7 +18,7 @@ Prepare `PS-002 — Owner Decision Package` without approving owner choices.
 
 ## Not completed
 
-Independent PR review, merge, owner choices, required legal/tax facts, `MC-003`, `PS-003`, and `G1` remain incomplete.
+Owner choices, required legal/tax facts, `MC-003`, `PS-003`, and `G1` remain incomplete.
 
 ## Changed files
 
@@ -34,24 +34,24 @@ Existing `DEC-001`–`DEC-013`, `DEC-015`, and `DEC-016`; `DEC-014` remains supe
 
 ## Blockers
 
-No technical blocker to review. Owner facts and qualified legal/tax review block `MC-003` where identified.
+No Product Strategy technical blocker. Owner facts and qualified legal/tax review block `MC-003` where identified.
 
 ## Exact next action
 
-Open and independently review the PS-002 draft PR. After approval and merge, run `MC-003` with explicit owner answers.
+Run `MC-003` with explicit owner answers. Start PS-003 only after that gate is approved.
 
 ## Handoff target
 
-Independent PS-002 reviewer, then the project owner and Master Orchestrator for `MC-003`.
+Project owner and Master Orchestrator for `MC-003`.
 
 ## Branch
 
-`task/ws-02/PS-002-owner-decision-package`
+None active. `task/ws-02/PS-002-owner-decision-package` is historical.
 
 ## PR
 
-Draft [#8](https://github.com/Bear78888/bizmetria.ai/pull/8).
+Merged [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) at `66be062629a9b11670d1b76d202a30474eff98f7`.
 
 ## Validation results
 
-Local validation pending final publication checks: option completeness, approved-constraint trace, recommendation/approval separation, downstream coverage, legal-boundary scan, decision-ID uniqueness, relative links, and changed-file scope.
+PASS — option completeness, approved-constraint trace, recommendation/approval separation, downstream coverage, legal-boundary scan, capacity arithmetic, decision-ID uniqueness, relative links, full remote/local diff equality, merge state, and resulting `main`.

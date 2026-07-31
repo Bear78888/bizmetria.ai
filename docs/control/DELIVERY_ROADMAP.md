@@ -145,7 +145,7 @@ Pass only when:
 - the Decision Log, Project Status, Task Queue, Registry, Active Work, Master Continuation, and Workstream 01 state agree;
 - `PS-001` and `LS-001` are the only initial execution assignments.
 
-All four conditions were satisfied when G0 passed. `PS-001` and `LS-001` are now `APPROVED` through PR #5 and PR #6; `PS-002` is `READY`. No later task is authorized to start before its named dependencies and gate pass.
+All four conditions were satisfied when G0 passed. `PS-001` and `LS-001` are `APPROVED` through PR #5 and PR #6; `PS-002` is `APPROVED` through PR #8. `MC-003` is active and blocked on explicit owner selections and required facts/reviews. No later task is authorized to start before its named dependencies and gate pass.
 
 # Phase 1 — Product and policy baseline
 
@@ -601,7 +601,7 @@ BizMetria receives status `AD READY` only when all conditions below are true:
 1. `MC-002` is merged and `G0` is `PASS` — complete.
 2. Assign `PS-001` and `LS-001` as the first two non-overlapping execution tasks — complete.
 3. Review and merge each result independently — complete through PR #5 and PR #6.
-4. Run `PS-002`, then `MC-003`, then `PS-003` — `PS-002` is next.
+4. Run `PS-002`, then `MC-003`, then `PS-003` — PS-002 is complete; MC-003 is active and awaiting owner input.
 5. Do not start Phase 2 implementation until `G1` passes.
 
 ## Handoff Summary
@@ -609,9 +609,9 @@ BizMetria receives status `AD READY` only when all conditions below are true:
 - **Task:** `MC-002 — Delivery Roadmap and Phase Gates`
 - **Status:** Approved through PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), merge SHA `713c17e2ca854ce65125d65382dedee3fcec6d9c`.
 - **Files changed:** Roadmap plus synchronized global and Workstream 01 governance records.
-- **Governance result:** Gate `G0` is `PASS`; `PS-001` and `LS-001` are `APPROVED`; `PS-002` is `READY`.
+- **Governance result:** Gate `G0` is `PASS`; `PS-001`, `LS-001`, and `PS-002` are `APPROVED`; `MC-003` is blocked on explicit authority inputs.
 - **Decisions approved:** No new product decision; `MC-001` and `DEC-016` are recognized as approved after PR #2 merge.
 - **Open questions:** `OPEN-001` through `OPEN-009` remain unresolved and are routed through Phase 1 or the relevant later gate.
 - **Dependencies:** Approved MC-001 architecture and merged recovery baseline.
 - **Validation:** Task-ID uniqueness, link resolution, dependency reachability, invariant scan, no secrets/personal data, and complete diff review passed before approval.
-- **Recommended next task:** Assign `PS-002 — Owner Decision Package` on its temporary Product Strategy branch.
+- **Recommended next task:** Complete `MC-003 — Product Decision Gate` from explicit owner selections and required factual/professional-review confirmations.

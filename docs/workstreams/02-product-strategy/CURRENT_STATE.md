@@ -1,11 +1,11 @@
 # Current State
 
 **Workstream:** 02 — Product Strategy
-**Status:** `REVIEW`
+**Status:** `APPROVED`
 **Last updated:** 2026-07-30
-**Current task:** `PS-002 — Owner Decision Package`
-**Current branch:** `task/ws-02/PS-002-owner-decision-package`
-**Current PR:** Draft [#8](https://github.com/Bear78888/bizmetria.ai/pull/8)
+**Current task:** None; next is `PS-003 — Product Requirements Baseline v1.0`
+**Current branch:** None; PS-002 branch is historical
+**Current PR:** None
 
 ## Approved baseline
 
@@ -13,15 +13,15 @@ Approved product foundation in the Master Brief and DEC-001–DEC-016; approved 
 
 ## Completed
 
-A complete new Product Blueprint v0.1 was independently reviewed and merged through PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5) at `21d223223180e7a7d617f28648674efb613c4a92`. It is not represented as the unavailable historical original.
+A complete new Product Blueprint v0.1 was independently reviewed and merged through PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5) at `21d223223180e7a7d617f28648674efb613c4a92`. The Owner Decision Package v0.1 was independently reviewed and merged through PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8) at `66be062629a9b11670d1b76d202a30474eff98f7`.
 
 ## In progress
 
-`PS-002 — Owner Decision Package` is complete on its scoped task branch and awaiting independent draft-PR review. It provides independently answerable options, recommendations, tradeoffs, exact proposed rules, downstream impacts, KPI targets, capacity controls, and factual owner/legal confirmations.
+No Product Strategy task is in progress. PS-002 is approved as a recommendation package; no owner selection was approved by that merge.
 
 ## Not started
 
-`MC-003 — Product Decision Gate` and `PS-003 — Product Requirements v1.0` remain gated. Neither starts until PS-002 is independently reviewed and merged.
+`PS-003 — Product Requirements Baseline v1.0` remains gated on approved MC-003.
 
 ## Open decisions
 
@@ -29,7 +29,7 @@ All choices in the Owner Decision Package remain proposals. `OPEN-001`–`OPEN-0
 
 ## Blockers
 
-No technical blocker prevents PS-002 review. Explicit owner choices, entity/jurisdiction facts, and qualified legal/tax review remain blockers for `MC-003` and `G1`.
+No Product Strategy technical blocker. Explicit owner choices, entity/jurisdiction facts, and qualified legal/tax review block MC-003 and therefore PS-003/G1.
 
 ## Dependencies
 
@@ -50,8 +50,8 @@ Gate `G0` passed after MC-002 merged through PR [#3](https://github.com/Bear7888
 
 ## Exact next action
 
-Open and independently review the PS-002 draft PR. Merge only after confirming option completeness, proposal-versus-approval boundaries, legal qualifiers, downstream coverage, and repository invariants.
+Wait for approved MC-003, then start PS-003 from the verified post-gate `main`.
 
 ## Latest session checkpoint
 
-On 2026-07-30, PS-002 was prepared from approved PS-001 and LS-001 on a branch created from verified `main` SHA `608ef46e382f86d557168ab2396b56e21e88cf75`. The package recommends choices but approves none.
+On 2026-07-30, PS-002 was independently reviewed and merged at `66be062629a9b11670d1b76d202a30474eff98f7`. MC-003 now owns decision intake; no recommendation is an owner selection.
