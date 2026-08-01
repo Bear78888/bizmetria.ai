@@ -22,7 +22,8 @@ env:
   ASSESSMENT_STORAGE_MODE: mock
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_synthetic
   SUPABASE_SECRET_KEY: sb_secret_ci_synthetic
-  OPENAI_API_KEY: synthetic_openai_ci
+  ANTHROPIC_API_KEY: sk-ant-ci-synthetic
+  ANALYSIS_PROVIDER: deterministic
   STRIPE_SECRET_KEY: sk_test_ci_synthetic
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: pk_test_ci_synthetic
   RETELL_API_KEY: synthetic_retell_ci

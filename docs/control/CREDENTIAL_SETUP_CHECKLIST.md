@@ -15,7 +15,7 @@
 
 ## Later sandbox stages
 
-- [ ] OpenAI, Stripe, Retell, and Resend expected names are present in Vercel Preview.
+- [ ] Anthropic, Stripe, Retell, and Resend expected names are present in Vercel Preview.
 - [ ] Stripe keys pass test-mode validation.
 - [ ] Later provisioned IDs/webhook names are added directly to the appropriate dashboard environment.
 - [ ] Development calls, emails, and test payments use synthetic data only.

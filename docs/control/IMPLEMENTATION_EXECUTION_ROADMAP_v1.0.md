@@ -8,7 +8,7 @@
 | PR 1 — Platform Foundation (`BE-002`) | Next.js, strict TypeScript, environment validation, Supabase schema/migrations, Auth, RLS, Storage, CI, browser smoke tests | REVIEW — PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) | Preview/synthetic only |
 | PR 2 — Public Website and Free Assessment | Bilingual public site, 11 questions, deterministic score, lead/consent persistence, free result | PLANNED | No production email |
 | PR 3 — Stripe and Paid Onboarding | $299 test checkout, promotion codes, webhooks, orders, onboarding, customer area | PLANNED | Stripe test mode only |
-| PR 4 — Retell and AI Analysis | EN/ES development agents, webhook fixtures, transcripts, structured OpenAI analysis, recovery | PLANNED | No production phone numbers or customer data |
+| PR 4 — Retell and AI Analysis | EN/ES development agents, webhook fixtures, transcripts, structured Claude analysis, recovery | PLANNED | No production phone numbers or customer data |
 | PR 5 — Reports, Review, Email and Admin | Report schema, manual review, PDF, protected delivery, lifecycle email, admin console | PLANNED | Development recipient only |
 | PR 6 — QA and Production Readiness | Sandbox E2E, security/performance checks, monitoring hooks, rollback and activation checklist | PLANNED | No automatic live activation |
 
