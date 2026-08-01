@@ -1,0 +1,148 @@
+# Sends signed, simulated Retell lifecycle events for an existing interview
+# session against the production webhook. No call is placed and no Retell
+# object is touched: the API key (read from Vercel, never printed) only signs
+# the request bodies the way Retell would. Database verification and cleanup
+# happen outside this workflow.
+
+name: Verify interview webhook end to end
+
+on:
+  workflow_dispatch:
+    inputs:
+      session_id:
+        description: 'interview_sessions.id to drive through the lifecycle'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  simulate:
+    if: github.repository == 'Bear78888/bizmetria.ai'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: development
+    env:
+      VERCEL_TEAM_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
+      VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      SESSION_ID: ${{ inputs.session_id }}
+      WEBHOOK_URL: https://bizmetria-ai.vercel.app/api/webhooks/retell
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Send signed lifecycle events
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$VERCEL_TOKEN" || { echo "VERCEL_TOKEN is missing." >&2; exit 1; }
+          echo "::add-mask::$VERCEL_TOKEN"
+
+          node <<'NODE'
+          const { Retell } = require('retell-sdk');
+
+          const token = process.env.VERCEL_TOKEN;
+          const teamId = process.env.VERCEL_TEAM_ID;
+          const projectId = process.env.VERCEL_PROJECT_ID;
+          const sessionId = process.env.SESSION_ID;
+          const webhookUrl = process.env.WEBHOOK_URL;
+          const base = `https://api.vercel.com/v9/projects/${encodeURIComponent(projectId)}/env`;
+
+          const listResponse = await fetch(`${base}?teamId=${encodeURIComponent(teamId)}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (!listResponse.ok) throw new Error(`Env listing failed: ${listResponse.status}`);
+          const { envs = [] } = await listResponse.json();
+          const entry = envs.find(
+            (env) =>
+              env.key === 'RETELL_API_KEY' &&
+              Array.isArray(env.target) &&
+              env.target.includes('production') &&
+              !env.gitBranch &&
+              !env.configurationId,
+          );
+          if (!entry) throw new Error('RETELL_API_KEY is not set on Production.');
+          const detail = await fetch(
+            `${base}/${entry.id}?teamId=${encodeURIComponent(teamId)}&decrypt=true`,
+            { headers: { Authorization: `Bearer ${token}` } },
+          );
+          if (!detail.ok) throw new Error(`Reading RETELL_API_KEY failed: ${detail.status}`);
+          const { value: apiKey } = await detail.json();
+          if (!apiKey) throw new Error('RETELL_API_KEY value is not readable.');
+          console.log(`::add-mask::${apiKey}`);
+
+          const callId = `call_sim_${Date.now()}`;
+          const startedAt = Date.now();
+
+          async function deliver(event) {
+            const body = JSON.stringify(event);
+            const signature = await Retell.sign(body, apiKey);
+            const response = await fetch(webhookUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'x-retell-signature': signature },
+              body,
+            });
+            const responseBody = await response.text();
+            console.log(`${event.event}: ${response.status} ${responseBody}`);
+            if (!response.ok) throw new Error(`${event.event} was not accepted.`);
+            return JSON.parse(responseBody);
+          }
+
+          // A forged signature must be rejected before anything real is sent.
+          const forged = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-retell-signature': `v=${Date.now()},d=${'0'.repeat(64)}`,
+            },
+            body: JSON.stringify({ event: 'call_started', call: { call_id: callId } }),
+          });
+          if (forged.status !== 400) {
+            throw new Error(`Forged signature returned ${forged.status}, expected 400.`);
+          }
+          console.log('forged signature: 400 as expected');
+
+          const metadata = { bizmetria_interview_session_id: sessionId };
+
+          const started = await deliver({
+            event: 'call_started',
+            call: { call_id: callId, metadata, start_timestamp: startedAt },
+          });
+          if (started.outcome !== 'processed') throw new Error('call_started not processed.');
+
+          const ended = await deliver({
+            event: 'call_ended',
+            call: {
+              call_id: callId,
+              metadata,
+              start_timestamp: startedAt,
+              end_timestamp: startedAt + 60_000,
+              transcript:
+                'Agent: Hello, this is the BizMetria assessment interview.\nUser: Hi, ready to begin.',
+              transcript_object: [
+                { role: 'agent', content: 'Hello, this is the BizMetria assessment interview.' },
+                { role: 'user', content: 'Hi, ready to begin.' },
+              ],
+            },
+          });
+          if (ended.outcome !== 'processed') throw new Error('call_ended not processed.');
+
+          const duplicate = await deliver({
+            event: 'call_started',
+            call: { call_id: callId, metadata, start_timestamp: startedAt },
+          });
+          if (duplicate.outcome !== 'ignored') throw new Error('duplicate was not ignored.');
+
+          console.log('');
+          console.log(`SIMULATION COMPLETE call_id=${callId} session=${sessionId}`);
+          NODE
