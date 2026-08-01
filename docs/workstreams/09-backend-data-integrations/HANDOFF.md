@@ -1,52 +1,22 @@
 # Handoff
 
 **Workstream:** 09 — Backend, Data and Integrations
-**Last updated:** 2026-07-30
+**Last updated:** 2026-07-31
 
-## Goal of latest work
+## Current implementation
 
-Initialize the permanent GitHub operating context for this workstream.
+BE-002 establishes the first executable application: Next.js App Router, strict TypeScript, English/Spanish routes, scoped environment validation, Supabase SSR Auth clients, a normalized database migration with RLS and private report Storage, synthetic seed data, CI, unit/integration tests, and Playwright smoke tests.
 
-## Completed
+## Branch and PR
 
-Canonical brief, state, queue, decision index, artifact index, handoff, changelog, and deliverables policy prepared under MC-001.
+- Branch: `task/ws-09/BE-002-platform-foundation`
+- PR: Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18)
+- Base: verified `main` at `7677bee1b0791bb4f954f058aa9e959d4796985a`
 
-## Not completed
+## Remaining gate
 
-Domain model, APIs/events, state machines, adapters, observability, and failure recovery.
+Publish the branch, verify GitHub CI, Vercel Preview, environment-name validation, and native Supabase preview behavior. Do not merge a production-affecting database deployment without explicit owner permission.
 
-## Changed files
+## Next implementation after merge
 
-The eight required operating elements in this workstream directory.
-
-## Decisions used
-
-[DEC-001–DEC-015](../../BIZMETRIA_DECISION_LOG.md) and the explicit MC-001 governance-migration assignment. No new product decision was made.
-
-## Open questions
-
-Technology stack, telephony, CRM/email vendors, hosting, and implementation choices.
-
-## Blockers
-
-No undisclosed blocker. Ownership and dependencies are recorded in `CURRENT_STATE.md`.
-
-## Exact next action
-
-Wait for stable product/data contracts; Master Orchestrator then assigns a BE-prefixed architecture task.
-
-## Handoff target
-
-Master Orchestrator and the next explicitly assigned temporary Workstream Chat.
-
-## Branch
-
-`architecture/master-orchestrator-workstreams-v1`
-
-## PR
-
-[#2](https://github.com/Bear78888/bizmetria.ai/pull/2)
-
-## Validation results
-
-PASS — all eight required elements, required sections, task prefixes, state fields, and relative links validated under MC-001.
+PR 2 — Public Website and Free Assessment, from the new remote `main`.

@@ -14,9 +14,11 @@
 
 ## Active task index
 
-No execution task is active in the approved post-LS-002 state. `LC-001` and `AE-001` are `READY` and require separate scoped branches and draft PRs before becoming active. The service branch that publishes this closeout is historical when this record reaches `main`.
+| Task | Status | Branch | PR | Scope |
+|---|---|---|---|---|
+| `BE-002 — Platform Foundation` | REVIEW | `task/ws-09/BE-002-platform-foundation` | Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) | Next.js, TypeScript, environment validation, Supabase Auth/RLS/Storage, CI/tests, native preview verification |
 
-`PS-001`, `LS-001`, `PS-002`, `MC-003`, `PS-003`, `FA-001`, `PS-004`, and `LS-002` are merged and approved. `G1` is `PASS`; `G2` is not passed. Live payment, real-order, production-data, and public-launch work remains blocked by the named pre-live gates.
+`LC-001` is merged through PR #17. `AE-001` remains unfinished on a remote branch with no task commit and is not a blocker for BE-002. `G2` is not passed. Live payment, real-order, production-data, production communications, and public-launch work remain blocked by the named pre-live gates.
 
 ## Non-active preserved branches
 
@@ -35,6 +37,7 @@ No execution task is active in the approved post-LS-002 state. `LC-001` and `AE-
 - `task/ws-11/LS-001-legal-data-baseline` — merged through PR #6; historical.
 - `task/ws-11/LS-002-consent-claims-data-requirements` — merged through PR #15; historical.
 - `task/ws-01/LS-002-phase2-closeout` — service branch; historical when its closeout reaches `main`.
+- `task/ws-10/LC-001-commercial-lifecycle-contract` — merged through PR #17; historical.
 - `test/chatgpt-write-access` — preserved test branch; do not modify or delete.
 
 ## Reconciliation procedure

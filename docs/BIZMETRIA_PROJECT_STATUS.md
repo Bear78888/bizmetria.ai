@@ -1,12 +1,12 @@
 # BizMetria Project Status
 
 **As of:** 2026-07-31 \
-**Overall status:** `PHASE 2 IN PROGRESS — LS-002 APPROVED; LC-001 AND AE-001 READY` \
-**Verified `main` SHA:** `a60597ebd3a17c06c923150fb9cf76f24c3a437c`
+**Overall status:** `SANDBOX IMPLEMENTATION — PLATFORM FOUNDATION IN REVIEW` \
+**Verified starting `main` SHA:** `7677bee1b0791bb4f954f058aa9e959d4796985a`
 
 ## Current phase
 
-Recovery PR [#1](https://github.com/Bear78888/bizmetria.ai/pull/1), architecture PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2), Delivery Roadmap PR [#3](https://github.com/Bear78888/bizmetria.ai/pull/3), Product Blueprint PR [#5](https://github.com/Bear78888/bizmetria.ai/pull/5), Legal/Data Baseline PR [#6](https://github.com/Bear78888/bizmetria.ai/pull/6), Phase 1 input closeout PR [#7](https://github.com/Bear78888/bizmetria.ai/pull/7), Owner Decision Package PR [#8](https://github.com/Bear78888/bizmetria.ai/pull/8), MC-003 owner decision PR [#9](https://github.com/Bear78888/bizmetria.ai/pull/9), Product Requirements PR [#10](https://github.com/Bear78888/bizmetria.ai/pull/10), Free Audit Contract PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), Paid Assessment Contract PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13), Phase 2 input closeout PR [#14](https://github.com/Bear78888/bizmetria.ai/pull/14), and Consent/Claims/Data Requirements PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) are merged.
+All historical baseline tasks through LC-001 are merged. The latest verified merge is Commercial and Lifecycle Contract PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17) at `7677bee1b0791bb4f954f058aa9e959d4796985a`. No PR was open when BE-002 started.
 
 Gate `G0 — Governance Ready` is `PASS` because:
 
@@ -15,7 +15,7 @@ Gate `G0 — Governance Ready` is `PASS` because:
 - the Decision Log, Project Status, Task Queue, Registry, Active Work, Master Continuation, and Workstream 01 state are synchronized;
 - `PS-001` and `LS-001` were the only initial execution assignments and are now approved.
 
-`G1 — Product Baseline Approved` is `PASS`. FA-001, PS-004, and LS-002 were independently reviewed and merged. The consent/claims/data contract now covers 21 customer-facing surfaces, all 44 paid fields, 23 stored data classes, rights/retention behavior, and production-review triggers. `LC-001` and `AE-001` are the two dependency-ready non-overlapping tasks; `G2` is not passed. Missing entity, support, staffing, legal, tax, vendor/security, release, and live-credential facts remain fail-closed pre-live dependencies.
+`G1 — Product Baseline Approved` is `PASS`; `G2` remains not passed. LC-001 is merged. AE-001 remains unfinished but does not block the owner-authorized Platform Foundation. Missing entity, support, staffing, legal, tax, vendor/security, release, and live-credential facts remain fail-closed pre-live dependencies.
 
 ## Confirmed product baseline
 
@@ -50,8 +50,9 @@ Gate `G0 — Governance Ready` is `PASS` because:
 | FA-001 Free Audit and Score Contract | Free Audit and Lead Scoring | APPROVED | PR [#12](https://github.com/Bear78888/bizmetria.ai/pull/12), merge SHA `97446522cf9eba8e63fe1b1887439fb77adabf5f` |
 | PS-004 Paid Assessment Content Contract | Product Strategy | APPROVED | PR [#13](https://github.com/Bear78888/bizmetria.ai/pull/13), merge SHA `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b` |
 | LS-002 Consent, Claims, and Data Requirements | Legal, Privacy and Security | APPROVED | PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15), merge SHA `a60597ebd3a17c06c923150fb9cf76f24c3a437c` |
-| LC-001 Commercial and Lifecycle Contract | Payments, CRM and Lifecycle | READY | PS-003 and LS-002 approved |
+| LC-001 Commercial and Lifecycle Contract | Payments, CRM and Lifecycle | APPROVED | PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17), merge SHA `7677bee1b0791bb4f954f058aa9e959d4796985a` |
 | AE-001 Analysis and Evidence Contract | AI Analysis Engine | READY | FA-001, PS-004, and LS-002 approved |
+| BE-002 Platform Foundation | Backend, Data and Integrations | REVIEW | Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) |
 | G2 and later delivery tasks | Applicable workstreams | PLANNED | Follow named dependencies in the Delivery Roadmap |
 
 The complete sequence is in [`docs/control/DELIVERY_ROADMAP.md`](control/DELIVERY_ROADMAP.md); exact per-workstream state is in [`docs/control/WORKSTREAM_REGISTRY.md`](control/WORKSTREAM_REGISTRY.md).
@@ -73,7 +74,7 @@ The Decision Log and Delivery Roadmap name the task and gate responsible for eac
 
 ## Immediate next action
 
-Start `LC-001` and `AE-001` from verified `main` on separate scoped branches and draft PRs. Their file scopes do not overlap. Preserve every pre-live dependency and keep Stripe in test mode until the final protected activation stage.
+Complete BE-002 local validation, publish one draft PR, and require passing GitHub CI plus native Vercel Preview. Validate Supabase through the native preview integration when available; do not apply production database changes without explicit owner permission.
 
 ## Operational safeguards
 

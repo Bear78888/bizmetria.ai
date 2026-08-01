@@ -1,12 +1,12 @@
 # Master Continuation
 
 **Repository:** `Bear78888/bizmetria.ai`  
-**Current phase:** Phase 2 — Canonical product and system contracts \
+**Current phase:** Sandbox implementation — Platform Foundation \
 **Last updated:** 2026-07-31 \
-**Verified `main` SHA:** `a60597ebd3a17c06c923150fb9cf76f24c3a437c` \
-**Current task:** `LC-001 and AE-001` — `READY` \
-**Current execution branch:** None \
-**Current execution PR:** None
+**Verified starting `main` SHA:** `7677bee1b0791bb4f954f058aa9e959d4796985a` \
+**Current task:** `BE-002 — Platform Foundation` — `REVIEW` \
+**Current execution branch:** `task/ws-09/BE-002-platform-foundation` \
+**Current execution PR:** Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18)
 
 ## BizMetria in brief
 
@@ -42,8 +42,9 @@ PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2) approved `MC-001` and 
 - Workstream 02: `PS-004` is `APPROVED` through PR #13.
 - Workstream 04: `FA-001` is `APPROVED` through PR #12; OPEN-009 is closed.
 - Workstream 11: `LS-002` is `APPROVED` through PR #15 at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
-- Workstream 10: `LC-001` is `READY` because PS-003 and LS-002 are approved.
+- Workstream 10: `LC-001` is `APPROVED` through PR #17 at `7677bee1b0791bb4f954f058aa9e959d4796985a`.
 - Workstream 07: `AE-001` is `READY` because FA-001, PS-004, and LS-002 are approved.
+- Workstream 09: `BE-002` is `REVIEW` in draft PR #18 under the owner's 2026-07-31 technical implementation directive; AE-001 is not its dependency.
 - `G2` and all later tasks remain `PLANNED` behind named dependencies and phase gates.
 - Workstream 04 preserves two recovered inputs as historical evidence; implementations use the approved v1 contract.
 
@@ -51,7 +52,7 @@ See the [Delivery Roadmap](DELIVERY_ROADMAP.md) for the complete critical path a
 
 ## Active work
 
-- No execution task is active after LS-002 merge. `LC-001` and `AE-001` are the two next ready tasks with non-overlapping workstream files.
+- BE-002 is active on `task/ws-09/BE-002-platform-foundation`, based on verified remote `main` `7677bee1b0791bb4f954f058aa9e959d4796985a`.
 - Entity/address, support identity, legal/tax review, report-review staffing, consultation staffing, and live Stripe credentials are explicit pre-live dependencies; they do not block PS-003, architecture, implementation, or staging.
 - The merged recovery, architecture, and MC-002 branches are historical, not live-locks.
 - The PS-001 and LS-001 branches are historical after PR #5 and PR #6 merged.
@@ -76,11 +77,11 @@ See the [Delivery Roadmap](DELIVERY_ROADMAP.md) for the complete critical path a
 
 ## Current blockers
 
-No dependency blocker remains for `LC-001` or `AE-001`. Missing entity/operations facts and qualified legal/tax/vendor/security/release evidence still block live Stripe activation, real paid orders, production customer data, and public paid launch.
+No dependency blocker prevents Platform Foundation preview work. Native Vercel and Supabase preview checks remain acceptance evidence. Missing entity/operations facts and qualified legal/tax/vendor/security/release evidence still block live Stripe activation, real paid orders, production customer data, production communications, and public paid launch.
 
 ## Exact next action
 
-Start `LC-001` on `task/ws-10/LC-001-commercial-lifecycle-contract` and `AE-001` on `task/ws-07/AE-001-analysis-evidence-contract` from verified `main`, each with one draft PR. Keep payment integration in Stripe test mode, use synthetic data only, and preserve every pre-live dependency.
+Publish BE-002 as one draft PR, verify CI, Vercel Preview, and native Supabase preview behavior, and preserve every production activation boundary. After an authorized merge, start PR 2 from the new remote `main`.
 
 ## Required Startup Reading
 
