@@ -51,6 +51,27 @@ status documents are now out of date and superseded by this section:
   rotation of the temporary credentials, and connecting the `bizmetria.ai` domain,
   which does not resolve yet.
 
+## 2026-08-01 owner decisions
+
+- **The analysis provider is Claude (Anthropic), not OpenAI** (`DEC-027`). OpenAI
+  is withdrawn from the project: `OPENAI_API_KEY` no longer exists in the
+  environment contract, CI, or `.env.example`, and every roadmap and registry
+  entry that named OpenAI now names Anthropic. The free AI Opportunity Check is
+  unaffected — it stays deterministic arithmetic with no model call.
+  `src/features/analysis` implements the paid analysis against
+  `@anthropic-ai/sdk` on `claude-opus-5` with structured outputs, alongside a
+  deterministic offline provider that satisfies the same contract so the feature
+  is testable and CI stays offline. Rationale and boundaries:
+  [`docs/architecture/analysis-provider.md`](../architecture/analysis-provider.md).
+- **Result email sends from `noreply@bizmetria.com`** (the domain verified in
+  Resend; the product domain remains `bizmetria.ai`). `RESEND_FROM_EMAIL` and
+  `RESEND_DELIVERY_MODE` are now validated by the environment schema, so a
+  malformed sender fails the build instead of the first send.
+- **Owner action still outstanding for this work:** `ANTHROPIC_API_KEY` does not
+  exist in any environment yet. Until it is added to Vercel, deployments run the
+  deterministic provider. The schema accepts its absence on purpose so the build
+  never breaks ahead of the feature, but validates the prefix when present.
+
 ## BizMetria in brief
 
 BizMetria.ai is a cross-industry English/Spanish business assessment platform. The paid `BizMetria Business Assessment` costs **$299 one time**, is not a subscription, and excludes separately sold implementation. Cold traffic starts with a free `AI Opportunity Check`. The canonical product baseline is the [Master Brief](../BIZMETRIA_MASTER_BRIEF_v1.0.md); do not duplicate or silently alter it here.

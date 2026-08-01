@@ -64,7 +64,7 @@ const urgencyScores: Record<AssessmentAnswers['Q11'], number> = {
   start_now: 15,
 };
 
-const blockMaximums: Record<ScoreBlockId, number> = {
+export const blockMaximums: Record<ScoreBlockId, number> = {
   lead_response_follow_up: 30,
   manual_work: 25,
   systems_data: 20,

@@ -2,7 +2,7 @@
 
 Status: **APPROVED / RECOVERED**  
 Recovered: 2026-07-30  
-Last updated: 2026-07-31
+Last updated: 2026-08-01
 
 This log records approved decisions recoverable from the available project context and later owner-approved governance changes. It does not claim to reproduce the exact wording of unavailable historical repository content.
 
@@ -34,6 +34,7 @@ This log records approved decisions recoverable from the available project conte
 | DEC-024 | BizMetria's intended paid-service geography is all 50 U.S. states and the District of Columbia. | APPROVED WITH PRE-LAUNCH LEGAL/TAX DEPENDENCY | Approved as `D08-A`; live checkout and advertising remain disabled until qualified legal and tax review confirms the required nationwide controls. No international paid launch is approved. |
 | DEC-025 | Account holders and purchasers must be authorized business representatives aged 18 or older. | APPROVED WITH PRE-LAUNCH LEGAL DEPENDENCY | Approved as `D09-A`; final Terms, privacy handling, representations, and enforcement require qualified counsel review before live use. |
 | DEC-026 | Stripe is the approved processor for BizMetria's real one-time payments and promotion-code checkout. | APPROVED | Build test/live separation, webhook verification, idempotency, refunds, receipts, and externalized secrets now; add account identifiers and live keys only during the final protected activation step. No Stripe secret may be committed to GitHub. |
+| DEC-027 | Claude (Anthropic) is the analysis provider for the paid Business Assessment; OpenAI is withdrawn from the project. | APPROVED | Owner decision, 2026-08-01. `OPENAI_API_KEY` is removed from the environment contract and replaced by `ANTHROPIC_API_KEY`. The free AI Opportunity Check stays deterministic and model-free. Implementation and the offline fallback provider are documented in [`docs/architecture/analysis-provider.md`](architecture/analysis-provider.md). |
 
 ## Open decision register
 

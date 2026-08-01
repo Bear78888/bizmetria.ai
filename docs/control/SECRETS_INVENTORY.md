@@ -10,7 +10,7 @@
 | `SUPABASE_SECRET_KEY` | Server-only | Platform Foundation | Vercel | Never import into a client module |
 | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Browser-safe | PR 3 | Vercel | Test-mode key only before production activation |
 | `STRIPE_SECRET_KEY` | Server-only | PR 3 | Vercel | Test mode only; live charging is prohibited |
-| `OPENAI_API_KEY` | Server-only | PR 4 | Vercel | Synthetic/development inputs until release approval |
+| `ANTHROPIC_API_KEY` | Server-only | PR 4 | Vercel | Optional until the paid assessment ships; the analysis provider refuses to run without it |
 | `RETELL_API_KEY` | Server-only | PR 4 | Vercel | Development agents only; no production numbers |
 | `RESEND_API_KEY` | Server-only | PR 2/5 | Vercel | Sandbox or approved development recipient only |
 

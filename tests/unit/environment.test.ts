@@ -94,7 +94,7 @@ describe('environment validation', () => {
     expect(() =>
       parseIntegrationEnvironment({
         ...platformEnvironment,
-        OPENAI_API_KEY: 'synthetic-openai-key',
+        ANTHROPIC_API_KEY: 'sk-ant-synthetic',
         STRIPE_SECRET_KEY: 'sk_live_disallowed',
         NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: 'pk_live_disallowed',
         RETELL_API_KEY: 'synthetic-retell-key',
@@ -109,7 +109,7 @@ describe('environment validation', () => {
     try {
       parseIntegrationEnvironment({
         ...platformEnvironment,
-        OPENAI_API_KEY: 'synthetic-openai-key',
+        ANTHROPIC_API_KEY: 'sk-ant-synthetic',
         STRIPE_SECRET_KEY: suppliedSecret,
         NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: 'pk_test_synthetic',
         RETELL_API_KEY: 'synthetic-retell-key',
@@ -119,5 +119,51 @@ describe('environment validation', () => {
       expect(error).toBeInstanceOf(EnvironmentValidationError);
       expect(String(error)).not.toContain(suppliedSecret);
     }
+  });
+
+  const integrationEnvironment = {
+    ...platformEnvironment,
+    STRIPE_SECRET_KEY: 'sk_test_synthetic',
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: 'pk_test_synthetic',
+    RETELL_API_KEY: 'synthetic-retell-key',
+    RESEND_API_KEY: 'synthetic-resend-key',
+  };
+
+  // The credential does not exist yet in any deployed environment. Requiring it
+  // would fail the build before the analysis feature ships, so the schema lets
+  // a deployment come up without it and the analysis provider refuses instead.
+  it('builds without an Anthropic credential', () => {
+    expect(validateEnvironment(integrationEnvironment, 'integrations').ok).toBe(true);
+  });
+
+  it('rejects a value in ANTHROPIC_API_KEY that is not an Anthropic key', () => {
+    const check = validateEnvironment(
+      { ...integrationEnvironment, ANTHROPIC_API_KEY: 'sk-proj-wrong-provider' },
+      'integrations',
+    );
+
+    expect(check.ok).toBe(false);
+    expect(check.invalid).toContain('ANTHROPIC_API_KEY');
+  });
+
+  it('rejects a malformed sender address', () => {
+    const check = validateEnvironment(
+      { ...integrationEnvironment, RESEND_FROM_EMAIL: 'noreply@' },
+      'integrations',
+    );
+
+    expect(check.ok).toBe(false);
+    expect(check.invalid).toContain('RESEND_FROM_EMAIL');
+  });
+
+  it('accepts the configured sender address', () => {
+    const result = parseIntegrationEnvironment({
+      ...integrationEnvironment,
+      ANTHROPIC_API_KEY: 'sk-ant-synthetic',
+      RESEND_FROM_EMAIL: 'noreply@bizmetria.com',
+      RESEND_DELIVERY_MODE: 'send',
+    });
+
+    expect(result.RESEND_FROM_EMAIL).toBe('noreply@bizmetria.com');
   });
 });

@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { resolveExpectedSupabaseProjectRef } from '../supabase/target';
 
 export const expectedEnvironmentNames = [
-  'OPENAI_API_KEY',
+  'ANTHROPIC_API_KEY',
   'STRIPE_SECRET_KEY',
   'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
   'RETELL_API_KEY',
@@ -22,7 +22,7 @@ export const browserEnvironmentNames = [
 ] as const;
 
 export const serverOnlyEnvironmentNames = [
-  'OPENAI_API_KEY',
+  'ANTHROPIC_API_KEY',
   'STRIPE_SECRET_KEY',
   'RETELL_API_KEY',
   'RESEND_API_KEY',
@@ -95,7 +95,18 @@ const platformEnvironmentObject = publicSupabaseSchema.extend({
 });
 
 const integrationEnvironmentObject = platformEnvironmentObject.extend({
-  OPENAI_API_KEY: z.string().min(1, 'OPENAI_API_KEY is required'),
+  // Claude is the analysis provider. The key is optional so a deployment can
+  // build and serve the free assessment before the credential exists; the
+  // analysis provider itself refuses to run without it. Whatever is set must
+  // at least look like an Anthropic key, so a value pasted into the wrong
+  // variable fails at build time rather than on the first paid assessment.
+  ANTHROPIC_API_KEY: z
+    .string()
+    .startsWith('sk-ant-', 'ANTHROPIC_API_KEY must be an Anthropic API key')
+    .optional(),
+  ANALYSIS_PROVIDER: z.enum(['claude', 'deterministic']).optional(),
+  RESEND_FROM_EMAIL: z.email({ error: 'RESEND_FROM_EMAIL must be a valid address' }).optional(),
+  RESEND_DELIVERY_MODE: z.literal('send').optional(),
   STRIPE_SECRET_KEY: z
     .string()
     .startsWith('sk_test_', 'STRIPE_SECRET_KEY must be a Stripe test key'),
