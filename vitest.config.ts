@@ -10,6 +10,15 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  // Resolve the way a React Server Component does. Without this the
+  // `server-only` marker resolves to the module that throws on import, so every
+  // server module — routes, storage, elevated clients — is untestable. Vitest
+  // loads modules through Vite's SSR pipeline, so the condition belongs here.
+  ssr: {
+    resolve: {
+      conditions: ['react-server', 'node', 'import'],
+    },
+  },
   test: {
     environment: 'node',
     include: ['tests/unit/**/*.test.ts'],
