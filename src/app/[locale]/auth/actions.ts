@@ -18,6 +18,24 @@ function localeFromForm(formData: FormData): Locale {
   return typeof locale === 'string' && isLocale(locale) ? locale : 'en';
 }
 
+// Same containment rule as /auth/callback: only a same-origin path ever
+// becomes a redirect target, so a crafted ?next= cannot send a fresh session
+// to another site.
+function nextPathFromForm(formData: FormData): string | null {
+  const value = formData.get('next');
+  if (typeof value !== 'string' || !value) return null;
+  try {
+    const safeBase = new URL('https://bizmetria.invalid');
+    const candidate = new URL(value, safeBase);
+    if (candidate.origin === safeBase.origin && candidate.pathname.startsWith('/')) {
+      return `${candidate.pathname}${candidate.search}`;
+    }
+  } catch {
+    // Malformed values fall back to the default destination.
+  }
+  return null;
+}
+
 function authInputFromForm(formData: FormData) {
   return authInputSchema.safeParse({
     email: formData.get('email'),
@@ -58,6 +76,7 @@ async function requestOrigin() {
 export async function signIn(formData: FormData) {
   const locale = localeFromForm(formData);
   const input = authInputFromForm(formData);
+  const nextPath = nextPathFromForm(formData);
 
   if (!input.success) {
     redirect(`/${locale}/auth?error=invalid_input`);
@@ -70,7 +89,7 @@ export async function signIn(formData: FormData) {
     redirect(`/${locale}/auth?error=sign_in_failed`);
   }
 
-  redirect(`/${locale}/account`);
+  redirect(nextPath ?? `/${locale}/account`);
 }
 
 export async function signUp(formData: FormData) {
@@ -83,10 +102,11 @@ export async function signUp(formData: FormData) {
 
   const supabase = await createSupabaseServerClient();
   const origin = await requestOrigin();
+  const nextPath = nextPathFromForm(formData) ?? `/${locale}/account`;
   const { error } = await supabase.auth.signUp({
     ...input.data,
     options: {
-      emailRedirectTo: `${origin}/auth/callback?next=/${locale}/account`,
+      emailRedirectTo: `${origin}/auth/callback?next=${encodeURIComponent(nextPath)}`,
       data: {
         preferred_locale: locale,
       },
