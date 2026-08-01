@@ -15,8 +15,11 @@ export const REGISTERED_PREVIEW_PROJECT_REFS: readonly string[] = Object.freeze(
 
 type EnvironmentInput = Readonly<Record<string, string | undefined>>;
 
-export function failSupabaseTargetVerification(): never {
-  throw new Error(SUPABASE_TARGET_ERROR);
+// `detail` may only ever carry non-secret identifiers (project refs, hostnames,
+// the target-env flag). Without them a mismatch is undiagnosable in a deployed
+// environment; with them the message still exposes nothing sensitive.
+export function failSupabaseTargetVerification(detail?: string): never {
+  throw new Error(detail ? `${SUPABASE_TARGET_ERROR} ${detail}` : SUPABASE_TARGET_ERROR);
 }
 
 function isRegisteredPreviewTarget(environment: EnvironmentInput): boolean {
@@ -44,20 +47,22 @@ export function verifySupabaseEnvironmentTarget(environment: EnvironmentInput = 
   const expectedRef = resolveExpectedSupabaseProjectRef(environment);
   const expectedHostname = `${expectedRef}.supabase.co`;
 
+  const observed = `Received ref: ${environment.SUPABASE_PROJECT_REF ?? '(unset)'}, target env: ${environment.SUPABASE_TARGET_ENV ?? '(unset)'}.`;
+
   if (environment.SUPABASE_PROJECT_REF !== expectedRef) {
-    failSupabaseTargetVerification();
+    failSupabaseTargetVerification(observed);
   }
 
   const projectUrl = environment.NEXT_PUBLIC_SUPABASE_URL;
   if (!projectUrl || projectUrl.toLowerCase().includes('/rest/v1/')) {
-    failSupabaseTargetVerification();
+    failSupabaseTargetVerification(`${observed} Project URL is missing or not a root URL.`);
   }
 
   let parsedUrl: URL;
   try {
     parsedUrl = new URL(projectUrl);
   } catch {
-    failSupabaseTargetVerification();
+    failSupabaseTargetVerification(`${observed} Project URL is not a valid URL.`);
   }
 
   if (
@@ -67,6 +72,8 @@ export function verifySupabaseEnvironmentTarget(environment: EnvironmentInput = 
     parsedUrl.search !== '' ||
     parsedUrl.hash !== ''
   ) {
-    failSupabaseTargetVerification();
+    failSupabaseTargetVerification(
+      `${observed} Expected host: ${expectedHostname}, received host: ${parsedUrl.hostname}.`,
+    );
   }
 }

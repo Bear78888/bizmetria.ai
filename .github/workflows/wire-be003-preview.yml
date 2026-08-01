@@ -195,6 +195,18 @@ jobs:
           rm -f "$RUNNER_TEMP/vercel-preview-env.txt"
           echo "Branch-scoped Vercel Preview variables are configured without exposing their values."
 
+          # Print only the non-secret target markers actually resolved for this
+          # branch. Refs, hostnames and modes are non-secret by design; keys are
+          # never printed, and the pulled file is deleted immediately.
+          resolved_env="$RUNNER_TEMP/preview-resolved.env"
+          npx --yes vercel@latest env pull "$resolved_env" \
+            --environment=preview --git-branch="$GIT_BRANCH" --yes --no-color \
+            --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_SLUG" >/dev/null
+          echo "Resolved non-secret Preview target markers:"
+          grep -E '^(SUPABASE_PROJECT_REF|SUPABASE_TARGET_ENV|ASSESSMENT_STORAGE_MODE|NEXT_PUBLIC_SUPABASE_URL)=' \
+            "$resolved_env" || echo "(none of the expected markers were resolved)"
+          rm -f "$resolved_env"
+
       # No local `vercel build`/`deploy` here. The Vercel Git integration builds
       # each Preview on Vercel's own infrastructure, where the full Preview
       # environment (including these branch-scoped overrides) is injected
