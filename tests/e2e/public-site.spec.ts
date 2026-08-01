@@ -74,6 +74,7 @@ test('health endpoint reports adapters without environment names or values', asy
   const body = (await response.json()) as {
     status: string;
     service: string;
+    revision: string;
     adapters: { assessmentStorage: string; analysisProvider: string; resultEmail: string };
   };
 
@@ -83,6 +84,7 @@ test('health endpoint reports adapters without environment names or values', asy
   expect(body).toEqual({
     status: 'ok',
     service: 'bizmetria-web',
+    revision: expect.any(String),
     adapters: {
       assessmentStorage: 'mock',
       analysisProvider: 'deterministic',

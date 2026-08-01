@@ -29,6 +29,17 @@ function activeAdapters() {
   };
 }
 
+/**
+ * Which commit is actually serving.
+ *
+ * Without this, "is the fix deployed yet?" can only be answered by guessing
+ * from behaviour — and a wrong guess sends you debugging code that is not
+ * running. A commit SHA is public information in a public repository.
+ */
+function deployedRevision(): string {
+  return process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? 'unknown';
+}
+
 export function GET() {
   const environment = checkServerEnvironment('platform');
 
@@ -36,6 +47,7 @@ export function GET() {
     {
       status: environment.ok ? 'ok' : 'configuration_error',
       service: 'bizmetria-web',
+      revision: deployedRevision(),
       adapters: activeAdapters(),
     },
     {
