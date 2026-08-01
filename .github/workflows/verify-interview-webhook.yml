@@ -49,7 +49,7 @@ jobs:
           echo "::add-mask::$VERCEL_TOKEN"
 
           node <<'NODE'
-          const { Retell } = require('retell-sdk');
+          const { Retell } = await import('retell-sdk');
 
           const token = process.env.VERCEL_TOKEN;
           const teamId = process.env.VERCEL_TEAM_ID;
