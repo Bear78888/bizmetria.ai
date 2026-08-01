@@ -67,13 +67,40 @@ test('11-question assessment calculates a deterministic result in preview mode',
   await expect(page.locator('.opportunity-card')).toHaveCount(3);
 });
 
-test('health endpoint exposes neither environment names nor values', async ({ request }) => {
+test('health endpoint reports adapters without environment names or values', async ({
+  request,
+}) => {
   const response = await request.get('/api/health');
-  const body = (await response.json()) as { status: string; service: string };
+  const body = (await response.json()) as {
+    status: string;
+    service: string;
+    adapters: { assessmentStorage: string; analysisProvider: string; resultEmail: string };
+  };
 
   expect(response.status()).toBe(200);
-  expect(body).toEqual({ status: 'ok', service: 'bizmetria-web' });
-  expect(JSON.stringify(body)).not.toContain('SUPABASE_SECRET_KEY');
+  // Exact shape: an added field must be a deliberate choice, since everything
+  // here is served publicly.
+  expect(body).toEqual({
+    status: 'ok',
+    service: 'bizmetria-web',
+    adapters: {
+      assessmentStorage: 'mock',
+      analysisProvider: 'deterministic',
+      resultEmail: 'skipped',
+    },
+  });
+
+  const serialised = JSON.stringify(body);
+  for (const name of [
+    'SUPABASE_SECRET_KEY',
+    'SUPABASE_PROJECT_REF',
+    'ANTHROPIC_API_KEY',
+    'supabase.co',
+    'sk-ant-',
+    'sb_secret_',
+  ]) {
+    expect(serialised).not.toContain(name);
+  }
 });
 
 test('sandbox authentication surface remains available', async ({ page }) => {
