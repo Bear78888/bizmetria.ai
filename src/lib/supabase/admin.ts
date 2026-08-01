@@ -11,7 +11,13 @@ export function createSupabaseAdminClient() {
   const projectUrl = resolveSupabaseAdminUrl();
   const environment = getPlatformEnvironment();
 
-  return createClient(projectUrl, environment.SUPABASE_SECRET_KEY, {
+  // A Vercel Marketplace Supabase integration owns the `SUPABASE_*` names and
+  // overwrites them with its own project's credentials. Prefer a namespaced
+  // variable no third party manages, falling back to the standard name so
+  // environments without that collision keep working unchanged.
+  const secretKey = process.env.BIZMETRIA_SUPABASE_SECRET_KEY || environment.SUPABASE_SECRET_KEY;
+
+  return createClient(projectUrl, secretKey, {
     auth: {
       autoRefreshToken: false,
       persistSession: false,

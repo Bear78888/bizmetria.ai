@@ -223,6 +223,9 @@ jobs:
           set_vercel_env NEXT_PUBLIC_SUPABASE_URL "$SUPABASE_PREVIEW_URL"
           set_vercel_env NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY "$SUPABASE_PREVIEW_PUBLISHABLE_KEY"
           set_vercel_env SUPABASE_SECRET_KEY "$SUPABASE_PREVIEW_SECRET_KEY" sensitive
+          # The marketplace integration overwrites SUPABASE_SECRET_KEY on every
+          # deployment, so also publish the namespaced variable the app prefers.
+          set_vercel_env BIZMETRIA_SUPABASE_SECRET_KEY "$SUPABASE_PREVIEW_SECRET_KEY" sensitive
           set_vercel_env SUPABASE_PROJECT_REF "$DEV_SUPABASE_PROJECT_REF"
           set_vercel_env SUPABASE_TARGET_ENV preview
           set_vercel_env ASSESSMENT_STORAGE_MODE supabase
@@ -235,6 +238,7 @@ jobs:
             NEXT_PUBLIC_SUPABASE_URL \
             NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY \
             SUPABASE_SECRET_KEY \
+            BIZMETRIA_SUPABASE_SECRET_KEY \
             SUPABASE_PROJECT_REF \
             SUPABASE_TARGET_ENV \
             ASSESSMENT_STORAGE_MODE; do
