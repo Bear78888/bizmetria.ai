@@ -93,6 +93,7 @@ jobs:
           NODE
 
       - name: Create a production deployment from the tip of main
+        id: deploy
         shell: bash
         run: |
           set -euo pipefail
@@ -128,6 +129,7 @@ jobs:
             // Wait for the build itself, not for the previous deployment to
             // keep answering. ERROR surfaces here with the inspector URL
             // instead of timing out downstream.
+            const fs = require('node:fs');
             for (let attempt = 0; attempt < 90; attempt += 1) {
               await new Promise((resolve) => setTimeout(resolve, 10_000));
               const stateResponse = await fetch(
@@ -137,7 +139,14 @@ jobs:
               if (!stateResponse.ok) continue;
               const deployment = await stateResponse.json();
               console.log(`build state: ${deployment.readyState}`);
-              if (deployment.readyState === 'READY') return;
+              if (deployment.readyState === 'READY') {
+                // The verify step compares against what was actually built,
+                // not against the ref this workflow happens to run from.
+                const sha = deployment.gitSource?.sha ?? deployment.meta?.githubCommitSha ?? '';
+                fs.appendFileSync(process.env.GITHUB_OUTPUT, `deployed_sha=${sha}\n`);
+                console.log(`deployed commit: ${sha}`);
+                return;
+              }
               if (deployment.readyState === 'ERROR' || deployment.readyState === 'CANCELED') {
                 throw new Error(
                   `Build finished as ${deployment.readyState}. Inspect: https://vercel.com/jorgiohenes-7252s-projects/bizmetria-ai/${created.id}`,
@@ -153,9 +162,12 @@ jobs:
 
       - name: Verify the served revision is the commit this run deployed
         shell: bash
+        env:
+          DEPLOYED_SHA: ${{ steps.deploy.outputs.deployed_sha }}
         run: |
           set -euo pipefail
-          expected="${EXPECTED_SHA:0:7}"
+          expected="${DEPLOYED_SHA:0:7}"
+          test -n "$expected" || expected="${EXPECTED_SHA:0:7}"
           # The strong form of "is it deployed": the running code reports which
           # commit it was built from, so equality is a fact, not an inference.
           for attempt in $(seq 1 30); do
