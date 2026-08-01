@@ -1,0 +1,138 @@
+/**
+ * Provisions the BizMetria interview agents in Retell (development/test).
+ *
+ * Creates one voice agent per locale (EN, ES), each backed by a Retell LLM
+ * response engine whose prompt implements the ten approved interview
+ * objectives from PS-004 §9.2 — and nothing beyond them. Idempotent by agent
+ * name: an existing `bizmetria-interview-en` / `-es` agent is reused and its
+ * ids are printed, so re-running never creates duplicates.
+ *
+ * No phone numbers are purchased and no calls are placed. Web-call access is
+ * created at interview time by the application, not here.
+ *
+ *   RETELL_API_KEY=... [RETELL_WEBHOOK_URL=...] node scripts/provision-retell-agents.mjs
+ */
+
+import { Retell } from 'retell-sdk';
+
+const apiKey = process.env.RETELL_API_KEY;
+if (!apiKey) throw new Error('RETELL_API_KEY is required.');
+
+// The deployment origin serving /api/webhooks/retell. Overridable so a future
+// domain activation does not require editing this script.
+const webhookUrl =
+  process.env.RETELL_WEBHOOK_URL ?? 'https://bizmetria-ai.vercel.app/api/webhooks/retell';
+
+const client = new Retell({ apiKey });
+
+/**
+ * The interview contract, shared by both locales. The agent adapts probe
+ * selection within these objectives; it must not expand into implementation
+ * consulting or unrestricted discovery (PS-004 §9.1).
+ */
+const interviewContract = `
+You are conducting a structured business-assessment interview for BizMetria.
+The customer has already completed a written questionnaire and has already
+given recorded consent; this call may last up to about 45 minutes.
+
+Work through these ten objectives, adapting your follow-up questions but never
+leaving this scope:
+1. Confirm the participant's role, authority, and scope, and who must validate
+   material decisions.
+2. Confirm the primary objective, the intended operational outcome, and the
+   time horizon.
+3. Walk through the primary workflow from trigger to outcome: capture the
+   trigger, the outcome, and at least two ordered steps.
+4. Clarify handoffs, exceptions, the main bottleneck, delays, manual effort,
+   and rework.
+5. Confirm system categories, how connected they are, data sources, data
+   quality, and authorized-access constraints.
+6. For every material quantity, distinguish measured, estimated, and unknown
+   values. "Unknown" is always an acceptable answer; never invent precision.
+7. Confirm constraints, regulated-data categories, risks, capacity, and
+   dependencies. "None" or "unknown" are acceptable.
+8. Test improvement hypotheses against what the customer actually said, without
+   prescribing implementations, vendors, or prices.
+9. Surface and resolve — or explicitly classify — material contradictions
+   between the questionnaire and this conversation.
+10. Close by confirming what the report will and will not cover, the selected
+    language, the limits of the evidence, and the next steps.
+
+Hard rules:
+- Never request or accept passwords, API keys, card or bank data, government
+  identifiers, customer lists, employee records, health data, or any other
+  sensitive records. If such a topic affects feasibility, note the category at
+  a high level and move on.
+- Do not give implementation consulting, legal, tax, or financial advice, and
+  do not promise outcomes, savings, or delivery dates.
+- Stay professional, concise, and warm. One question at a time.
+`.trim();
+
+const locales = [
+  {
+    key: 'en',
+    agentName: 'bizmetria-interview-en',
+    language: 'en-US',
+    beginMessage:
+      'Hello! This is the BizMetria business assessment interview. This call is recorded and transcribed, as you agreed a moment ago. It takes up to 45 minutes, and "I don\'t know" is always a fine answer. Shall we begin?',
+    promptSuffix: 'Conduct the entire interview in English.',
+  },
+  {
+    key: 'es',
+    agentName: 'bizmetria-interview-es',
+    language: 'es-419',
+    beginMessage:
+      'Hola, le habla la entrevista de la Evaluación Empresarial de BizMetria. Esta llamada se graba y se transcribe, como usted aceptó hace un momento. Dura hasta 45 minutos y "no lo sé" siempre es una respuesta válida. ¿Comenzamos?',
+    promptSuffix: 'Realice toda la entrevista en español.',
+  },
+];
+
+async function pickVoice(language) {
+  const voices = await client.voice.list();
+  const prefix = language.split('-')[0];
+  const candidates = voices
+    .filter((voice) => (voice.language ?? '').toLowerCase().startsWith(prefix))
+    .sort((a, b) => a.voice_id.localeCompare(b.voice_id));
+  const chosen = candidates[0] ?? voices.sort((a, b) => a.voice_id.localeCompare(b.voice_id))[0];
+  if (!chosen) throw new Error(`No Retell voice available for language ${language}.`);
+  return chosen.voice_id;
+}
+
+const existingAgents = await client.agent.list();
+
+for (const locale of locales) {
+  const existing = existingAgents.find((agent) => agent.agent_name === locale.agentName);
+  if (existing) {
+    console.log(`${locale.agentName}: exists, agent_id=${existing.agent_id}`);
+    continue;
+  }
+
+  const llm = await client.llm.create({
+    model: 'claude-4.5-sonnet',
+    general_prompt: `${interviewContract}\n\n${locale.promptSuffix}`,
+    begin_message: locale.beginMessage,
+  });
+
+  const voiceId = await pickVoice(locale.language);
+  const agent = await client.agent.create({
+    agent_name: locale.agentName,
+    response_engine: { type: 'retell-llm', llm_id: llm.llm_id },
+    voice_id: voiceId,
+    language: locale.language,
+    webhook_url: webhookUrl,
+  });
+
+  console.log(
+    `${locale.agentName}: created, agent_id=${agent.agent_id}, llm_id=${llm.llm_id}, voice=${voiceId}`,
+  );
+}
+
+console.log('');
+console.log('Set these in Vercel (Production):');
+const finalAgents = await client.agent.list();
+for (const locale of locales) {
+  const agent = finalAgents.find((candidate) => candidate.agent_name === locale.agentName);
+  if (agent) {
+    console.log(`RETELL_AGENT_ID_${locale.key.toUpperCase()}=${agent.agent_id}`);
+  }
+}
