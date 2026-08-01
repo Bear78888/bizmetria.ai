@@ -1,0 +1,94 @@
+# Domain activation, application side: once DNS points bizmetria.com at
+# Vercel, this sets NEXT_PUBLIC_APP_URL for Production so authentication
+# callbacks and checkout return URLs are built on the public domain. The value
+# is fixed on purpose — this workflow activates the one approved domain, it is
+# not a general env-var editor. A redeploy (deploy-production.yml) is still
+# required: deployments capture env at creation time.
+
+name: Activate public domain (set NEXT_PUBLIC_APP_URL)
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "ACTIVATE PUBLIC DOMAIN" to proceed'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  set-app-url:
+    if: github.repository == 'Bear78888/bizmetria.ai'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: development
+    env:
+      VERCEL_TEAM_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
+      VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      CONFIRMATION: ${{ inputs.confirm }}
+      APP_URL: https://bizmetria.com
+
+    steps:
+      - name: Require the confirmation phrase
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRMATION" != "ACTIVATE PUBLIC DOMAIN" ]; then
+            echo "Confirmation phrase did not match. Nothing was changed." >&2
+            exit 1
+          fi
+
+      - name: Set NEXT_PUBLIC_APP_URL on Production
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$VERCEL_TOKEN" || { echo "VERCEL_TOKEN is missing." >&2; exit 1; }
+          echo "::add-mask::$VERCEL_TOKEN"
+
+          node <<'NODE'
+          const token = process.env.VERCEL_TOKEN;
+          const teamId = process.env.VERCEL_TEAM_ID;
+          const projectId = process.env.VERCEL_PROJECT_ID;
+          const value = process.env.APP_URL;
+          const key = 'NEXT_PUBLIC_APP_URL';
+          const base = `https://api.vercel.com/v9/projects/${encodeURIComponent(projectId)}/env`;
+
+          const listResponse = await fetch(`${base}?teamId=${encodeURIComponent(teamId)}`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          if (!listResponse.ok) {
+            throw new Error(`Listing environment variables failed: ${listResponse.status}`);
+          }
+          const { envs = [] } = await listResponse.json();
+          const existing = envs.find(
+            (env) =>
+              env.key === key &&
+              Array.isArray(env.target) &&
+              env.target.includes('production') &&
+              !env.gitBranch &&
+              !env.configurationId,
+          );
+
+          if (existing) {
+            const patch = await fetch(`${base}/${existing.id}?teamId=${encodeURIComponent(teamId)}`, {
+              method: 'PATCH',
+              headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ value }),
+            });
+            if (!patch.ok) throw new Error(`Updating ${key} failed: ${patch.status}`);
+            console.log(`${key}: updated to ${value}`);
+          } else {
+            const create = await fetch(`${base}?teamId=${encodeURIComponent(teamId)}`, {
+              method: 'POST',
+              headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+              body: JSON.stringify({ key, value, type: 'plain', target: ['production'] }),
+            });
+            if (!create.ok) throw new Error(`Creating ${key} failed: ${create.status}`);
+            console.log(`${key}: created as ${value}`);
+          }
+
+          console.log('Run deploy-production.yml so the deployment picks the value up.');
+          NODE
