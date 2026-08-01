@@ -13,7 +13,7 @@ permissions:
 
 concurrency:
   group: wire-be003-preview
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   wire:
@@ -256,19 +256,31 @@ jobs:
             );
           ' "$payload_file" "$idempotency_key" "$marker_email"
 
+          # Retry only conditions that a redeploy can fix. A 401 means the bypass
+          # secret itself is wrong, so fail immediately with an actionable message
+          # instead of silently retrying for minutes.
           status="000"
-          for attempt in $(seq 1 24); do
+          for attempt in $(seq 1 12); do
             status="$(curl --silent --show-error --max-time 30 \
               --output "$response_file" --write-out '%{http_code}' \
               -X POST "$PREVIEW_BASE_URL/api/free-assessment" \
               -H 'Content-Type: application/json' \
               -H "x-vercel-protection-bypass: $VERCEL_AUTOMATION_BYPASS_SECRET" \
               --data @"$payload_file" || echo 000)"
+
             if [[ "$status" == "200" ]]; then
               break
             fi
-            echo "Preview not ready yet (HTTP $status); retrying in 15s."
-            sleep 15
+
+            if [[ "$status" == "401" || "$status" == "403" ]]; then
+              echo "Preview refused the automation bypass (HTTP $status)." >&2
+              echo "Check that VERCEL_AUTOMATION_BYPASS_SECRET matches a bypass listed under" >&2
+              echo "Vercel > Settings > Deployment Protection > Protection Bypass for Automation." >&2
+              exit 1
+            fi
+
+            echo "Preview not ready yet (HTTP $status); attempt $attempt of 12, retrying in 10s."
+            sleep 10
           done
 
           if [[ "$status" != "200" ]]; then
