@@ -28,8 +28,8 @@ The canonical Supabase project is `bizmetria.ai / rbndiytodvoyiejassnw` at `http
 
 ## Current boundary
 
-Vercel Production has the canonical root URL and project-ref variable. Existing Preview Supabase variables are integration-managed by unrelated project `rxdlnszottdnouudkgvb`; they are not used for writes. Publishable/secret key provenance cannot be confirmed from the masked UI. `ASSESSMENT_STORAGE_MODE` remains `mock`, Resend delivery remains disabled, and no production database operation was performed in BE-003.
+Vercel Production keeps the canonical root URL and project-ref variable and stays on `ASSESSMENT_STORAGE_MODE=mock`. This branch's Vercel Preview is wired (via `.github/workflows/wire-be003-preview.yml`) to the isolated free-tier development project `bizmetria-be003-dev` (`bwmyzkufqrufjimtfwow`) under an explicit `SUPABASE_TARGET_ENV=preview` flag with `ASSESSMENT_STORAGE_MODE=supabase`; that project holds the Platform Foundation schema and no data. Native Supabase Preview Branches are unavailable because the canonical org is on the Free plan (HTTP 402). Resend delivery remains disabled and no production database operation was performed in BE-003. See `ops/preview/isolated-dev-target.md`.
 
 ## Acceptance gate
 
-Local format, lint, typecheck, 26 unit tests, five migration-contract tests, and production build pass. The local browser binary download is blocked by the execution network proxy; GitHub CI installs Chromium and owns the authoritative E2E result. Native Vercel/Supabase preview evidence remains pending until the draft PR is opened.
+Local and remote format, lint, typecheck, 33 unit tests, five migration-contract tests, and production build pass. GitHub CI installs Chromium (now cached across runs) and owns the authoritative E2E result: the `Quality and build` and `Browser smoke tests` jobs are green on PR #21, and the Vercel Preview is Ready with the isolated dev-project environment.

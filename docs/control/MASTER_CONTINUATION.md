@@ -2,11 +2,38 @@
 
 **Repository:** `Bear78888/bizmetria.ai`  
 **Current phase:** Sandbox implementation — Public Website and Free Assessment \
-**Last updated:** 2026-07-31 \
+**Last updated:** 2026-08-01 \
 **Verified starting `main` SHA:** `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd` \
 **Current task:** `BE-003 — Public Website and Free Assessment` — `REVIEW` \
 **Current execution branch:** `task/ws-09/BE-003-public-site-free-assessment-v2` \
-**Current execution PR:** Draft PR [#21](https://github.com/Bear78888/bizmetria.ai/pull/21)
+**Current execution PR:** PR [#21](https://github.com/Bear78888/bizmetria.ai/pull/21)
+
+## 2026-08-01 status update (supersedes earlier "mock / preview-blocked" notes)
+
+The following items elsewhere in this file and in the other control/workstream
+status documents are now out of date and superseded by this section:
+
+- **CI is green** for PR #21: `Quality and build` and `Browser smoke tests` pass
+  (format, lint, typecheck, 33 unit + 5 migration-contract tests, build, and 4
+  Playwright E2E). The earlier Prettier failure is fixed.
+- **Supabase Branching root cause:** the canonical org `zgthongawzokxqvmsvmt`
+  (owner of `rbndiytodvoyiejassnw`) is on the **Free** plan, so native Preview
+  Branches return HTTP 402. The fragile per-push branch-provisioning workflow was
+  retired.
+- **Isolated dev target:** a standalone free-tier project `bizmetria-be003-dev`
+  (`bwmyzkufqrufjimtfwow`) now holds the Platform Foundation schema (27 tables,
+  RLS forced, 58 policies, 8 functions, private `reports` bucket). A real
+  non-mock assessment write was verified end-to-end and then removed; the project
+  holds no data. See `ops/preview/isolated-dev-target.md`.
+- **Target guard / env schema** accept this dev ref only under an explicit
+  `SUPABASE_TARGET_ENV=preview` flag; production stays pinned to the canonical ref
+  and the wrong-project incident refs remain refused.
+- **Vercel Preview** for this branch is wired to the dev project by
+  `.github/workflows/wire-be003-preview.yml`; the Preview builds Ready with that
+  environment. A live HTTP write test additionally requires bypassing Vercel
+  Deployment Protection.
+- **Still owner-gated:** merging PR #21 (a production deploy), any live Stripe /
+  Retell / production Resend action, and rotation of the temporary credentials.
 
 ## BizMetria in brief
 
