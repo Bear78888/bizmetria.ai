@@ -193,6 +193,12 @@ export default function QuestionnaireClient({
       <section className="result-section" aria-labelledby="questionnaire-done">
         <h1 id="questionnaire-done">{text(uiCopy.pageTitle)}</h1>
         <p role="status">{text(uiCopy.submitted)}</p>
+        <a
+          className="button button-primary"
+          href={`/${locale}/assessment/paid/interview?id=${assessmentId}`}
+        >
+          {text(uiCopy.toInterview)}
+        </a>
       </section>
     );
   }
