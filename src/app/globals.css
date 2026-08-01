@@ -1108,3 +1108,106 @@ h2 {
     transition-duration: 0.01ms !important;
   }
 }
+
+.questionnaire {
+  display: grid;
+  gap: 18px;
+}
+
+.questionnaire-section {
+  display: grid;
+  gap: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin: 0;
+  padding: 18px;
+}
+
+.questionnaire-section legend {
+  padding: 0 6px;
+  font-weight: 700;
+}
+
+.questionnaire-field {
+  display: grid;
+  gap: 6px;
+}
+
+.questionnaire-field-rejected {
+  border-left: 3px solid var(--danger);
+  padding-left: 10px;
+}
+
+.questionnaire-label {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+.questionnaire-field input[type='text'],
+.questionnaire-field textarea,
+.questionnaire-field select {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-elevated);
+  padding: 10px 12px;
+  color: var(--text);
+  font: inherit;
+}
+
+.checkbox-group {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.field-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.row-list {
+  display: grid;
+  gap: 12px;
+}
+
+.row-list-item {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.structured-row {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.structured-row label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.questionnaire-status {
+  min-height: 1.2em;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

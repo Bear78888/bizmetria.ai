@@ -131,10 +131,16 @@ export default async function PaidAssessmentStartPage({ params, searchParams }: 
         </h1>
         <p>
           {spanish
-            ? 'El siguiente paso es el cuestionario ampliado, seguido de la entrevista. El cuestionario estará disponible aquí y en su cuenta.'
-            : 'The next step is the extended questionnaire, followed by the interview. The questionnaire will be available here and in your account.'}
+            ? 'El siguiente paso es el cuestionario ampliado, seguido de la entrevista.'
+            : 'The next step is the extended questionnaire, followed by the interview.'}
         </p>
-        <Link className="button button-primary" href={`/${locale}/account`}>
+        <Link
+          className="button button-primary"
+          href={`/${locale}/assessment/paid/questionnaire?id=${result.assessment.id}`}
+        >
+          {spanish ? 'Comenzar el cuestionario' : 'Start the questionnaire'}
+        </Link>
+        <Link className="button button-secondary" href={`/${locale}/account`}>
           {spanish ? 'Ir a su cuenta' : 'Go to your account'}
         </Link>
       </section>
