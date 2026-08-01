@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useSyncExternalStore } from 'react';
+import { useMemo, useState, useSyncExternalStore } from 'react';
 
 import { resultContent } from './content';
 import type { PublicAssessmentResult } from './result';
@@ -102,12 +102,11 @@ export function ResultClient({ locale }: ResultClientProps) {
             <strong>$299</strong>
             <p>{copy.offerText}</p>
           </div>
-          <Link
-            className="button button-primary"
-            href={`/${locale}/auth?intent=business-assessment`}
-          >
-            {copy.offerAction}
-          </Link>
+          <CheckoutButton
+            locale={locale}
+            assessmentId={result.assessmentId}
+            label={copy.offerAction}
+          />
         </div>
       </section>
 
@@ -115,5 +114,78 @@ export function ResultClient({ locale }: ResultClientProps) {
         <Link href={`/${locale}/assessment`}>{copy.restart}</Link>
       </div>
     </article>
+  );
+}
+
+interface CheckoutButtonProps {
+  readonly locale: AssessmentLocale;
+  readonly assessmentId: string;
+  readonly label: string;
+}
+
+const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/iu;
+
+/**
+ * Opens Stripe Checkout for this free assessment. The server re-derives every
+ * amount and applies no promotion from here, so the only thing this button
+ * sends is which assessment the purchase follows from.
+ *
+ * A preview-mode result carries a synthetic `preview-` id that no order can
+ * attach to; the button then links to the auth page as before instead of
+ * offering a checkout that would be refused.
+ */
+function CheckoutButton({ locale, assessmentId, label }: CheckoutButtonProps) {
+  const [state, setState] = useState<'idle' | 'starting' | 'failed'>('idle');
+  const purchasable = UUID_PATTERN.test(assessmentId);
+
+  if (!purchasable) {
+    return (
+      <Link className="button button-primary" href={`/${locale}/auth?intent=business-assessment`}>
+        {label}
+      </Link>
+    );
+  }
+
+  const start = async () => {
+    setState('starting');
+    try {
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contractVersion: 'checkout/1.0.0',
+          locale,
+          freeAssessmentId: assessmentId,
+          idempotencyKey: crypto.randomUUID(),
+        }),
+      });
+      const payload = (await response.json()) as { checkoutUrl?: string };
+      if (!response.ok || !payload.checkoutUrl) throw new Error('checkout unavailable');
+      window.location.assign(payload.checkoutUrl);
+    } catch {
+      setState('failed');
+    }
+  };
+
+  return (
+    <div className="checkout-start">
+      <button
+        className="button button-primary"
+        type="button"
+        disabled={state === 'starting'}
+        onClick={() => {
+          void start();
+        }}
+      >
+        {label}
+      </button>
+      {state === 'failed' ? (
+        <p role="alert" className="checkout-error">
+          {locale === 'es'
+            ? 'El pago no está disponible en este momento. Inténtelo de nuevo más tarde.'
+            : 'Checkout is not available right now. Please try again later.'}
+        </p>
+      ) : null}
+    </div>
   );
 }

@@ -104,7 +104,7 @@ export async function buildCheckoutSession(
   const params: Stripe.Checkout.SessionCreateParams = {
     mode: 'payment',
     line_items: [{ price: priceId, quantity: 1 }],
-    customer_email: request.email,
+    ...(request.email ? { customer_email: request.email } : {}),
     locale: request.locale,
     client_reference_id: request.freeAssessmentId,
     success_url: `${returnBase}/confirmed?session_id={CHECKOUT_SESSION_ID}`,
