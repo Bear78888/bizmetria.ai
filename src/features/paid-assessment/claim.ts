@@ -72,10 +72,7 @@ export interface PaidAssessmentStore {
 }
 
 export type ClaimRejection =
-  | 'order_not_found'
-  | 'order_not_paid'
-  | 'owned_by_another_account'
-  | 'email_mismatch';
+  'order_not_found' | 'order_not_paid' | 'owned_by_another_account' | 'email_mismatch';
 
 export type ClaimResult =
   | { readonly claimed: true; readonly assessment: PaidAssessmentSummary }
@@ -89,7 +86,10 @@ function normalizeEmail(email: string): string {
  * Pure eligibility decision, separated so the rules are testable without a
  * database: paid order, not owned by someone else, emails match.
  */
-export function decideClaim(order: ClaimableOrder | null, claimant: Claimant): ClaimRejection | null {
+export function decideClaim(
+  order: ClaimableOrder | null,
+  claimant: Claimant,
+): ClaimRejection | null {
   if (!order) return 'order_not_found';
   // A still-open or expired checkout has nothing to claim; the webhook is the
   // only authority on "paid".

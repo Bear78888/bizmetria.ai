@@ -125,7 +125,9 @@ export default async function PaidAssessmentStartPage({ params, searchParams }: 
       <section className="result-section" aria-labelledby="ready-heading">
         <p className="eyebrow">{spanish ? 'Compra vinculada' : 'Purchase linked'}</p>
         <h1 id="ready-heading">
-          {spanish ? 'Su evaluación está lista para empezar.' : 'Your assessment is ready to begin.'}
+          {spanish
+            ? 'Su evaluación está lista para empezar.'
+            : 'Your assessment is ready to begin.'}
         </h1>
         <p>
           {spanish
