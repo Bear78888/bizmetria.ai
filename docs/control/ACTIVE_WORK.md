@@ -16,9 +16,9 @@
 
 | Task | Status | Branch | PR | Scope |
 |---|---|---|---|---|
-| `BE-002 — Platform Foundation` | REVIEW | `task/ws-09/BE-002-platform-foundation` | Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) | Next.js, TypeScript, environment validation, Supabase Auth/RLS/Storage, CI/tests, native preview verification |
+| `BE-003 — Public Website and Free Assessment` | REVIEW | `task/ws-09/BE-003-public-site-free-assessment-v2` | Draft PR pending | Bilingual public website, deterministic free assessment, result/email adapters, target guard, CI/E2E, and native previews |
 
-`LC-001` is merged through PR #17. `AE-001` remains unfinished on a remote branch with no task commit and is not a blocker for BE-002. `G2` is not passed. Live payment, real-order, production-data, production communications, and public-launch work remain blocked by the named pre-live gates.
+`BE-002` is merged through PR #18. Incorrect draft PR #20 is closed without merge and its branch is frozen as incident evidence. `AE-001` remains unfinished and is not a blocker for BE-003. Live payments, production marketing communications, and production assessment writes remain fail-closed.
 
 ## Non-active preserved branches
 
@@ -38,6 +38,8 @@
 - `task/ws-11/LS-002-consent-claims-data-requirements` — merged through PR #15; historical.
 - `task/ws-01/LS-002-phase2-closeout` — service branch; historical when its closeout reaches `main`.
 - `task/ws-10/LC-001-commercial-lifecycle-contract` — merged through PR #17; historical.
+- `task/ws-09/BE-002-platform-foundation` — merged through PR #18; historical.
+- `task/ws-09/BE-003-public-site-free-assessment` — PR #20 closed without merge; frozen incident branch, not reusable.
 - `test/chatgpt-write-access` — preserved test branch; do not modify or delete.
 
 ## Reconciliation procedure

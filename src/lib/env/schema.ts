@@ -9,6 +9,7 @@ export const expectedEnvironmentNames = [
   'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY',
   'SUPABASE_SECRET_KEY',
   'NEXT_PUBLIC_SUPABASE_URL',
+  'SUPABASE_PROJECT_REF',
 ] as const;
 
 export const browserEnvironmentNames = [
@@ -69,6 +70,7 @@ export const browserEnvironmentSchema = publicSupabaseSchema.extend({
 });
 
 export const platformEnvironmentSchema = publicSupabaseSchema.extend({
+  SUPABASE_PROJECT_REF: z.literal('rbndiytodvoyiejassnw'),
   SUPABASE_SECRET_KEY: z.string().min(1, 'SUPABASE_SECRET_KEY is required'),
 });
 

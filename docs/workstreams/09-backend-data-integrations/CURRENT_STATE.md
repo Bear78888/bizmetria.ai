@@ -3,31 +3,33 @@
 **Workstream:** 09 — Backend, Data and Integrations
 **Status:** `REVIEW`
 **Last updated:** 2026-07-31
-**Current task:** `BE-002 — Platform Foundation`
-**Current branch:** `task/ws-09/BE-002-platform-foundation`
-**Current PR:** Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18)
+**Current task:** `BE-003 — Public Website and Free Assessment`
+**Current branch:** `task/ws-09/BE-003-public-site-free-assessment-v2`
+**Current PR:** Draft PR pending
 
 ## Confirmed starting point
 
-Remote `main` was verified at `7677bee1b0791bb4f954f058aa9e959d4796985a`; no PR was open when BE-002 began. MC-003, PS-003, FA-001, PS-004, LS-002, and LC-001 were already merged and are not being repeated. AE-001 remains unfinished but does not block Platform Foundation under the owner's current technical directive.
+Remote `main` is `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`, the merge of Platform Foundation PR #18. Reconciliation PR #20 is closed without merge and its migration is absent from `main`.
 
-## In progress
+The canonical Supabase project is `bizmetria.ai / rbndiytodvoyiejassnw` at `https://rbndiytodvoyiejassnw.supabase.co`. One read-only audit found the canonical foundation migration `20260731000100 platform_foundation`, 27 empty public tables with forced RLS, 56 public plus 2 Storage policies, the required helper functions/triggers, zero Auth users, and one empty private `reports` bucket. No legacy `disputes` object or reconciliation history exists.
 
-Production-grade Next.js/TypeScript foundation, scoped environment validation, Supabase migration, Auth, RLS, private Storage, synthetic seed data, CI, unit/integration tests, browser smoke tests, and native preview verification.
+## Implemented
 
-## Safety boundary
+- responsive English and Spanish public homepages;
+- 11-question canonical free assessment and separate contact/consent step;
+- deterministic `ai-opportunity-score/1.0.0` engine and approved free-result boundary;
+- server-side validation and score recomputation;
+- guarded Supabase service-role persistence adapter plus safe Preview mock adapter;
+- result page, up to three opportunity areas, six locked sections, and $299 one-time CTA;
+- fail-closed Resend service-email adapter;
+- Supabase target guard in scripts, runtime, environment examples, and CI;
+- unit, migration-contract, and Playwright E2E coverage;
+- non-destructive wrong-target incident record.
 
-Only synthetic/sandbox operation is authorized. Stripe live mode, real payments, production Retell numbers, production email, production Supabase changes, and final-domain publication are not part of BE-002.
+## Current boundary
+
+Vercel Production has the canonical root URL and project-ref variable. Existing Preview Supabase variables are integration-managed by unrelated project `rxdlnszottdnouudkgvb`; they are not used for writes. Publishable/secret key provenance cannot be confirmed from the masked UI. `ASSESSMENT_STORAGE_MODE` remains `mock`, Resend delivery remains disabled, and no production database operation was performed in BE-003.
 
 ## Acceptance gate
 
-- strict typecheck, formatting, lint, unit/integration tests, and production build pass;
-- GitHub CI passes;
-- Vercel Preview is `Ready` and bilingual/auth/health surfaces respond;
-- native Supabase preview validation succeeds when available;
-- RLS and private-storage policies are present and migration-contract tests pass;
-- no secret value is present in Git history or output.
-
-## Exact next action
-
-Publish the verified implementation as one draft PR, update its metadata once with the PR number, and run the remote acceptance gate without applying production Supabase changes.
+Local format, lint, typecheck, 26 unit tests, five migration-contract tests, and production build pass. The local browser binary download is blocked by the execution network proxy; GitHub CI installs Chromium and owns the authoritative E2E result. Native Vercel/Supabase preview evidence remains pending until the draft PR is opened.

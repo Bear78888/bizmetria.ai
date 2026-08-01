@@ -9,13 +9,14 @@ import {
 
 const platformEnvironment = {
   NEXT_PUBLIC_APP_URL: 'https://preview.bizmetria.example',
-  NEXT_PUBLIC_SUPABASE_URL: 'https://abcdefghijklmnopqrst.supabase.co',
+  NEXT_PUBLIC_SUPABASE_URL: 'https://rbndiytodvoyiejassnw.supabase.co',
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_synthetic',
+  SUPABASE_PROJECT_REF: 'rbndiytodvoyiejassnw',
   SUPABASE_SECRET_KEY: 'sb_secret_synthetic',
 };
 
 describe('environment validation', () => {
-  it('accepts a hosted Supabase root project URL', () => {
+  it('accepts the canonical hosted Supabase root project URL', () => {
     expect(validateEnvironment(platformEnvironment, 'platform')).toEqual({
       ok: true,
       missing: [],
@@ -36,7 +37,7 @@ describe('environment validation', () => {
     const check = validateEnvironment(
       {
         ...platformEnvironment,
-        NEXT_PUBLIC_SUPABASE_URL: 'https://abcdefghijklmnopqrst.supabase.co/rest/v1/',
+        NEXT_PUBLIC_SUPABASE_URL: 'https://rbndiytodvoyiejassnw.supabase.co/rest/v1/',
       },
       'platform',
     );

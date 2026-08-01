@@ -173,13 +173,24 @@ As of: 2026-07-31
 ### `BE-002 — Platform Foundation`
 
 - **Owner:** Backend, Data and Integrations / Master Orchestrator.
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Priority:** Critical
 - **Dependency:** Verified remote `main` at `7677bee1b0791bb4f954f058aa9e959d4796985a`; AE-001 is explicitly not a blocker.
 - **Branch:** `task/ws-09/BE-002-platform-foundation`.
 - **Outcome:** Executable Next.js/strict-TypeScript foundation, environment validation, Supabase schema/migrations, Auth, RLS, private Storage, synthetic seed, CI/test foundation, and successful native preview evidence.
 - **Boundary:** Synthetic/sandbox only; no live Stripe, real payments, production Retell numbers/email/data, production Supabase changes, or final-domain launch.
-- **Review status:** Local gate passed; draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) awaits remote CI, Vercel Preview, and Supabase integration evidence.
+- **Review status:** Merged through PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) at `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`.
+
+### `BE-003 — Public Website and Free Assessment`
+
+- **Owner:** Backend, Data and Integrations / Brand, Website and UX / Free Audit.
+- **Status:** `REVIEW`
+- **Priority:** Critical
+- **Dependency:** BE-002 and approved FA-001/LS-002 contracts.
+- **Branch:** `task/ws-09/BE-003-public-site-free-assessment-v2`.
+- **Outcome:** Responsive English/Spanish website, 11-question check, deterministic 0–100 score, contact and separate optional consent choices, server persistence adapter, result and locked paid boundary, $299 CTA, Resend adapter, unit tests, Playwright E2E, target guard, and incident record.
+- **Boundary:** Preview uses a mock adapter until the correct Supabase Preview Branch variables replace the unrelated Vercel-managed integration; production database writes, live payments, and live marketing messages remain disabled.
+- **Review status:** Local format, lint, typecheck, unit, migration-contract, and build gates pass; draft PR and native previews pending.
 
 ## Planned delivery catalog
 

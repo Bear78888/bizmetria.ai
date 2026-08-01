@@ -1,12 +1,12 @@
 # BizMetria Project Status
 
 **As of:** 2026-07-31 \
-**Overall status:** `SANDBOX IMPLEMENTATION — PLATFORM FOUNDATION IN REVIEW` \
-**Verified starting `main` SHA:** `7677bee1b0791bb4f954f058aa9e959d4796985a`
+**Overall status:** `SANDBOX IMPLEMENTATION — PUBLIC WEBSITE AND FREE ASSESSMENT IN REVIEW` \
+**Verified starting `main` SHA:** `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`
 
 ## Current phase
 
-All historical baseline tasks through LC-001 are merged. The latest verified merge is Commercial and Lifecycle Contract PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17) at `7677bee1b0791bb4f954f058aa9e959d4796985a`. No PR was open when BE-002 started.
+All historical baseline tasks through LC-001 and Platform Foundation BE-002 are merged. The latest verified merge is PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) at `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`. BE-003 implements the first public product flow from that exact `main`.
 
 Gate `G0 — Governance Ready` is `PASS` because:
 
@@ -52,7 +52,8 @@ Gate `G0 — Governance Ready` is `PASS` because:
 | LS-002 Consent, Claims, and Data Requirements | Legal, Privacy and Security | APPROVED | PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15), merge SHA `a60597ebd3a17c06c923150fb9cf76f24c3a437c` |
 | LC-001 Commercial and Lifecycle Contract | Payments, CRM and Lifecycle | APPROVED | PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17), merge SHA `7677bee1b0791bb4f954f058aa9e959d4796985a` |
 | AE-001 Analysis and Evidence Contract | AI Analysis Engine | READY | FA-001, PS-004, and LS-002 approved |
-| BE-002 Platform Foundation | Backend, Data and Integrations | REVIEW | Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) |
+| BE-002 Platform Foundation | Backend, Data and Integrations | APPROVED | PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18), merge SHA `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd` |
+| BE-003 Public Website and Free Assessment | Backend / UX / Free Audit | REVIEW | `task/ws-09/BE-003-public-site-free-assessment-v2`; draft PR pending |
 | G2 and later delivery tasks | Applicable workstreams | PLANNED | Follow named dependencies in the Delivery Roadmap |
 
 The complete sequence is in [`docs/control/DELIVERY_ROADMAP.md`](control/DELIVERY_ROADMAP.md); exact per-workstream state is in [`docs/control/WORKSTREAM_REGISTRY.md`](control/WORKSTREAM_REGISTRY.md).
@@ -74,7 +75,7 @@ The Decision Log and Delivery Roadmap name the task and gate responsible for eac
 
 ## Immediate next action
 
-Complete BE-002 local validation, publish one draft PR, and require passing GitHub CI plus native Vercel Preview. Validate Supabase through the native preview integration when available; do not apply production database changes without explicit owner permission.
+Publish the BE-003 draft PR, require GitHub CI and Vercel Preview, and keep assessment persistence in mock mode until the incorrect Vercel Preview Supabase integration is replaced with credentials from the correct BizMetria Preview Branch. Production writes and Resend delivery remain fail-closed.
 
 ## Operational safeguards
 

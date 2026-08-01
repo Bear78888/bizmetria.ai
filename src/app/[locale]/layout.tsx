@@ -31,8 +31,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         <Link className="brand" href={`/${locale}`}>
           BizMetria<span>.ai</span>
         </Link>
-        <nav aria-label="Primary navigation">
+        <nav aria-label={messages.navigation.ariaLabel}>
           <Link href={`/${locale}`}>{messages.navigation.home}</Link>
+          <Link href={`/${locale}/assessment`}>{messages.navigation.assessment}</Link>
           <Link href={`/${locale}/account`}>{messages.navigation.account}</Link>
           <Link href={`/${locale}/auth`}>{messages.navigation.signIn}</Link>
           <Link className="language-link" href={`/${alternateLocale}`}>

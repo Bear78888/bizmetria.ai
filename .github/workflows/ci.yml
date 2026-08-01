@@ -17,7 +17,9 @@ env:
   NEXT_TELEMETRY_DISABLED: '1'
   BIZMETRIA_VALIDATE_INTEGRATIONS: '1'
   NEXT_PUBLIC_APP_URL: http://127.0.0.1:3000
-  NEXT_PUBLIC_SUPABASE_URL: https://abcdefghijklmnopqrst.supabase.co
+  NEXT_PUBLIC_SUPABASE_URL: https://rbndiytodvoyiejassnw.supabase.co
+  SUPABASE_PROJECT_REF: rbndiytodvoyiejassnw
+  ASSESSMENT_STORAGE_MODE: mock
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_synthetic
   SUPABASE_SECRET_KEY: sb_secret_ci_synthetic
   OPENAI_API_KEY: synthetic_openai_ci
@@ -43,6 +45,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Verify canonical Supabase target
+        run: npm run verify:supabase-target
 
       - name: Audit production dependencies
         run: npm run audit:production
@@ -81,6 +86,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Verify canonical Supabase target
+        run: npm run verify:supabase-target
 
       - name: Install Chromium
         run: npx playwright install --with-deps chromium

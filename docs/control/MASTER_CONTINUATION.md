@@ -1,12 +1,12 @@
 # Master Continuation
 
 **Repository:** `Bear78888/bizmetria.ai`  
-**Current phase:** Sandbox implementation — Platform Foundation \
+**Current phase:** Sandbox implementation — Public Website and Free Assessment \
 **Last updated:** 2026-07-31 \
-**Verified starting `main` SHA:** `7677bee1b0791bb4f954f058aa9e959d4796985a` \
-**Current task:** `BE-002 — Platform Foundation` — `REVIEW` \
-**Current execution branch:** `task/ws-09/BE-002-platform-foundation` \
-**Current execution PR:** Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18)
+**Verified starting `main` SHA:** `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd` \
+**Current task:** `BE-003 — Public Website and Free Assessment` — `REVIEW` \
+**Current execution branch:** `task/ws-09/BE-003-public-site-free-assessment-v2` \
+**Current execution PR:** Draft PR pending
 
 ## BizMetria in brief
 
@@ -44,7 +44,7 @@ PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2) approved `MC-001` and 
 - Workstream 11: `LS-002` is `APPROVED` through PR #15 at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
 - Workstream 10: `LC-001` is `APPROVED` through PR #17 at `7677bee1b0791bb4f954f058aa9e959d4796985a`.
 - Workstream 07: `AE-001` is `READY` because FA-001, PS-004, and LS-002 are approved.
-- Workstream 09: `BE-002` is `REVIEW` in draft PR #18 under the owner's 2026-07-31 technical implementation directive; AE-001 is not its dependency.
+- Workstream 09: `BE-002` is `APPROVED` through PR #18; `BE-003` is in review on a clean branch from its merge SHA.
 - `G2` and all later tasks remain `PLANNED` behind named dependencies and phase gates.
 - Workstream 04 preserves two recovered inputs as historical evidence; implementations use the approved v1 contract.
 
@@ -52,7 +52,9 @@ See the [Delivery Roadmap](DELIVERY_ROADMAP.md) for the complete critical path a
 
 ## Active work
 
-- BE-002 is active on `task/ws-09/BE-002-platform-foundation`, based on verified remote `main` `7677bee1b0791bb4f954f058aa9e959d4796985a`.
+- BE-003 is active on `task/ws-09/BE-003-public-site-free-assessment-v2`, based on verified remote `main` `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`.
+- Supabase target `bizmetria.ai / rbndiytodvoyiejassnw` is verified. Its foundation migration is present and the application tables contain no rows.
+- Vercel Preview is still attached to an unrelated Supabase integration; BE-003 therefore uses the mock persistence adapter until the owner replaces the three Preview project variables.
 - Entity/address, support identity, legal/tax review, report-review staffing, consultation staffing, and live Stripe credentials are explicit pre-live dependencies; they do not block PS-003, architecture, implementation, or staging.
 - The merged recovery, architecture, and MC-002 branches are historical, not live-locks.
 - The PS-001 and LS-001 branches are historical after PR #5 and PR #6 merged.
@@ -77,11 +79,11 @@ See the [Delivery Roadmap](DELIVERY_ROADMAP.md) for the complete critical path a
 
 ## Current blockers
 
-No dependency blocker prevents Platform Foundation preview work. Native Vercel and Supabase preview checks remain acceptance evidence. Missing entity/operations facts and qualified legal/tax/vendor/security/release evidence still block live Stripe activation, real paid orders, production customer data, production communications, and public paid launch.
+No code blocker prevents BE-003 preview work. The only infrastructure blocker is the unrelated Vercel Preview Supabase integration; it blocks Preview database writes, not frontend, score, validation, result, or E2E work. Missing entity/operations and qualified legal/tax/vendor/security/release evidence still block live payments and production marketing communications.
 
 ## Exact next action
 
-Publish BE-002 as one draft PR, verify CI, Vercel Preview, and native Supabase preview behavior, and preserve every production activation boundary. After an authorized merge, start PR 2 from the new remote `main`.
+Publish BE-003 as one draft PR, verify CI and Vercel Preview, then replace the Preview Supabase variables with the correct native Preview Branch values before enabling write-mode integration tests. Keep production writes and Resend delivery disabled until project-scoped keys are owner-verified.
 
 ## Required Startup Reading
 
