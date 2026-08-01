@@ -94,9 +94,25 @@ async function fillEverywhere(selector, value) {
   return false;
 }
 await fillEverywhere('input[name="email"]', 'verify+purchase@bizmetria.com');
-const cardTab = page.locator('text=/^(Card|Tarjeta)$/').first();
-if (await cardTab.count()) await cardTab.click().catch(() => {});
-await page.waitForTimeout(2000);
+
+// Payment methods are an accordion; the card fields only exist after the
+// card item is expanded. Labels vary, so click items until the field appears.
+async function cardFieldVisible() {
+  for (const frame of page.frames()) {
+    const field = frame.locator('input[name="cardNumber"]').first();
+    if ((await field.count()) && (await field.isVisible().catch(() => false))) return true;
+  }
+  return false;
+}
+const accordionItems = page.locator('[name="payment-method-accordion-item-title"]');
+const itemCount = await accordionItems.count();
+for (let index = 0; index < itemCount && !(await cardFieldVisible()); index += 1) {
+  await accordionItems
+    .nth(index)
+    .click()
+    .catch(() => {});
+  await page.waitForTimeout(1500);
+}
 
 const filledCard = await fillEverywhere('input[name="cardNumber"]', '4242424242424242');
 if (!filledCard) {
