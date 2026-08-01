@@ -26,6 +26,10 @@ function activeAdapters() {
     assessmentStorage: process.env.ASSESSMENT_STORAGE_MODE === 'supabase' ? 'supabase' : 'mock',
     analysisProvider,
     resultEmail: process.env.RESEND_DELIVERY_MODE === 'send' ? 'send' : 'skipped',
+    checkout:
+      process.env.CHECKOUT_MODE === 'stripe' && process.env.ASSESSMENT_STORAGE_MODE === 'supabase'
+        ? 'stripe'
+        : 'disabled',
   };
 }
 

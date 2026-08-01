@@ -75,7 +75,12 @@ test('health endpoint reports adapters without environment names or values', asy
     status: string;
     service: string;
     revision: string;
-    adapters: { assessmentStorage: string; analysisProvider: string; resultEmail: string };
+    adapters: {
+      assessmentStorage: string;
+      analysisProvider: string;
+      resultEmail: string;
+      checkout: string;
+    };
   };
 
   expect(response.status()).toBe(200);
@@ -89,6 +94,7 @@ test('health endpoint reports adapters without environment names or values', asy
       assessmentStorage: 'mock',
       analysisProvider: 'deterministic',
       resultEmail: 'skipped',
+      checkout: 'disabled',
     },
   });
 
