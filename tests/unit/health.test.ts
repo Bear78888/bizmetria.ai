@@ -15,6 +15,8 @@ const managedNames = [
   'ANALYSIS_PROVIDER',
   'ANTHROPIC_API_KEY',
   'RESEND_DELIVERY_MODE',
+  'CHECKOUT_MODE',
+  'STRIPE_WEBHOOK_SECRET',
 ];
 
 let saved: Record<string, string | undefined>;
@@ -40,7 +42,12 @@ async function body() {
   return (await GET().json()) as {
     status: string;
     revision: string;
-    adapters: { assessmentStorage: string; analysisProvider: string; resultEmail: string };
+    adapters: {
+      assessmentStorage: string;
+      analysisProvider: string;
+      resultEmail: string;
+      checkout: string;
+    };
   };
 }
 

@@ -110,6 +110,15 @@ const integrationEnvironmentObject = platformEnvironmentObject.extend({
   STRIPE_SECRET_KEY: z
     .string()
     .startsWith('sk_test_', 'STRIPE_SECRET_KEY must be a Stripe test key'),
+  // Optional until the webhook endpoint is registered in Stripe; the webhook
+  // route fails closed without it. Prefix-checked so a key pasted into the
+  // wrong variable fails the build rather than every delivery.
+  STRIPE_WEBHOOK_SECRET: z
+    .string()
+    .startsWith('whsec_', 'STRIPE_WEBHOOK_SECRET must be a webhook signing secret')
+    .optional(),
+  // The paid flow's own switch, deliberately separate from lead storage.
+  CHECKOUT_MODE: z.literal('stripe').optional(),
   NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: z
     .string()
     .startsWith('pk_test_', 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY must be a Stripe test key'),

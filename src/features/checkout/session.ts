@@ -55,12 +55,18 @@ async function resolvePriceId(stripe: CheckoutStripe): Promise<string> {
  * Stripe while remaining in the approved ladder — and Stripe wins, because it
  * is what actually applies the discount.
  */
-async function resolvePromotionCodeId(
+async function resolvePromotionCode(
   stripe: CheckoutStripe,
   code: PromotionCode,
-): Promise<string | null> {
+): Promise<{ id: string; couponId: string | null } | null> {
   const codes = await stripe.promotionCodes.list({ code, active: true, limit: 1 });
-  return codes.data[0]?.id ?? null;
+  const found = codes.data[0];
+  if (!found) return null;
+  const coupon = (found as { coupon?: string | { id?: string } }).coupon;
+  return {
+    id: found.id,
+    couponId: typeof coupon === 'string' ? coupon : (coupon?.id ?? null),
+  };
 }
 
 export interface BuildCheckoutSessionOptions {
@@ -79,13 +85,13 @@ export async function buildCheckoutSession(
     promotionSource,
   );
 
-  let promotionCodeId: string | null = null;
+  let promotion: { id: string; couponId: string | null } | null = null;
   let appliedPromotionCode: PromotionCode | null = null;
   let discountCents = 0;
 
   if (decision?.applied) {
-    promotionCodeId = await resolvePromotionCodeId(stripe, decision.code);
-    if (promotionCodeId) {
+    promotion = await resolvePromotionCode(stripe, decision.code);
+    if (promotion) {
       appliedPromotionCode = decision.code;
       discountCents = decision.discountCents;
     }
@@ -120,14 +126,23 @@ export async function buildCheckoutSession(
     // Never both: the ladder allows one promotion per order and no stacking,
     // and Stripe rejects a session that sets `discounts` alongside the
     // customer-entered promotion code field.
-    ...(promotionCodeId
-      ? { discounts: [{ promotion_code: promotionCodeId }] }
+    ...(promotion
+      ? { discounts: [{ promotion_code: promotion.id }] }
       : { allow_promotion_codes: false }),
+    // The webhook reads these back: they are how a completed session is tied
+    // to this application's order and applied promotion without trusting
+    // anything client-controlled.
     metadata: {
       bizmetria_free_assessment_id: request.freeAssessmentId,
       bizmetria_idempotency_key: request.idempotencyKey,
       bizmetria_locale: request.locale,
-      ...(appliedPromotionCode ? { bizmetria_promotion_code: appliedPromotionCode } : {}),
+      ...(appliedPromotionCode && promotion
+        ? {
+            bizmetria_promotion_code: appliedPromotionCode,
+            bizmetria_promotion_code_id: promotion.id,
+            ...(promotion.couponId ? { bizmetria_coupon_id: promotion.couponId } : {}),
+          }
+        : {}),
     },
   };
 
