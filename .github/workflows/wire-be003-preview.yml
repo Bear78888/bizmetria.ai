@@ -32,6 +32,7 @@ jobs:
       # The Vercel CLI links non-interactively from VERCEL_ORG_ID + VERCEL_PROJECT_ID.
       # Both must be present or the CLI refuses ("specified PROJECT_ID but not ORG_ID").
       VERCEL_ORG_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
+      PREVIEW_BASE_URL: https://bizmetria-ai-git-task-ws-09be-849935-jorgiohenes-7252s-projects.vercel.app
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
@@ -219,11 +220,22 @@ jobs:
       # correctly. A fresh Preview is produced by the next push to this branch,
       # which then reads from the isolated dev project.
 
+      # Vercel captures environment variables when a deployment is created, so a
+      # deployment built before (or while) the variables above were written keeps
+      # the previous values. Redeploy first, otherwise the live test races the
+      # build and can exercise a stale key.
+      - name: Redeploy the Preview so it captures the branch-scoped variables
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx --yes vercel@latest redeploy "$PREVIEW_BASE_URL" \
+            --no-color --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_SLUG" \
+            || echo "Redeploy did not complete; the live test will retry against the current deployment." >&2
+
       - name: Submit a real assessment to the protected Preview
         shell: bash
         env:
           VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
-          PREVIEW_BASE_URL: https://bizmetria-ai-git-task-ws-09be-849935-jorgiohenes-7252s-projects.vercel.app
         run: |
           set -euo pipefail
           test -n "$VERCEL_AUTOMATION_BYPASS_SECRET" \
