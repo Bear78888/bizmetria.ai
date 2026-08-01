@@ -3,8 +3,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import {
-  EXPECTED_SUPABASE_PROJECT_REF,
   failSupabaseTargetVerification,
+  resolveExpectedSupabaseProjectRef,
   SUPABASE_TARGET_ERROR,
   verifySupabaseEnvironmentTarget,
 } from '../src/lib/supabase/target.ts';
@@ -35,7 +35,7 @@ export function verifySupabaseTarget(
   verifySupabaseEnvironmentTarget(environment);
 
   const linkedProjectRef = readLinkedProjectRef(projectRoot);
-  if (linkedProjectRef && linkedProjectRef !== EXPECTED_SUPABASE_PROJECT_REF) {
+  if (linkedProjectRef && linkedProjectRef !== resolveExpectedSupabaseProjectRef(environment)) {
     failSupabaseTargetVerification();
   }
 }

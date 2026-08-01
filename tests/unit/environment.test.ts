@@ -24,6 +24,35 @@ describe('environment validation', () => {
     });
   });
 
+  it('accepts a registered preview project ref only with the preview flag', () => {
+    const previewEnvironment = {
+      ...platformEnvironment,
+      SUPABASE_TARGET_ENV: 'preview',
+      SUPABASE_PROJECT_REF: 'bwmyzkufqrufjimtfwow',
+      NEXT_PUBLIC_SUPABASE_URL: 'https://bwmyzkufqrufjimtfwow.supabase.co',
+    };
+
+    expect(validateEnvironment(previewEnvironment, 'platform')).toEqual({
+      ok: true,
+      missing: [],
+      invalid: [],
+    });
+  });
+
+  it('rejects a non-canonical project ref without the preview flag', () => {
+    const check = validateEnvironment(
+      {
+        ...platformEnvironment,
+        SUPABASE_PROJECT_REF: 'bwmyzkufqrufjimtfwow',
+        NEXT_PUBLIC_SUPABASE_URL: 'https://bwmyzkufqrufjimtfwow.supabase.co',
+      },
+      'platform',
+    );
+
+    expect(check.ok).toBe(false);
+    expect(check.invalid).toContain('SUPABASE_PROJECT_REF');
+  });
+
   it('accepts a local Supabase root URL for local development', () => {
     const result = parsePlatformEnvironment({
       ...platformEnvironment,

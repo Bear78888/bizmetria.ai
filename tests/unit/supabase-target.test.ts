@@ -12,9 +12,46 @@ const canonicalEnvironment = {
   SUPABASE_SECRET_KEY: 'must-never-be-printed',
 };
 
+const registeredPreviewRef = 'bwmyzkufqrufjimtfwow';
+const previewEnvironment = {
+  SUPABASE_TARGET_ENV: 'preview',
+  SUPABASE_PROJECT_REF: registeredPreviewRef,
+  NEXT_PUBLIC_SUPABASE_URL: `https://${registeredPreviewRef}.supabase.co`,
+  SUPABASE_SECRET_KEY: 'must-never-be-printed',
+};
+
 describe('Supabase target guard', () => {
   it('accepts only the canonical root project target', () => {
     expect(() => verifySupabaseTarget(canonicalEnvironment)).not.toThrow();
+  });
+
+  it('accepts a registered preview target only when explicitly opted in', () => {
+    expect(() => verifySupabaseTarget(previewEnvironment)).not.toThrow();
+  });
+
+  it('rejects a registered preview ref when the preview flag is absent', () => {
+    expect(() =>
+      verifySupabaseTarget({ ...previewEnvironment, SUPABASE_TARGET_ENV: undefined }),
+    ).toThrow(SUPABASE_TARGET_ERROR);
+  });
+
+  it('rejects an unregistered ref even with the preview flag set', () => {
+    expect(() =>
+      verifySupabaseTarget({
+        ...previewEnvironment,
+        SUPABASE_PROJECT_REF: 'wioaqrwsc1gxabfuufg',
+        NEXT_PUBLIC_SUPABASE_URL: 'https://wioaqrwsc1gxabfuufg.supabase.co',
+      }),
+    ).toThrow(SUPABASE_TARGET_ERROR);
+  });
+
+  it('rejects a preview target whose URL host does not match its ref', () => {
+    expect(() =>
+      verifySupabaseTarget({
+        ...previewEnvironment,
+        NEXT_PUBLIC_SUPABASE_URL: 'https://rbndiytodvoyiejassnw.supabase.co',
+      }),
+    ).toThrow(SUPABASE_TARGET_ERROR);
   });
 
   it.each([
@@ -51,5 +88,13 @@ describe('Supabase target guard', () => {
     expect(() => verifySupabaseTarget(canonicalEnvironment, projectRoot)).toThrow(
       SUPABASE_TARGET_ERROR,
     );
+  });
+
+  it('accepts a Supabase CLI link to the registered preview project', () => {
+    const projectRoot = join(tmpdir(), `bizmetria-target-${crypto.randomUUID()}`);
+    mkdirSync(join(projectRoot, 'supabase/.temp'), { recursive: true });
+    writeFileSync(join(projectRoot, 'supabase/.temp/project-ref'), `${registeredPreviewRef}\n`);
+
+    expect(() => verifySupabaseTarget(previewEnvironment, projectRoot)).not.toThrow();
   });
 });
