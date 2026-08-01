@@ -24,7 +24,8 @@
     "supabase:link": "supabase link --project-ref rbndiytodvoyiejassnw && npm run verify:supabase-target",
     "supabase:migrate": "npm run verify:supabase-target && supabase db push",
     "audit:production": "npm audit --omit=dev --audit-level=high",
-    "ci": "npm run format && npm run lint && npm run typecheck && npm run test && npm run test:integration && npm run build"
+    "ci": "npm run format && npm run lint && npm run typecheck && npm run test && npm run test:integration && npm run build",
+    "test:live": "vitest run --config vitest.live.config.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",
