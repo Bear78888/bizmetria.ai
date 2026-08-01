@@ -5,7 +5,7 @@ import type { OpportunityScore } from '@/features/free-assessment/score';
 
 import { AnalysisProviderError, createStructuredAnalysisCall } from './claude';
 import type { BusinessAnalysis } from './contract';
-import { generateAnalysis, resolveAnalysisProviderId } from './index';
+import { analysisEnvironment, generateAnalysis, resolveAnalysisProviderId } from './index';
 import { buildAnalysisInput } from './input';
 
 /**
@@ -20,8 +20,8 @@ export async function analyseSubmission(
   answers: AssessmentAnswers,
   score: OpportunityScore,
 ): Promise<BusinessAnalysis> {
-  const providerId = resolveAnalysisProviderId();
-  const apiKey = process.env.ANTHROPIC_API_KEY;
+  const providerId = resolveAnalysisProviderId(analysisEnvironment());
+  const apiKey = analysisEnvironment().ANTHROPIC_API_KEY;
 
   if (providerId === 'claude' && !apiKey) {
     throw new AnalysisProviderError(

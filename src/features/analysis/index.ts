@@ -17,6 +17,23 @@ export { ANALYSIS_SYSTEM_PROMPT, buildAnalysisPrompt } from './prompt';
 
 type EnvironmentInput = Readonly<Record<string, string | undefined>>;
 
+/**
+ * Reads the analysis variables by their literal names.
+ *
+ * This indirection is not decoration. The bundler only preserves environment
+ * variables it can see referenced literally, so reading them off a passed-in
+ * `process.env` object silently yields `undefined` for any name that appears
+ * nowhere else in the source. That is exactly what happened: a configured
+ * `ANTHROPIC_API_KEY` was invisible at runtime while directly-referenced
+ * variables in the same deployment resolved fine.
+ */
+export function analysisEnvironment(): EnvironmentInput {
+  return {
+    ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
+    ANALYSIS_PROVIDER: process.env.ANALYSIS_PROVIDER,
+  };
+}
+
 function isProviderId(value: string | undefined): value is AnalysisProviderId {
   return analysisProviderIds.includes(value as AnalysisProviderId);
 }
@@ -33,7 +50,7 @@ function isProviderId(value: string | undefined): value is AnalysisProviderId {
  *   configured, so the feature is developable before the credential exists.
  */
 export function resolveAnalysisProviderId(
-  environment: EnvironmentInput = process.env,
+  environment: EnvironmentInput = analysisEnvironment(),
 ): AnalysisProviderId {
   const configured = environment.ANALYSIS_PROVIDER?.trim();
 

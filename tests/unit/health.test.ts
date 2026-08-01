@@ -76,6 +76,17 @@ describe('health endpoint', () => {
     expect((await body()).adapters.resultEmail).toBe('send');
   });
 
+  // Regression: the provider used to be resolved from a passed-in `process.env`
+  // object, and the bundler only preserves variables it sees referenced
+  // literally. A configured ANTHROPIC_API_KEY was therefore invisible in a
+  // deployed build while directly-referenced variables resolved fine.
+  it('reads the Anthropic key by its literal name', async () => {
+    const { analysisEnvironment } = await import('@/features/analysis');
+
+    process.env.ANTHROPIC_API_KEY = 'sk-ant-literal-read';
+    expect(analysisEnvironment().ANTHROPIC_API_KEY).toBe('sk-ant-literal-read');
+  });
+
   it('exposes no credential, host or project reference', async () => {
     process.env.ANTHROPIC_API_KEY = 'sk-ant-synthetic';
     const serialised = JSON.stringify(await body());
