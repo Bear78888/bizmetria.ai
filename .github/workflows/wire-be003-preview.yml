@@ -29,6 +29,9 @@ jobs:
       VERCEL_TEAM_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
       VERCEL_TEAM_SLUG: jorgiohenes-7252s-projects
       VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
+      # The Vercel CLI links non-interactively from VERCEL_ORG_ID + VERCEL_PROJECT_ID.
+      # Both must be present or the CLI refuses ("specified PROJECT_ID but not ORG_ID").
+      VERCEL_ORG_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
 
