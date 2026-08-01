@@ -1,0 +1,24 @@
+name: Verify a full test-mode purchase
+
+'on':
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  purchase:
+    name: Pay the hosted checkout with the test card
+    if: github.repository == 'Bear78888/bizmetria.ai'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Run the purchase
+        run: node scripts/verify-test-purchase.mjs
