@@ -63,6 +63,40 @@ export default function InterviewClient({ locale, assessmentId }: InterviewClien
     };
   }, []);
 
+  // Once the call ends, nudge the analysis to start. The transcript arrives
+  // through the provider webhook a moment later, so the first attempt can be
+  // too early — a couple of spaced retries cover that. Best effort only: the
+  // run endpoint is idempotent and refuses anything not actually ready.
+  useEffect(() => {
+    if (callState !== 'ended') return;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const attempt = async () => {
+      try {
+        const response = await fetch('/api/paid-analysis/run', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ assessmentId }),
+        });
+        const body = (await response.json()) as { reason?: string };
+        return (
+          response.ok || !['interview_incomplete', 'transcript_missing'].includes(body.reason ?? '')
+        );
+      } catch {
+        return false;
+      }
+    };
+    timers.push(
+      setTimeout(() => {
+        void attempt().then((done) => {
+          if (!done) timers.push(setTimeout(() => void attempt(), 25_000));
+        });
+      }, 8_000),
+    );
+    return () => {
+      for (const timer of timers) clearTimeout(timer);
+    };
+  }, [callState, assessmentId]);
+
   const start = async () => {
     if (!consented || callState === 'connecting' || callState === 'in_call') return;
     setCallState('connecting');
