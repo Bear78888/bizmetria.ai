@@ -195,30 +195,11 @@ jobs:
           rm -f "$RUNNER_TEMP/vercel-preview-env.txt"
           echo "Branch-scoped Vercel Preview variables are configured without exposing their values."
 
-      - name: Build and deploy a fresh Vercel Preview with the branch-scoped variables
-        id: deploy
-        shell: bash
-        run: |
-          set -euo pipefail
-          npx --yes vercel@latest pull \
-            --yes \
-            --environment=preview \
-            --git-branch="$GIT_BRANCH" \
-            --no-color \
-            --token "$VERCEL_TOKEN" \
-            --scope "$VERCEL_TEAM_SLUG" \
-            >/dev/null
-          npx --yes vercel@latest build \
-            --no-color \
-            --token "$VERCEL_TOKEN" \
-            --scope "$VERCEL_TEAM_SLUG"
-          deployment_url="$(npx --yes vercel@latest deploy \
-            --prebuilt \
-            --yes \
-            --no-color \
-            --token "$VERCEL_TOKEN" \
-            --scope "$VERCEL_TEAM_SLUG")"
-          echo "deployment_url=$deployment_url" >> "$GITHUB_OUTPUT"
+      # No local `vercel build`/`deploy` here. The Vercel Git integration builds
+      # each Preview on Vercel's own infrastructure, where the full Preview
+      # environment (including these branch-scoped overrides) is injected
+      # correctly. A fresh Preview is produced by the next push to this branch,
+      # which then reads from the isolated dev project.
 
       - name: Publish a non-secret provisioning summary
         if: always()
