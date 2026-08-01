@@ -2,6 +2,11 @@ name: Audit Vercel integrations and environment ownership
 
 'on':
   workflow_dispatch: {}
+  push:
+    branches:
+      - task/ws-09/BE-003-public-site-free-assessment-v2
+    paths:
+      - .github/workflows/audit-vercel-integrations.yml
 
 permissions:
   contents: read
