@@ -136,23 +136,49 @@ async function persistToSupabase(
     );
   if (existingConsentsError) throw persistenceError('consent lookup', existingConsentsError);
 
-  const consentRows = consentChoices.map(({ channel, granted }) => ({
-    id: existingConsents?.find((consent) => consent.channel === channel)?.id,
-    lead_id: lead.id,
-    channel,
-    status: granted ? 'granted' : 'denied',
-    policy_version: submission.consent.policyVersion,
-    capture_source: 'public_free_assessment_contact',
-    evidence: {
-      affirmative_choice: granted,
-      locale: submission.locale,
-      service_message: channel === 'transactional',
-    },
-    granted_at: granted ? timestamp : null,
-    revoked_at: null,
-  }));
-  const { error: consentError } = await supabase.from('consents').upsert(consentRows);
-  if (consentError) throw persistenceError('consent', consentError);
+  // Never send an `id` for a new consent. supabase-js pads a bulk payload so
+  // every row shares the same keys, so an `id: undefined` becomes an explicit
+  // null, which suppresses the column default and violates its not-null
+  // constraint. Insert new rows without the column and update existing ones by id.
+  const newConsents: Record<string, unknown>[] = [];
+  const existingUpdates: { id: string; patch: Record<string, unknown> }[] = [];
+
+  for (const { channel, granted } of consentChoices) {
+    const row = {
+      lead_id: lead.id,
+      channel,
+      status: granted ? 'granted' : 'denied',
+      policy_version: submission.consent.policyVersion,
+      capture_source: 'public_free_assessment_contact',
+      evidence: {
+        affirmative_choice: granted,
+        locale: submission.locale,
+        service_message: channel === 'transactional',
+      },
+      granted_at: granted ? timestamp : null,
+      revoked_at: null,
+    };
+
+    const existingId = existingConsents?.find((consent) => consent.channel === channel)?.id;
+    if (existingId) {
+      existingUpdates.push({ id: existingId, patch: row });
+    } else {
+      newConsents.push(row);
+    }
+  }
+
+  if (newConsents.length > 0) {
+    const { error: consentError } = await supabase.from('consents').insert(newConsents);
+    if (consentError) throw persistenceError('consent', consentError);
+  }
+
+  for (const { id, patch } of existingUpdates) {
+    const { error: consentUpdateError } = await supabase
+      .from('consents')
+      .update(patch)
+      .eq('id', id);
+    if (consentUpdateError) throw persistenceError('consent update', consentUpdateError);
+  }
 
   return assessment.id;
 }
