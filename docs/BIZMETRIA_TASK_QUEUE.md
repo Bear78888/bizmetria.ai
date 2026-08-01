@@ -173,13 +173,25 @@ As of: 2026-07-31
 ### `BE-002 — Platform Foundation`
 
 - **Owner:** Backend, Data and Integrations / Master Orchestrator.
-- **Status:** `REVIEW`
+- **Status:** `APPROVED`
 - **Priority:** Critical
 - **Dependency:** Verified remote `main` at `7677bee1b0791bb4f954f058aa9e959d4796985a`; AE-001 is explicitly not a blocker.
-- **Branch:** `task/ws-09/BE-002-platform-foundation`.
+- **Historical branch:** `task/ws-09/BE-002-platform-foundation`.
 - **Outcome:** Executable Next.js/strict-TypeScript foundation, environment validation, Supabase schema/migrations, Auth, RLS, private Storage, synthetic seed, CI/test foundation, and successful native preview evidence.
 - **Boundary:** Synthetic/sandbox only; no live Stripe, real payments, production Retell numbers/email/data, production Supabase changes, or final-domain launch.
-- **Review status:** Local gate passed; draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) awaits remote CI, Vercel Preview, and Supabase integration evidence.
+- **Evidence:** PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18), merge SHA `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`.
+- **Review status:** GitHub CI, Vercel Preview, and isolated Supabase Preview passed; merged and verified in `main`. The synthetic Preview branch was removed, and no production Supabase migration was applied.
+
+### `BE-003 — Public Website and Free Assessment`
+
+- **Owner:** Backend, Data and Integrations / Master Orchestrator.
+- **Status:** `READY`
+- **Priority:** Critical
+- **Dependencies:** Approved BE-002, PS-003, FA-001, and LS-002.
+- **Planned branch:** `task/ws-09/BE-003-public-site-free-assessment`.
+- **Outcome:** Working English/Spanish public pages, canonical 11-question free assessment, deterministic `AI Opportunity Score`, contact form and consent, Supabase Preview persistence, result page, basic Resend email flow, unit tests, and browser E2E tests.
+- **Acceptance:** Canonical question IDs and score vectors, bilingual parity, required/optional consent separation, safe retry behavior, CI, Vercel Preview, and isolated Supabase Preview all pass.
+- **Boundary:** Preview/synthetic operation only; no production Supabase migration, real customer traffic, live payment, or unrestricted production email.
 
 ## Planned delivery catalog
 

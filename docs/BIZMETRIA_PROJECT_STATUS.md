@@ -1,12 +1,12 @@
 # BizMetria Project Status
 
 **As of:** 2026-07-31 \
-**Overall status:** `SANDBOX IMPLEMENTATION — PLATFORM FOUNDATION IN REVIEW` \
-**Verified starting `main` SHA:** `7677bee1b0791bb4f954f058aa9e959d4796985a`
+**Overall status:** `SANDBOX IMPLEMENTATION — PLATFORM FOUNDATION APPROVED; PUBLIC WEBSITE + FREE ASSESSMENT READY` \
+**Verified `main` SHA:** `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`
 
 ## Current phase
 
-All historical baseline tasks through LC-001 are merged. The latest verified merge is Commercial and Lifecycle Contract PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17) at `7677bee1b0791bb4f954f058aa9e959d4796985a`. No PR was open when BE-002 started.
+All historical baseline tasks through LC-001 are merged. Platform Foundation `BE-002` passed its local and remote gates and merged through PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) at `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`; all 68 changed files are present in remote `main`.
 
 Gate `G0 — Governance Ready` is `PASS` because:
 
@@ -15,7 +15,9 @@ Gate `G0 — Governance Ready` is `PASS` because:
 - the Decision Log, Project Status, Task Queue, Registry, Active Work, Master Continuation, and Workstream 01 state are synchronized;
 - `PS-001` and `LS-001` were the only initial execution assignments and are now approved.
 
-`G1 — Product Baseline Approved` is `PASS`; `G2` remains not passed. LC-001 is merged. AE-001 remains unfinished but does not block the owner-authorized Platform Foundation. Missing entity, support, staffing, legal, tax, vendor/security, release, and live-credential facts remain fail-closed pre-live dependencies.
+`G1 — Product Baseline Approved` is `PASS`; `G2` remains not passed. LC-001 and BE-002 are merged. AE-001 remains unfinished but does not block the owner-authorized implementation sequence. Missing entity, support, staffing, legal, tax, vendor/security, release, and live-credential facts remain fail-closed pre-live dependencies.
+
+Vercel automatically deployed `main` as Production at [deployment `6KSZVSYjP`](https://vercel.com/jorgiohenes-7252s-projects/bizmetria-ai/6KSZVSYjPBZgZCAMPCTZ6KFyAghZ); status is `Ready`. Supabase `Deploy to production` remains off, the production `public` schema did not receive the BE-002 migration, and the synthetic Preview branch `pr-18-be-002` was removed after merge.
 
 ## Confirmed product baseline
 
@@ -52,7 +54,8 @@ Gate `G0 — Governance Ready` is `PASS` because:
 | LS-002 Consent, Claims, and Data Requirements | Legal, Privacy and Security | APPROVED | PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15), merge SHA `a60597ebd3a17c06c923150fb9cf76f24c3a437c` |
 | LC-001 Commercial and Lifecycle Contract | Payments, CRM and Lifecycle | APPROVED | PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17), merge SHA `7677bee1b0791bb4f954f058aa9e959d4796985a` |
 | AE-001 Analysis and Evidence Contract | AI Analysis Engine | READY | FA-001, PS-004, and LS-002 approved |
-| BE-002 Platform Foundation | Backend, Data and Integrations | REVIEW | Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18) |
+| BE-002 Platform Foundation | Backend, Data and Integrations | APPROVED | PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18), merge SHA `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd` |
+| BE-003 Public Website and Free Assessment | Backend, Data and Integrations / Master Orchestrator | READY | BE-002, PS-003, FA-001, and LS-002 approved; planned branch `task/ws-09/BE-003-public-site-free-assessment` |
 | G2 and later delivery tasks | Applicable workstreams | PLANNED | Follow named dependencies in the Delivery Roadmap |
 
 The complete sequence is in [`docs/control/DELIVERY_ROADMAP.md`](control/DELIVERY_ROADMAP.md); exact per-workstream state is in [`docs/control/WORKSTREAM_REGISTRY.md`](control/WORKSTREAM_REGISTRY.md).
@@ -65,7 +68,6 @@ Workstream 04 retains the recovered documents as historical evidence. Implementa
 
 The following remain unresolved and must not be silently approved:
 
-- technology stack except for the owner-approved Stripe payment boundary;
 - voice/telephony vendor;
 - CRM and email vendor;
 - exact customer-facing legal text, tax configuration, support identity, report-review staffing, and consultation staffing required before live operation.
@@ -74,7 +76,7 @@ The Decision Log and Delivery Roadmap name the task and gate responsible for eac
 
 ## Immediate next action
 
-Complete BE-002 local validation, publish one draft PR, and require passing GitHub CI plus native Vercel Preview. Validate Supabase through the native preview integration when available; do not apply production database changes without explicit owner permission.
+Start `BE-003 — Public Website and Free Assessment` from remote `main` `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd` on `task/ws-09/BE-003-public-site-free-assessment`. Build the working bilingual funnel, deterministic score, contact/consent persistence, result page, basic Resend flow, and automated tests in Preview only. Production Supabase migrations remain prohibited without separate approval.
 
 ## Operational safeguards
 
