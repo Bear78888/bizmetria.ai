@@ -93,18 +93,24 @@ jobs:
             }
 
             const apiKeys = await api(`/v1/projects/${encodeURIComponent(ref)}/api-keys?reveal=true`);
-            const publishable = apiKeys.find(
-              (key) =>
-                key.type === 'publishable' ||
-                String(key.api_key || '').startsWith('sb_publishable_') ||
-                /(^|[_ -])anon($|[_ -])/iu.test(String(key.name || '')),
-            )?.api_key;
-            const secret = apiKeys.find(
-              (key) =>
-                key.type === 'secret' ||
-                String(key.api_key || '').startsWith('sb_secret_') ||
-                /service[_ -]?role/iu.test(String(key.name || '')),
-            )?.api_key;
+
+            // A project exposes both modern keys (sb_publishable_/sb_secret_) and
+            // legacy JWT keys, with the legacy entries listed first. Matching on
+            // name alone therefore picks the legacy key, which a new project
+            // rejects with "Invalid API key". Always prefer the modern key and
+            // fall back to a legacy one only when no modern key exists.
+            function pickKey(modernType, modernPrefix, legacyNamePattern) {
+              const usable = apiKeys.filter((key) => key && key.api_key && key.disabled !== true);
+              const modern = usable.find(
+                (key) =>
+                  key.type === modernType || String(key.api_key).startsWith(modernPrefix),
+              );
+              const legacy = usable.find((key) => legacyNamePattern.test(String(key.name || '')));
+              return (modern || legacy)?.api_key;
+            }
+
+            const publishable = pickKey('publishable', 'sb_publishable_', /(^|[_ -])anon($|[_ -])/iu);
+            const secret = pickKey('secret', 'sb_secret_', /service[_ -]?role/iu);
 
             if (!publishable || !secret) {
               throw new Error('Isolated dev project keys were not available in the expected format.');
