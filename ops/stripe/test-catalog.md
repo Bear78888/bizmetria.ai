@@ -12,10 +12,10 @@ object by accident.
 
 ## What exists
 
-| Object  | Identifier                       | Detail                        |
-| ------- | -------------------------------- | ----------------------------- |
-| Product | `prod_UzeptuObiGjDpW`            | BizMetria Business Assessment |
-| Price   | `price_1TzfVPReWI4VeYwHgDI8Fvfp` | $299.00 USD, one-time         |
+| Object  | Identifier                       | Detail                                                                        |
+| ------- | -------------------------------- | ----------------------------------------------------------------------------- |
+| Product | `prod_UzeptuObiGjDpW`            | BizMetria Business Assessment, tax code `txcd_20060048` (Consulting Services) |
+| Price   | `price_1TzfVPReWI4VeYwHgDI8Fvfp` | $299.00 USD, one-time                                                         |
 
 The price carries the lookup key `bizmetria_assessment_usd_299`, so the
 application resolves it by name rather than storing an identifier that changes
@@ -56,6 +56,30 @@ Idempotent: objects are matched by metadata, lookup key or code, and each
 creation carries a stable idempotency key. Re-running converges the `active`
 flag rather than creating duplicates — verified by running it three times and
 confirming exactly four promotion codes exist.
+
+## Merchant of record and the product tax code
+
+Checkout sessions set `managed_payments: { enabled: false }`, which makes
+**BizMetria the merchant of record** — responsible for its own sales-tax
+registration, collection and remittance.
+
+This was forced, not chosen. The account has Managed Payments (Stripe as
+merchant of record) enabled by default, and Checkout rejected every session
+twice before this settled:
+
+1. _"the product tax code is missing"_ — Managed Payments requires one.
+2. _"this product tax code is ineligible for Managed Payments"_ — after
+   classifying the product accurately as `txcd_20060048`, Consulting Services.
+
+What is sold is a consulting service with human review and a live
+consultation, not a SaaS subscription or a downloadable digital good. Keeping
+Managed Payments would have meant misclassifying the product to qualify for it.
+
+**Worth raising with the tax advisor:** Managed Payments would move multi-state
+sales-tax handling to Stripe, and multi-state tax is already a named pre-live
+blocker (`DEC-024`). If the offering can be restructured into an eligible
+category without misrepresenting it, that trade may be worth making. Both the
+classification and this choice need confirmation before live mode.
 
 ## Before live mode
 
