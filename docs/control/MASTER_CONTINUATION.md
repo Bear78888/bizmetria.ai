@@ -64,13 +64,37 @@ status documents are now out of date and superseded by this section:
   is testable and CI stays offline. Rationale and boundaries:
   [`docs/architecture/analysis-provider.md`](../architecture/analysis-provider.md).
 - **Result email sends from `noreply@bizmetria.com`** (the domain verified in
-  Resend; the product domain remains `bizmetria.ai`). `RESEND_FROM_EMAIL` and
+  Resend; see the later block for the matching site-domain decision). `RESEND_FROM_EMAIL` and
   `RESEND_DELIVERY_MODE` are now validated by the environment schema, so a
   malformed sender fails the build instead of the first send.
 - **Owner action still outstanding for this work:** `ANTHROPIC_API_KEY` does not
   exist in any environment yet. Until it is added to Vercel, deployments run the
   deterministic provider. The schema accepts its absence on purpose so the build
   never breaks ahead of the feature, but validates the prefix when present.
+
+## 2026-08-01 later the same day
+
+- **Claude analysis verified against the real API.** `npm run test:live`
+  (opt-in, never part of CI) ran the provider in both locales with a real key:
+  6 findings, 8 recommendations and a full three-phase roadmap each, grounded in
+  the submitted answers, with no invented figures and no financial claims.
+- **Stripe moved to its own account.** `acct_1TzfDfReWI4VeYwH` was created for
+  BizMetria; the previous connection was to an unrelated business on a **live**
+  key, so nothing was ever written through it. The test catalog now exists —
+  product, $299 price, and the four-tier promotion ladder with $149/$199
+  disabled per the approved launch rule. See `ops/stripe/test-catalog.md`.
+- **Public domain is `bizmetria.com` for the test phase** (owner decision), so
+  the site origin matches the `noreply@bizmetria.com` sender domain. `.ai` is
+  unaffected and is a one-line change later. `bizmetria.com` currently serves a
+  registrar parking page; DNS still has to be pointed at Vercel. See
+  `ops/domain/activate-public-domain.md`.
+- **Production lead capture approved by the owner.** The switch is
+  `.github/workflows/enable-production-lead-capture.yml`, which requires a typed
+  confirmation phrase, sets the Production variable, redeploys and verifies the
+  result through `/api/health`.
+- **Credential hygiene:** the Anthropic key and both Stripe test keys were
+  pasted into chat. Rotation stays deferred by owner decision until before
+  launch, but the Anthropic key is billable and belongs at the top of that list.
 
 ## BizMetria in brief
 
