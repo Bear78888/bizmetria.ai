@@ -4,7 +4,9 @@
 // database verification. Test mode only; no real charge is possible.
 import { chromium } from '@playwright/test';
 
-const BASE = 'https://bizmetria-ai.vercel.app';
+// The public domain since activation; overridable for checks against a
+// specific deployment host.
+const BASE = process.env.VERIFY_BASE_URL ?? 'https://bizmetria.com';
 const uuid = crypto.randomUUID();
 
 // 1) Real free assessment so the order has a lead to attach to.
