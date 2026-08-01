@@ -65,7 +65,7 @@ jobs:
           const projectId = process.env.VERCEL_PROJECT_ID;
           const base = `https://api.vercel.com/v9/projects/${encodeURIComponent(projectId)}/env`;
 
-          const response = await fetch(`${base}?teamId=${encodeURIComponent(teamId)}&decrypt=true`, {
+          const response = await fetch(`${base}?teamId=${encodeURIComponent(teamId)}`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           if (!response.ok) {
@@ -80,12 +80,25 @@ jobs:
               !env.gitBranch &&
               !env.configurationId,
           );
-          if (!entry || !entry.value) {
+          if (!entry) {
+            throw new Error('RETELL_API_KEY is not set on the Vercel Production environment.');
+          }
+
+          // Values are omitted from the listing; decryption is per-variable.
+          const detail = await fetch(
+            `${base}/${entry.id}?teamId=${encodeURIComponent(teamId)}&decrypt=true`,
+            { headers: { Authorization: `Bearer ${token}` } },
+          );
+          if (!detail.ok) {
+            throw new Error(`Reading RETELL_API_KEY failed: ${detail.status}`);
+          }
+          const decrypted = await detail.json();
+          if (!decrypted.value) {
             throw new Error(
-              'RETELL_API_KEY not readable from Vercel Production env. If it was stored as "Sensitive", re-create it as a plain encrypted variable or run the provisioning script where the key is available.',
+              'RETELL_API_KEY exists but its value is not readable (stored as "Sensitive"). Re-create it as a plain encrypted variable, or run scripts/provision-retell-agents.mjs where the key is available.',
             );
           }
-          process.stdout.write(entry.value);
+          process.stdout.write(decrypted.value);
           NODE
           )
           test -n "$RETELL_API_KEY" || { echo "Empty RETELL_API_KEY." >&2; exit 1; }
