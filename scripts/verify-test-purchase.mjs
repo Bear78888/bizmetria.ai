@@ -1,5 +1,3 @@
-// Full test purchase against production: free assessment -> checkout -> Stripe
-// hosted page (test card) -> confirmed page. DB verification happens separately.
 // Drives a complete REAL test-mode purchase against production: submits a
 // free assessment, opens checkout with the public promotion code, pays the
 // hosted Stripe page with the standard test card, and prints the ids for
