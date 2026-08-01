@@ -1,7 +1,6 @@
 import 'server-only';
 
 import { createSupabaseAdminClient } from '@/lib/supabase/admin';
-import { verifySupabaseEnvironmentTarget } from '@/lib/supabase/target';
 
 import { QUESTION_IDS, type FreeAssessmentSubmission, type QuestionId } from './schema';
 import type { OpportunityScore } from './score';
@@ -37,7 +36,7 @@ async function persistToSupabase(
   submission: FreeAssessmentSubmission,
   score: OpportunityScore,
 ): Promise<string> {
-  verifySupabaseEnvironmentTarget();
+  // createSupabaseAdminClient verifies the target ref before returning a client.
   const supabase = createSupabaseAdminClient();
   const timestamp = new Date().toISOString();
 

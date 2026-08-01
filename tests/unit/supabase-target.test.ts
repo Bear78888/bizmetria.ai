@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 import { SUPABASE_TARGET_ERROR, verifySupabaseTarget } from '../../scripts/verify-supabase-target';
+import { resolveSupabaseAdminUrl } from '../../src/lib/supabase/target';
 
 const canonicalEnvironment = {
   SUPABASE_PROJECT_REF: 'rbndiytodvoyiejassnw',
@@ -88,6 +89,33 @@ describe('Supabase target guard', () => {
     expect(() => verifySupabaseTarget(canonicalEnvironment, projectRoot)).toThrow(
       SUPABASE_TARGET_ERROR,
     );
+  });
+
+  it('derives the elevated origin from the ref, ignoring a hijacked public URL', () => {
+    // A Vercel Marketplace integration can overwrite NEXT_PUBLIC_SUPABASE_URL.
+    // Elevated access must still resolve to the server-owned ref's origin.
+    expect(
+      resolveSupabaseAdminUrl({
+        ...canonicalEnvironment,
+        NEXT_PUBLIC_SUPABASE_URL: 'https://choztfjytyqijwbrvqjh.supabase.co',
+      }),
+    ).toBe('https://rbndiytodvoyiejassnw.supabase.co');
+
+    expect(
+      resolveSupabaseAdminUrl({
+        ...previewEnvironment,
+        NEXT_PUBLIC_SUPABASE_URL: 'https://choztfjytyqijwbrvqjh.supabase.co',
+      }),
+    ).toBe(`https://${registeredPreviewRef}.supabase.co`);
+  });
+
+  it('still refuses an unregistered ref when deriving the elevated origin', () => {
+    expect(() =>
+      resolveSupabaseAdminUrl({
+        ...previewEnvironment,
+        SUPABASE_PROJECT_REF: 'choztfjytyqijwbrvqjh',
+      }),
+    ).toThrow(SUPABASE_TARGET_ERROR);
   });
 
   it('accepts a Supabase CLI link to the registered preview project', () => {

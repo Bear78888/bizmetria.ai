@@ -43,15 +43,34 @@ export function resolveExpectedSupabaseProjectRef(
   return EXPECTED_SUPABASE_PROJECT_REF;
 }
 
-export function verifySupabaseEnvironmentTarget(environment: EnvironmentInput = process.env): void {
-  const expectedRef = resolveExpectedSupabaseProjectRef(environment);
-  const expectedHostname = `${expectedRef}.supabase.co`;
+function describeObservedTarget(environment: EnvironmentInput): string {
+  return `Received ref: ${environment.SUPABASE_PROJECT_REF ?? '(unset)'}, target env: ${environment.SUPABASE_TARGET_ENV ?? '(unset)'}.`;
+}
 
-  const observed = `Received ref: ${environment.SUPABASE_PROJECT_REF ?? '(unset)'}, target env: ${environment.SUPABASE_TARGET_ENV ?? '(unset)'}.`;
+// Validates the server-owned project ref and returns the ref that elevated
+// access must use. Deliberately independent of NEXT_PUBLIC_SUPABASE_URL: that
+// variable is public and can be overwritten by a Vercel Marketplace integration,
+// so it must never be the value an elevated write trusts.
+export function verifySupabaseProjectRef(environment: EnvironmentInput = process.env): string {
+  const expectedRef = resolveExpectedSupabaseProjectRef(environment);
 
   if (environment.SUPABASE_PROJECT_REF !== expectedRef) {
-    failSupabaseTargetVerification(observed);
+    failSupabaseTargetVerification(describeObservedTarget(environment));
   }
+
+  return expectedRef;
+}
+
+// The single authoritative origin for elevated (service-role) access, derived
+// from the verified ref rather than read from a public, externally writable URL.
+export function resolveSupabaseAdminUrl(environment: EnvironmentInput = process.env): string {
+  return `https://${verifySupabaseProjectRef(environment)}.supabase.co`;
+}
+
+export function verifySupabaseEnvironmentTarget(environment: EnvironmentInput = process.env): void {
+  const expectedRef = verifySupabaseProjectRef(environment);
+  const expectedHostname = `${expectedRef}.supabase.co`;
+  const observed = describeObservedTarget(environment);
 
   const projectUrl = environment.NEXT_PUBLIC_SUPABASE_URL;
   if (!projectUrl || projectUrl.toLowerCase().includes('/rest/v1/')) {
