@@ -24,7 +24,10 @@ export async function POST(request: Request) {
   }
 
   const rawBody = await request.text();
-  if (!Retell.verify(rawBody, apiKey, signature)) {
+  // Retell.verify is asynchronous — an unawaited call returns a Promise,
+  // which is always truthy and would accept every signature.
+  const signatureValid = await Retell.verify(rawBody, apiKey, signature);
+  if (!signatureValid) {
     return NextResponse.json({ error: 'invalid_signature' }, { status: 400 });
   }
 
