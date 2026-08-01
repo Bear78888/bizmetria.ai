@@ -1,6 +1,6 @@
 name: Provision BE-003 preview infrastructure
 
-"on":
+'on':
   push:
     branches:
       - task/ws-09/BE-003-public-site-free-assessment-v2
