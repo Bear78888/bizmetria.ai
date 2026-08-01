@@ -45,7 +45,10 @@ export async function POST(request: Request) {
     const delivery = await sendResultEmail(submission.data.contact.email, result);
 
     return NextResponse.json({ result, delivery, storageMode: stored.storageMode });
-  } catch {
+  } catch (error) {
+    // Server-side only: the client response stays generic so nothing internal
+    // leaks, but a swallowed failure here is otherwise impossible to diagnose.
+    console.error('free-assessment request failed', error);
     return NextResponse.json({ error: 'assessment_unavailable' }, { status: 503 });
   }
 }

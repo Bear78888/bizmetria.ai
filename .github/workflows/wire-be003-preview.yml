@@ -286,6 +286,10 @@ jobs:
           if [[ "$status" != "200" ]]; then
             echo "Preview assessment POST failed with HTTP $status." >&2
             head -c 400 "$response_file" >&2 || true
+            echo >&2
+            echo "--- recent Vercel runtime logs ---" >&2
+            timeout 60 npx --yes vercel@latest logs "$PREVIEW_BASE_URL" \
+              --no-color --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_SLUG" >&2 || true
             exit 1
           fi
 
