@@ -40,7 +40,12 @@ export const checkoutRequestSchema = z.object({
    * lead so it is reachable without an account.
    */
   freeAssessmentId: z.uuid(),
-  email: z.email(),
+  /**
+   * Optional: when absent, Stripe Checkout collects the email itself. The
+   * free-result page holds no contact email client-side (deliberately), so
+   * the button cannot supply one.
+   */
+  email: z.email().optional(),
   /**
    * Optional. Case is normalised before lookup — Stripe treats promotion codes
    * case-insensitively and a customer typing `biz49` means `BIZ49`.
