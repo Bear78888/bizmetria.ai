@@ -12,6 +12,19 @@ export interface StoredAssessment {
   readonly storageMode: AssessmentStorageMode;
 }
 
+interface PersistenceFailure {
+  readonly code?: string;
+  readonly message?: string;
+}
+
+// Includes the Postgres error code and message so a failed write is diagnosable.
+// `details` and `hint` are deliberately excluded: they can echo the offending
+// row, which carries submitted contact data.
+function persistenceError(step: string, cause: PersistenceFailure | null): Error {
+  const detail = cause ? ` (${cause.code ?? 'unknown'}: ${cause.message ?? 'no message'})` : '';
+  return new Error(`Unable to persist assessment ${step}.${detail}`);
+}
+
 function canonicalAnswerIds(
   questionId: QuestionId,
   answers: FreeAssessmentSubmission['answers'],
@@ -59,7 +72,7 @@ async function persistToSupabase(
     .select('id')
     .single();
 
-  if (leadError || !lead) throw new Error('Unable to persist assessment lead.');
+  if (leadError || !lead) throw persistenceError('lead', leadError);
 
   const { data: assessment, error: assessmentError } = await supabase
     .from('free_assessments')
@@ -78,7 +91,7 @@ async function persistToSupabase(
     .select('id')
     .single();
 
-  if (assessmentError || !assessment) throw new Error('Unable to persist assessment.');
+  if (assessmentError || !assessment) throw persistenceError('record', assessmentError);
 
   const answerRows = QUESTION_IDS.map((questionId) => ({
     free_assessment_id: assessment.id,
@@ -89,7 +102,7 @@ async function persistToSupabase(
   const { error: answersError } = await supabase
     .from('free_assessment_answers')
     .upsert(answerRows, { onConflict: 'free_assessment_id,question_id' });
-  if (answersError) throw new Error('Unable to persist assessment answers.');
+  if (answersError) throw persistenceError('answers', answersError);
 
   const { error: scoreError } = await supabase.from('opportunity_scores').upsert(
     {
@@ -105,7 +118,7 @@ async function persistToSupabase(
     },
     { onConflict: 'free_assessment_id' },
   );
-  if (scoreError) throw new Error('Unable to persist assessment score.');
+  if (scoreError) throw persistenceError('score', scoreError);
 
   const consentChoices = [
     { channel: 'transactional', granted: true },
@@ -121,7 +134,7 @@ async function persistToSupabase(
       'channel',
       consentChoices.map((choice) => choice.channel),
     );
-  if (existingConsentsError) throw new Error('Unable to verify assessment consent.');
+  if (existingConsentsError) throw persistenceError('consent lookup', existingConsentsError);
 
   const consentRows = consentChoices.map(({ channel, granted }) => ({
     id: existingConsents?.find((consent) => consent.channel === channel)?.id,
@@ -139,7 +152,7 @@ async function persistToSupabase(
     revoked_at: null,
   }));
   const { error: consentError } = await supabase.from('consents').upsert(consentRows);
-  if (consentError) throw new Error('Unable to persist assessment consent.');
+  if (consentError) throw persistenceError('consent', consentError);
 
   return assessment.id;
 }
