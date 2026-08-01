@@ -129,11 +129,38 @@ await fillEverywhere('input[name="cardCvc"]', '123');
 await fillEverywhere('input[name="billingName"]', 'Purchase Verification');
 await fillEverywhere('input[name="billingPostalCode"]', '90210');
 
+// A country select can gate submission, and the Link save-my-info checkbox
+// makes a phone number mandatory when left on. Neutralise both.
+for (const frame of page.frames()) {
+  const country = frame.locator('select[name="billingCountry"]').first();
+  if (await country.count()) await country.selectOption('US').catch(() => {});
+  const stripePass = frame.locator('input[name="enableStripePass"]').first();
+  if ((await stripePass.count()) && (await stripePass.isChecked().catch(() => false))) {
+    await stripePass.uncheck().catch(() => {});
+  }
+}
+
 await page.click('button[type="submit"], .SubmitButton');
 // success_url points at the canonical domain, which is still parked; payment
 // completion is judged by leaving checkout.stripe.com, and truth lives in the
 // database via the webhook.
-await page.waitForURL((url) => !url.hostname.includes('checkout.stripe.com'), { timeout: 90000 });
+try {
+  await page.waitForURL((url) => !url.hostname.includes('checkout.stripe.com'), {
+    timeout: 90000,
+    waitUntil: 'commit',
+  });
+} catch (error) {
+  console.log('still on:', page.url());
+  for (const frame of page.frames()) {
+    const alerts = await frame
+      .$$eval('[role="alert"], .FieldError, [id$="-error"]', (els) =>
+        els.map((el) => el.textContent?.trim()).filter(Boolean),
+      )
+      .catch(() => []);
+    if (alerts.length) console.log('validation:', alerts.join(' | '));
+  }
+  throw error;
+}
 console.log('landed on:', page.url());
 await browser.close();
 console.log('PURCHASE COMPLETE');
