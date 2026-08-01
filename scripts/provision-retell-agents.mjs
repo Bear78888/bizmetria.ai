@@ -87,12 +87,33 @@ const locales = [
   },
 ];
 
+const LANGUAGE_MARKERS = {
+  en: ['en', 'english'],
+  es: ['es', 'spanish', 'español', 'espanol'],
+};
+
+/**
+ * Voice metadata varies by provider ('es-419', 'Spanish', a voice named
+ * 'Santiago'…), so matching is by marker across language, accent and name.
+ * When nothing matches, the available languages are printed so the mismatch
+ * is diagnosable from the run log, and the first voice overall is the
+ * fallback — a working agent with an imperfect accent beats no agent.
+ */
 async function pickVoice(language) {
   const voices = await client.voice.list();
-  const prefix = language.split('-')[0];
+  const markers = LANGUAGE_MARKERS[language.split('-')[0]] ?? [language.split('-')[0]];
+  const describe = (voice) =>
+    [voice.language, voice.accent, voice.voice_name, voice.voice_id]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
   const candidates = voices
-    .filter((voice) => (voice.language ?? '').toLowerCase().startsWith(prefix))
+    .filter((voice) => markers.some((marker) => describe(voice).includes(marker)))
     .sort((a, b) => a.voice_id.localeCompare(b.voice_id));
+  if (candidates.length === 0) {
+    const seen = [...new Set(voices.map((voice) => voice.language ?? 'unknown'))].sort();
+    console.log(`no voice matched ${language}; available languages: ${seen.join(', ')}`);
+  }
   const chosen = candidates[0] ?? voices.sort((a, b) => a.voice_id.localeCompare(b.voice_id))[0];
   if (!chosen) throw new Error(`No Retell voice available for language ${language}.`);
   return chosen.voice_id;
@@ -109,7 +130,20 @@ const existingAgents = await listAgents();
 for (const locale of locales) {
   const existing = existingAgents.find((agent) => agent.agent_name === locale.agentName);
   if (existing) {
-    console.log(`${locale.agentName}: exists, agent_id=${existing.agent_id}`);
+    // Converge the voice: the first provisioning run could fall back to an
+    // English voice when no language match was found.
+    const full = await client.agent.retrieve(existing.agent_id);
+    const desiredVoice = await pickVoice(locale.language);
+    if (full.voice_id !== desiredVoice) {
+      await client.agent.update(existing.agent_id, { voice_id: desiredVoice });
+      console.log(
+        `${locale.agentName}: exists, agent_id=${existing.agent_id}, voice ${full.voice_id} -> ${desiredVoice}`,
+      );
+    } else {
+      console.log(
+        `${locale.agentName}: exists, agent_id=${existing.agent_id}, voice=${full.voice_id}`,
+      );
+    }
     continue;
   }
 
