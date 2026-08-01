@@ -1,5 +1,3 @@
-// Full test purchase against production: free assessment -> checkout -> Stripe
-// hosted page (test card) -> confirmed page. DB verification happens separately.
 // Drives a complete REAL test-mode purchase against production: submits a
 // free assessment, opens checkout with the public promotion code, pays the
 // hosted Stripe page with the standard test card, and prints the ids for
@@ -141,9 +139,9 @@ for (const frame of page.frames()) {
 }
 
 await page.click('button[type="submit"], .SubmitButton');
-// success_url points at the canonical domain, which is still parked; payment
-// completion is judged by leaving checkout.stripe.com, and truth lives in the
-// database via the webhook.
+// success_url is built on the deployment origin, so payment completion should
+// land on the confirmed page. Database state (via the webhook) remains the
+// source of truth for "paid" — this checks the customer-visible redirect.
 try {
   await page.waitForURL((url) => !url.hostname.includes('checkout.stripe.com'), {
     timeout: 90000,
@@ -162,6 +160,11 @@ try {
   throw error;
 }
 console.log('landed on:', page.url());
+const landing = new URL(page.url());
+if (!landing.pathname.endsWith('/assessment/paid/confirmed')) {
+  throw new Error(`redirect landed on ${page.url()}, not the confirmed page`);
+}
+await page.waitForLoadState('domcontentloaded').catch(() => {});
 await browser.close();
 console.log('PURCHASE COMPLETE');
 console.log('cleanup-order-id:', checkout.orderId);

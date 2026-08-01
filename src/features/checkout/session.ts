@@ -1,6 +1,6 @@
 import type Stripe from 'stripe';
 
-import { canonicalPath } from '@/lib/site';
+import { deploymentPath } from '@/lib/site';
 
 import {
   ASSESSMENT_CURRENCY,
@@ -99,7 +99,10 @@ export async function buildCheckoutSession(
     // blocked from buying at full price over a promotion problem.
   }
 
-  const returnBase = canonicalPath(`/${request.locale}/assessment/paid`);
+  // Return URLs use the live deployment origin, not the canonical domain:
+  // the customer has just paid, and the canonical domain is parked until DNS
+  // activation, which would strand them on a parking page.
+  const returnBase = deploymentPath(`/${request.locale}/assessment/paid`);
 
   const params: Stripe.Checkout.SessionCreateParams = {
     mode: 'payment',
