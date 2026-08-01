@@ -517,9 +517,10 @@ export const uiCopy: Record<string, Bilingual> = {
     es: 'Faltan respuestas obligatorias o hay inconsistencias. Revise los campos indicados abajo.',
   },
   submitted: {
-    en: 'Questionnaire complete. The next step is your interview — we will contact you with scheduling details.',
-    es: 'Cuestionario completado. El siguiente paso es su entrevista; le contactaremos con los detalles para agendarla.',
+    en: 'Questionnaire complete. The next step is your interview.',
+    es: 'Cuestionario completado. El siguiente paso es su entrevista.',
   },
+  toInterview: { en: 'Continue to the interview', es: 'Continuar a la entrevista' },
   optional: { en: 'Optional', es: 'Opcional' },
   addRow: { en: 'Add', es: 'Añadir' },
   removeRow: { en: 'Remove', es: 'Quitar' },
