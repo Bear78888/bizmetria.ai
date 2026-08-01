@@ -8,6 +8,11 @@ import {
   type PaidAssessmentStore,
   type PaidAssessmentSummary,
 } from './claim';
+import {
+  PAID_ASSESSMENT_SCHEMA_VERSION,
+  type QuestionnaireState,
+  type QuestionnaireStore,
+} from './questionnaire';
 
 function storeError(step: string, cause: { code?: string; message?: string } | null) {
   // Postgres code and message only; `details`/`hint` can echo the row.
@@ -104,6 +109,65 @@ export function createSupabasePaidAssessmentStore(): PaidAssessmentStore {
       if (error) throw storeError('assessment lookup', error);
       if (!data) throw storeError('assessment lookup', null);
       return toSummary(data as AssessmentRow);
+    },
+  };
+}
+
+export function createSupabaseQuestionnaireStore(): QuestionnaireStore {
+  const supabase = createSupabaseAdminClient();
+
+  return {
+    async loadQuestionnaire(input): Promise<QuestionnaireState | null> {
+      const { data, error } = await supabase
+        .from('paid_assessments')
+        .select('id, status, questionnaire_data, completion_state, preferred_locale')
+        .eq('id', input.assessmentId)
+        .eq('customer_profile_id', input.customerProfileId)
+        .is('deleted_at', null)
+        .maybeSingle();
+      if (error) throw storeError('questionnaire load', error);
+      if (!data) return null;
+
+      const completion = (data.completion_state ?? {}) as { version?: unknown };
+      const version = typeof completion.version === 'number' ? completion.version : 0;
+      return {
+        assessmentId: data.id,
+        status: data.status,
+        version,
+        data: (data.questionnaire_data ?? {}) as Record<string, unknown>,
+        preferredLocale: data.preferred_locale,
+      };
+    },
+
+    async writeQuestionnaire(input): Promise<boolean> {
+      let query = supabase
+        .from('paid_assessments')
+        .update({
+          questionnaire_data: input.data,
+          completion_state: {
+            version: input.newVersion,
+            schema_version: PAID_ASSESSMENT_SCHEMA_VERSION,
+            ...(input.markSubmitted ? { submitted_version: input.newVersion } : {}),
+          },
+          status: input.status,
+          ...(input.markStarted ? { started_at: new Date().toISOString() } : {}),
+          ...(input.markSubmitted ? { submitted_at: new Date().toISOString() } : {}),
+        })
+        .eq('id', input.assessmentId)
+        .eq('customer_profile_id', input.customerProfileId)
+        .is('deleted_at', null);
+
+      // Optimistic concurrency at the database, not just in the read: the
+      // update only matches while the stored version is still the one the
+      // caller read. A fresh row has no version key at all, which counts as 0.
+      query =
+        input.expectedVersion === 0
+          ? query.or('completion_state->>version.is.null,completion_state->>version.eq.0')
+          : query.eq('completion_state->>version', String(input.expectedVersion));
+
+      const { data, error } = await query.select('id');
+      if (error) throw storeError('questionnaire write', error);
+      return (data ?? []).length > 0;
     },
   };
 }
