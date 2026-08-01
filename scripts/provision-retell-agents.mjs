@@ -98,7 +98,13 @@ async function pickVoice(language) {
   return chosen.voice_id;
 }
 
-const existingAgents = await client.agent.list();
+// Agent listing is paginated: the response is `{ items }`, not an array.
+async function listAgents() {
+  const response = await client.agent.list();
+  return response.items ?? [];
+}
+
+const existingAgents = await listAgents();
 
 for (const locale of locales) {
   const existing = existingAgents.find((agent) => agent.agent_name === locale.agentName);
@@ -129,7 +135,7 @@ for (const locale of locales) {
 
 console.log('');
 console.log('Set these in Vercel (Production):');
-const finalAgents = await client.agent.list();
+const finalAgents = await listAgents();
 for (const locale of locales) {
   const agent = finalAgents.find((candidate) => candidate.agent_name === locale.agentName);
   if (agent) {
