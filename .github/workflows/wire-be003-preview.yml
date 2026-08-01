@@ -132,12 +132,54 @@ jobs:
               { encoding: 'utf8', mode: 0o600 },
             );
 
+            // Format markers only: a boolean and a length reveal nothing usable
+            // but distinguish a real modern key from a legacy or masked value.
+            console.log(
+              `Resolved publishable key: modern=${publishable.startsWith('sb_publishable_')}, length=${publishable.length}`,
+            );
+            console.log(
+              `Resolved secret key: modern=${secret.startsWith('sb_secret_')}, length=${secret.length}`,
+            );
             console.log('Isolated dev project keys resolved without exposing their values.');
           })().catch((error) => {
             console.error(error instanceof Error ? error.message : 'Failed to read the isolated dev project.');
             process.exitCode = 1;
           });
           NODE
+
+      # Isolates a key problem from a deployment problem: if this direct write
+      # fails, the resolved secret key is wrong; if it succeeds but the Preview
+      # still cannot write, the deployment is not receiving the key.
+      - name: Verify the resolved secret key can actually write to the dev project
+        shell: bash
+        run: |
+          set -euo pipefail
+          probe_file="$RUNNER_TEMP/key-probe.json"
+          probe_key="keycheck-${GITHUB_RUN_ID}"
+
+          status="$(curl --silent --show-error \
+            --output "$probe_file" --write-out '%{http_code}' \
+            -X POST "$SUPABASE_PREVIEW_URL/rest/v1/leads" \
+            --header "apikey: $SUPABASE_PREVIEW_SECRET_KEY" \
+            --header "Authorization: Bearer $SUPABASE_PREVIEW_SECRET_KEY" \
+            --header 'Content-Type: application/json' \
+            --header 'Prefer: return=representation' \
+            --data "{\"name\":\"Key Probe\",\"business_name\":\"Key Probe Co\",\"email\":\"key-probe@example.com\",\"preferred_locale\":\"en\",\"idempotency_key\":\"$probe_key\"}")"
+
+          if [[ "$status" != "201" ]]; then
+            echo "The resolved secret key cannot write to the dev project (HTTP $status)." >&2
+            head -c 300 "$probe_file" >&2 || true
+            rm -f "$probe_file"
+            exit 1
+          fi
+
+          curl --silent --show-error --output /dev/null \
+            -X DELETE \
+            --header "apikey: $SUPABASE_PREVIEW_SECRET_KEY" \
+            --header "Authorization: Bearer $SUPABASE_PREVIEW_SECRET_KEY" \
+            "$SUPABASE_PREVIEW_URL/rest/v1/leads?idempotency_key=eq.$probe_key"
+          rm -f "$probe_file"
+          echo "The resolved secret key writes and deletes successfully."
 
       - name: Confirm the isolated dev project holds no assessment data
         shell: bash
