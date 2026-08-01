@@ -1,0 +1,111 @@
+name: Remove stale foreign Supabase Preview variables
+
+'on':
+  workflow_dispatch: {}
+  push:
+    branches:
+      - task/ws-09/BE-003-public-site-free-assessment-v2
+    paths:
+      - .github/workflows/cleanup-vercel-preview-env.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cleanup-vercel-preview-env
+  cancel-in-progress: true
+
+jobs:
+  cleanup:
+    name: Delete environment-wide Preview Supabase variables
+    if: github.repository == 'Bear78888/bizmetria.ai'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: development
+    env:
+      VERCEL_TEAM_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
+      VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+    steps:
+      - name: Delete only unowned, environment-wide Preview Supabase variables
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$VERCEL_TOKEN" || { echo "VERCEL_TOKEN is missing." >&2; exit 1; }
+          echo "::add-mask::$VERCEL_TOKEN"
+
+          node <<'NODE'
+          (async () => {
+            const token = process.env.VERCEL_TOKEN;
+            const teamId = process.env.VERCEL_TEAM_ID;
+            const projectId = process.env.VERCEL_PROJECT_ID;
+            const base = `https://api.vercel.com/v9/projects/${encodeURIComponent(projectId)}/env`;
+            const query = `teamId=${encodeURIComponent(teamId)}`;
+
+            // Names the previous setup left behind, pointing at an unrelated
+            // Supabase project. They shadow the branch-scoped values this
+            // project actually uses.
+            const staleNames = new Set([
+              'SUPABASE_URL',
+              'SUPABASE_ANON_KEY',
+              'SUPABASE_PUBLISHABLE_KEY',
+              'SUPABASE_SERVICE_ROLE_KEY',
+              'SUPABASE_SECRET_KEY',
+              'SUPABASE_JWT_SECRET',
+              'NEXT_PUBLIC_SUPABASE_URL',
+              'NEXT_PUBLIC_SUPABASE_ANON_KEY',
+              'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY',
+              'POSTGRES_URL',
+              'POSTGRES_PRISMA_URL',
+              'POSTGRES_URL_NON_POOLING',
+              'POSTGRES_USER',
+              'POSTGRES_HOST',
+              'POSTGRES_PASSWORD',
+              'POSTGRES_DATABASE',
+            ]);
+
+            const listResponse = await fetch(`${base}?${query}`, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            if (!listResponse.ok) {
+              throw new Error(`List failed ${listResponse.status}: ${(await listResponse.text()).slice(0, 300)}`);
+            }
+            const { envs } = await listResponse.json();
+
+            // Strictly bounded: Preview only, environment-wide only (no branch
+            // override of ours), and never a variable owned by an integration.
+            const doomed = (envs || []).filter(
+              (variable) =>
+                staleNames.has(variable.key) &&
+                Array.isArray(variable.target) &&
+                variable.target.length === 1 &&
+                variable.target[0] === 'preview' &&
+                !variable.gitBranch &&
+                !variable.configurationId,
+            );
+
+            if (doomed.length === 0) {
+              console.log('Nothing to remove; the Preview environment is already clean.');
+              return;
+            }
+
+            for (const variable of doomed) {
+              const deleteResponse = await fetch(
+                `${base}/${encodeURIComponent(variable.id)}?${query}`,
+                { method: 'DELETE', headers: { Authorization: `Bearer ${token}` } },
+              );
+              if (!deleteResponse.ok) {
+                throw new Error(
+                  `Delete of ${variable.key} failed ${deleteResponse.status}: ${(await deleteResponse.text()).slice(0, 200)}`,
+                );
+              }
+              console.log(`Removed environment-wide Preview variable ${variable.key}`);
+            }
+
+            console.log(`Removed ${doomed.length} stale Preview variables.`);
+          })().catch((error) => {
+            console.error(error instanceof Error ? error.message : 'Cleanup failed.');
+            process.exitCode = 1;
+          });
+          NODE

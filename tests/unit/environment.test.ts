@@ -9,18 +9,48 @@ import {
 
 const platformEnvironment = {
   NEXT_PUBLIC_APP_URL: 'https://preview.bizmetria.example',
-  NEXT_PUBLIC_SUPABASE_URL: 'https://abcdefghijklmnopqrst.supabase.co',
+  NEXT_PUBLIC_SUPABASE_URL: 'https://rbndiytodvoyiejassnw.supabase.co',
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: 'sb_publishable_synthetic',
+  SUPABASE_PROJECT_REF: 'rbndiytodvoyiejassnw',
   SUPABASE_SECRET_KEY: 'sb_secret_synthetic',
 };
 
 describe('environment validation', () => {
-  it('accepts a hosted Supabase root project URL', () => {
+  it('accepts the canonical hosted Supabase root project URL', () => {
     expect(validateEnvironment(platformEnvironment, 'platform')).toEqual({
       ok: true,
       missing: [],
       invalid: [],
     });
+  });
+
+  it('accepts a registered preview project ref only with the preview flag', () => {
+    const previewEnvironment = {
+      ...platformEnvironment,
+      SUPABASE_TARGET_ENV: 'preview',
+      SUPABASE_PROJECT_REF: 'bwmyzkufqrufjimtfwow',
+      NEXT_PUBLIC_SUPABASE_URL: 'https://bwmyzkufqrufjimtfwow.supabase.co',
+    };
+
+    expect(validateEnvironment(previewEnvironment, 'platform')).toEqual({
+      ok: true,
+      missing: [],
+      invalid: [],
+    });
+  });
+
+  it('rejects a non-canonical project ref without the preview flag', () => {
+    const check = validateEnvironment(
+      {
+        ...platformEnvironment,
+        SUPABASE_PROJECT_REF: 'bwmyzkufqrufjimtfwow',
+        NEXT_PUBLIC_SUPABASE_URL: 'https://bwmyzkufqrufjimtfwow.supabase.co',
+      },
+      'platform',
+    );
+
+    expect(check.ok).toBe(false);
+    expect(check.invalid).toContain('SUPABASE_PROJECT_REF');
   });
 
   it('accepts a local Supabase root URL for local development', () => {
@@ -36,7 +66,7 @@ describe('environment validation', () => {
     const check = validateEnvironment(
       {
         ...platformEnvironment,
-        NEXT_PUBLIC_SUPABASE_URL: 'https://abcdefghijklmnopqrst.supabase.co/rest/v1/',
+        NEXT_PUBLIC_SUPABASE_URL: 'https://rbndiytodvoyiejassnw.supabase.co/rest/v1/',
       },
       'platform',
     );

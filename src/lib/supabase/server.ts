@@ -4,8 +4,10 @@ import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
 import { getPlatformEnvironment } from '@/lib/env/server';
+import { verifySupabaseEnvironmentTarget } from '@/lib/supabase/target';
 
 export async function createSupabaseServerClient() {
+  verifySupabaseEnvironmentTarget();
   const environment = getPlatformEnvironment();
   const cookieStore = await cookies();
 

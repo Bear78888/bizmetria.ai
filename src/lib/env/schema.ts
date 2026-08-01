@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { resolveExpectedSupabaseProjectRef } from '../supabase/target';
+
 export const expectedEnvironmentNames = [
   'OPENAI_API_KEY',
   'STRIPE_SECRET_KEY',
@@ -9,6 +11,7 @@ export const expectedEnvironmentNames = [
   'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY',
   'SUPABASE_SECRET_KEY',
   'NEXT_PUBLIC_SUPABASE_URL',
+  'SUPABASE_PROJECT_REF',
 ] as const;
 
 export const browserEnvironmentNames = [
@@ -68,11 +71,30 @@ export const browserEnvironmentSchema = publicSupabaseSchema.extend({
     .optional(),
 });
 
-export const platformEnvironmentSchema = publicSupabaseSchema.extend({
+// The canonical production project is always accepted. A registered isolated
+// preview/development project is accepted only when SUPABASE_TARGET_ENV=preview
+// is set, so production (which never sets that flag) stays pinned to canonical.
+function refineSupabaseProjectRef(
+  value: { SUPABASE_PROJECT_REF: string; SUPABASE_TARGET_ENV?: 'preview' | undefined },
+  context: z.RefinementCtx,
+): void {
+  const expectedRef = resolveExpectedSupabaseProjectRef(value);
+  if (value.SUPABASE_PROJECT_REF !== expectedRef) {
+    context.addIssue({
+      code: 'custom',
+      path: ['SUPABASE_PROJECT_REF'],
+      message: `SUPABASE_PROJECT_REF must be ${expectedRef}`,
+    });
+  }
+}
+
+const platformEnvironmentObject = publicSupabaseSchema.extend({
+  SUPABASE_PROJECT_REF: z.string().min(1, 'SUPABASE_PROJECT_REF is required'),
   SUPABASE_SECRET_KEY: z.string().min(1, 'SUPABASE_SECRET_KEY is required'),
+  SUPABASE_TARGET_ENV: z.literal('preview').optional(),
 });
 
-export const integrationEnvironmentSchema = platformEnvironmentSchema.extend({
+const integrationEnvironmentObject = platformEnvironmentObject.extend({
   OPENAI_API_KEY: z.string().min(1, 'OPENAI_API_KEY is required'),
   STRIPE_SECRET_KEY: z
     .string()
@@ -83,6 +105,12 @@ export const integrationEnvironmentSchema = platformEnvironmentSchema.extend({
   RETELL_API_KEY: z.string().min(1, 'RETELL_API_KEY is required'),
   RESEND_API_KEY: z.string().min(1, 'RESEND_API_KEY is required'),
 });
+
+export const platformEnvironmentSchema =
+  platformEnvironmentObject.superRefine(refineSupabaseProjectRef);
+
+export const integrationEnvironmentSchema =
+  integrationEnvironmentObject.superRefine(refineSupabaseProjectRef);
 
 export type BrowserEnvironment = z.infer<typeof browserEnvironmentSchema>;
 export type PlatformEnvironment = z.infer<typeof platformEnvironmentSchema>;

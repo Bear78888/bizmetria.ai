@@ -1,0 +1,101 @@
+name: Audit Vercel integrations and environment ownership
+
+'on':
+  workflow_dispatch: {}
+  push:
+    branches:
+      - task/ws-09/BE-003-public-site-free-assessment-v2
+    paths:
+      - .github/workflows/audit-vercel-integrations.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: audit-vercel-integrations
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    name: Report integration scope and environment variable ownership
+    if: github.repository == 'Bear78888/bizmetria.ai'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: development
+    env:
+      VERCEL_TEAM_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
+      VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+    steps:
+      - name: Report integration scope and environment ownership
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$VERCEL_TOKEN" || { echo "VERCEL_TOKEN is missing." >&2; exit 1; }
+          echo "::add-mask::$VERCEL_TOKEN"
+
+          node <<'NODE'
+          (async () => {
+            const token = process.env.VERCEL_TOKEN;
+            const teamId = process.env.VERCEL_TEAM_ID;
+            const projectId = process.env.VERCEL_PROJECT_ID;
+
+            async function api(path) {
+              const separator = path.includes('?') ? '&' : '?';
+              const response = await fetch(
+                `https://api.vercel.com${path}${separator}teamId=${encodeURIComponent(teamId)}`,
+                { headers: { Authorization: `Bearer ${token}` } },
+              );
+              if (!response.ok) {
+                throw new Error(`Vercel API ${response.status} for ${path}: ${(await response.text()).slice(0, 300)}`);
+              }
+              return response.json();
+            }
+
+            // Each section is independent so one failing endpoint still leaves
+            // the rest of the report usable.
+            console.log('=== Integration configurations ===');
+            try {
+              const configurations = await api('/v1/integrations/configurations?view=account');
+              for (const configuration of configurations || []) {
+                console.log(
+                  JSON.stringify({
+                    id: configuration.id,
+                    slug: configuration.slug,
+                    source: configuration.source,
+                    projectSelection: configuration.projectSelection,
+                    projects: configuration.projects,
+                    disabledAt: configuration.disabledAt ?? null,
+                  }),
+                );
+              }
+            } catch (error) {
+              console.log(`configurations unavailable: ${error.message}`);
+            }
+
+            // Environment variable ownership. Values are never printed.
+            console.log('=== Environment variables (metadata only) ===');
+            try {
+              const environment = await api(`/v9/projects/${encodeURIComponent(projectId)}/env`);
+              for (const variable of environment.envs || []) {
+                console.log(
+                  JSON.stringify({
+                    id: variable.id,
+                    key: variable.key,
+                    target: variable.target,
+                    gitBranch: variable.gitBranch ?? null,
+                    type: variable.type,
+                    // Non-empty when the variable is owned by an integration.
+                    configurationId: variable.configurationId ?? null,
+                  }),
+                );
+              }
+            } catch (error) {
+              console.log(`environment unavailable: ${error.message}`);
+            }
+          })().catch((error) => {
+            console.error(error instanceof Error ? error.message : 'Audit failed.');
+            process.exitCode = 1;
+          });
+          NODE

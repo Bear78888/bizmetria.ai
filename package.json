@@ -20,6 +20,9 @@
     "test:watch": "vitest",
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "test:e2e": "playwright test",
+    "verify:supabase-target": "node --experimental-strip-types scripts/verify-supabase-target.ts",
+    "supabase:link": "supabase link --project-ref rbndiytodvoyiejassnw && npm run verify:supabase-target",
+    "supabase:migrate": "npm run verify:supabase-target && supabase db push",
     "audit:production": "npm audit --omit=dev --audit-level=high",
     "ci": "npm run format && npm run lint && npm run typecheck && npm run test && npm run test:integration && npm run build"
   },

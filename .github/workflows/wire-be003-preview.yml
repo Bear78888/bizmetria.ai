@@ -1,0 +1,443 @@
+name: Wire BE-003 preview to isolated dev Supabase
+
+'on':
+  workflow_dispatch: {}
+  push:
+    branches:
+      - task/ws-09/BE-003-public-site-free-assessment-v2
+    paths:
+      - .github/workflows/wire-be003-preview.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wire-be003-preview
+  cancel-in-progress: true
+
+jobs:
+  wire:
+    name: Wire Vercel Preview to isolated dev Supabase
+    if: github.repository == 'Bear78888/bizmetria.ai'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: development
+    env:
+      DEV_SUPABASE_PROJECT_REF: bwmyzkufqrufjimtfwow
+      CANONICAL_SUPABASE_PROJECT_REF: rbndiytodvoyiejassnw
+      GIT_BRANCH: task/ws-09/BE-003-public-site-free-assessment-v2
+      VERCEL_TEAM_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
+      VERCEL_TEAM_SLUG: jorgiohenes-7252s-projects
+      VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
+      # The Vercel CLI links non-interactively from VERCEL_ORG_ID + VERCEL_PROJECT_ID.
+      # Both must be present or the CLI refuses ("specified PROJECT_ID but not ORG_ID").
+      VERCEL_ORG_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
+      PREVIEW_BASE_URL: https://bizmetria-ai-git-task-ws-09be-849935-jorgiohenes-7252s-projects.vercel.app
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+    steps:
+      - name: Check out the exact PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: task/ws-09/BE-003-public-site-free-assessment-v2
+          fetch-depth: 1
+
+      - name: Validate protected inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$SUPABASE_ACCESS_TOKEN" || { echo "SUPABASE_ACCESS_TOKEN is missing." >&2; exit 1; }
+          test -n "$VERCEL_TOKEN" || { echo "VERCEL_TOKEN is missing." >&2; exit 1; }
+          echo "::add-mask::$SUPABASE_ACCESS_TOKEN"
+          echo "::add-mask::$VERCEL_TOKEN"
+          test "$DEV_SUPABASE_PROJECT_REF" != "$CANONICAL_SUPABASE_PROJECT_REF" \
+            || { echo "The isolated dev ref must not equal the canonical production ref." >&2; exit 1; }
+          [[ "$DEV_SUPABASE_PROJECT_REF" =~ ^[a-z]{20}$ ]] \
+            || { echo "The isolated dev ref is malformed." >&2; exit 1; }
+
+      - name: Read the isolated dev project keys and confirm it is data-less
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('node:fs');
+
+          (async () => {
+            const baseUrl = 'https://api.supabase.com';
+            const token = process.env.SUPABASE_ACCESS_TOKEN;
+            const ref = process.env.DEV_SUPABASE_PROJECT_REF;
+            const canonicalRef = process.env.CANONICAL_SUPABASE_PROJECT_REF;
+            const githubEnv = process.env.GITHUB_ENV;
+
+            if (!token || !ref || !canonicalRef || !githubEnv) {
+              throw new Error('Required protected input is missing.');
+            }
+            if (ref === canonicalRef) {
+              throw new Error('Refusing to wire the canonical production project as a preview target.');
+            }
+
+            async function api(path) {
+              const response = await fetch(`${baseUrl}${path}`, {
+                headers: { Authorization: `Bearer ${token}` },
+              });
+              if (!response.ok) {
+                const body = (await response.text()).slice(0, 300);
+                throw new Error(`Supabase Management API ${response.status}: ${body || 'empty response'}`);
+              }
+              return response.json();
+            }
+
+            const project = await api(`/v1/projects/${encodeURIComponent(ref)}`);
+            if (!project || project.ref !== ref) {
+              throw new Error('Supabase returned an unexpected project for the dev ref.');
+            }
+
+            const apiKeys = await api(`/v1/projects/${encodeURIComponent(ref)}/api-keys?reveal=true`);
+
+            // A project exposes both modern keys (sb_publishable_/sb_secret_) and
+            // legacy JWT keys, with the legacy entries listed first. Matching on
+            // name alone therefore picks the legacy key, which a new project
+            // rejects with "Invalid API key". Always prefer the modern key and
+            // fall back to a legacy one only when no modern key exists.
+            function pickKey(modernType, modernPrefix, legacyNamePattern) {
+              const usable = apiKeys.filter((key) => key && key.api_key && key.disabled !== true);
+              const modern = usable.find(
+                (key) =>
+                  key.type === modernType || String(key.api_key).startsWith(modernPrefix),
+              );
+              const legacy = usable.find((key) => legacyNamePattern.test(String(key.name || '')));
+              return (modern || legacy)?.api_key;
+            }
+
+            const publishable = pickKey('publishable', 'sb_publishable_', /(^|[_ -])anon($|[_ -])/iu);
+            const secret = pickKey('secret', 'sb_secret_', /service[_ -]?role/iu);
+
+            if (!publishable || !secret) {
+              throw new Error('Isolated dev project keys were not available in the expected format.');
+            }
+
+            const previewUrl = `https://${ref}.supabase.co`;
+            for (const value of [publishable, secret]) {
+              console.log(`::add-mask::${value}`);
+            }
+
+            fs.appendFileSync(
+              githubEnv,
+              [
+                `SUPABASE_PREVIEW_URL=${previewUrl}`,
+                `SUPABASE_PREVIEW_PUBLISHABLE_KEY=${publishable}`,
+                `SUPABASE_PREVIEW_SECRET_KEY=${secret}`,
+              ].join('\n') + '\n',
+              { encoding: 'utf8', mode: 0o600 },
+            );
+
+            // Format markers only: a boolean and a length reveal nothing usable
+            // but distinguish a real modern key from a legacy or masked value.
+            console.log(
+              `Resolved publishable key: modern=${publishable.startsWith('sb_publishable_')}, length=${publishable.length}`,
+            );
+            console.log(
+              `Resolved secret key: modern=${secret.startsWith('sb_secret_')}, length=${secret.length}`,
+            );
+            console.log('Isolated dev project keys resolved without exposing their values.');
+          })().catch((error) => {
+            console.error(error instanceof Error ? error.message : 'Failed to read the isolated dev project.');
+            process.exitCode = 1;
+          });
+          NODE
+
+      # Isolates a key problem from a deployment problem: if this direct write
+      # fails, the resolved secret key is wrong; if it succeeds but the Preview
+      # still cannot write, the deployment is not receiving the key.
+      - name: Verify the resolved secret key can actually write to the dev project
+        shell: bash
+        run: |
+          set -euo pipefail
+          probe_file="$RUNNER_TEMP/key-probe.json"
+          probe_key="keycheck-${GITHUB_RUN_ID}"
+
+          status="$(curl --silent --show-error \
+            --output "$probe_file" --write-out '%{http_code}' \
+            -X POST "$SUPABASE_PREVIEW_URL/rest/v1/leads" \
+            --header "apikey: $SUPABASE_PREVIEW_SECRET_KEY" \
+            --header "Authorization: Bearer $SUPABASE_PREVIEW_SECRET_KEY" \
+            --header 'Content-Type: application/json' \
+            --header 'Prefer: return=representation' \
+            --data "{\"name\":\"Key Probe\",\"business_name\":\"Key Probe Co\",\"email\":\"key-probe@example.com\",\"preferred_locale\":\"en\",\"idempotency_key\":\"$probe_key\"}")"
+
+          if [[ "$status" != "201" ]]; then
+            echo "The resolved secret key cannot write to the dev project (HTTP $status)." >&2
+            head -c 300 "$probe_file" >&2 || true
+            rm -f "$probe_file"
+            exit 1
+          fi
+
+          curl --silent --show-error --output /dev/null \
+            -X DELETE \
+            --header "apikey: $SUPABASE_PREVIEW_SECRET_KEY" \
+            --header "Authorization: Bearer $SUPABASE_PREVIEW_SECRET_KEY" \
+            "$SUPABASE_PREVIEW_URL/rest/v1/leads?idempotency_key=eq.$probe_key"
+          rm -f "$probe_file"
+          echo "The resolved secret key writes and deletes successfully."
+
+      - name: Confirm the isolated dev project holds no assessment data
+        shell: bash
+        run: |
+          set -euo pipefail
+          response_file="$RUNNER_TEMP/dev-rowcount.json"
+          status="$(curl --silent --show-error \
+            --output "$response_file" \
+            --write-out '%{http_code}' \
+            --header "apikey: $SUPABASE_PREVIEW_SECRET_KEY" \
+            --header "Authorization: Bearer $SUPABASE_PREVIEW_SECRET_KEY" \
+            --header 'Prefer: count=exact' \
+            --head \
+            "$SUPABASE_PREVIEW_URL/rest/v1/leads?select=id&limit=1")"
+          test "$status" = "200" || { echo "Dev project reachability check failed with HTTP $status." >&2; exit 1; }
+          echo "Isolated dev project is reachable with the service key."
+
+      - name: Link the checked-out source to the existing Vercel project
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .vercel
+          node -e 'const fs=require("node:fs"); fs.writeFileSync(".vercel/project.json", JSON.stringify({orgId:process.env.VERCEL_TEAM_ID,projectId:process.env.VERCEL_PROJECT_ID}));'
+
+      - name: Set only this Git branch's Vercel Preview Supabase variables
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          set_vercel_env() {
+            local name="$1"
+            local value="$2"
+            local sensitivity="${3:-public}"
+            local args=(env add "$name" preview "$GIT_BRANCH" --force --yes --no-color --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_SLUG")
+            if [[ "$sensitivity" == "sensitive" ]]; then
+              args+=(--sensitive)
+            fi
+            printf '%s' "$value" | npx --yes vercel@latest "${args[@]}" >/dev/null
+          }
+
+          set_vercel_env NEXT_PUBLIC_SUPABASE_URL "$SUPABASE_PREVIEW_URL"
+          set_vercel_env NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY "$SUPABASE_PREVIEW_PUBLISHABLE_KEY"
+          set_vercel_env SUPABASE_SECRET_KEY "$SUPABASE_PREVIEW_SECRET_KEY" sensitive
+          # The marketplace integration overwrites SUPABASE_SECRET_KEY on every
+          # deployment, so also publish the namespaced variable the app prefers.
+          set_vercel_env BIZMETRIA_SUPABASE_SECRET_KEY "$SUPABASE_PREVIEW_SECRET_KEY" sensitive
+          set_vercel_env SUPABASE_PROJECT_REF "$DEV_SUPABASE_PROJECT_REF"
+          set_vercel_env SUPABASE_TARGET_ENV preview
+          set_vercel_env ASSESSMENT_STORAGE_MODE supabase
+
+          npx --yes vercel@latest env ls preview "$GIT_BRANCH" \
+            --no-color --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_SLUG" \
+            > "$RUNNER_TEMP/vercel-preview-env.txt"
+
+          for required_name in \
+            NEXT_PUBLIC_SUPABASE_URL \
+            NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY \
+            SUPABASE_SECRET_KEY \
+            BIZMETRIA_SUPABASE_SECRET_KEY \
+            SUPABASE_PROJECT_REF \
+            SUPABASE_TARGET_ENV \
+            ASSESSMENT_STORAGE_MODE; do
+            grep -Fq "$required_name" "$RUNNER_TEMP/vercel-preview-env.txt" \
+              || { echo "Missing Vercel Preview variable name: $required_name" >&2; exit 1; }
+          done
+          rm -f "$RUNNER_TEMP/vercel-preview-env.txt"
+          echo "Branch-scoped Vercel Preview variables are configured without exposing their values."
+
+          # Print only the non-secret target markers actually resolved for this
+          # branch. Refs, hostnames and modes are non-secret by design; keys are
+          # never printed, and the pulled file is deleted immediately.
+          resolved_env="$RUNNER_TEMP/preview-resolved.env"
+          npx --yes vercel@latest env pull "$resolved_env" \
+            --environment=preview --git-branch="$GIT_BRANCH" --yes --no-color \
+            --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_SLUG" >/dev/null
+          echo "Resolved non-secret Preview target markers:"
+          grep -E '^(SUPABASE_PROJECT_REF|SUPABASE_TARGET_ENV|ASSESSMENT_STORAGE_MODE|NEXT_PUBLIC_SUPABASE_URL)=' \
+            "$resolved_env" || echo "(none of the expected markers were resolved)"
+          rm -f "$resolved_env"
+
+      # No local `vercel build`/`deploy` here. The Vercel Git integration builds
+      # each Preview on Vercel's own infrastructure, where the full Preview
+      # environment (including these branch-scoped overrides) is injected
+      # correctly. A fresh Preview is produced by the next push to this branch,
+      # which then reads from the isolated dev project.
+
+      # Vercel captures environment variables when a deployment is created, so a
+      # deployment built before (or while) the variables above were written keeps
+      # the previous values. Redeploy first, otherwise the live test races the
+      # build and can exercise a stale key.
+      - name: Redeploy the Preview so it captures the branch-scoped variables
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx --yes vercel@latest redeploy "$PREVIEW_BASE_URL" \
+            --no-color --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_SLUG" \
+            || echo "Redeploy did not complete; the live test will retry against the current deployment." >&2
+
+      - name: Submit a real assessment to the protected Preview
+        shell: bash
+        env:
+          VERCEL_AUTOMATION_BYPASS_SECRET: ${{ secrets.VERCEL_AUTOMATION_BYPASS_SECRET }}
+        run: |
+          set -euo pipefail
+          test -n "$VERCEL_AUTOMATION_BYPASS_SECRET" \
+            || { echo "VERCEL_AUTOMATION_BYPASS_SECRET is missing." >&2; exit 1; }
+          echo "::add-mask::$VERCEL_AUTOMATION_BYPASS_SECRET"
+
+          idempotency_key="$(cat /proc/sys/kernel/random/uuid)"
+          marker_email="ci-e2e-${idempotency_key}@example.com"
+          payload_file="$RUNNER_TEMP/e2e-payload.json"
+          response_file="$RUNNER_TEMP/e2e-response.json"
+
+          node -e '
+            const fs = require("node:fs");
+            const [file, key, email] = process.argv.slice(1);
+            fs.writeFileSync(
+              file,
+              JSON.stringify({
+                schemaVersion: "free-audit-schema/1.0.0",
+                locale: "en",
+                idempotencyKey: key,
+                answers: {
+                  Q01: "professional_services",
+                  Q02: "team_2_5",
+                  Q03: "eleven_to_30",
+                  Q04: ["phone", "email"],
+                  Q05: "within_5_minutes",
+                  Q06: "integrated_crm",
+                  Q07: ["lead_intake", "follow_up"],
+                  Q08: "automated_multi_step_follow_up",
+                  Q09: "slow_lead_response",
+                  Q10: "respond_faster",
+                  Q11: "start_now",
+                },
+                contact: {
+                  contactName: "CI E2E",
+                  businessName: "CI E2E Co",
+                  email,
+                  website: "",
+                  phone: "",
+                  preferredLanguage: "en",
+                },
+                consent: {
+                  emailMarketing: false,
+                  smsMarketing: false,
+                  policyVersion: "consent-copy/en-es/1.0.0",
+                },
+              }),
+            );
+          ' "$payload_file" "$idempotency_key" "$marker_email"
+
+          # Retry only conditions that a redeploy can fix. A 401 means the bypass
+          # secret itself is wrong, so fail immediately with an actionable message
+          # instead of silently retrying for minutes.
+          status="000"
+          for attempt in $(seq 1 12); do
+            status="$(curl --silent --show-error --max-time 30 \
+              --output "$response_file" --write-out '%{http_code}' \
+              -X POST "$PREVIEW_BASE_URL/api/free-assessment" \
+              -H 'Content-Type: application/json' \
+              -H "x-vercel-protection-bypass: $VERCEL_AUTOMATION_BYPASS_SECRET" \
+              --data @"$payload_file" || echo 000)"
+
+            if [[ "$status" == "200" ]]; then
+              break
+            fi
+
+            if [[ "$status" == "401" || "$status" == "403" ]]; then
+              echo "Preview refused the automation bypass (HTTP $status)." >&2
+              echo "Check that VERCEL_AUTOMATION_BYPASS_SECRET matches a bypass listed under" >&2
+              echo "Vercel > Settings > Deployment Protection > Protection Bypass for Automation." >&2
+              exit 1
+            fi
+
+            echo "Preview not ready yet (HTTP $status); attempt $attempt of 12, retrying in 10s."
+            sleep 10
+          done
+
+          if [[ "$status" != "200" ]]; then
+            echo "Preview assessment POST failed with HTTP $status." >&2
+            head -c 400 "$response_file" >&2 || true
+            echo >&2
+            echo "--- recent Vercel runtime logs ---" >&2
+            timeout 60 npx --yes vercel@latest logs "$PREVIEW_BASE_URL" \
+              --no-color --token "$VERCEL_TOKEN" --scope "$VERCEL_TEAM_SLUG" >&2 || true
+            exit 1
+          fi
+
+          storage_mode="$(node -e 'const d=JSON.parse(require("node:fs").readFileSync(process.argv[1],"utf8")); process.stdout.write(String(d.storageMode || ""));' "$response_file")"
+          if [[ "$storage_mode" != "supabase" ]]; then
+            echo "Preview reported storageMode=$storage_mode; expected supabase." >&2
+            exit 1
+          fi
+
+          rm -f "$payload_file" "$response_file"
+          echo "MARKER_EMAIL=$marker_email" >> "$GITHUB_ENV"
+          echo "Preview returned HTTP 200 with storageMode=supabase."
+
+      - name: Confirm the row landed in the isolated dev project, then remove it
+        shell: bash
+        run: |
+          set -euo pipefail
+          rows_file="$RUNNER_TEMP/e2e-rows.json"
+
+          status="$(curl --silent --show-error \
+            --output "$rows_file" --write-out '%{http_code}' \
+            --header "apikey: $SUPABASE_PREVIEW_SECRET_KEY" \
+            --header "Authorization: Bearer $SUPABASE_PREVIEW_SECRET_KEY" \
+            "$SUPABASE_PREVIEW_URL/rest/v1/leads?select=id&email=eq.$MARKER_EMAIL")"
+          if [[ "$status" != "200" ]]; then
+            echo "Isolated dev project read failed with HTTP $status." >&2
+            exit 1
+          fi
+
+          found="$(node -e 'const r=JSON.parse(require("node:fs").readFileSync(process.argv[1],"utf8")); process.stdout.write(String(Array.isArray(r) ? r.length : 0));' "$rows_file")"
+          if [[ "$found" != "1" ]]; then
+            echo "Expected exactly one persisted lead, found $found." >&2
+            exit 1
+          fi
+          echo "Verified: the Preview submission was persisted to the isolated dev project."
+
+          delete_status="$(curl --silent --show-error \
+            --output /dev/null --write-out '%{http_code}' \
+            -X DELETE \
+            --header "apikey: $SUPABASE_PREVIEW_SECRET_KEY" \
+            --header "Authorization: Bearer $SUPABASE_PREVIEW_SECRET_KEY" \
+            "$SUPABASE_PREVIEW_URL/rest/v1/leads?email=eq.$MARKER_EMAIL")"
+          if [[ "$delete_status" != "204" && "$delete_status" != "200" ]]; then
+            echo "Cleanup delete failed with HTTP $delete_status." >&2
+            exit 1
+          fi
+
+          curl --silent --show-error --output "$rows_file" \
+            --header "apikey: $SUPABASE_PREVIEW_SECRET_KEY" \
+            --header "Authorization: Bearer $SUPABASE_PREVIEW_SECRET_KEY" \
+            "$SUPABASE_PREVIEW_URL/rest/v1/leads?select=id&email=eq.$MARKER_EMAIL"
+          remaining="$(node -e 'const r=JSON.parse(require("node:fs").readFileSync(process.argv[1],"utf8")); process.stdout.write(String(Array.isArray(r) ? r.length : 0));' "$rows_file")"
+          if [[ "$remaining" != "0" ]]; then
+            echo "Cleanup left $remaining rows behind." >&2
+            exit 1
+          fi
+
+          rm -f "$rows_file"
+          echo "Cleanup verified: the isolated dev project holds no test rows."
+
+      - name: Publish a non-secret provisioning summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '## BE-003 Preview wiring'
+            echo
+            echo "- Isolated dev Supabase ref: \`$DEV_SUPABASE_PROJECT_REF\`"
+            echo "- Git branch: \`$GIT_BRANCH\`"
+            echo "- Production data copied: no"
+            echo "- Vercel variable scope: Preview + exact Git branch only"
+            echo "- Assessment persistence mode: supabase (isolated dev project)"
+            echo "- Live Preview write test: submitted, verified in the dev project, then deleted"
+            echo "- Production database writes: none"
+          } >> "$GITHUB_STEP_SUMMARY"
