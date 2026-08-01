@@ -6,7 +6,7 @@
 **Verified starting `main` SHA:** `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd` \
 **Current task:** `BE-003 — Public Website and Free Assessment` — `REVIEW` \
 **Current execution branch:** `task/ws-09/BE-003-public-site-free-assessment-v2` \
-**Current execution PR:** PR [#21](https://github.com/Bear78888/bizmetria.ai/pull/21)
+**Current execution PR:** PR [#21](https://github.com/Bear78888/bizmetria.ai/pull/21) — **merged** as `7fadf55`
 
 ## 2026-08-01 status update (supersedes earlier "mock / preview-blocked" notes)
 
@@ -33,18 +33,23 @@ status documents are now out of date and superseded by this section:
   verified**: the workflow submits a real assessment through the protected
   Preview URL, requires `storageMode=supabase`, confirms the row in the dev
   project, deletes it and checks none remain.
-- **The Vercel Marketplace Supabase integration overwrites the `SUPABASE_*`
-  variables** on every deployment with another project's credentials. Proved by
-  a guard refusal naming the foreign host and by a direct key probe that
-  succeeded while the deployment reported `Invalid API key`. Mitigated in the
-  application: the elevated origin is derived from the verified project ref, and
-  the service-role key is read from `BIZMETRIA_SUPABASE_SECRET_KEY`. Disconnecting
-  the integration from the Vercel project remains an owner dashboard action.
+- **Sixteen stale environment-wide Preview variables shadowed this project's
+  values** and pointed at an unrelated Supabase project. An audit showed they were
+  plain project variables (`configurationId: null`), not integration-owned, which
+  is why no "disconnect" existed for them; they have been deleted. The marketplace
+  integration owns only Production variables whose names this application never
+  reads, so it was left untouched. The application also defends itself: the
+  elevated origin is derived from the verified project ref, and the service-role
+  key is read from `BIZMETRIA_SUPABASE_SECRET_KEY`.
 - **A production-affecting defect was found and fixed:** consent rows were sent
   with an explicit null primary key, so `consents` were never stored for any
   submission (`23502`).
-- **Still owner-gated:** merging PR #21 (a production deploy), any live Stripe /
-  Retell / production Resend action, and rotation of the temporary credentials.
+- **PR #21 is merged** (`7fadf55`) and deployed. Both locales serve correctly and
+  the canonical production database holds zero rows: production runs on the
+  canonical project with mock persistence, so no production write occurs.
+- **Still owner-gated:** any live Stripe / Retell / production Resend action,
+  rotation of the temporary credentials, and connecting the `bizmetria.ai` domain,
+  which does not resolve yet.
 
 ## BizMetria in brief
 
@@ -92,7 +97,7 @@ See the [Delivery Roadmap](DELIVERY_ROADMAP.md) for the complete critical path a
 
 - BE-003 is active on `task/ws-09/BE-003-public-site-free-assessment-v2`, based on verified remote `main` `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`.
 - Supabase target `bizmetria.ai / rbndiytodvoyiejassnw` is verified. Its foundation migration is present and the application tables contain no rows.
-- Vercel Preview is still attached to an unrelated Supabase integration; BE-003 therefore uses the mock persistence adapter until the owner replaces the three Preview project variables.
+- Vercel Preview for the BE-003 branch writes to the isolated development project `bwmyzkufqrufjimtfwow`; production keeps the canonical project and the mock adapter.
 - Entity/address, support identity, legal/tax review, report-review staffing, consultation staffing, and live Stripe credentials are explicit pre-live dependencies; they do not block PS-003, architecture, implementation, or staging.
 - The merged recovery, architecture, and MC-002 branches are historical, not live-locks.
 - The PS-001 and LS-001 branches are historical after PR #5 and PR #6 merged.
