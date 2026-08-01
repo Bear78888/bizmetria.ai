@@ -42,9 +42,11 @@ remain refused.
 
 ## Enabling the deployed Preview to use this target
 
-The application still defaults to `ASSESSMENT_STORAGE_MODE=mock`. To make a
-Vercel Preview write to this isolated project, set the following branch-scoped
-Preview variables (never commit their values):
+The local default remains `ASSESSMENT_STORAGE_MODE=mock`. The
+`.github/workflows/wire-be003-preview.yml` workflow wires the deployed Preview
+for this Git branch: it reads the dev project keys through the Supabase
+Management API and sets the following branch-scoped Vercel Preview variables
+(values never printed or committed):
 
 - `NEXT_PUBLIC_SUPABASE_URL=https://bwmyzkufqrufjimtfwow.supabase.co`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<dev publishable key>`
@@ -52,6 +54,12 @@ Preview variables (never commit their values):
 - `SUPABASE_PROJECT_REF=bwmyzkufqrufjimtfwow`
 - `SUPABASE_TARGET_ENV=preview`
 - `ASSESSMENT_STORAGE_MODE=supabase`
+
+Vercel's own Git-integration build then produces the Preview; its build
+succeeding with these variables confirms the app accepts and targets the
+isolated dev project. A live HTTP write test against the Preview URL additionally
+requires bypassing Vercel Deployment Protection (the Preview returns `401` to
+anonymous requests), e.g. with a Protection Bypass for Automation token.
 
 The canonical production environment must keep `SUPABASE_PROJECT_REF` and the URL
 on `rbndiytodvoyiejassnw`, `ASSESSMENT_STORAGE_MODE=mock` (or unset), and must
