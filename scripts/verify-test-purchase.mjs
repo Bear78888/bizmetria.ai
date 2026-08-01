@@ -1,0 +1,100 @@
+// Full test purchase against production: free assessment -> checkout -> Stripe
+// hosted page (test card) -> confirmed page. DB verification happens separately.
+// Drives a complete REAL test-mode purchase against production: submits a
+// free assessment, opens checkout with the public promotion code, pays the
+// hosted Stripe page with the standard test card, and prints the ids for
+// database verification. Test mode only; no real charge is possible.
+import { chromium } from '@playwright/test';
+
+const BASE = 'https://bizmetria-ai.vercel.app';
+const uuid = crypto.randomUUID();
+
+// 1) Real free assessment so the order has a lead to attach to.
+const submission = {
+  schemaVersion: 'free-audit-schema/1.0.0',
+  locale: 'en',
+  idempotencyKey: uuid,
+  contact: {
+    contactName: 'Purchase Verification',
+    businessName: 'BizMetria Purchase Check',
+    email: 'verify+purchase@bizmetria.com',
+    phone: '',
+    website: '',
+    preferredLanguage: 'en',
+  },
+  consent: {
+    emailMarketing: false,
+    smsMarketing: false,
+    policyVersion: 'consent-copy/en-es/1.0.0',
+  },
+  answers: {
+    Q01: 'professional_services',
+    Q02: 'solo',
+    Q03: 'zero_to_10',
+    Q04: ['email'],
+    Q05: 'within_5_minutes',
+    Q06: 'integrated_crm',
+    Q07: ['none'],
+    Q08: 'automated_multi_step_follow_up',
+    Q09: 'limited_visibility_or_reporting',
+    Q10: 'improve_reporting',
+    Q11: 'just_exploring',
+  },
+};
+const assessmentResponse = await fetch(`${BASE}/api/free-assessment`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(submission),
+});
+const assessment = await assessmentResponse.json();
+if (!assessmentResponse.ok) throw new Error(`assessment: ${JSON.stringify(assessment)}`);
+const freeAssessmentId = assessment.result.assessmentId;
+console.log('free assessment:', freeAssessmentId, 'storage:', assessment.storageMode);
+
+// 2) Open the checkout with the public BIZ49 code so the redemption path runs too.
+const checkoutResponse = await fetch(`${BASE}/api/checkout`, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    contractVersion: 'checkout/1.0.0',
+    locale: 'en',
+    freeAssessmentId,
+    promotionCode: 'BIZ49',
+    idempotencyKey: crypto.randomUUID(),
+  }),
+});
+const checkout = await checkoutResponse.json();
+if (!checkoutResponse.ok) throw new Error(`checkout: ${JSON.stringify(checkout)}`);
+console.log(
+  'order:',
+  checkout.orderId,
+  'total cents:',
+  checkout.amountTotalCents,
+  'promo:',
+  checkout.appliedPromotionCode,
+);
+
+// 3) Pay on the hosted Stripe page with the standard test card.
+const browser = await chromium.launch();
+const page = await browser.newPage();
+await page.goto(checkout.checkoutUrl, { waitUntil: 'domcontentloaded' });
+await page.waitForTimeout(4000);
+
+await page.fill('input[name="email"]', 'verify+purchase@bizmetria.com');
+await page.fill('input[name="cardNumber"]', '4242424242424242');
+await page.fill('input[name="cardExpiry"]', '12 / 34');
+await page.fill('input[name="cardCvc"]', '123');
+await page.fill('input[name="billingName"]', 'Purchase Verification');
+const postal = page.locator('input[name="billingPostalCode"]');
+if (await postal.count()) await postal.fill('90210');
+
+await page.click('button[type="submit"], .SubmitButton');
+// success_url points at the canonical domain, which is still parked; payment
+// completion is judged by leaving checkout.stripe.com, and truth lives in the
+// database via the webhook.
+await page.waitForURL((url) => !url.hostname.includes('checkout.stripe.com'), { timeout: 90000 });
+console.log('landed on:', page.url());
+await browser.close();
+console.log('PURCHASE COMPLETE');
+console.log('cleanup-order-id:', checkout.orderId);
+console.log('cleanup-assessment-id:', freeAssessmentId);
