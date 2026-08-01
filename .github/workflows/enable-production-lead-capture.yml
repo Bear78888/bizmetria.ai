@@ -127,22 +127,64 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          echo "::add-mask::$VERCEL_TOKEN"
+
           # Vercel captures environment variables when a deployment is created,
           # so the running deployment keeps the previous value until replaced.
-          npx --yes vercel@latest redeploy \
-            --token "$VERCEL_TOKEN" \
-            --scope "$VERCEL_TEAM_ID" \
-            --yes \
-            "$(npx --yes vercel@latest ls bizmetria-ai \
-                 --token "$VERCEL_TOKEN" \
-                 --scope "$VERCEL_TEAM_ID" \
-                 --prod --yes 2>/dev/null | grep -oE 'https://[a-z0-9.-]+\.vercel\.app' | head -1)"
+          #
+          # Done through the REST API rather than the CLI: the CLI's flags drift
+          # between releases, and `npx vercel@latest` silently picks up whatever
+          # is current. An earlier attempt failed because `vercel ls` stopped
+          # accepting `--yes`. The API surface is versioned in the path.
+          node <<'NODE'
+          (async () => {
+            const token = process.env.VERCEL_TOKEN;
+            const teamId = process.env.VERCEL_TEAM_ID;
+            const projectId = process.env.VERCEL_PROJECT_ID;
+            const headers = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
+            const team = `teamId=${encodeURIComponent(teamId)}`;
+
+            const listUrl =
+              `https://api.vercel.com/v6/deployments?${team}` +
+              `&projectId=${encodeURIComponent(projectId)}&target=production&state=READY&limit=1`;
+            const listResponse = await fetch(listUrl, { headers });
+            if (!listResponse.ok) {
+              throw new Error(`Listing production deployments failed: ${listResponse.status}`);
+            }
+            const { deployments = [] } = await listResponse.json();
+            const current = deployments[0];
+            if (!current) throw new Error('No ready production deployment to redeploy.');
+            console.log(`Redeploying ${current.uid} (${current.url}).`);
+
+            const createResponse = await fetch(`https://api.vercel.com/v13/deployments?${team}`, {
+              method: 'POST',
+              headers,
+              body: JSON.stringify({
+                name: 'bizmetria-ai',
+                deploymentId: current.uid,
+                target: 'production',
+              }),
+            });
+            const created = await createResponse.json();
+            if (!createResponse.ok) {
+              throw new Error(
+                `Creating the redeployment failed: ${createResponse.status} ${created?.error?.message ?? ''}`,
+              );
+            }
+            console.log(`Created deployment ${created.id}.`);
+          })().catch((error) => {
+            console.error(error.message);
+            process.exit(1);
+          });
+          NODE
 
       - name: Verify the deployment reports the new adapter
         shell: bash
         run: |
           set -euo pipefail
-          for attempt in $(seq 1 30); do
+          # The redeployment has to build before it serves, so this waits
+          # rather than reading the still-live previous deployment.
+          for attempt in $(seq 1 40); do
             body="$(curl -fsS https://bizmetria-ai.vercel.app/api/health || true)"
             echo "attempt $attempt: $body"
             if printf '%s' "$body" | grep -q "\"assessmentStorage\":\"$TARGET_MODE\""; then
