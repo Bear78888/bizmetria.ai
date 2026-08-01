@@ -80,13 +80,38 @@ const page = await browser.newPage();
 await page.goto(checkout.checkoutUrl, { waitUntil: 'domcontentloaded' });
 await page.waitForTimeout(4000);
 
-await page.fill('input[name="email"]', 'verify+purchase@bizmetria.com');
-await page.fill('input[name="cardNumber"]', '4242424242424242');
-await page.fill('input[name="cardExpiry"]', '12 / 34');
-await page.fill('input[name="cardCvc"]', '123');
-await page.fill('input[name="billingName"]', 'Purchase Verification');
-const postal = page.locator('input[name="billingPostalCode"]');
-if (await postal.count()) await postal.fill('90210');
+// Payment fields may live on the page or inside Stripe iframes, behind a
+// collapsed "Card" accordion. Find them wherever they are, and dump what is
+// visible if they cannot be found.
+async function fillEverywhere(selector, value) {
+  for (const frame of page.frames()) {
+    const field = frame.locator(selector).first();
+    if ((await field.count()) && (await field.isVisible().catch(() => false))) {
+      await field.fill(value);
+      return true;
+    }
+  }
+  return false;
+}
+await fillEverywhere('input[name="email"]', 'verify+purchase@bizmetria.com');
+const cardTab = page.locator('text=/^(Card|Tarjeta)$/').first();
+if (await cardTab.count()) await cardTab.click().catch(() => {});
+await page.waitForTimeout(2000);
+
+const filledCard = await fillEverywhere('input[name="cardNumber"]', '4242424242424242');
+if (!filledCard) {
+  for (const frame of page.frames()) {
+    const names = await frame
+      .$$eval('input, button[type="submit"]', (els) => els.map((el) => el.name || el.id || el.type))
+      .catch(() => []);
+    if (names.length) console.log('frame', frame.url().slice(0, 90), names.join(','));
+  }
+  throw new Error('card number field not found anywhere');
+}
+await fillEverywhere('input[name="cardExpiry"]', '12 / 34');
+await fillEverywhere('input[name="cardCvc"]', '123');
+await fillEverywhere('input[name="billingName"]', 'Purchase Verification');
+await fillEverywhere('input[name="billingPostalCode"]', '90210');
 
 await page.click('button[type="submit"], .SubmitButton');
 // success_url points at the canonical domain, which is still parked; payment
