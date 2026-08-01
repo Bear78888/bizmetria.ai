@@ -1,16 +1,17 @@
 import type { MetadataRoute } from 'next';
 
 import { locales } from '@/i18n/config';
+import { canonicalPath } from '@/lib/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return locales.flatMap((locale) => [
     {
-      url: `https://bizmetria.ai/${locale}`,
+      url: canonicalPath(`/${locale}`),
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
-      url: `https://bizmetria.ai/${locale}/assessment`,
+      url: canonicalPath(`/${locale}/assessment`),
       changeFrequency: 'monthly',
       priority: 0.9,
     },
