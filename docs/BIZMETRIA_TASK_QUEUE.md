@@ -188,6 +188,7 @@ As of: 2026-07-31
 - **Priority:** Critical
 - **Dependency:** BE-002 and approved FA-001/LS-002 contracts.
 - **Branch:** `task/ws-09/BE-003-public-site-free-assessment-v2`.
+- **PR:** Draft PR [#21](https://github.com/Bear78888/bizmetria.ai/pull/21).
 - **Outcome:** Responsive English/Spanish website, 11-question check, deterministic 0–100 score, contact and separate optional consent choices, server persistence adapter, result and locked paid boundary, $299 CTA, Resend adapter, unit tests, Playwright E2E, target guard, and incident record.
 - **Boundary:** Preview uses a mock adapter until the correct Supabase Preview Branch variables replace the unrelated Vercel-managed integration; production database writes, live payments, and live marketing messages remain disabled.
 - **Review status:** Local format, lint, typecheck, unit, migration-contract, and build gates pass; draft PR and native previews pending.

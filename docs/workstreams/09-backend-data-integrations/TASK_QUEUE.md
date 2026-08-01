@@ -25,7 +25,7 @@
 - **Objective:** Deliver the first public bilingual product flow on the merged foundation.
 - **Outputs:** EN/ES homepages, mobile UI, 11 canonical questions, 0–100 score, contact and separate optional consents, guarded persistence, result/locked boundary, $299 CTA, Resend adapter, unit and Playwright tests, and Vercel Preview.
 - **Branch:** `task/ws-09/BE-003-public-site-free-assessment-v2`
-- **PR:** Draft PR pending
+- **PR:** Draft PR [#21](https://github.com/Bear78888/bizmetria.ai/pull/21)
 - **Dependencies:** Approved BE-002, FA-001, LS-002, and exact Supabase target `rbndiytodvoyiejassnw`.
 - **Acceptance:** Local and CI gates, Vercel Preview, correct Preview database credentials before write-mode validation, no raw answers/contact in result payloads, and no production/live activation.
 - **Review status:** Local non-browser gate passed; draft PR and native preview evidence pending.

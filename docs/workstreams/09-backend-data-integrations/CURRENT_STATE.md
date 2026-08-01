@@ -5,7 +5,7 @@
 **Last updated:** 2026-07-31
 **Current task:** `BE-003 — Public Website and Free Assessment`
 **Current branch:** `task/ws-09/BE-003-public-site-free-assessment-v2`
-**Current PR:** Draft PR pending
+**Current PR:** Draft PR [#21](https://github.com/Bear78888/bizmetria.ai/pull/21)
 
 ## Confirmed starting point
 

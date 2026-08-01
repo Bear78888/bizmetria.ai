@@ -10,7 +10,7 @@ BE-003 adds the real bilingual public website and deterministic Free AI Opportun
 ## Branch and PR
 
 - Branch: `task/ws-09/BE-003-public-site-free-assessment-v2`
-- PR: draft PR pending
+- PR: Draft PR [#21](https://github.com/Bear78888/bizmetria.ai/pull/21)
 - Base: verified `main` `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`
 
 ## Remaining gate

@@ -16,7 +16,7 @@
 
 | Task | Status | Branch | PR | Scope |
 |---|---|---|---|---|
-| `BE-003 — Public Website and Free Assessment` | REVIEW | `task/ws-09/BE-003-public-site-free-assessment-v2` | Draft PR pending | Bilingual public website, deterministic free assessment, result/email adapters, target guard, CI/E2E, and native previews |
+| `BE-003 — Public Website and Free Assessment` | REVIEW | `task/ws-09/BE-003-public-site-free-assessment-v2` | Draft PR [#21](https://github.com/Bear78888/bizmetria.ai/pull/21) | Bilingual public website, deterministic free assessment, result/email adapters, target guard, CI/E2E, and native previews |
 
 `BE-002` is merged through PR #18. Incorrect draft PR #20 is closed without merge and its branch is frozen as incident evidence. `AE-001` remains unfinished and is not a blocker for BE-003. Live payments, production marketing communications, and production assessment writes remain fail-closed.
 

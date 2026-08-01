@@ -53,7 +53,7 @@ Gate `G0 — Governance Ready` is `PASS` because:
 | LC-001 Commercial and Lifecycle Contract | Payments, CRM and Lifecycle | APPROVED | PR [#17](https://github.com/Bear78888/bizmetria.ai/pull/17), merge SHA `7677bee1b0791bb4f954f058aa9e959d4796985a` |
 | AE-001 Analysis and Evidence Contract | AI Analysis Engine | READY | FA-001, PS-004, and LS-002 approved |
 | BE-002 Platform Foundation | Backend, Data and Integrations | APPROVED | PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18), merge SHA `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd` |
-| BE-003 Public Website and Free Assessment | Backend / UX / Free Audit | REVIEW | `task/ws-09/BE-003-public-site-free-assessment-v2`; draft PR pending |
+| BE-003 Public Website and Free Assessment | Backend / UX / Free Audit | REVIEW | Draft PR [#21](https://github.com/Bear78888/bizmetria.ai/pull/21) |
 | G2 and later delivery tasks | Applicable workstreams | PLANNED | Follow named dependencies in the Delivery Roadmap |
 
 The complete sequence is in [`docs/control/DELIVERY_ROADMAP.md`](control/DELIVERY_ROADMAP.md); exact per-workstream state is in [`docs/control/WORKSTREAM_REGISTRY.md`](control/WORKSTREAM_REGISTRY.md).

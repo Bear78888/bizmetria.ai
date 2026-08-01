@@ -6,7 +6,7 @@
 **Verified starting `main` SHA:** `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd` \
 **Current task:** `BE-003 — Public Website and Free Assessment` — `REVIEW` \
 **Current execution branch:** `task/ws-09/BE-003-public-site-free-assessment-v2` \
-**Current execution PR:** Draft PR pending
+**Current execution PR:** Draft PR [#21](https://github.com/Bear78888/bizmetria.ai/pull/21)
 
 ## BizMetria in brief
 
