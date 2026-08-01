@@ -29,9 +29,20 @@ status documents are now out of date and superseded by this section:
   `SUPABASE_TARGET_ENV=preview` flag; production stays pinned to the canonical ref
   and the wrong-project incident refs remain refused.
 - **Vercel Preview** for this branch is wired to the dev project by
-  `.github/workflows/wire-be003-preview.yml`; the Preview builds Ready with that
-  environment. A live HTTP write test additionally requires bypassing Vercel
-  Deployment Protection.
+  `.github/workflows/wire-be003-preview.yml`, and a **live end-to-end write is
+  verified**: the workflow submits a real assessment through the protected
+  Preview URL, requires `storageMode=supabase`, confirms the row in the dev
+  project, deletes it and checks none remain.
+- **The Vercel Marketplace Supabase integration overwrites the `SUPABASE_*`
+  variables** on every deployment with another project's credentials. Proved by
+  a guard refusal naming the foreign host and by a direct key probe that
+  succeeded while the deployment reported `Invalid API key`. Mitigated in the
+  application: the elevated origin is derived from the verified project ref, and
+  the service-role key is read from `BIZMETRIA_SUPABASE_SECRET_KEY`. Disconnecting
+  the integration from the Vercel project remains an owner dashboard action.
+- **A production-affecting defect was found and fixed:** consent rows were sent
+  with an explicit null primary key, so `consents` were never stored for any
+  submission (`23502`).
 - **Still owner-gated:** merging PR #21 (a production deploy), any live Stripe /
   Retell / production Resend action, and rotation of the temporary credentials.
 

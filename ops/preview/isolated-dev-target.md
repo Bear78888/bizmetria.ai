@@ -51,15 +51,52 @@ Management API and sets the following branch-scoped Vercel Preview variables
 - `NEXT_PUBLIC_SUPABASE_URL=https://bwmyzkufqrufjimtfwow.supabase.co`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<dev publishable key>`
 - `SUPABASE_SECRET_KEY=<dev secret key>` (sensitive)
+- `BIZMETRIA_SUPABASE_SECRET_KEY=<dev secret key>` (sensitive; see below)
 - `SUPABASE_PROJECT_REF=bwmyzkufqrufjimtfwow`
 - `SUPABASE_TARGET_ENV=preview`
 - `ASSESSMENT_STORAGE_MODE=supabase`
 
-Vercel's own Git-integration build then produces the Preview; its build
-succeeding with these variables confirms the app accepts and targets the
-isolated dev project. A live HTTP write test against the Preview URL additionally
-requires bypassing Vercel Deployment Protection (the Preview returns `401` to
-anonymous requests), e.g. with a Protection Bypass for Automation token.
+It then redeploys the Preview — Vercel captures environment variables when a
+deployment is created, so an existing deployment keeps the previous values — and
+submits a real assessment through the protected Preview URL using a Protection
+Bypass for Automation secret (the Preview returns `401` to anonymous requests).
+The test requires `storageMode=supabase`, confirms the row reached the dev
+project, deletes it, and verifies no rows remain.
+
+## The Vercel Marketplace Supabase integration hijacks `SUPABASE_*`
+
+A Supabase integration installed from the Vercel Marketplace is connected to this
+Vercel project and **overwrites the `SUPABASE_*` variables on every deployment**
+with credentials for its own unrelated project. This was proved, not assumed:
+
+- The target guard refused a write because `NEXT_PUBLIC_SUPABASE_URL` arrived as
+  `choztfjytyqijwbrvqjh.supabase.co` while `SUPABASE_PROJECT_REF` was still ours.
+- A direct PostgREST probe using the workflow-resolved secret key wrote
+  successfully, while the deployed Preview reported `Invalid API key` — so the
+  deployment was receiving a different key.
+
+Two application-side defences follow:
+
+1. Elevated access derives its origin from the verified `SUPABASE_PROJECT_REF`
+   (`resolveSupabaseAdminUrl`) rather than trusting the public URL variable.
+2. The service-role key is read from `BIZMETRIA_SUPABASE_SECRET_KEY`, a namespace
+   no third-party integration manages, falling back to `SUPABASE_SECRET_KEY`.
+
+The integration should still be disconnected from the `bizmetria-ai` Vercel
+project, because the browser/SSR Supabase client keeps receiving its values. That
+is a dashboard action (Vercel → Integrations → Supabase → Manage → Show
+Connections, or Manage Access): the API only supports deleting the entire
+marketplace installation, which is a paid resource that may serve other projects.
+
+## Defect found by the live test
+
+The live write exposed a bug that would have affected every production
+submission: consent rows were built with `id: undefined`, and supabase-js pads a
+bulk payload so all rows share the same keys, sending an explicit `null` primary
+key. That suppressed the column default and failed with
+`23502 null value in column "id" ... violates not-null constraint`, so no consent
+record was ever stored. New consents are now inserted without the `id` column and
+existing ones updated by id.
 
 The canonical production environment must keep `SUPABASE_PROJECT_REF` and the URL
 on `rbndiytodvoyiejassnw`, `ASSESSMENT_STORAGE_MODE=mock` (or unset), and must
