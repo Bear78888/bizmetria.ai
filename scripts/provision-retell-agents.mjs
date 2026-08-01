@@ -18,10 +18,8 @@ import { Retell } from 'retell-sdk';
 const apiKey = process.env.RETELL_API_KEY;
 if (!apiKey) throw new Error('RETELL_API_KEY is required.');
 
-// The deployment origin serving /api/webhooks/retell. Overridable so a future
-// domain activation does not require editing this script.
-const webhookUrl =
-  process.env.RETELL_WEBHOOK_URL ?? 'https://bizmetria-ai.vercel.app/api/webhooks/retell';
+// The public origin serving /api/webhooks/retell since domain activation.
+const webhookUrl = process.env.RETELL_WEBHOOK_URL ?? 'https://bizmetria.com/api/webhooks/retell';
 
 const client = new Retell({ apiKey });
 
@@ -87,12 +85,41 @@ const locales = [
   },
 ];
 
+const LANGUAGE_MARKERS = {
+  en: ['en', 'english'],
+  es: ['es', 'spanish', 'español', 'espanol'],
+};
+
+/**
+ * Voice metadata varies by provider ('es-419', 'Spanish', a voice named
+ * 'Santiago'…), so matching is by marker across language, accent and name.
+ * When nothing matches, the available languages are printed so the mismatch
+ * is diagnosable from the run log, and the first voice overall is the
+ * fallback — a working agent with an imperfect accent beats no agent.
+ */
 async function pickVoice(language) {
   const voices = await client.voice.list();
-  const prefix = language.split('-')[0];
-  const candidates = voices
-    .filter((voice) => (voice.language ?? '').toLowerCase().startsWith(prefix))
-    .sort((a, b) => a.voice_id.localeCompare(b.voice_id));
+  const markers = LANGUAGE_MARKERS[language.split('-')[0]] ?? [language.split('-')[0]];
+  // Short codes only ever match the language/accent fields (so 'es' cannot
+  // match a voice named 'Jess'); words may match anywhere in the metadata.
+  const shortMarkers = markers.filter((marker) => marker.length <= 3);
+  const longMarkers = markers.filter((marker) => marker.length > 3);
+  const matches = (voice) => {
+    const langField = `${voice.language ?? ''} ${voice.accent ?? ''}`.toLowerCase().trim();
+    const everything = [voice.language, voice.accent, voice.voice_name, voice.voice_id]
+      .filter(Boolean)
+      .join(' ')
+      .toLowerCase();
+    return (
+      shortMarkers.some((marker) => langField.startsWith(marker)) ||
+      longMarkers.some((marker) => everything.includes(marker))
+    );
+  };
+  const candidates = voices.filter(matches).sort((a, b) => a.voice_id.localeCompare(b.voice_id));
+  if (candidates.length === 0) {
+    const seen = [...new Set(voices.map((voice) => voice.language ?? 'unknown'))].sort();
+    console.log(`no voice matched ${language}; available languages: ${seen.join(', ')}`);
+  }
   const chosen = candidates[0] ?? voices.sort((a, b) => a.voice_id.localeCompare(b.voice_id))[0];
   if (!chosen) throw new Error(`No Retell voice available for language ${language}.`);
   return chosen.voice_id;
@@ -109,7 +136,24 @@ const existingAgents = await listAgents();
 for (const locale of locales) {
   const existing = existingAgents.find((agent) => agent.agent_name === locale.agentName);
   if (existing) {
-    console.log(`${locale.agentName}: exists, agent_id=${existing.agent_id}`);
+    // Converge voice and webhook: the first provisioning run could fall back
+    // to an English voice, and agents created before domain activation still
+    // point their webhook at the Vercel host.
+    const full = await client.agent.retrieve(existing.agent_id);
+    const desiredVoice = await pickVoice(locale.language);
+    const changes = {};
+    if (full.voice_id !== desiredVoice) changes.voice_id = desiredVoice;
+    if (full.webhook_url !== webhookUrl) changes.webhook_url = webhookUrl;
+    if (Object.keys(changes).length > 0) {
+      await client.agent.update(existing.agent_id, changes);
+      console.log(
+        `${locale.agentName}: exists, agent_id=${existing.agent_id}, updated ${Object.keys(changes).join('+')} (voice=${changes.voice_id ?? full.voice_id})`,
+      );
+    } else {
+      console.log(
+        `${locale.agentName}: exists, agent_id=${existing.agent_id}, voice=${full.voice_id}`,
+      );
+    }
     continue;
   }
 
