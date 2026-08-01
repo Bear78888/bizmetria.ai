@@ -123,6 +123,16 @@ const integrationEnvironmentObject = platformEnvironmentObject.extend({
     .string()
     .startsWith('pk_test_', 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY must be a Stripe test key'),
   RETELL_API_KEY: z.string().min(1, 'RETELL_API_KEY is required'),
+  // Set by scripts/provision-retell-agents.ts output; the interview start
+  // endpoint stays 503 for a locale whose agent is missing.
+  RETELL_AGENT_ID_EN: z
+    .string()
+    .startsWith('agent_', 'RETELL_AGENT_ID_EN must be a Retell agent id')
+    .optional(),
+  RETELL_AGENT_ID_ES: z
+    .string()
+    .startsWith('agent_', 'RETELL_AGENT_ID_ES must be a Retell agent id')
+    .optional(),
   RESEND_API_KEY: z.string().min(1, 'RESEND_API_KEY is required'),
 });
 
