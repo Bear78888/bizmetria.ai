@@ -6,7 +6,7 @@ import { signIn, signUp } from './actions';
 
 interface AuthPageProps {
   readonly params: Promise<{ locale: string }>;
-  readonly searchParams: Promise<{ error?: string; message?: string }>;
+  readonly searchParams: Promise<{ error?: string; message?: string; next?: string }>;
 }
 
 const copy = {
@@ -59,6 +59,7 @@ export default async function AuthPage({ params, searchParams }: AuthPageProps) 
         ) : null}
         <form className="auth-form">
           <input name="locale" type="hidden" value={locale} />
+          {query.next ? <input name="next" type="hidden" value={query.next} /> : null}
           <label>
             {messages.email}
             <input name="email" type="email" autoComplete="email" required />
