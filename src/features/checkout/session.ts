@@ -103,6 +103,11 @@ export async function buildCheckoutSession(
 
   const params: Stripe.Checkout.SessionCreateParams = {
     mode: 'payment',
+    // Cards only, stated rather than inherited: the webhook treats
+    // checkout.session.completed as the paid transition, which is only sound
+    // while no delayed payment method is offered. Letting Stripe's dashboard
+    // defaults add methods would silently break that assumption.
+    payment_method_types: ['card'],
     line_items: [{ price: priceId, quantity: 1 }],
     ...(request.email ? { customer_email: request.email } : {}),
     locale: request.locale,
