@@ -39,6 +39,7 @@ afterEach(() => {
 async function body() {
   return (await GET().json()) as {
     status: string;
+    revision: string;
     adapters: { assessmentStorage: string; analysisProvider: string; resultEmail: string };
   };
 }
