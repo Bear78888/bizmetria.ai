@@ -1,12 +1,12 @@
 # Master Continuation
 
 **Repository:** `Bear78888/bizmetria.ai`  
-**Current phase:** Sandbox implementation — Platform Foundation \
+**Current phase:** Sandbox implementation — Public Website and Free Assessment \
 **Last updated:** 2026-07-31 \
-**Verified starting `main` SHA:** `7677bee1b0791bb4f954f058aa9e959d4796985a` \
-**Current task:** `BE-002 — Platform Foundation` — `REVIEW` \
-**Current execution branch:** `task/ws-09/BE-002-platform-foundation` \
-**Current execution PR:** Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18)
+**Verified `main` SHA:** `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd` \
+**Current task:** `BE-003 — Public Website and Free Assessment` — `READY` \
+**Current execution branch:** None \
+**Current execution PR:** None
 
 ## BizMetria in brief
 
@@ -44,7 +44,7 @@ PR [#2](https://github.com/Bear78888/bizmetria.ai/pull/2) approved `MC-001` and 
 - Workstream 11: `LS-002` is `APPROVED` through PR #15 at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
 - Workstream 10: `LC-001` is `APPROVED` through PR #17 at `7677bee1b0791bb4f954f058aa9e959d4796985a`.
 - Workstream 07: `AE-001` is `READY` because FA-001, PS-004, and LS-002 are approved.
-- Workstream 09: `BE-002` is `REVIEW` in draft PR #18 under the owner's 2026-07-31 technical implementation directive; AE-001 is not its dependency.
+- Workstream 09: `BE-002` is `APPROVED` through PR #18 at `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`; `BE-003` is `READY`. AE-001 is not a BE-003 dependency.
 - `G2` and all later tasks remain `PLANNED` behind named dependencies and phase gates.
 - Workstream 04 preserves two recovered inputs as historical evidence; implementations use the approved v1 contract.
 
@@ -52,7 +52,7 @@ See the [Delivery Roadmap](DELIVERY_ROADMAP.md) for the complete critical path a
 
 ## Active work
 
-- BE-002 is active on `task/ws-09/BE-002-platform-foundation`, based on verified remote `main` `7677bee1b0791bb4f954f058aa9e959d4796985a`.
+- No implementation branch is active after the BE-002 merge. `BE-003` and `AE-001` are ready for separate scoped branches.
 - Entity/address, support identity, legal/tax review, report-review staffing, consultation staffing, and live Stripe credentials are explicit pre-live dependencies; they do not block PS-003, architecture, implementation, or staging.
 - The merged recovery, architecture, and MC-002 branches are historical, not live-locks.
 - The PS-001 and LS-001 branches are historical after PR #5 and PR #6 merged.
@@ -74,14 +74,15 @@ See the [Delivery Roadmap](DELIVERY_ROADMAP.md) for the complete critical path a
 - PS-004 created the minimized paid questionnaire, interview/evidence, recovery, and completion contract, passed independent review, and merged through PR #13 at `1ed5a2a190fdfef03c7d1fcdec5320ec817c596b`.
 - OPEN-009 is closed; LS-002 is approved; LC-001 and AE-001 are ready; G2 remains unpassed.
 - LS-002 defined consent, claims, field/data-class adoption, rights, retention, and review triggers and merged through PR #15 at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
+- BE-002 passed GitHub CI, Vercel Preview, and a Healthy isolated Supabase Preview, then merged through PR #18 at `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`. Vercel automatically created a Ready Production deployment from `main`; Supabase production deployment remained off, and the synthetic Preview branch was removed without copying data to production.
 
 ## Current blockers
 
-No dependency blocker prevents Platform Foundation preview work. Native Vercel and Supabase preview checks remain acceptance evidence. Missing entity/operations facts and qualified legal/tax/vendor/security/release evidence still block live Stripe activation, real paid orders, production customer data, production communications, and public paid launch.
+No dependency blocker prevents BE-003 Preview work. Missing entity/operations facts and qualified legal/tax/vendor/security/release evidence still block live Stripe activation, real paid orders, production customer data, production communications, and public paid launch.
 
 ## Exact next action
 
-Publish BE-002 as one draft PR, verify CI, Vercel Preview, and native Supabase preview behavior, and preserve every production activation boundary. After an authorized merge, start PR 2 from the new remote `main`.
+Start `BE-003 — Public Website and Free Assessment` on `task/ws-09/BE-003-public-site-free-assessment` from verified remote `main` `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`. Implement real working English/Spanish pages, the 11-question free assessment, deterministic scoring, consent-aware Supabase Preview persistence, result page, basic Resend flow, and unit/E2E tests; keep production Supabase migrations disabled.
 
 ## Required Startup Reading
 

@@ -1,33 +1,35 @@
 # Current State
 
 **Workstream:** 09 — Backend, Data and Integrations
-**Status:** `REVIEW`
+**Status:** `APPROVED`
 **Last updated:** 2026-07-31
-**Current task:** `BE-002 — Platform Foundation`
-**Current branch:** `task/ws-09/BE-002-platform-foundation`
-**Current PR:** Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18)
+**Current task:** `BE-003 — Public Website and Free Assessment` — `READY`
+**Current branch:** None; historical `task/ws-09/BE-002-platform-foundation`
+**Current PR:** Merged PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18)
 
-## Confirmed starting point
+## Completed
 
-Remote `main` was verified at `7677bee1b0791bb4f954f058aa9e959d4796985a`; no PR was open when BE-002 began. MC-003, PS-003, FA-001, PS-004, LS-002, and LC-001 were already merged and are not being repeated. AE-001 remains unfinished but does not block Platform Foundation under the owner's current technical directive.
+BE-002 established the Next.js/TypeScript foundation, environment validation, Supabase migration, Auth, RLS, private Storage, synthetic seed, CI, unit/integration tests, browser smoke tests, and native previews. It merged at `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`; all 68 changed files are present in remote `main`.
 
-## In progress
+## Verified closeout
 
-Production-grade Next.js/TypeScript foundation, scoped environment validation, Supabase migration, Auth, RLS, private Storage, synthetic seed data, CI, unit/integration tests, browser smoke tests, and native preview verification.
+- GitHub CI, Vercel Preview, and isolated Supabase Preview passed.
+- Vercel automatically created a Production deployment from `main`; deployment `6KSZVSYjP` is `Ready`.
+- Supabase `Deploy to production` remains off and the production `public` schema did not receive the BE-002 migration.
+- Preview branch `pr-18-be-002` contained only the migration plus synthetic seed data and was removed after merge without copying Preview data to production.
 
 ## Safety boundary
 
-Only synthetic/sandbox operation is authorized. Stripe live mode, real payments, production Retell numbers, production email, production Supabase changes, and final-domain publication are not part of BE-002.
+Only synthetic/Preview operation is authorized for BE-003. Stripe live mode, real payments, production Retell numbers, unrestricted production email, production Supabase migrations, and real customer data remain excluded.
 
-## Acceptance gate
+## Next task acceptance
 
-- strict typecheck, formatting, lint, unit/integration tests, and production build pass;
-- GitHub CI passes;
-- Vercel Preview is `Ready` and bilingual/auth/health surfaces respond;
-- native Supabase preview validation succeeds when available;
-- RLS and private-storage policies are present and migration-contract tests pass;
-- no secret value is present in Git history or output.
+- working English and Spanish public pages;
+- canonical 11-question free assessment and deterministic score;
+- contact form, consent, Supabase Preview persistence, and result page;
+- basic Resend email flow limited to approved development behavior;
+- unit/E2E tests, GitHub CI, Vercel Preview, and isolated Supabase Preview pass.
 
 ## Exact next action
 
-Publish the verified implementation as one draft PR, update its metadata once with the PR number, and run the remote acceptance gate without applying production Supabase changes.
+Start `BE-003` on `task/ws-09/BE-003-public-site-free-assessment` from verified remote `main` `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`.

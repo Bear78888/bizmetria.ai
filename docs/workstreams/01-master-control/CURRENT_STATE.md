@@ -3,9 +3,9 @@
 **Workstream:** 01 — Master Control  
 **Status:** `APPROVED` \
 **Last updated:** 2026-07-31 \
-**Current task:** `BE-002 Platform Foundation oversight` — `REVIEW` \
-**Current branch:** `task/ws-09/BE-002-platform-foundation` \
-**Current PR:** Draft PR [#18](https://github.com/Bear78888/bizmetria.ai/pull/18)
+**Current task:** `BE-003 Public Website and Free Assessment oversight` — `READY` \
+**Current branch:** None \
+**Current PR:** None
 
 ## Approved baseline
 
@@ -34,23 +34,25 @@
 - `OPEN-009` is closed.
 - `LS-002` was independently reviewed and merged through PR [#15](https://github.com/Bear78888/bizmetria.ai/pull/15) at `a60597ebd3a17c06c923150fb9cf76f24c3a437c`.
 - `LC-001` merged through PR #17 at `7677bee1b0791bb4f954f058aa9e959d4796985a`; `AE-001` remains unfinished; `G2` remains unpassed.
+- `BE-002` passed its complete remote gate and merged through PR #18 at `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`; Supabase production migrations remained disabled.
 
 ## In progress
 
-BE-002 is active under the owner's 2026-07-31 technical implementation directive.
+No implementation task is active after the BE-002 merge. `BE-003` is ready to start from current remote `main`.
 
 ## Not started
 
-- `AE-001` is ready but unfinished; it is not a dependency of BE-002.
+- `BE-003` is ready; its planned branch is `task/ws-09/BE-003-public-site-free-assessment`.
+- `AE-001` is ready but unfinished; it is not a dependency of BE-003.
 - `MC-004` and later Master Control gates remain dependency-gated.
 
 ## Open decisions
 
-`D01-B`, `D02-A`, `D03-A`, `D04-B`, `D05-B`, `D06-B`, `D07-B`, `D08-A`, and `D09-A` are approved. `OPEN-001`, `OPEN-002`, `OPEN-003`, `OPEN-007`, `OPEN-008`, and `OPEN-009` have approved dispositions; `OPEN-004`, `OPEN-005`, and `OPEN-006` remain routed downstream.
+`D01-B`, `D02-A`, `D03-A`, `D04-B`, `D05-B`, `D06-B`, `D07-B`, `D08-A`, and `D09-A` are approved. `OPEN-004` is resolved for the sandbox foundation by merged BE-002; voice/telephony and CRM/email vendor choices remain downstream.
 
 ## Blockers
 
-No dependency blocker exists for BE-002 preview work. AE-001 remains a separate unfinished contract. Entity/address, support identity, legal/tax review, staffing, vendor/security evidence, release qualification, and live Stripe secrets remain pre-live blockers.
+No dependency blocker exists for BE-003 Preview work. AE-001 remains a separate unfinished contract. Entity/address, support identity, legal/tax review, staffing, vendor/security evidence, release qualification, and live Stripe secrets remain pre-live blockers.
 
 ## Dependencies
 
@@ -72,8 +74,8 @@ Approved MC-001 architecture, verified `main`, current product baseline, all wor
 
 ## Exact next action
 
-Publish and remotely validate BE-002. Require CI and Vercel Preview; use synthetic data and do not apply production Supabase changes without explicit permission.
+Start BE-003 from verified remote `main` `ddfafe0079972b48540b35b4ee3cf4cfce3e68fd`, deliver the working bilingual free-assessment funnel with Supabase/Resend Preview integrations and tests, and keep production Supabase migrations disabled.
 
 ## Latest session checkpoint
 
-On 2026-07-31, LS-002 passed independent review and merged through PR #15; LC-001 and AE-001 became ready. Credentials remain external and live activation remains a final gated step.
+On 2026-07-31, BE-002 merged through PR #18. Vercel created a Ready Production deployment from `main`; Supabase production remained unchanged, and the synthetic Preview branch was removed after merge. Credentials remain external and live activation remains gated.
