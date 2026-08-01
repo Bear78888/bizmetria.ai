@@ -53,38 +53,46 @@ jobs:
               return response.json();
             }
 
-            // Which marketplace/OAuth integrations exist and what they can reach.
-            const configurations = await api('/v1/integrations/configurations');
+            // Each section is independent so one failing endpoint still leaves
+            // the rest of the report usable.
             console.log('=== Integration configurations ===');
-            for (const configuration of configurations || []) {
-              console.log(
-                JSON.stringify({
-                  id: configuration.id,
-                  slug: configuration.slug,
-                  source: configuration.source,
-                  scopes: configuration.scopes,
-                  projectSelection: configuration.projectSelection,
-                  projects: configuration.projects,
-                }),
-              );
+            try {
+              const configurations = await api('/v1/integrations/configurations?view=account');
+              for (const configuration of configurations || []) {
+                console.log(
+                  JSON.stringify({
+                    id: configuration.id,
+                    slug: configuration.slug,
+                    source: configuration.source,
+                    projectSelection: configuration.projectSelection,
+                    projects: configuration.projects,
+                    disabledAt: configuration.disabledAt ?? null,
+                  }),
+                );
+              }
+            } catch (error) {
+              console.log(`configurations unavailable: ${error.message}`);
             }
 
             // Environment variable ownership. Values are never printed.
-            const environment = await api(`/v9/projects/${encodeURIComponent(projectId)}/env`);
             console.log('=== Environment variables (metadata only) ===');
-            for (const variable of environment.envs || []) {
-              console.log(
-                JSON.stringify({
-                  id: variable.id,
-                  key: variable.key,
-                  target: variable.target,
-                  gitBranch: variable.gitBranch,
-                  type: variable.type,
-                  // Non-empty when the variable is owned by an integration.
-                  configurationId: variable.configurationId ?? null,
-                  edgeConfigId: variable.edgeConfigId ?? null,
-                }),
-              );
+            try {
+              const environment = await api(`/v9/projects/${encodeURIComponent(projectId)}/env`);
+              for (const variable of environment.envs || []) {
+                console.log(
+                  JSON.stringify({
+                    id: variable.id,
+                    key: variable.key,
+                    target: variable.target,
+                    gitBranch: variable.gitBranch ?? null,
+                    type: variable.type,
+                    // Non-empty when the variable is owned by an integration.
+                    configurationId: variable.configurationId ?? null,
+                  }),
+                );
+              }
+            } catch (error) {
+              console.log(`environment unavailable: ${error.message}`);
             }
           })().catch((error) => {
             console.error(error instanceof Error ? error.message : 'Audit failed.');
