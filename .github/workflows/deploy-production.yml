@@ -1,0 +1,171 @@
+name: Deploy main to production
+
+# Builds the current tip of main as a fresh production deployment, waits for
+# the build, and verifies that the deployed revision actually serves.
+#
+# This exists because a Vercel *redeploy* clones the source of an existing
+# deployment: it picks up current environment variables but not current code.
+# Relying on redeploys froze production on an old commit while main moved on.
+# A git-source deployment has no such property — it builds what main is now.
+
+'on':
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build main and verify the served revision
+    if: github.repository == 'Bear78888/bizmetria.ai'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: development
+    env:
+      VERCEL_TEAM_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
+      VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
+      # GitHub's numeric id for Bear78888/bizmetria.ai, required by gitSource.
+      GITHUB_REPO_ID: '1317827560'
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      EXPECTED_SHA: ${{ github.sha }}
+
+    steps:
+      - name: Report recent production deployments (diagnostic)
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$VERCEL_TOKEN" || { echo "VERCEL_TOKEN is missing." >&2; exit 1; }
+          echo "::add-mask::$VERCEL_TOKEN"
+
+          node <<'NODE'
+          (async () => {
+            const token = process.env.VERCEL_TOKEN;
+            const team = `teamId=${encodeURIComponent(process.env.VERCEL_TEAM_ID)}`;
+            const projectId = encodeURIComponent(process.env.VERCEL_PROJECT_ID);
+            const response = await fetch(
+              `https://api.vercel.com/v6/deployments?${team}&projectId=${projectId}&target=production&limit=8`,
+              { headers: { Authorization: `Bearer ${token}` } },
+            );
+            if (!response.ok) throw new Error(`Listing deployments failed: ${response.status}`);
+            const { deployments = [] } = await response.json();
+            // Shows whether git pushes have been producing deployments at all,
+            // and whether any recent build errored.
+            for (const deployment of deployments) {
+              console.log(
+                [
+                  deployment.uid,
+                  deployment.state,
+                  new Date(deployment.createdAt).toISOString(),
+                  deployment.meta?.githubCommitSha?.slice(0, 7) ?? 'no-git-meta',
+                  deployment.meta?.githubCommitMessage?.split('\n')[0]?.slice(0, 60) ?? '',
+                ].join('  '),
+              );
+            }
+
+            // When recent builds errored, print the newest failure's build log
+            // tail. The environment schema reports variable NAMES only, so
+            // this cannot leak a value — but it names exactly what to fix.
+            const failed = deployments.find((deployment) => deployment.state === 'ERROR');
+            if (failed) {
+              console.log(`\n=== build log tail of failed ${failed.uid} ===`);
+              const eventsResponse = await fetch(
+                `https://api.vercel.com/v3/deployments/${encodeURIComponent(failed.uid)}/events?${team}&builds=1&limit=-1`,
+                { headers: { Authorization: `Bearer ${token}` } },
+              );
+              if (eventsResponse.ok) {
+                const events = await eventsResponse.json();
+                const lines = (Array.isArray(events) ? events : [])
+                  .map((event) => event?.payload?.text ?? event?.text ?? '')
+                  .filter((text) => text.length > 0);
+                for (const line of lines.slice(-60)) console.log(line);
+              } else {
+                console.log(`events unavailable: ${eventsResponse.status}`);
+              }
+            }
+          })().catch((error) => {
+            console.error(error.message);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Create a production deployment from the tip of main
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "::add-mask::$VERCEL_TOKEN"
+
+          node <<'NODE'
+          (async () => {
+            const token = process.env.VERCEL_TOKEN;
+            const team = `teamId=${encodeURIComponent(process.env.VERCEL_TEAM_ID)}`;
+            const headers = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
+
+            const createResponse = await fetch(`https://api.vercel.com/v13/deployments?${team}`, {
+              method: 'POST',
+              headers,
+              body: JSON.stringify({
+                name: 'bizmetria-ai',
+                target: 'production',
+                gitSource: {
+                  type: 'github',
+                  repoId: Number(process.env.GITHUB_REPO_ID),
+                  ref: 'main',
+                },
+              }),
+            });
+            const created = await createResponse.json();
+            if (!createResponse.ok) {
+              throw new Error(
+                `Creating the deployment failed: ${createResponse.status} ${created?.error?.message ?? ''}`,
+              );
+            }
+            console.log(`Created ${created.id} from main (${created.url}).`);
+
+            // Wait for the build itself, not for the previous deployment to
+            // keep answering. ERROR surfaces here with the inspector URL
+            // instead of timing out downstream.
+            for (let attempt = 0; attempt < 90; attempt += 1) {
+              await new Promise((resolve) => setTimeout(resolve, 10_000));
+              const stateResponse = await fetch(
+                `https://api.vercel.com/v13/deployments/${encodeURIComponent(created.id)}?${team}`,
+                { headers },
+              );
+              if (!stateResponse.ok) continue;
+              const deployment = await stateResponse.json();
+              console.log(`build state: ${deployment.readyState}`);
+              if (deployment.readyState === 'READY') return;
+              if (deployment.readyState === 'ERROR' || deployment.readyState === 'CANCELED') {
+                throw new Error(
+                  `Build finished as ${deployment.readyState}. Inspect: https://vercel.com/jorgiohenes-7252s-projects/bizmetria-ai/${created.id}`,
+                );
+              }
+            }
+            throw new Error('Build did not reach READY within the wait budget.');
+          })().catch((error) => {
+            console.error(error.message);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Verify the served revision is the commit this run deployed
+        shell: bash
+        run: |
+          set -euo pipefail
+          expected="${EXPECTED_SHA:0:7}"
+          # The strong form of "is it deployed": the running code reports which
+          # commit it was built from, so equality is a fact, not an inference.
+          for attempt in $(seq 1 30); do
+            body="$(curl -fsS https://bizmetria-ai.vercel.app/api/health || true)"
+            echo "attempt $attempt: $body"
+            if printf '%s' "$body" | grep -q "\"revision\":\"$expected\""; then
+              echo "Production serves revision $expected."
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "Production never reported revision $expected." >&2
+          exit 1

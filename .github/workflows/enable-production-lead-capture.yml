@@ -172,6 +172,31 @@ jobs:
               );
             }
             console.log(`Created deployment ${created.id}.`);
+
+            // A redeploy clones the SOURCE of the existing deployment: it
+            // picks up current environment variables but not current code.
+            // That is correct for this workflow — it changes a variable — but
+            // it means this must never be used as a way to ship main. Use
+            // deploy-production.yml for that.
+            //
+            // Wait for THIS deployment to become ready. Polling the public
+            // URL instead would pass instantly against the previous, still
+            // live deployment whenever the desired value already matched.
+            for (let attempt = 0; attempt < 60; attempt += 1) {
+              await new Promise((resolve) => setTimeout(resolve, 10_000));
+              const stateResponse = await fetch(
+                `https://api.vercel.com/v13/deployments/${encodeURIComponent(created.id)}?${team}`,
+                { headers },
+              );
+              if (!stateResponse.ok) continue;
+              const deployment = await stateResponse.json();
+              console.log(`build state: ${deployment.readyState}`);
+              if (deployment.readyState === 'READY') return;
+              if (deployment.readyState === 'ERROR' || deployment.readyState === 'CANCELED') {
+                throw new Error(`Redeployment finished as ${deployment.readyState}.`);
+              }
+            }
+            throw new Error('Redeployment did not reach READY within the wait budget.');
           })().catch((error) => {
             console.error(error.message);
             process.exit(1);
