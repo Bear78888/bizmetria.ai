@@ -31,6 +31,18 @@ if (!secretKey.startsWith('sk_test_')) {
 
 const ASSESSMENT_PRICE_CENTS = 29_900;
 
+// Stripe's "Consulting Services" code. What is sold is a paid business
+// assessment with human review and a live consultation — a professional
+// service delivered with digital tooling, not a SaaS subscription or a
+// downloadable digital good, which carry different treatment in several US
+// states.
+//
+// A product tax code is mandatory on this account because Managed Payments is
+// enabled, which makes Stripe the merchant of record. Both that choice and this
+// classification need confirmation from a qualified tax advisor before live
+// mode, and that review is already a recorded pre-live dependency (DEC-024).
+const ASSESSMENT_TAX_CODE = 'txcd_20060048';
+
 // The approved promotion ladder (D04-B / DEC-012, DEC-020). `enabled` reflects
 // the launch rule: start with $49 and $99, keep $149 and $199 switched off
 // until payment, attribution and suppression tests pass. `maxRedemptions`
@@ -117,11 +129,20 @@ async function main() {
         name: 'BizMetria Business Assessment',
         description:
           'One-time bilingual business assessment: personalized analysis, recommendations, impact/effort matrix and a 30-90 day roadmap. Implementation services are separate.',
+        tax_code: ASSESSMENT_TAX_CODE,
         'metadata[bizmetria_sku]': 'assessment',
       },
       'bizmetria-product-assessment-v1',
     ));
   console.info(`Product: ${product.id}${existingProduct ? ' (existing)' : ' (created)'}`);
+
+  // Converge the tax code on a product that predates it. Without one, Checkout
+  // rejects every session on a Managed Payments account, so this is not
+  // cosmetic — it is what makes the product sellable.
+  if (product.tax_code !== ASSESSMENT_TAX_CODE) {
+    await stripe('POST', `/products/${product.id}`, { tax_code: ASSESSMENT_TAX_CODE });
+    console.info(`Product tax code set to ${ASSESSMENT_TAX_CODE} (Consulting Services).`);
+  }
 
   // Price — one-time, USD. lookup_key makes it findable without storing the id.
   const existingPrice = await findByLookup(
