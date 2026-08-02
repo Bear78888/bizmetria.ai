@@ -128,7 +128,7 @@ async function main() {
       {
         name: 'BizMetria Business Assessment',
         description:
-          'One-time bilingual business assessment: personalized analysis, recommendations, impact/effort matrix and a 30-90 day roadmap. Implementation services are separate.',
+          'One-time bilingual business assessment: personalized analysis, recommendations, impact/effort matrix and a 30-day implementation plan. Implementation services are separate.',
         tax_code: ASSESSMENT_TAX_CODE,
         'metadata[bizmetria_sku]': 'assessment',
       },

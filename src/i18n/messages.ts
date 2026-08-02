@@ -71,7 +71,7 @@ const messages = {
     offer: {
       eyebrow: 'When you need the full picture',
       product: 'Business Assessment',
-      title: 'Move from a score to a prioritized 30–90 day plan.',
+      title: 'Move from a score to a prioritized 30-day implementation plan.',
       description:
         'The complete Business Assessment adds personalized analysis, recommendations, an Impact vs. Effort Matrix, a professional PDF, and a results consultation.',
       price: '$299 one-time',
@@ -80,7 +80,7 @@ const messages = {
       items: [
         'Personalized analysis',
         'Impact vs. Effort Matrix',
-        '30–90 day roadmap',
+        '30-day implementation plan',
         'Professional PDF + consultation',
       ],
     },
@@ -161,7 +161,7 @@ const messages = {
     offer: {
       eyebrow: 'Cuando necesita la imagen completa',
       product: 'Evaluación Empresarial',
-      title: 'Pase de una puntuación a un plan priorizado de 30–90 días.',
+      title: 'Pase de una puntuación a un plan de implementación de 30 días priorizado.',
       description:
         'La Evaluación Empresarial completa añade análisis personalizado, recomendaciones, una Matriz de impacto frente a esfuerzo, un PDF profesional y una consulta de resultados.',
       price: '$299 por pago único',
@@ -170,7 +170,7 @@ const messages = {
       items: [
         'Análisis personalizado',
         'Matriz de impacto frente a esfuerzo',
-        'Hoja de ruta de 30–90 días',
+        'Plan de implementación de 30 días',
         'PDF profesional y consulta',
       ],
     },

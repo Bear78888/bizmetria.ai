@@ -6,7 +6,7 @@ import {
   analysisLimits,
   buildAnalysisInput,
   createStructuredAnalysisCall,
-  roadmapPhases,
+  sprintWeeks,
 } from '@/features/analysis';
 import type { AssessmentAnswers } from '@/features/free-assessment/schema';
 import { scoreAssessment, scoreBlockOrder } from '@/features/free-assessment/score';
@@ -53,8 +53,8 @@ describe.skipIf(!apiKey)('Claude analysis provider against the real API', () => 
       expect(recommendation.firstStep.length).toBeGreaterThan(20);
     }
 
-    for (const phase of roadmapPhases) {
-      expect(analysis.content.roadmap[phase].length).toBeGreaterThan(0);
+    for (const week of sprintWeeks) {
+      expect(analysis.content.sprint[week].length).toBeGreaterThan(0);
     }
 
     // The questionnaire never supplied revenue or currency, and the report
@@ -69,7 +69,7 @@ describe.skipIf(!apiKey)('Claude analysis provider against the real API', () => 
     console.info(
       `[${locale}] ${analysis.content.findings.length} findings, ` +
         `${analysis.content.recommendations.length} recommendations, ` +
-        `roadmap ${roadmapPhases.map((phase) => analysis.content.roadmap[phase].length).join('/')}`,
+        `sprint ${sprintWeeks.map((week) => analysis.content.sprint[week].length).join('/')}`,
     );
     console.info(`[${locale}] summary: ${analysis.content.executiveSummary}`);
     console.info(

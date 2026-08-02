@@ -9,7 +9,7 @@ const lockedIds = [
   'full_personalized_analysis',
   'complete_recommendations',
   'impact_effort_matrix',
-  'roadmap_30_90_day',
+  'implementation_sprint_30_day',
   'professional_pdf_report',
   'results_consultation',
 ] as const;

@@ -233,6 +233,7 @@ export const summaryCopy: Record<
     readonly areasLead: string;
     readonly close: string;
     readonly noAreas: string;
+    readonly sprintClose: string;
   }
 > = {
   en: {
@@ -251,9 +252,11 @@ export const summaryCopy: Record<
     },
     areasLead: 'The clearest opportunity areas from your answers are',
     close:
-      'The findings, recommendations and roadmap below follow directly from those answers. They describe operational opportunity only and are not a financial valuation or a guarantee of results.',
+      'The findings, recommendations and 30-day plan below follow directly from those answers. They describe operational opportunity only and are not a financial valuation or a guarantee of results.',
     noAreas:
       'No single area dominates, so the recommendations below are ordered by expected return.',
+    sprintClose:
+      'Verify each change against its baseline, fix what fell short, and document the working setup for handover.',
   },
   es: {
     lead: (total) =>
@@ -271,8 +274,10 @@ export const summaryCopy: Record<
     },
     areasLead: 'Las áreas de oportunidad más claras según sus respuestas son',
     close:
-      'Los hallazgos, las recomendaciones y la hoja de ruta que siguen se derivan directamente de esas respuestas. Describen únicamente oportunidad operativa y no constituyen una valoración financiera ni una garantía de resultados.',
+      'Los hallazgos, las recomendaciones y el plan de 30 días que siguen se derivan directamente de esas respuestas. Describen únicamente oportunidad operativa y no constituyen una valoración financiera ni una garantía de resultados.',
     noAreas:
       'Ninguna área domina por sí sola, por lo que las recomendaciones siguientes se ordenan por retorno esperado.',
+    sprintClose:
+      'Verifique cada cambio contra su línea base, corrija lo que quedó corto y documente la configuración final para el traspaso.',
   },
 };

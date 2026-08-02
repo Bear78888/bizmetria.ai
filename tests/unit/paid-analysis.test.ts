@@ -35,10 +35,11 @@ function validContent() {
         firstStep: 'Map the current intake steps end to end.',
       },
     ],
-    roadmap: {
-      days1To30: ['Document the intake workflow.'],
-      days31To60: ['Pilot an automated acknowledgement.'],
-      days61To90: ['Review results against the response-time goal.'],
+    sprint: {
+      week1: ['Document the intake workflow.'],
+      week2: ['Pilot an automated acknowledgement.'],
+      week3: ['Review results against the response-time goal.'],
+      week4: ['Verify against the baseline and hand over documentation.'],
     },
   };
 }
@@ -200,7 +201,7 @@ describe('runPaidAnalysis', () => {
         executiveSummary: '',
         findings: [],
         recommendations: [],
-        roadmap: { days1To30: [], days31To60: [], days61To90: [] },
+        sprint: { week1: [], week2: [], week3: [], week4: [] },
       });
 
     const outcome = await runPaidAnalysis(memoryStore(state), call, claimant);

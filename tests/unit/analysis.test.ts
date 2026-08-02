@@ -13,7 +13,7 @@ import {
   buildAnalysisPrompt,
   generateAnalysis,
   resolveAnalysisProviderId,
-  roadmapPhases,
+  sprintWeeks,
   type AnalysisContent,
   type BusinessAnalysis,
 } from '@/features/analysis';
@@ -79,12 +79,12 @@ function expectValidAnalysis(analysis: BusinessAnalysis): void {
     expect(recommendation.firstStep.length).toBeGreaterThan(0);
   }
 
-  for (const phase of roadmapPhases) {
-    expect(analysis.content.roadmap[phase].length).toBeLessThanOrEqual(
-      analysisLimits.roadmapItemsPerPhase,
+  for (const week of sprintWeeks) {
+    expect(analysis.content.sprint[week].length).toBeLessThanOrEqual(
+      analysisLimits.sprintItemsPerWeek,
     );
   }
-  expect(roadmapPhases.some((phase) => analysis.content.roadmap[phase].length > 0)).toBe(true);
+  expect(sprintWeeks.some((week) => analysis.content.sprint[week].length > 0)).toBe(true);
 }
 
 describe('analysis input', () => {
@@ -189,10 +189,11 @@ const validModelOutput: AnalysisContent = {
       firstStep: 'List the channels and pick the inbox that will own all of them.',
     },
   ],
-  roadmap: {
-    days1To30: ['Consolidate channels into one queue.'],
-    days31To60: ['Add automated follow-up for unconverted enquiries.'],
-    days61To90: ['Review response metrics weekly.'],
+  sprint: {
+    week1: ['Consolidate channels into one queue.'],
+    week2: ['Add automated follow-up for unconverted enquiries.'],
+    week3: ['Review response metrics weekly.'],
+    week4: ['Verify results against the baseline and document handover.'],
   },
 };
 
@@ -224,15 +225,16 @@ describe('Claude analysis provider', () => {
     const analysis = await analyseWithClaude(inputFor(focusedAnswers), async () => ({
       ...validModelOutput,
       executiveSummary: '  Summary with padding.  ',
-      roadmap: {
-        days1To30: ['  Consolidate channels.  ', '   '],
-        days31To60: [],
-        days61To90: [],
+      sprint: {
+        week1: ['  Consolidate channels.  ', '   '],
+        week2: [],
+        week3: [],
+        week4: [],
       },
     }));
 
     expect(analysis.content.executiveSummary).toBe('Summary with padding.');
-    expect(analysis.content.roadmap.days1To30).toEqual(['Consolidate channels.']);
+    expect(analysis.content.sprint.week1).toEqual(['Consolidate channels.']);
   });
 
   it('caps collections at the number of items the report renders', async () => {
