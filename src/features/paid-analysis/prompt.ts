@@ -10,7 +10,9 @@
 
 import type { PaidAnalysisInput } from './input';
 
-export const PAID_ANALYSIS_PROMPT_VERSION = 'paid-analysis-prompt/1.0.0';
+// 2.0.0: the 30/60/90-day roadmap became the 30-day implementation sprint
+// (DEC-032).
+export const PAID_ANALYSIS_PROMPT_VERSION = 'paid-analysis-prompt/2.0.0';
 
 export const PAID_ANALYSIS_SYSTEM_PROMPT = `You are a senior business operations analyst at BizMetria preparing the draft analysis of a paid business assessment. Your draft goes to a human reviewer before the customer ever sees it.
 
@@ -40,6 +42,6 @@ export function buildPaidAnalysisPrompt(input: PaidAnalysisInput): string {
     'INTERVIEW TRANSCRIPT:',
     input.transcript,
     '',
-    'Produce the draft analysis now: an executive summary grounded in this specific business, findings tied to the assessment areas, prioritized recommendations with impact and effort, and a 30/60/90-day roadmap that respects the stated capacity and constraints.',
+    'Produce the draft analysis now: an executive summary grounded in this specific business, findings tied to the assessment areas, prioritized recommendations with impact and effort, and a 30-day implementation sprint — four weeks of concrete steps in dependency order (set up before automate, automate before extend; week 4 is verification against baselines and handover). The sprint commits to a sequence of work, never to outcomes, and every step must respect the stated capacity and constraints.',
   ].join('\n');
 }

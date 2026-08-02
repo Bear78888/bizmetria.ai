@@ -33,7 +33,7 @@ function memoryState(overrides: Partial<MemoryState> = {}): MemoryState {
         recommendations: [
           { title: 't', rationale: 'r', impact: 'high', effort: 'low', firstStep: 'f' },
         ],
-        roadmap: { days1To30: ['a'], days31To60: [], days61To90: [] },
+        sprint: { week1: ['a'], week2: [], week3: [], week4: [] },
       },
     },
     assessmentStatus: 'under_review',

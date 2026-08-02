@@ -5,10 +5,11 @@ const labels = {
     summary: 'Executive summary',
     findings: 'Findings',
     recommendations: 'Recommendations',
-    roadmap: '90-day roadmap',
-    phase1: 'Days 1–30',
-    phase2: 'Days 31–60',
-    phase3: 'Days 61–90',
+    sprint: '30-day implementation sprint',
+    week1: 'Week 1',
+    week2: 'Week 2',
+    week3: 'Week 3',
+    week4: 'Week 4',
     impact: 'Impact',
     effort: 'Effort',
     firstStep: 'First step',
@@ -18,10 +19,11 @@ const labels = {
     summary: 'Resumen ejecutivo',
     findings: 'Hallazgos',
     recommendations: 'Recomendaciones',
-    roadmap: 'Hoja de ruta de 90 días',
-    phase1: 'Días 1–30',
-    phase2: 'Días 31–60',
-    phase3: 'Días 61–90',
+    sprint: 'Sprint de implementación de 30 días',
+    week1: 'Semana 1',
+    week2: 'Semana 2',
+    week3: 'Semana 3',
+    week4: 'Semana 4',
     impact: 'Impacto',
     effort: 'Esfuerzo',
     firstStep: 'Primer paso',
@@ -73,12 +75,13 @@ export default function ReportView({ locale, content }: ReportViewProps) {
       </section>
 
       <section>
-        <h2>{text.roadmap}</h2>
+        <h2>{text.sprint}</h2>
         {(
           [
-            [text.phase1, content.roadmap.days1To30],
-            [text.phase2, content.roadmap.days31To60],
-            [text.phase3, content.roadmap.days61To90],
+            [text.week1, content.sprint.week1],
+            [text.week2, content.sprint.week2],
+            [text.week3, content.sprint.week3],
+            [text.week4, content.sprint.week4],
           ] as const
         ).map(([phase, items]) =>
           items.length > 0 ? (

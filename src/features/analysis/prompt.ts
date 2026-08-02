@@ -61,7 +61,7 @@ export function buildAnalysisPrompt(input: AnalysisInput): string {
     `- executiveSummary: 3–5 sentences on what the answers show overall and what it means for sequencing. Reference the score.`,
     `- findings: up to ${analysisLimits.findings}, one per opportunity area that the answers actually support, strongest first. Each names what the answers show and why it matters operationally.`,
     `- recommendations: up to ${analysisLimits.recommendations}, ordered so the highest impact at the lowest effort comes first. Each carries an impact and effort rating and a concrete first step the owner can take this week.`,
-    `- roadmap: up to ${analysisLimits.roadmapItemsPerPhase} concrete actions in each of days 1–30, 31–60 and 61–90, sequenced so later phases build on earlier ones.`,
+    `- sprint: a 30-day implementation sprint with up to ${analysisLimits.sprintItemsPerWeek} concrete actions in each of weeks 1–4, in dependency order (set up before automate, automate before extend; week 4 verifies against baselines and documents handover). Commit to a sequence of work, never to outcomes.`,
     '',
     'Each finding must use one of these area identifiers, matching the area it describes: ' +
       scoreBlockOrder.join(', ') +

@@ -3,7 +3,10 @@ import { z } from 'zod';
 import type { AssessmentLocale } from '@/features/free-assessment/schema';
 import { scoreBlockOrder } from '@/features/free-assessment/score';
 
-export const ANALYSIS_CONTRACT_VERSION = 'business-analysis/1.0.0';
+// 2.0.0: the 30/60/90-day roadmap became the 30-day implementation sprint
+// (DEC-032) — four weeks of sequenced work, promising order of execution,
+// never outcomes.
+export const ANALYSIS_CONTRACT_VERSION = 'business-analysis/2.0.0';
 
 export const analysisProviderIds = ['claude', 'deterministic'] as const;
 export type AnalysisProviderId = (typeof analysisProviderIds)[number];
@@ -36,10 +39,11 @@ export const analysisContentSchema = z.object({
       firstStep: z.string(),
     }),
   ),
-  roadmap: z.object({
-    days1To30: z.array(z.string()),
-    days31To60: z.array(z.string()),
-    days61To90: z.array(z.string()),
+  sprint: z.object({
+    week1: z.array(z.string()),
+    week2: z.array(z.string()),
+    week3: z.array(z.string()),
+    week4: z.array(z.string()),
   }),
 });
 
@@ -47,13 +51,13 @@ export type AnalysisContent = z.infer<typeof analysisContentSchema>;
 export type AnalysisFinding = AnalysisContent['findings'][number];
 export type AnalysisRecommendation = AnalysisContent['recommendations'][number];
 
-export const roadmapPhases = ['days1To30', 'days31To60', 'days61To90'] as const;
-export type RoadmapPhase = (typeof roadmapPhases)[number];
+export const sprintWeeks = ['week1', 'week2', 'week3', 'week4'] as const;
+export type SprintWeek = (typeof sprintWeeks)[number];
 
 export const analysisLimits = {
   findings: 6,
   recommendations: 8,
-  roadmapItemsPerPhase: 6,
+  sprintItemsPerWeek: 5,
 } as const;
 
 export interface BusinessAnalysis {
@@ -113,10 +117,11 @@ export function normalizeAnalysisContent(content: AnalysisContent): AnalysisCont
     )
     .slice(0, analysisLimits.recommendations);
 
-  const roadmap = {
-    days1To30: cleanLines(content.roadmap.days1To30, analysisLimits.roadmapItemsPerPhase),
-    days31To60: cleanLines(content.roadmap.days31To60, analysisLimits.roadmapItemsPerPhase),
-    days61To90: cleanLines(content.roadmap.days61To90, analysisLimits.roadmapItemsPerPhase),
+  const sprint = {
+    week1: cleanLines(content.sprint.week1, analysisLimits.sprintItemsPerWeek),
+    week2: cleanLines(content.sprint.week2, analysisLimits.sprintItemsPerWeek),
+    week3: cleanLines(content.sprint.week3, analysisLimits.sprintItemsPerWeek),
+    week4: cleanLines(content.sprint.week4, analysisLimits.sprintItemsPerWeek),
   };
 
   if (executiveSummary.length === 0) {
@@ -128,11 +133,11 @@ export function normalizeAnalysisContent(content: AnalysisContent): AnalysisCont
   if (recommendations.length === 0) {
     throw new AnalysisContractError('Analysis contains no usable recommendations.');
   }
-  if (roadmapPhases.every((phase) => roadmap[phase].length === 0)) {
-    throw new AnalysisContractError('Analysis roadmap is empty in every phase.');
+  if (sprintWeeks.every((week) => sprint[week].length === 0)) {
+    throw new AnalysisContractError('Analysis sprint plan is empty in every week.');
   }
 
-  return { executiveSummary, findings, recommendations, roadmap };
+  return { executiveSummary, findings, recommendations, sprint };
 }
 
 /**

@@ -52,7 +52,7 @@ function executiveSummary(input: AnalysisInput, blocks: readonly ScoreBlockId[])
 function buildContent(input: AnalysisInput): AnalysisContent {
   const copy = blockCopy[input.locale];
   const blocks = contributingBlocks(input);
-  const roadmapBlocks = blocks.slice(0, 3);
+  const sprintBlocks = blocks.slice(0, 3);
 
   return normalizeAnalysisContent({
     executiveSummary: executiveSummary(input, blocks),
@@ -68,10 +68,13 @@ function buildContent(input: AnalysisInput): AnalysisContent {
       effort: copy[block].effort,
       firstStep: copy[block].firstStep,
     })),
-    roadmap: {
-      days1To30: roadmapBlocks.map((block) => copy[block].roadmap[0]),
-      days31To60: roadmapBlocks.map((block) => copy[block].roadmap[1]),
-      days61To90: roadmapBlocks.map((block) => copy[block].roadmap[2]),
+    // The 30-day sprint sequences the same steps by dependency: set up first,
+    // then automate, then extend — closing on verification and handover.
+    sprint: {
+      week1: sprintBlocks.map((block) => copy[block].roadmap[0]),
+      week2: sprintBlocks.map((block) => copy[block].roadmap[1]),
+      week3: sprintBlocks.map((block) => copy[block].roadmap[2]),
+      week4: [summaryCopy[input.locale].sprintClose],
     },
   });
 }

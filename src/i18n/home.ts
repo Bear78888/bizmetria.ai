@@ -64,7 +64,7 @@ const home = {
     report: {
       eyebrow: 'THE $299 DELIVERABLE',
       title: 'A report you can hand to your team.',
-      text: 'The Business Assessment turns your questionnaire and a recorded interview into a reviewed report: findings tied to evidence, an Impact vs. Effort Matrix, and a 30–90 day roadmap. Fixed price, no subscription, and implementation is never required.',
+      text: 'The Business Assessment turns your questionnaire and a recorded interview into a reviewed report: findings tied to evidence, an Impact vs. Effort Matrix, and a 30-day implementation plan. Fixed price, no subscription, and implementation is never required.',
       note: 'Sample pages, illustrative content.',
       matrix: {
         pageLabel: 'SAMPLE PAGE · IMPACT VS. EFFORT',
@@ -80,15 +80,15 @@ const home = {
         callout: 'Every recommendation is placed, so you see what is worth doing first.',
       },
       roadmap: {
-        pageLabel: 'SAMPLE PAGE · 30–90 DAY ROADMAP',
-        title: '30–90 day roadmap',
+        pageLabel: 'SAMPLE PAGE · 30-DAY PLAN',
+        title: '30-day implementation plan',
         phases: [
           {
-            window: 'DAYS 1–30',
+            window: 'WEEK 1',
             item: 'Document the intake workflow; switch on auto-acknowledgement.',
           },
-          { window: 'DAYS 31–60', item: 'Pilot follow-up sequences on one lead source.' },
-          { window: 'DAYS 61–90', item: 'Review results against response-time baseline.' },
+          { window: 'WEEKS 2–3', item: 'Pilot follow-up sequences on one lead source.' },
+          { window: 'WEEK 4', item: 'Review results against response-time baseline.' },
         ],
         callout: 'Sequenced to your stated capacity, not to a vendor’s sales cycle.',
       },
@@ -133,7 +133,7 @@ const home = {
           name: 'BizMetria Assessment',
           price: '$299',
           detail:
-            'Fixed price. Reviewed report, Impact vs. Effort Matrix, 30–90 day roadmap, results consultation.',
+            'Fixed price. Reviewed report, Impact vs. Effort Matrix, 30-day implementation plan, results consultation.',
           cta: 'Start the $299 assessment',
           highlighted: true,
         },
@@ -161,7 +161,7 @@ const home = {
         },
         {
           q: 'What exactly do I get for $299?',
-          a: 'A personalized analysis reviewed by a person: findings, recommendations, an Impact vs. Effort Matrix, a 30–90 day roadmap, and a results consultation.',
+          a: 'A personalized analysis reviewed by a person: findings, recommendations, an Impact vs. Effort Matrix, a 30-day implementation plan, and a results consultation.',
         },
         {
           q: 'Will you try to sell me implementation?',
@@ -245,7 +245,7 @@ const home = {
     report: {
       eyebrow: 'EL ENTREGABLE DE $299',
       title: 'Un informe que puede entregar a su equipo.',
-      text: 'La Evaluación Empresarial convierte su cuestionario y una entrevista grabada en un informe revisado: hallazgos ligados a evidencia, una Matriz de impacto frente a esfuerzo y una hoja de ruta de 30–90 días. Precio fijo, sin suscripción, y la implementación nunca es obligatoria.',
+      text: 'La Evaluación Empresarial convierte su cuestionario y una entrevista grabada en un informe revisado: hallazgos ligados a evidencia, una Matriz de impacto frente a esfuerzo y un plan de implementación de 30 días. Precio fijo, sin suscripción, y la implementación nunca es obligatoria.',
       note: 'Páginas de muestra, contenido ilustrativo.',
       matrix: {
         pageLabel: 'PÁGINA DE MUESTRA · IMPACTO VS. ESFUERZO',
@@ -261,8 +261,8 @@ const home = {
         callout: 'Cada recomendación está ubicada, para que vea qué conviene hacer primero.',
       },
       roadmap: {
-        pageLabel: 'PÁGINA DE MUESTRA · HOJA DE RUTA 30–90 DÍAS',
-        title: 'Hoja de ruta de 30–90 días',
+        pageLabel: 'PÁGINA DE MUESTRA · PLAN DE 30 DÍAS',
+        title: 'Plan de implementación de 30 días',
         phases: [
           {
             window: 'DÍAS 1–30',
@@ -321,7 +321,7 @@ const home = {
           name: 'Evaluación BizMetria',
           price: '$299',
           detail:
-            'Precio fijo. Informe revisado, Matriz de impacto frente a esfuerzo, hoja de ruta de 30–90 días, consulta de resultados.',
+            'Precio fijo. Informe revisado, Matriz de impacto frente a esfuerzo, plan de implementación de 30 días, consulta de resultados.',
           cta: 'Comenzar la evaluación de $299',
           highlighted: true,
         },
@@ -349,7 +349,7 @@ const home = {
         },
         {
           q: '¿Qué recibo exactamente por $299?',
-          a: 'Un análisis personalizado revisado por una persona: hallazgos, recomendaciones, una Matriz de impacto frente a esfuerzo, una hoja de ruta de 30–90 días y una consulta de resultados.',
+          a: 'Un análisis personalizado revisado por una persona: hallazgos, recomendaciones, una Matriz de impacto frente a esfuerzo, un plan de implementación de 30 días y una consulta de resultados.',
         },
         {
           q: '¿Intentarán venderme implementación?',
