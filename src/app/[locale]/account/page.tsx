@@ -51,8 +51,8 @@ function nextStep(locale: string, assessment: { id: string; status: string }) {
     case 'not_started':
     case 'in_progress':
       return {
-        href: `/${locale}/assessment/paid/questionnaire?id=${assessment.id}`,
-        label: spanish ? 'Continuar el cuestionario' : 'Continue the questionnaire',
+        href: `/${locale}/assessment/paid/begin?id=${assessment.id}`,
+        label: spanish ? 'Responder: voz o cuestionario' : 'Answer: voice or questionnaire',
       };
     case 'questionnaire_complete':
     case 'interview_ready':

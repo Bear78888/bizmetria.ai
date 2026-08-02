@@ -164,6 +164,10 @@ const home = {
           a: 'A personalized analysis reviewed by a person: findings, recommendations, an Impact vs. Effort Matrix, a 30-day implementation plan, and a results consultation.',
         },
         {
+          q: 'How do I give my answers after purchase?',
+          a: 'Your choice: talk to our voice agent right in the browser — it asks all the questions in a 30–60 minute conversation (recommended) — or fill in the written questionnaire at your own pace. Both lead to the same reviewed report.',
+        },
+        {
           q: 'Will you try to sell me implementation?',
           a: 'No. Implementation is separate and never required. The assessment is designed to be useful even if you never buy anything else.',
         },
@@ -350,6 +354,10 @@ const home = {
         {
           q: '¿Qué recibo exactamente por $299?',
           a: 'Un análisis personalizado revisado por una persona: hallazgos, recomendaciones, una Matriz de impacto frente a esfuerzo, un plan de implementación de 30 días y una consulta de resultados.',
+        },
+        {
+          q: '¿Cómo doy mis respuestas después de la compra?',
+          a: 'Usted elige: hable con nuestro agente de voz directamente en el navegador — le hace todas las preguntas en una conversación de 30 a 60 minutos (recomendado) — o complete el cuestionario escrito a su ritmo. Ambos llevan al mismo informe revisado.',
         },
         {
           q: '¿Intentarán venderme implementación?',

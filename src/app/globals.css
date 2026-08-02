@@ -2258,3 +2258,55 @@ main p a:hover,
   cursor: pointer;
   padding: 0;
 }
+
+/* Post-purchase choice: voice interview or written questionnaire */
+
+.begin-options {
+  margin-top: 26px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  max-width: 760px;
+}
+
+.begin-option {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.begin-option h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.begin-option p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.begin-option .button {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.begin-option-recommended {
+  border-color: var(--metric);
+  box-shadow: 0 12px 40px rgb(27 91 255 / 10%);
+}
+
+.begin-option-recommended .mono-label {
+  color: var(--metric);
+}
+
+.begin-note {
+  margin-top: 22px;
+  max-width: 680px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}

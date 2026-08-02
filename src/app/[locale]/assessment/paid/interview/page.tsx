@@ -91,21 +91,19 @@ export default async function InterviewPage({ params, searchParams }: PageProps)
     );
   }
 
-  if (assessment.status !== 'questionnaire_complete' && assessment.status !== 'interview_ready') {
+  const startable = ['not_started', 'in_progress', 'questionnaire_complete', 'interview_ready'];
+  if (!startable.includes(assessment.status)) {
     return (
       <main className="page-shell">
         <section className="result-section">
-          <h1>{spanish ? 'Primero el cuestionario' : 'Questionnaire first'}</h1>
+          <h1>{spanish ? 'Entrevista no disponible' : 'Interview not available'}</h1>
           <p>
             {spanish
-              ? 'La entrevista se habilita cuando el cuestionario está completo.'
-              : 'The interview becomes available once the questionnaire is complete.'}
+              ? 'Esta evaluación ya pasó la etapa de entrevista.'
+              : 'This assessment has already moved past the interview stage.'}
           </p>
-          <Link
-            className="button button-primary"
-            href={`/${locale}/assessment/paid/questionnaire?id=${assessmentId}`}
-          >
-            {spanish ? 'Ir al cuestionario' : 'Go to the questionnaire'}
+          <Link className="button button-secondary" href={`/${locale}/account`}>
+            {spanish ? 'Ir a su cuenta' : 'Go to your account'}
           </Link>
         </section>
       </main>

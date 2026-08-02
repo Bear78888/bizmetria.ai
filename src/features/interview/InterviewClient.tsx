@@ -15,7 +15,7 @@ const copy = {
     title: 'Your assessment interview',
     disclosureHeading: 'Before we begin',
     disclosure:
-      'This interview is a voice conversation with an AI interviewer in English. The call is recorded and transcribed, and the transcript is used to prepare your assessment report. It takes up to 45 minutes; you can stop at any time and start again later. "I don\'t know" is always an acceptable answer.',
+      'This interview is a voice conversation with an AI interviewer in English. The call is recorded and transcribed, and the transcript is used to prepare your assessment report. It usually takes 30–60 minutes; you can stop at any time and start again later. "I don\'t know" is always an acceptable answer.',
     warning:
       'Do not share passwords, API keys, card or bank data, government IDs, customer lists, employee records, health data, or other sensitive records during the call.',
     consentLabel: 'I agree to this interview being recorded and transcribed.',
@@ -33,7 +33,7 @@ const copy = {
     title: 'Su entrevista de evaluación',
     disclosureHeading: 'Antes de comenzar',
     disclosure:
-      'Esta entrevista es una conversación de voz con un entrevistador de IA en español. La llamada se graba y se transcribe, y la transcripción se usa para preparar su informe de evaluación. Dura hasta 45 minutos; puede detenerla en cualquier momento y retomarla después. «No lo sé» siempre es una respuesta aceptable.',
+      'Esta entrevista es una conversación de voz con un entrevistador de IA en español. La llamada se graba y se transcribe, y la transcripción se usa para preparar su informe de evaluación. Suele durar entre 30 y 60 minutos; puede detenerla en cualquier momento y retomarla después. «No lo sé» siempre es una respuesta aceptable.',
     warning:
       'No comparta contraseñas, claves API, datos de tarjetas o bancarios, identificaciones oficiales, listas de clientes, registros de empleados, datos de salud u otra información sensible durante la llamada.',
     consentLabel: 'Acepto que esta entrevista se grabe y se transcriba.',

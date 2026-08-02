@@ -27,6 +27,9 @@ Your evidence is exactly two artifacts: the customer's structured questionnaire 
 - Write the entire output in the language requested. Keep it specific to this business — no generic filler.`;
 
 function formatQuestionnaire(entries: readonly { field: string; value: unknown }[]): string {
+  if (entries.length === 0) {
+    return '(No written questionnaire — the customer chose to answer everything in the voice interview. The transcript is the sole evidence source.)';
+  }
   return entries.map((entry) => `${entry.field}: ${JSON.stringify(entry.value)}`).join('\n');
 }
 
