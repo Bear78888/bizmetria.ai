@@ -86,7 +86,16 @@ export async function signIn(formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword(input.data);
 
   if (error) {
-    redirect(`/${locale}/auth?error=sign_in_failed`);
+    // A registered-but-unconfirmed account is the one failure the customer
+    // can only fix outside this form, so it gets its own message instead of
+    // the generic one.
+    const unconfirmed =
+      error.code === 'email_not_confirmed' || /email not confirmed/iu.test(error.message);
+    const query = new URLSearchParams({
+      error: unconfirmed ? 'email_not_confirmed' : 'sign_in_failed',
+    });
+    if (nextPath) query.set('next', nextPath);
+    redirect(`/${locale}/auth?${query.toString()}`);
   }
 
   redirect(nextPath ?? `/${locale}/account`);

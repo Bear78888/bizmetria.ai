@@ -39,6 +39,8 @@ const copy = {
     or: 'or',
     checkEmail: 'Check your email to confirm your account.',
     error: 'Authentication could not be completed. Check the details and try again.',
+    emailNotConfirmed:
+      'Your account exists, but the email is not confirmed yet. Open the confirmation link we sent to your inbox (check spam too), then sign in here.',
   },
   es: {
     eyebrow: 'Cuenta',
@@ -60,6 +62,8 @@ const copy = {
     or: 'o',
     checkEmail: 'Revise su correo para confirmar su cuenta.',
     error: 'No se pudo completar la autenticación. Revise los datos e inténtelo de nuevo.',
+    emailNotConfirmed:
+      'Su cuenta existe, pero el correo aún no está confirmado. Abra el enlace de confirmación que le enviamos (revise también el spam) y luego inicie sesión aquí.',
   },
 } as const;
 
@@ -110,7 +114,7 @@ export default async function AuthPage({ params, searchParams }: AuthPageProps) 
         ) : null}
         {query.error ? (
           <p className="form-message form-message-error" role="alert">
-            {messages.error}
+            {query.error === 'email_not_confirmed' ? messages.emailNotConfirmed : messages.error}
           </p>
         ) : null}
 
