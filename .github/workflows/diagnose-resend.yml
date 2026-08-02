@@ -43,19 +43,30 @@ jobs:
             });
             if (!listResponse.ok) throw new Error(`env list failed: ${listResponse.status}`);
             const { envs = [] } = await listResponse.json();
-            const entry = envs.find(
+            // Every production-targeted entry for this key, whoever owns it:
+            // the runtime sees integration-owned and Sensitive variables too,
+            // so the diagnosis must look at exactly what the runtime sees.
+            const entries = envs.filter(
               (env) =>
                 env.key === key &&
                 Array.isArray(env.target) &&
                 env.target.includes('production') &&
-                !env.gitBranch &&
-                !env.configurationId,
+                !env.gitBranch,
             );
+            for (const entry of entries) {
+              console.log(
+                `${key}: id=${entry.id} type=${entry.type} integration=${Boolean(entry.configurationId)} createdAt=${entry.createdAt}`,
+              );
+            }
+            const entry = entries[0];
             if (!entry) return null;
             const detail = await fetch(`${base}/${entry.id}?${query}&decrypt=true`, {
               headers: { Authorization: `Bearer ${token}` },
             });
-            if (!detail.ok) throw new Error(`env read ${key} failed: ${detail.status}`);
+            if (!detail.ok) {
+              console.log(`${key}: decrypt failed with ${detail.status}`);
+              return null;
+            }
             return (await detail.json()).value ?? null;
           }
 
