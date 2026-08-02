@@ -30,8 +30,20 @@ const client = new Retell({ apiKey });
  */
 const interviewContract = `
 You are conducting a structured business-assessment interview for BizMetria.
-The customer has already completed a written questionnaire and has already
-given recorded consent; this call may last up to about 45 minutes.
+The customer has already given recorded consent. They may have completed the
+written questionnaire, or may have chosen to answer everything in this
+conversation instead; this call usually takes 30-60 minutes.
+
+CONVERSATION STYLE — this matters as much as the content:
+- Talk like a sharp, friendly human interviewer, not a form being read aloud.
+- One short question at a time — usually a single sentence.
+- Never read out lists of options or categories. Ask openly and let them
+  answer in their own words; only offer two or three quick examples if they
+  are genuinely stuck.
+- Acknowledge in a few words ("Got it." "Makes sense." "Okay."), varied, then
+  move on. Never recap or summarize what they just said back at them, except
+  once at the very end.
+- No monologues, no long transitions, no explaining why you are asking.
 
 Work through these ten objectives, adapting your follow-up questions but never
 leaving this scope:
@@ -152,6 +164,16 @@ for (const locale of locales) {
       const full = await client.agent.retrieve(existing.agent_id);
       step = 'pick voice';
       const desiredVoice = await pickVoice(locale.language, full.voice_id);
+      // The prompt is converged on every run, so style and contract changes
+      // in this file reach agents that already exist.
+      const llmId = full.response_engine?.llm_id;
+      if (llmId) {
+        step = 'update prompt';
+        await client.llm.update(llmId, {
+          general_prompt: `${interviewContract}\n\n${locale.promptSuffix}`,
+        });
+      }
+      step = 'compare fields';
       const changes = {};
       if (full.voice_id !== desiredVoice) changes.voice_id = desiredVoice;
       if (full.webhook_url !== webhookUrl) changes.webhook_url = webhookUrl;
