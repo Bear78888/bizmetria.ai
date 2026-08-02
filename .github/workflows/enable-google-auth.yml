@@ -1,0 +1,115 @@
+# Sets NEXT_PUBLIC_AUTH_GOOGLE on Vercel Production. The auth page and the
+# try-free dialog render the Continue-with-Google button only when this is
+# "enabled" — flip it after the Google provider is configured in Supabase.
+# Build-time variable: run deploy-production.yml afterwards.
+#
+# Reverting is the same workflow with mode=disabled.
+
+name: Enable Google auth button
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Google button state for Production
+        required: true
+        default: enabled
+        type: choice
+        options:
+          - enabled
+          - disabled
+      confirm:
+        description: Type ENABLE GOOGLE AUTH to proceed
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  configure:
+    if: github.repository == 'Bear78888/bizmetria.ai'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: development
+    env:
+      VERCEL_TEAM_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
+      VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      TARGET_MODE: ${{ inputs.mode }}
+      CONFIRMATION: ${{ inputs.confirm }}
+
+    steps:
+      - name: Require the confirmation phrase
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRMATION" != "ENABLE GOOGLE AUTH" ]; then
+            echo "Confirmation phrase did not match. Nothing was changed." >&2
+            exit 1
+          fi
+
+      - name: Set NEXT_PUBLIC_AUTH_GOOGLE on Production
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$VERCEL_TOKEN" || { echo "VERCEL_TOKEN is missing." >&2; exit 1; }
+          echo "::add-mask::$VERCEL_TOKEN"
+
+          node <<'NODE'
+          (async () => {
+            const token = process.env.VERCEL_TOKEN;
+            const teamId = process.env.VERCEL_TEAM_ID;
+            const projectId = process.env.VERCEL_PROJECT_ID;
+            const mode = process.env.TARGET_MODE;
+            const base = `https://api.vercel.com/v9/projects/${encodeURIComponent(projectId)}/env`;
+            const query = `teamId=${encodeURIComponent(teamId)}`;
+            const headers = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
+
+            const listResponse = await fetch(`${base}?${query}&decrypt=false`, { headers });
+            if (!listResponse.ok) {
+              throw new Error(`Listing environment variables failed: ${listResponse.status}`);
+            }
+            const { envs = [] } = await listResponse.json();
+            const existing = envs.find(
+              (env) =>
+                env.key === 'NEXT_PUBLIC_AUTH_GOOGLE' &&
+                Array.isArray(env.target) &&
+                env.target.includes('production') &&
+                !env.gitBranch &&
+                !env.configurationId,
+            );
+
+            if (existing) {
+              const patch = await fetch(`${base}/${encodeURIComponent(existing.id)}?${query}`, {
+                method: 'PATCH',
+                headers,
+                body: JSON.stringify({ value: mode }),
+              });
+              if (!patch.ok) {
+                throw new Error(`Updating the variable failed: ${patch.status} ${await patch.text()}`);
+              }
+              console.log(`Updated NEXT_PUBLIC_AUTH_GOOGLE to "${mode}".`);
+            } else {
+              const create = await fetch(`${base}?${query}`, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({
+                  key: 'NEXT_PUBLIC_AUTH_GOOGLE',
+                  value: mode,
+                  type: 'plain',
+                  target: ['production'],
+                }),
+              });
+              if (!create.ok) {
+                throw new Error(`Creating the variable failed: ${create.status} ${await create.text()}`);
+              }
+              console.log(`Created NEXT_PUBLIC_AUTH_GOOGLE="${mode}".`);
+            }
+          })().catch((error) => {
+            console.error(error.message);
+            process.exit(1);
+          });
+          NODE
+
+          echo "Done. Run deploy-production.yml so the button appears."
