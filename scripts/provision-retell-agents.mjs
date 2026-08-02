@@ -91,13 +91,14 @@ const LANGUAGE_MARKERS = {
 };
 
 /**
- * Voice metadata varies by provider ('es-419', 'Spanish', a voice named
- * 'Santiago'…), so matching is by marker across language, accent and name.
- * When nothing matches, the available languages are printed so the mismatch
- * is diagnosable from the run log, and the first voice overall is the
+ * Chooses a voice for the language. Metadata varies by provider ('es-419',
+ * 'Spanish', a voice named 'Santiago'…), so matching is by marker across
+ * language, accent and name. The current voice is kept whenever it already
+ * fits, so convergence never churns a working agent. When nothing matches,
+ * the available languages are printed and the first voice overall is the
  * fallback — a working agent with an imperfect accent beats no agent.
  */
-async function pickVoice(language) {
+async function pickVoice(language, currentVoiceId) {
   const voices = await client.voice.list();
   const markers = LANGUAGE_MARKERS[language.split('-')[0]] ?? [language.split('-')[0]];
   // Short codes only ever match the language/accent fields (so 'es' cannot
@@ -116,6 +117,10 @@ async function pickVoice(language) {
     );
   };
   const candidates = voices.filter(matches).sort((a, b) => a.voice_id.localeCompare(b.voice_id));
+  const current = currentVoiceId
+    ? candidates.find((voice) => voice.voice_id === currentVoiceId)
+    : undefined;
+  if (current) return current.voice_id;
   if (candidates.length === 0) {
     const seen = [...new Set(voices.map((voice) => voice.language ?? 'unknown'))].sort();
     console.log(`no voice matched ${language}; available languages: ${seen.join(', ')}`);
@@ -146,7 +151,7 @@ for (const locale of locales) {
     try {
       const full = await client.agent.retrieve(existing.agent_id);
       step = 'pick voice';
-      const desiredVoice = await pickVoice(locale.language);
+      const desiredVoice = await pickVoice(locale.language, full.voice_id);
       const changes = {};
       if (full.voice_id !== desiredVoice) changes.voice_id = desiredVoice;
       if (full.webhook_url !== webhookUrl) changes.webhook_url = webhookUrl;

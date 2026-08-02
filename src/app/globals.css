@@ -1270,3 +1270,114 @@ h2 {
   color: var(--text);
   font: inherit;
 }
+
+.chat-launcher {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 60;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface-elevated);
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgb(0 0 0 / 25%);
+}
+
+.chat-panel {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  width: min(380px, calc(100vw - 32px));
+  height: min(560px, calc(100vh - 64px));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface-elevated);
+  box-shadow: 0 18px 50px rgb(0 0 0 / 35%);
+  overflow: hidden;
+}
+
+.chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px;
+}
+
+.chat-header div {
+  display: grid;
+}
+
+.chat-header span {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.chat-header button {
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.chat-log {
+  flex: 1;
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  padding: 14px;
+  overflow-y: auto;
+}
+
+.chat-message {
+  max-width: 85%;
+  border-radius: 12px;
+  padding: 9px 12px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.chat-message-assistant {
+  justify-self: start;
+  border: 1px solid var(--border);
+}
+
+.chat-message-user {
+  justify-self: end;
+  background: var(--accent, #2563eb);
+  color: #fff;
+}
+
+.chat-status {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.chat-status-error {
+  color: var(--danger);
+}
+
+.chat-input {
+  display: flex;
+  gap: 8px;
+  border-top: 1px solid var(--border);
+  padding: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface, transparent);
+  padding: 10px 12px;
+  color: var(--text);
+  font: inherit;
+}
