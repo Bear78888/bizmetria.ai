@@ -140,7 +140,14 @@ export async function processFreeCheckCall(input: {
   const score = scoreAssessment(submission.data.answers);
   const stored = await storeAssessment(submission.data, score);
   const result = buildPublicResult(stored.assessmentId, submission.data.locale, score);
-  const delivery = await sendResultEmail(submission.data.contact.email, result);
+
+  let delivery = 'skipped';
+  try {
+    delivery = await sendResultEmail(submission.data.contact.email, result);
+  } catch (emailError) {
+    console.error('phone-intake result email failed', emailError);
+    delivery = 'failed';
+  }
 
   return { outcome: 'processed', assessmentId: stored.assessmentId, delivery };
 }

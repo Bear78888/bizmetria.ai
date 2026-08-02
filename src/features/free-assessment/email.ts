@@ -66,6 +66,11 @@ export async function sendResultEmail(
     body: JSON.stringify({ from, to: [recipient], subject, html }),
   });
 
-  if (!response.ok) throw new Error('Unable to deliver assessment result email.');
+  if (!response.ok) {
+    // Resend's error body is service JSON (name/message), never the
+    // recipient's content — safe and necessary for diagnosis.
+    const detail = (await response.text()).slice(0, 300);
+    throw new Error(`Result email refused: ${response.status} ${detail}`);
+  }
   return 'sent';
 }

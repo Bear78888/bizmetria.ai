@@ -71,6 +71,9 @@ export async function sendMiniReportEmail(
     body: JSON.stringify({ from, to: [recipient], subject, html }),
   });
 
-  if (!response.ok) throw new Error('Unable to deliver the mini-report email.');
+  if (!response.ok) {
+    const detail = (await response.text()).slice(0, 300);
+    throw new Error(`Mini-report email refused: ${response.status} ${detail}`);
+  }
   return 'sent';
 }
