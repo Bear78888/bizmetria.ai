@@ -100,24 +100,38 @@ if (agent) {
 
 // --- Phone number (reuse any number already routed to this agent) -----------
 
+// Numbers use weighted agent lists since Retell's 2026-03-31 migration; the
+// legacy single-agent field is read for old rows but never written.
+const inboundAgents = [{ agent_id: agent.agent_id, weight: 1 }];
+
+function routesTo(n, agentId) {
+  if (Array.isArray(n.inbound_agents)) {
+    return n.inbound_agents.some((entry) => entry.agent_id === agentId);
+  }
+  return n.inbound_agent_id === agentId;
+}
+
+function isSpare(n) {
+  const list = Array.isArray(n.inbound_agents) ? n.inbound_agents : [];
+  return list.length === 0 && !n.inbound_agent_id;
+}
+
 const numbers = await retell('GET', '/list-phone-numbers');
-let number = (Array.isArray(numbers) ? numbers : []).find(
-  (n) => n.inbound_agent_id === agent.agent_id,
-);
+let number = (Array.isArray(numbers) ? numbers : []).find((n) => routesTo(n, agent.agent_id));
 
 if (!number) {
-  // A number bought earlier but pointed elsewhere is re-pointed rather than
+  // A number bought earlier but pointed nowhere is re-pointed rather than
   // buying a second one; only a truly numberless account buys.
-  const spare = (Array.isArray(numbers) ? numbers : []).find((n) => !n.inbound_agent_id);
+  const spare = (Array.isArray(numbers) ? numbers : []).find((n) => isSpare(n));
   if (spare) {
     await retell('PATCH', `/update-phone-number/${encodeURIComponent(spare.phone_number)}`, {
-      inbound_agent_id: agent.agent_id,
+      inbound_agents: inboundAgents,
     });
     number = spare;
     console.log(`Re-pointed existing number ${spare.phone_number} to the free agent.`);
   } else {
     number = await retell('POST', '/create-phone-number', {
-      inbound_agent_id: agent.agent_id,
+      inbound_agents: inboundAgents,
       area_code: AREA_CODE,
     });
     console.log(`Bought ${number.phone_number} (area code ${AREA_CODE}).`);
