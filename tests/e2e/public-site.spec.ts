@@ -128,8 +128,12 @@ test('authentication surface offers sign-in and registration', async ({ page }) 
   await expect(page.getByRole('button', { name: 'Create account' })).toBeVisible();
 });
 
-test('the header keeps the sign-in entrance on phone-sized screens', async ({ page }) => {
+test('the header keeps registration and sign-in reachable on phone-sized screens', async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/en');
-  await expect(page.getByRole('navigation').getByRole('link', { name: 'Sign in' })).toBeVisible();
+  const nav = page.getByRole('navigation');
+  await expect(nav.getByRole('link', { name: 'Create account' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'Sign in' })).toBeVisible();
 });
