@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import CallOption from '@/components/CallOption';
 import FocusDiagram from '@/components/home/FocusDiagram';
 import HeroGauge from '@/components/home/HeroGauge';
+import { AssessmentClient } from '@/features/free-assessment/AssessmentClient';
 import ReportPreview from '@/components/home/ReportPreview';
 import { isLocale } from '@/i18n/config';
 import { getHomeContent } from '@/i18n/home';
@@ -22,16 +24,17 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return (
     <>
-      {/* §3.1 Hero: copy left, the working gauge right. */}
-      <section className="hero">
+      {/* §3.1 Hero (compacted): the check itself lives right below, so the
+          primary action scrolls to it and answering starts on this page. */}
+      <section className="hero hero-compact">
         <div className="hero-copy">
           <p className="mono-label">{content.hero.eyebrow}</p>
           <h1>{content.hero.title}</h1>
           <p className="hero-subhead">{content.hero.subhead}</p>
           <div className="actions">
-            <Link className="button button-primary" href={assessmentHref}>
+            <a className="button button-primary" href="#free-check">
               {content.hero.primaryCta}
-            </Link>
+            </a>
             <a className="button button-secondary" href="#report">
               {content.hero.secondaryCta}
             </a>
@@ -42,9 +45,16 @@ export default async function HomePage({ params }: HomePageProps) {
           bars={content.hero.gauge.bars}
           caption={content.hero.gauge.caption}
           cta={content.hero.gauge.cta}
-          ctaHref={assessmentHref}
+          ctaHref="#free-check"
           label={content.hero.gauge.label}
         />
+      </section>
+
+      {/* The free check itself, first thing after the hero: people answer
+          here, or call — both entrances side by side. */}
+      <section className="home-check" id="free-check">
+        <CallOption locale={locale} variant="banner" />
+        <AssessmentClient locale={locale} />
       </section>
 
       {/* §3.2 Honest proof strip: industry tags, no invented logos. */}
