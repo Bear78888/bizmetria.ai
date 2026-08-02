@@ -116,11 +116,20 @@ test('health endpoint reports adapters without environment names or values', asy
   }
 });
 
-test('authentication surface remains available', async ({ page }) => {
+test('authentication surface offers sign-in and registration', async ({ page }) => {
   await page.goto('/en/auth');
-  await expect(
-    page.getByRole('heading', { level: 1, name: 'Your BizMetria account' }),
-  ).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'Sign in to BizMetria' })).toBeVisible();
   await expect(page.getByRole('button', { name: 'Sign in' })).toBeVisible();
+
+  await page.getByRole('link', { name: 'Create a free account' }).click();
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'Create your free account' }),
+  ).toBeVisible();
   await expect(page.getByRole('button', { name: 'Create account' })).toBeVisible();
+});
+
+test('the header keeps the sign-in entrance on phone-sized screens', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/en');
+  await expect(page.getByRole('navigation').getByRole('link', { name: 'Sign in' })).toBeVisible();
 });

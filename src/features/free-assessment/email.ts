@@ -30,7 +30,7 @@ export async function sendResultEmail(
   if (!apiKey || !from || process.env.RESEND_DELIVERY_MODE !== 'send') return 'skipped';
 
   const spanish = result.locale === 'es';
-  const registerUrl = `${CANONICAL_SITE_URL}/${result.locale}/auth?intent=free-report`;
+  const registerUrl = `${CANONICAL_SITE_URL}/${result.locale}/auth?mode=register&intent=free-report`;
   const subject = spanish
     ? `Su puntuación de oportunidad de IA: ${result.score.total}/100`
     : `Your AI Opportunity Score: ${result.score.total}/100`;

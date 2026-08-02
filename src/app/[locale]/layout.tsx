@@ -35,10 +35,16 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           BizMetria<span>.ai</span>
         </Link>
         <nav aria-label={messages.navigation.ariaLabel}>
-          <Link href={`/${locale}`}>{messages.navigation.home}</Link>
-          <Link href={`/${locale}/assessment`}>{messages.navigation.assessment}</Link>
+          <Link className="nav-secondary" href={`/${locale}`}>
+            {messages.navigation.home}
+          </Link>
+          <Link className="nav-secondary" href={`/${locale}/assessment`}>
+            {messages.navigation.assessment}
+          </Link>
           <Link href={`/${locale}/account`}>{messages.navigation.account}</Link>
-          <Link href={`/${locale}/auth`}>{messages.navigation.signIn}</Link>
+          <Link className="nav-signin" href={`/${locale}/auth`}>
+            {messages.navigation.signIn}
+          </Link>
           <Link className="language-link" href={`/${alternateLocale}`}>
             {messages.navigation.language}
           </Link>

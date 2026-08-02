@@ -957,7 +957,7 @@ h2 {
 .auth-actions {
   display: grid;
   gap: 10px;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   margin-top: 4px;
 }
 
@@ -1009,7 +1009,10 @@ h2 {
     gap: 10px 16px;
   }
 
-  .site-header nav a:not(.language-link) {
+  /* Only the informational links collapse on small screens; the account
+     entrance stays reachable — hiding sign-in made registration invisible
+     to every phone visitor. */
+  .site-header nav a.nav-secondary {
     display: none;
   }
 
@@ -2134,4 +2137,61 @@ main p a:hover,
   max-width: 720px;
   color: var(--muted);
   font-size: 0.85rem;
+}
+
+/* Header sign-in entrance stays prominent on every viewport */
+
+.nav-signin {
+  border: 1px solid var(--metric);
+  border-radius: 999px;
+  padding: 8px 14px;
+  color: var(--metric);
+  font-weight: 650;
+}
+
+.nav-signin:hover {
+  background: var(--metric);
+  color: #ffffff;
+}
+
+/* Auth page: mode toggle and providers */
+
+.auth-mode-toggle {
+  margin-top: 16px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.auth-provider-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0 4px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.auth-provider-divider::before,
+.auth-provider-divider::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid var(--line);
+}
+
+.auth-google-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-elevated);
+  padding: 12px 14px;
+  font-weight: 650;
+  color: var(--text);
+}
+
+.auth-google-button:hover {
+  border-color: var(--metric);
 }
