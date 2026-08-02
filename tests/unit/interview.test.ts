@@ -198,7 +198,7 @@ describe('startInterview', () => {
     expect(outcome).toEqual({ started: false, reason: 'not_found' });
   });
 
-  it('refuses while the questionnaire is still in progress', async () => {
+  it('starts straight after purchase: the questionnaire is optional', async () => {
     const state = memoryState({ status: 'in_progress' });
     const outcome = await startInterview(memoryStore(state), fakeRetell([]), {
       assessmentId: ASSESSMENT_ID,
@@ -206,7 +206,19 @@ describe('startInterview', () => {
       consentGranted: true,
       agentIdByLocale: AGENTS,
     });
-    expect(outcome).toEqual({ started: false, reason: 'questionnaire_incomplete' });
+    expect(outcome.started).toBe(true);
+    expect(state.assessmentStatusLog).toContain('interview_ready');
+  });
+
+  it('refuses once the assessment has moved past the interview stage', async () => {
+    const state = memoryState({ status: 'under_review' });
+    const outcome = await startInterview(memoryStore(state), fakeRetell([]), {
+      assessmentId: ASSESSMENT_ID,
+      customerProfileId: PROFILE,
+      consentGranted: true,
+      agentIdByLocale: AGENTS,
+    });
+    expect(outcome).toEqual({ started: false, reason: 'not_startable' });
   });
 
   it('stops at the attempt ceiling', async () => {

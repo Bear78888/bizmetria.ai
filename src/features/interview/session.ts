@@ -1,7 +1,9 @@
 /**
- * Starting an interview (PS-004 §9).
+ * Starting an interview (PS-004 §9, amended 2026-08-02).
  *
- * A web call is created only after the questionnaire is complete, only for
+ * The customer chooses how to answer: the written questionnaire or the voice
+ * interview — the interview no longer requires a completed questionnaire, so
+ * a web call can start straight after purchase. It is still created only for
  * the assessment's owner, and only once affirmative consent has been captured
  * in the UI — capture stays off until the consent state is true (§9.1), which
  * is why consent is a required input here rather than something the agent
@@ -21,10 +23,15 @@ export interface InterviewRetell {
   }): Promise<{ readonly callId: string; readonly accessToken: string }>;
 }
 
-const STARTABLE_ASSESSMENT_STATUSES = new Set(['questionnaire_complete', 'interview_ready']);
+const STARTABLE_ASSESSMENT_STATUSES = new Set([
+  'not_started',
+  'in_progress',
+  'questionnaire_complete',
+  'interview_ready',
+]);
 
 export type StartRejection =
-  'not_found' | 'questionnaire_incomplete' | 'attempts_exhausted' | 'consent_missing';
+  'not_found' | 'not_startable' | 'attempts_exhausted' | 'consent_missing';
 
 export type StartOutcome =
   | {
@@ -54,7 +61,7 @@ export async function startInterview(
     return { started: false, reason: 'not_found' };
   }
   if (!STARTABLE_ASSESSMENT_STATUSES.has(assessment.status)) {
-    return { started: false, reason: 'questionnaire_incomplete' };
+    return { started: false, reason: 'not_startable' };
   }
 
   const priorAttempts = await store.countSessions(assessment.id);
@@ -91,7 +98,7 @@ export async function startInterview(
 
   await store.attachCall(session.id, call.callId);
 
-  if (assessment.status === 'questionnaire_complete') {
+  if (assessment.status !== 'interview_ready') {
     await store.updateAssessmentStatus(assessment.id, 'interview_ready');
   }
 
