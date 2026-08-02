@@ -3,6 +3,7 @@ import { notFound, redirect } from 'next/navigation';
 
 import { parseAnalysisContent } from '@/features/analysis/contract';
 import ReportView from '@/features/report-review/ReportView';
+import SolutionsGrid from '@/features/solutions/SolutionsGrid';
 import { isLocale } from '@/i18n/config';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 
@@ -74,6 +75,22 @@ export default async function CustomerReportPage({ params }: PageProps) {
         <p className="eyebrow">{spanish ? 'Su informe' : 'Your report'}</p>
         <h1>{spanish ? 'Evaluación Empresarial' : 'Business Assessment'}</h1>
         <ReportView content={content} locale={report.preferred_locale === 'es' ? 'es' : 'en'} />
+
+        <div className="report-solutions">
+          <p className="eyebrow">
+            {spanish ? 'Si prefiere que lo hagamos nosotros' : 'If you would rather we build it'}
+          </p>
+          <h2>
+            {spanish ? 'Implementaciones listas para encargar' : 'Ready-made implementations'}
+          </h2>
+          <p>
+            {spanish
+              ? 'Su informe funciona como una instrucción para hacerlo usted mismo. Encargar una solución solo ahorra tiempo — nunca es obligatorio.'
+              : 'Your report works as a do-it-yourself instruction. Ordering a solution only saves time — it is never required.'}
+          </p>
+          <SolutionsGrid locale={locale} paidAssessmentId={assessmentId} />
+        </div>
+
         <Link className="button button-secondary" href={`/${locale}/account`}>
           {spanish ? 'Volver a su cuenta' : 'Back to your account'}
         </Link>

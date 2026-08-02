@@ -3,6 +3,7 @@ import { notFound, redirect } from 'next/navigation';
 
 import { ScoreDial } from '@/components/account/ScoreDial';
 import { resultContent } from '@/features/free-assessment/content';
+import { findSolution } from '@/features/solutions/catalog';
 import { linkFreeWorkToProfile } from '@/features/free-assessment/link';
 import { sendMiniReportEmail } from '@/features/free-assessment/mini-report-email';
 import { CheckoutButton } from '@/features/free-assessment/ResultClient';
@@ -17,6 +18,17 @@ interface AccountPageProps {
 }
 
 export const dynamic = 'force-dynamic';
+
+const solutionStatusCopy: Record<string, { en: string; es: string }> = {
+  created: { en: 'Awaiting payment', es: 'Pendiente de pago' },
+  checkout_open: { en: 'Awaiting payment', es: 'Pendiente de pago' },
+  checkout_expired: { en: 'Checkout expired', es: 'Pago expirado' },
+  paid: { en: 'Paid — build starting', es: 'Pagado — la construcción comienza' },
+  in_build: { en: 'In build', es: 'En construcción' },
+  delivered: { en: 'Delivered', es: 'Entregado' },
+  cancelled: { en: 'Cancelled', es: 'Cancelado' },
+  refunded: { en: 'Refunded', es: 'Reembolsado' },
+};
 
 const statusCopy: Record<string, { en: string; es: string }> = {
   not_started: { en: 'Questionnaire not started', es: 'Cuestionario sin comenzar' },
@@ -160,7 +172,15 @@ export default async function AccountPage({ params }: AccountPageProps) {
     .is('deleted_at', null)
     .order('created_at', { ascending: false });
 
+  const { data: solutionOrders } = await supabase
+    .from('solution_orders')
+    .select('id, solution_code, status, created_at')
+    .is('deleted_at', null)
+    .not('status', 'in', '("created","checkout_open","checkout_expired","cancelled")')
+    .order('created_at', { ascending: false });
+
   const paidList = assessments ?? [];
+  const solutionList = solutionOrders ?? [];
   const hasPaid = paidList.length > 0;
   const hasReport = paidList.some((assessment) => assessment.status === 'completed');
   const isSpanish = locale === 'es';
@@ -304,6 +324,28 @@ export default async function AccountPage({ params }: AccountPageProps) {
             })}
           </div>
         )}
+
+        {solutionList.length > 0 ? (
+          <>
+            <h2>{isSpanish ? 'Sus implementaciones' : 'Your implementations'}</h2>
+            <div className="account-details">
+              {solutionList.map((order) => {
+                const solution = findSolution(order.solution_code);
+                const label = solutionStatusCopy[order.status];
+                return (
+                  <div key={order.id}>
+                    <dt>{order.created_at?.slice(0, 10)}</dt>
+                    <dd>
+                      {solution ? solution.title[locale] : order.solution_code}
+                      {' — '}
+                      {label ? (isSpanish ? label.es : label.en) : order.status}
+                    </dd>
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        ) : null}
 
         <form action={signOut}>
           <input name="locale" type="hidden" value={locale} />

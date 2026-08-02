@@ -32,6 +32,12 @@ export type EventAdmission = 'new' | 'retry' | 'duplicate';
 
 export type EventOutcome = 'processed' | 'ignored' | 'failed';
 
+export interface StoredSolutionOrder {
+  readonly id: string;
+  readonly status: string;
+  readonly amountTotalCents: number;
+}
+
 export interface CheckoutStore {
   /** Resolves the lead a free assessment belongs to, or null. */
   findLeadForFreeAssessment(freeAssessmentId: string): Promise<string | null>;
@@ -80,4 +86,16 @@ export interface CheckoutStore {
     readonly stripeCouponId: string | null;
     readonly discountCents: number;
   }): Promise<void>;
+
+  findSolutionOrderByCheckoutSession(sessionId: string): Promise<StoredSolutionOrder | null>;
+
+  /**
+   * The paid transition for a solution order. Must never regress a later
+   * delivery state — the implementation only moves rows still on the
+   * checkout side of the lifecycle.
+   */
+  markSolutionOrderPaid(
+    solutionOrderId: string,
+    paid: { paidAt: string; stripePaymentIntentId: string | null },
+  ): Promise<void>;
 }

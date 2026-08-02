@@ -7,6 +7,7 @@ import type {
   EventOutcome,
   NewOrder,
   StoredOrder,
+  StoredSolutionOrder,
 } from '@/features/checkout/store';
 import { WebhookProcessingError, processStripeEvent } from '@/features/checkout/webhook';
 
@@ -23,9 +24,11 @@ interface EventRow {
 function memoryStore() {
   const events = new Map<string, EventRow>();
   const orders = new Map<string, StoredOrder & { sessionId: string }>();
+  const solutionOrders = new Map<string, StoredSolutionOrder & { sessionId: string }>();
   const payments: { orderId: string; paymentIntentId: string; amountCents: number }[] = [];
   const redemptions: { orderId: string; codeId: string; discountCents: number }[] = [];
   const paidOrders = new Set<string>();
+  const paidSolutionOrders = new Map<string, string | null>();
 
   const store: CheckoutStore = {
     async findLeadForFreeAssessment() {
@@ -77,6 +80,15 @@ function memoryStore() {
         discountCents: redemption.discountCents,
       });
     },
+    async findSolutionOrderByCheckoutSession(sessionId) {
+      for (const order of solutionOrders.values()) {
+        if (order.sessionId === sessionId) return order;
+      }
+      return null;
+    },
+    async markSolutionOrderPaid(solutionOrderId, paid) {
+      paidSolutionOrders.set(solutionOrderId, paid.stripePaymentIntentId);
+    },
   };
 
   return {
@@ -85,8 +97,12 @@ function memoryStore() {
     payments,
     redemptions,
     paidOrders,
+    paidSolutionOrders,
     addOrder(order: StoredOrder & { sessionId: string }) {
       orders.set(order.id, order);
+    },
+    addSolutionOrder(order: StoredSolutionOrder & { sessionId: string }) {
+      solutionOrders.set(order.id, order);
     },
   };
 }
@@ -252,6 +268,107 @@ describe('stripe webhook processing', () => {
   it('keeps a thrown processing error typed', () => {
     const error = new WebhookProcessingError('x', 'y', true);
     expect(error.retryable).toBe(true);
+  });
+
+  it('marks a solution order paid when the session says solution_order', async () => {
+    const context = memoryStore();
+    context.addSolutionOrder({
+      id: 'sol-1',
+      sessionId: 'cs_sol_1',
+      status: 'checkout_open',
+      amountTotalCents: 39_000,
+    });
+
+    const result = await processStripeEvent(
+      completedSessionEvent({
+        sessionId: 'cs_sol_1',
+        amountTotal: 39_000,
+        metadata: {
+          bizmetria_idempotency_key: 'idem-sol-1',
+          bizmetria_kind: 'solution_order',
+          bizmetria_solution_code: 'intake_autoreply',
+        },
+      }),
+      '{}',
+      context.store,
+    );
+
+    expect(result).toEqual({ outcome: 'processed', orderId: 'sol-1' });
+    expect(context.paidSolutionOrders.get('sol-1')).toBe('pi_test_1');
+    expect(context.paidOrders.size).toBe(0);
+  });
+
+  it('never re-pays a solution order already in build or delivered', async () => {
+    const context = memoryStore();
+    context.addSolutionOrder({
+      id: 'sol-2',
+      sessionId: 'cs_sol_2',
+      status: 'in_build',
+      amountTotalCents: 39_000,
+    });
+
+    const result = await processStripeEvent(
+      completedSessionEvent({
+        eventId: 'evt_sol_2',
+        sessionId: 'cs_sol_2',
+        amountTotal: 39_000,
+        metadata: {
+          bizmetria_idempotency_key: 'idem-sol-2',
+          bizmetria_kind: 'solution_order',
+        },
+      }),
+      '{}',
+      context.store,
+    );
+
+    expect(result).toEqual({ outcome: 'processed', orderId: 'sol-2' });
+    expect(context.paidSolutionOrders.size).toBe(0);
+  });
+
+  it('fails non-retryably when the charged total disagrees with the solution order', async () => {
+    const context = memoryStore();
+    context.addSolutionOrder({
+      id: 'sol-3',
+      sessionId: 'cs_sol_3',
+      status: 'checkout_open',
+      amountTotalCents: 39_000,
+    });
+
+    await expect(
+      processStripeEvent(
+        completedSessionEvent({
+          eventId: 'evt_sol_3',
+          sessionId: 'cs_sol_3',
+          amountTotal: 1_000,
+          metadata: {
+            bizmetria_idempotency_key: 'idem-sol-3',
+            bizmetria_kind: 'solution_order',
+          },
+        }),
+        '{}',
+        context.store,
+      ),
+    ).rejects.toMatchObject({ code: 'amount_mismatch', retryable: false });
+    expect(context.paidSolutionOrders.size).toBe(0);
+  });
+
+  it('retries when the solution order row has not landed yet', async () => {
+    const context = memoryStore();
+
+    await expect(
+      processStripeEvent(
+        completedSessionEvent({
+          eventId: 'evt_sol_4',
+          sessionId: 'cs_sol_4',
+          metadata: {
+            bizmetria_idempotency_key: 'idem-sol-4',
+            bizmetria_kind: 'solution_order',
+          },
+        }),
+        '{}',
+        context.store,
+      ),
+    ).rejects.toMatchObject({ code: 'solution_order_not_found', retryable: true });
   });
 });
 
