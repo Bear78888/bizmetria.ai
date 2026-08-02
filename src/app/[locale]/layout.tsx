@@ -41,9 +41,9 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           <Link className="nav-secondary" href={`/${locale}/assessment`}>
             {messages.navigation.assessment}
           </Link>
-          <Link href={`/${locale}/account`}>{messages.navigation.account}</Link>
-          <Link className="nav-signin" href={`/${locale}/auth`}>
-            {messages.navigation.signIn}
+          <Link href={`/${locale}/auth`}>{messages.navigation.signIn}</Link>
+          <Link className="nav-signin" href={`/${locale}/auth?mode=register`}>
+            {messages.navigation.register}
           </Link>
           <Link className="language-link" href={`/${alternateLocale}`}>
             {messages.navigation.language}

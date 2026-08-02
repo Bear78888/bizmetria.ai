@@ -5,7 +5,7 @@ const messages = {
     navigation: {
       home: 'Home',
       assessment: 'Free AI Check',
-      account: 'Account',
+      register: 'Create account',
       signIn: 'Sign in',
       language: 'Español',
       ariaLabel: 'Primary navigation',
@@ -95,7 +95,7 @@ const messages = {
     navigation: {
       home: 'Inicio',
       assessment: 'Chequeo gratuito',
-      account: 'Cuenta',
+      register: 'Crear cuenta',
       signIn: 'Iniciar sesión',
       language: 'English',
       ariaLabel: 'Navegación principal',
