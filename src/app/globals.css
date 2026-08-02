@@ -1,15 +1,24 @@
 :root {
-  --background: #07111f;
-  --surface: #0e1b2d;
-  --surface-elevated: #14243a;
-  --text: #f7fbff;
-  --muted: #a9b8ca;
-  --primary: #51e1b8;
-  --primary-dark: #08271f;
-  --accent: #80a8ff;
-  --border: rgb(255 255 255 / 12%);
-  --danger: #ff9a9a;
-  color-scheme: dark;
+  /* Brand tokens (design brief §1): a precision instrument on paper. */
+  --ink: #101828;
+  --paper: #fbfbf9;
+  --metric: #1b5bff;
+  --metric-deep: #0a2e99;
+  --signal-green: #0e9f6e;
+  --line: #e4e4de;
+
+  /* Legacy names kept so every existing component restyles through tokens. */
+  --background: var(--paper);
+  --surface: #ffffff;
+  --surface-elevated: #ffffff;
+  --text: var(--ink);
+  --muted: #5b6472;
+  --primary: var(--metric);
+  --primary-dark: var(--metric-deep);
+  --accent: var(--metric);
+  --border: var(--line);
+  --danger: #b42318;
+  color-scheme: light;
 }
 
 * {
@@ -24,18 +33,9 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
-  background:
-    radial-gradient(circle at 80% -10%, rgb(80 120 255 / 20%), transparent 42rem),
-    radial-gradient(circle at -10% 20%, rgb(81 225 184 / 14%), transparent 32rem), var(--background);
+  background: var(--background);
   color: var(--text);
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    sans-serif;
+  font-family: var(--font-body, Inter), ui-sans-serif, system-ui, sans-serif;
   line-height: 1.5;
 }
 
@@ -56,8 +56,8 @@ a {
 }
 
 :focus-visible {
-  outline: 3px solid var(--accent);
-  outline-offset: 3px;
+  outline: 2px solid var(--metric);
+  outline-offset: 2px;
 }
 
 .site-shell {
@@ -188,13 +188,17 @@ h2 {
 }
 
 .button-primary {
-  background: var(--primary);
-  color: var(--primary-dark);
+  background: var(--metric);
+  color: #fff;
+}
+
+.button-primary:hover {
+  background: var(--metric-deep);
 }
 
 .button-secondary {
   border-color: var(--border);
-  background: rgb(255 255 255 / 4%);
+  background: rgb(16 24 40 / 3%);
   color: var(--text);
 }
 
@@ -209,7 +213,7 @@ h2 {
   border-radius: 30px;
   background: linear-gradient(145deg, rgb(128 168 255 / 22%), transparent 50%), var(--surface);
   padding: 34px;
-  box-shadow: 0 30px 80px rgb(0 0 0 / 28%);
+  box-shadow: 0 30px 80px rgb(16 24 40 / 8%);
 }
 
 .score-card::after {
@@ -249,10 +253,10 @@ h2 {
 }
 
 .score-card-topline > span {
-  border: 1px solid rgb(81 225 184 / 45%);
+  border: 1px solid rgb(27 91 255 / 45%);
   border-radius: 999px;
   padding: 5px 9px;
-  background: rgb(81 225 184 / 9%);
+  background: rgb(27 91 255 / 9%);
   font-size: 0.68rem;
   letter-spacing: 0.12em;
 }
@@ -393,7 +397,7 @@ h2 {
   border: 1px solid var(--border);
   border-radius: 30px;
   background:
-    radial-gradient(circle at 100% 0, rgb(81 225 184 / 13%), transparent 30rem), var(--surface);
+    radial-gradient(circle at 100% 0, rgb(27 91 255 / 13%), transparent 30rem), var(--surface);
   padding: clamp(30px, 7vw, 78px);
   grid-template-columns: 1.1fr 0.9fr;
 }
@@ -404,9 +408,9 @@ h2 {
 }
 
 .offer-section aside {
-  border: 1px solid rgb(81 225 184 / 25%);
+  border: 1px solid rgb(27 91 255 / 25%);
   border-radius: 22px;
-  background: rgb(7 17 31 / 66%);
+  background: rgb(255 255 255 / 85%);
   padding: 30px;
 }
 
@@ -505,7 +509,7 @@ h2 {
   overflow: hidden;
   margin-top: 10px;
   border-radius: 999px;
-  background: rgb(255 255 255 / 7%);
+  background: rgb(16 24 40 / 4%);
 }
 
 .progress-track span {
@@ -522,7 +526,7 @@ h2 {
   border-radius: 28px;
   background: linear-gradient(145deg, rgb(128 168 255 / 7%), transparent 45%), var(--surface);
   padding: clamp(24px, 5vw, 48px);
-  box-shadow: 0 30px 80px rgb(0 0 0 / 20%);
+  box-shadow: 0 30px 80px rgb(16 24 40 / 8%);
 }
 
 .question-fieldset {
@@ -561,7 +565,7 @@ h2 {
   gap: 13px;
   border: 1px solid var(--border);
   border-radius: 13px;
-  background: rgb(255 255 255 / 2.5%);
+  background: rgb(16 24 40 / 2.5%);
   padding: 13px 15px;
   cursor: pointer;
   color: var(--muted);
@@ -574,8 +578,8 @@ h2 {
 
 .answer-option:hover,
 .answer-option-selected {
-  border-color: rgb(81 225 184 / 48%);
-  background: rgb(81 225 184 / 8%);
+  border-color: rgb(27 91 255 / 48%);
+  background: rgb(27 91 255 / 8%);
   color: var(--text);
 }
 
@@ -714,12 +718,12 @@ h2 {
   width: 260px;
   height: 260px;
   place-content: center;
-  border: 2px solid rgb(81 225 184 / 45%);
+  border: 2px solid rgb(27 91 255 / 45%);
   border-radius: 50%;
-  background: radial-gradient(circle, rgb(81 225 184 / 14%), transparent 63%), var(--surface);
+  background: radial-gradient(circle, rgb(27 91 255 / 14%), transparent 63%), var(--surface);
   box-shadow:
-    0 0 0 14px rgb(81 225 184 / 3%),
-    0 30px 80px rgb(0 0 0 / 30%);
+    0 0 0 14px rgb(27 91 255 / 3%),
+    0 30px 80px rgb(16 24 40 / 8%);
   text-align: center;
 }
 
@@ -787,7 +791,7 @@ h2 {
   grid-template-columns: 1fr auto;
   border: 1px solid var(--border);
   border-radius: 14px;
-  background: rgb(255 255 255 / 2.5%);
+  background: rgb(16 24 40 / 2.5%);
   padding: 18px;
 }
 
@@ -814,9 +818,9 @@ h2 {
   justify-content: space-between;
   gap: 30px;
   margin-top: 34px;
-  border: 1px solid rgb(81 225 184 / 28%);
+  border: 1px solid rgb(27 91 255 / 28%);
   border-radius: 20px;
-  background: rgb(81 225 184 / 6%);
+  background: rgb(27 91 255 / 6%);
   padding: 28px;
 }
 
@@ -1283,7 +1287,7 @@ h2 {
   background: var(--surface-elevated);
   font-size: 1.5rem;
   cursor: pointer;
-  box-shadow: 0 10px 30px rgb(0 0 0 / 25%);
+  box-shadow: 0 10px 30px rgb(16 24 40 / 8%);
 }
 
 .chat-panel {
@@ -1298,7 +1302,7 @@ h2 {
   border: 1px solid var(--border);
   border-radius: 16px;
   background: var(--surface-elevated);
-  box-shadow: 0 18px 50px rgb(0 0 0 / 35%);
+  box-shadow: 0 18px 50px rgb(16 24 40 / 8%);
   overflow: hidden;
 }
 
@@ -1380,4 +1384,569 @@ h2 {
   padding: 10px 12px;
   color: var(--text);
   font: inherit;
+}
+
+/* ============================================================
+   Instrument redesign (design brief, 2026-08-02)
+   Typography voices, homepage sections, chat launcher restyle.
+   Appended last so these rules win the cascade.
+   ============================================================ */
+
+h1,
+h2,
+h3,
+legend {
+  font-family: var(--font-display, inherit);
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.04;
+}
+
+h2 {
+  font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+  letter-spacing: -0.02em;
+}
+
+.mono-label {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+main p a,
+.site-footer a,
+.faq-list a {
+  text-decoration: underline transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 140ms ease;
+}
+
+main p a:hover,
+.site-footer a:hover {
+  text-decoration-color: var(--metric);
+}
+
+.button {
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.home-section {
+  padding-block: 96px;
+}
+
+/* --- Hero + gauge (§2, §3.1) --- */
+
+.hero {
+  min-height: auto;
+  gap: 56px;
+  grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+  padding-block: 96px;
+}
+
+.hero-copy .mono-label {
+  margin-bottom: 18px;
+  color: var(--metric);
+}
+
+.hero-subhead {
+  max-width: 560px;
+  margin: 22px 0 0;
+  color: var(--muted);
+  font-size: 1.06rem;
+  line-height: 1.6;
+}
+
+.hero-trust {
+  margin-top: 26px;
+}
+
+.gauge-card {
+  display: grid;
+  gap: 18px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 26px;
+}
+
+.gauge-dial {
+  width: min(280px, 100%);
+  margin-inline: auto;
+}
+
+.gauge-score {
+  fill: var(--ink);
+  font-family: var(--font-mono, monospace);
+  font-size: 44px;
+  font-weight: 500;
+}
+
+.gauge-scale {
+  fill: var(--muted);
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+}
+
+.gauge-bars {
+  display: grid;
+  gap: 12px;
+}
+
+.gauge-bar-heading {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 0.88rem;
+}
+
+.gauge-bar-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.gauge-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--signal-green);
+  transition: width 900ms ease-out;
+}
+
+.gauge-caption {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* --- Proof strip (§3.2) --- */
+
+.proof-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+  border-block: 1px solid var(--line);
+  padding-block: 20px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.proof-strip ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.proof-strip li {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+
+/* --- Steps timeline (§3.3): the only numbered section --- */
+
+.steps-timeline {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 44px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps-timeline li {
+  position: relative;
+  padding-top: 26px;
+}
+
+.steps-timeline li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--line);
+  content: '';
+}
+
+.steps-timeline li::after {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--metric);
+  content: '';
+}
+
+.steps-timeline .mono-label {
+  color: var(--metric);
+}
+
+.steps-timeline h3 {
+  margin: 10px 0 8px;
+}
+
+.steps-timeline p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* --- Report preview (§3.4) --- */
+
+.report-section {
+  display: grid;
+  align-items: center;
+  gap: 56px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+}
+
+.report-intro p {
+  color: var(--muted);
+}
+
+.report-intro .button {
+  margin-top: 10px;
+}
+
+.report-note {
+  font-size: 0.82rem;
+}
+
+.report-stack {
+  display: grid;
+  position: relative;
+}
+
+.report-page {
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  box-shadow: 0 16px 40px rgb(16 24 40 / 8%);
+  padding: 24px;
+}
+
+.report-page h3 {
+  margin: 0;
+}
+
+.report-page-matrix {
+  transform: rotate(-1.6deg);
+}
+
+.report-page-roadmap {
+  z-index: 1;
+  max-width: 88%;
+  margin: -30px 0 0 auto;
+  transform: rotate(1.2deg);
+}
+
+.matrix-plot {
+  position: relative;
+  height: 210px;
+  border-bottom: 2px solid var(--line);
+  border-left: 2px solid var(--line);
+}
+
+.matrix-axis {
+  position: absolute;
+  font-size: 0.66rem;
+}
+
+.matrix-axis-y {
+  top: -4px;
+  left: 8px;
+}
+
+.matrix-axis-x {
+  right: 0;
+  bottom: -22px;
+}
+
+.matrix-point {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  transform: translate(-6px, -6px);
+  white-space: nowrap;
+}
+
+.matrix-point i {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--metric);
+}
+
+.matrix-point:first-of-type i {
+  background: var(--signal-green);
+}
+
+.report-callout {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.roadmap-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.roadmap-list li {
+  display: grid;
+  gap: 4px;
+  border-left: 3px solid var(--metric);
+  padding-left: 12px;
+}
+
+.roadmap-list p {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+/* --- Focus rows (§3.5): categories, not a sequence --- */
+
+.focus-rows {
+  display: grid;
+  gap: 56px;
+  margin-top: 44px;
+}
+
+.focus-row {
+  display: grid;
+  align-items: center;
+  gap: 40px;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+}
+
+.focus-row:nth-child(even) > svg {
+  order: 2;
+}
+
+.focus-diagram {
+  width: min(260px, 100%);
+  justify-self: center;
+}
+
+.diagram-mono {
+  fill: var(--muted);
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+}
+
+.focus-row h3 {
+  margin: 0 0 10px;
+}
+
+.focus-row p {
+  margin: 0 0 10px;
+  color: var(--muted);
+}
+
+.focus-sign {
+  font-style: italic;
+}
+
+/* --- Pricing anchor (§3.6) --- */
+
+.pricing-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 44px;
+}
+
+.pricing-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 24px;
+}
+
+.pricing-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.pricing-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.pricing-price {
+  color: var(--ink);
+  font-size: 1.6rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.pricing-card-highlighted {
+  border: 2px solid var(--metric);
+}
+
+.pricing-note {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* --- FAQ (§3.8) --- */
+
+.faq-list {
+  display: grid;
+  margin-top: 36px;
+  border-top: 1px solid var(--line);
+}
+
+.faq-list details {
+  border-bottom: 1px solid var(--line);
+  padding: 4px 0;
+}
+
+.faq-list summary {
+  padding: 16px 0;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.faq-list details p {
+  margin: 0 0 16px;
+  max-width: 640px;
+  color: var(--muted);
+}
+
+/* --- Bilingual band (§3.9) --- */
+
+.bilingual-band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  margin-block: 48px;
+  padding: 32px;
+}
+
+.bilingual-band h2 {
+  margin: 0 0 6px;
+  font-size: 1.4rem;
+}
+
+.bilingual-band p {
+  max-width: 560px;
+  margin: 0;
+  color: var(--muted);
+}
+
+/* --- Chat launcher (§4): custom SVG in metric --- */
+
+.chat-launcher {
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: var(--metric);
+  color: #fff;
+  box-shadow: 0 10px 30px rgb(16 24 40 / 18%);
+}
+
+.chat-launcher:hover {
+  background: var(--metric-deep);
+}
+
+.chat-launcher svg {
+  width: 26px;
+  height: 26px;
+}
+
+.chat-message-user {
+  background: var(--metric);
+}
+
+/* --- Responsive --- */
+
+@media (width <= 900px) {
+  .home-section {
+    padding-block: 56px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding-block: 56px;
+  }
+
+  .report-section,
+  .focus-row,
+  .focus-row:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .focus-row:nth-child(even) > svg {
+    order: 0;
+  }
+
+  .steps-timeline,
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .report-page-roadmap {
+    max-width: 100%;
+    margin-top: -18px;
+  }
+}
+
+.site-footer {
+  display: grid;
+  gap: 8px;
+  border-top: 1px solid var(--line);
+  margin-top: 48px;
+  padding-block: 32px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.site-footer p {
+  max-width: 640px;
+  margin: 0;
+}
+
+.footer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
 }

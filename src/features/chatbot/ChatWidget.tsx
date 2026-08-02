@@ -113,7 +113,22 @@ export default function ChatWidget({ locale }: ChatWidgetProps) {
         onClick={() => setIsOpen(true)}
         type="button"
       >
-        💬
+        {/* Speech bubble with a gauge needle: measurement, not magic. */}
+        <svg aria-hidden="true" fill="none" viewBox="0 0 24 24">
+          <path
+            d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H9l-4 3.5V6.5Z"
+            stroke="currentColor"
+            strokeLinejoin="round"
+            strokeWidth="1.8"
+          />
+          <path
+            d="M8 13a4 4 0 0 1 8 0"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeWidth="1.6"
+          />
+          <path d="m12 13 2.4-2.2" stroke="currentColor" strokeLinecap="round" strokeWidth="1.6" />
+        </svg>
       </button>
     );
   }

@@ -5,19 +5,21 @@ test('English and Spanish homepages expose the free assessment', async ({ page }
   await expect(
     page.getByRole('heading', {
       level: 1,
-      name: 'Know where AI can make a measurable difference.',
+      name: 'Measure where AI would actually pay off in your business.',
     }),
   ).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Take the free AI check' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Get my free score' }).first()).toBeVisible();
 
   await page.goto('/es');
   await expect(
     page.getByRole('heading', {
       level: 1,
-      name: 'Descubra dónde la IA puede marcar una diferencia medible.',
+      name: 'Mida dónde la IA realmente rendiría en su negocio.',
     }),
   ).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Hacer el chequeo gratuito' })).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Obtener mi puntuación gratis' }).first(),
+  ).toBeVisible();
 });
 
 test('11-question assessment calculates a deterministic result in preview mode', async ({
