@@ -42,7 +42,16 @@ export async function POST(request: Request) {
     const score = scoreAssessment(submission.data.answers);
     const stored = await storeAssessment(submission.data, score);
     const result = buildPublicResult(stored.assessmentId, submission.data.locale, score);
-    const delivery = await sendResultEmail(submission.data.contact.email, result);
+
+    // The email is secondary: the score is computed and stored, so a mail
+    // provider refusal must never turn a successful submission into an error.
+    let delivery = 'skipped';
+    try {
+      delivery = await sendResultEmail(submission.data.contact.email, result);
+    } catch (emailError) {
+      console.error('result email failed', emailError);
+      delivery = 'failed';
+    }
 
     return NextResponse.json({ result, delivery, storageMode: stored.storageMode });
   } catch (error) {
