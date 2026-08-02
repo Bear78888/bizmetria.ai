@@ -128,12 +128,27 @@ test('authentication surface offers sign-in and registration', async ({ page }) 
   await expect(page.getByRole('button', { name: 'Create account' })).toBeVisible();
 });
 
-test('the header keeps registration and sign-in reachable on phone-sized screens', async ({
-  page,
-}) => {
+test('the header keeps try-free and sign-in reachable on phone-sized screens', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/en');
   const nav = page.getByRole('navigation');
-  await expect(nav.getByRole('link', { name: 'Create account' })).toBeVisible();
+  await expect(nav.getByRole('button', { name: 'Try free' })).toBeVisible();
   await expect(nav.getByRole('link', { name: 'Sign in' })).toBeVisible();
+});
+
+test('the try-free button opens the registration dialog with a sign-in switch', async ({
+  page,
+}) => {
+  await page.goto('/en');
+  await page.getByRole('button', { name: 'Try free' }).click();
+
+  const dialog = page.getByRole('dialog');
+  await expect(dialog.getByRole('heading', { name: 'Try BizMetria for free' })).toBeVisible();
+  await expect(dialog.getByRole('button', { name: 'Create free account' })).toBeVisible();
+
+  await dialog.getByRole('button', { name: 'Sign in', exact: true }).click();
+  await expect(dialog.getByRole('heading', { name: 'Sign in to BizMetria' })).toBeVisible();
+
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
 });

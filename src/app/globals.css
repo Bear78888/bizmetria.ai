@@ -2145,8 +2145,10 @@ main p a:hover,
   border: 1px solid var(--metric);
   border-radius: 999px;
   padding: 8px 14px;
+  background: none;
   color: var(--metric);
   font-weight: 650;
+  cursor: pointer;
 }
 
 .nav-signin:hover {
@@ -2194,4 +2196,65 @@ main p a:hover,
 
 .auth-google-button:hover {
   border-color: var(--metric);
+}
+
+/* Try-free auth dialog */
+
+.auth-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(16 24 40 / 45%);
+  padding: 18px;
+}
+
+.auth-modal {
+  position: relative;
+  width: min(100%, 420px);
+  max-height: calc(100vh - 36px);
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--surface);
+  padding: 28px;
+  box-shadow: 0 30px 80px rgb(16 24 40 / 25%);
+}
+
+.auth-modal h2 {
+  margin: 0 0 8px;
+  font-size: 1.45rem;
+}
+
+.auth-modal > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.auth-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.auth-modal-close:hover {
+  color: var(--text);
+}
+
+.auth-mode-toggle button {
+  border: 0;
+  background: none;
+  color: var(--metric);
+  font-weight: 650;
+  cursor: pointer;
+  padding: 0;
 }

@@ -6,8 +6,9 @@ const messages = {
       home: 'Home',
       assessment: 'Free AI Check',
       register: 'Create account',
+      tryFree: 'Try free',
       signIn: 'Sign in',
-      language: 'Español',
+      language: 'ES',
       ariaLabel: 'Primary navigation',
     },
     hero: {
@@ -96,8 +97,9 @@ const messages = {
       home: 'Inicio',
       assessment: 'Chequeo gratuito',
       register: 'Crear cuenta',
+      tryFree: 'Probar gratis',
       signIn: 'Iniciar sesión',
-      language: 'English',
+      language: 'EN',
       ariaLabel: 'Navegación principal',
     },
     hero: {

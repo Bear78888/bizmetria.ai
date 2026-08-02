@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 
+import AuthModal from '@/components/auth/AuthModal';
 import ChatWidget from '@/features/chatbot/ChatWidget';
 import { isLocale, locales } from '@/i18n/config';
 import { getHomeContent } from '@/i18n/home';
@@ -42,9 +43,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
             {messages.navigation.assessment}
           </Link>
           <Link href={`/${locale}/auth`}>{messages.navigation.signIn}</Link>
-          <Link className="nav-signin" href={`/${locale}/auth?mode=register`}>
-            {messages.navigation.register}
-          </Link>
+          <AuthModal locale={locale} triggerLabel={messages.navigation.tryFree} />
           <Link className="language-link" href={`/${alternateLocale}`}>
             {messages.navigation.language}
           </Link>
