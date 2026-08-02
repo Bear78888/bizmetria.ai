@@ -138,20 +138,33 @@ for (const locale of locales) {
   if (existing) {
     // Converge voice and webhook: the first provisioning run could fall back
     // to an English voice, and agents created before domain activation still
-    // point their webhook at the Vercel host.
-    const full = await client.agent.retrieve(existing.agent_id);
-    const desiredVoice = await pickVoice(locale.language);
-    const changes = {};
-    if (full.voice_id !== desiredVoice) changes.voice_id = desiredVoice;
-    if (full.webhook_url !== webhookUrl) changes.webhook_url = webhookUrl;
-    if (Object.keys(changes).length > 0) {
-      await client.agent.update(existing.agent_id, changes);
+    // point their webhook at the Vercel host. Convergence is best-effort per
+    // step — the agents already work, so a provider hiccup here must not
+    // fail the run; each step names itself so a repeated failure is
+    // attributable from the log.
+    let step = 'retrieve agent';
+    try {
+      const full = await client.agent.retrieve(existing.agent_id);
+      step = 'pick voice';
+      const desiredVoice = await pickVoice(locale.language);
+      const changes = {};
+      if (full.voice_id !== desiredVoice) changes.voice_id = desiredVoice;
+      if (full.webhook_url !== webhookUrl) changes.webhook_url = webhookUrl;
+      if (Object.keys(changes).length > 0) {
+        step = `update ${Object.keys(changes).join('+')}`;
+        await client.agent.update(existing.agent_id, changes);
+        console.log(
+          `${locale.agentName}: exists, agent_id=${existing.agent_id}, updated ${Object.keys(changes).join('+')} (voice=${changes.voice_id ?? full.voice_id})`,
+        );
+      } else {
+        console.log(
+          `${locale.agentName}: exists, agent_id=${existing.agent_id}, voice=${full.voice_id}`,
+        );
+      }
+    } catch (error) {
+      const status = error?.status ?? 'unknown';
       console.log(
-        `${locale.agentName}: exists, agent_id=${existing.agent_id}, updated ${Object.keys(changes).join('+')} (voice=${changes.voice_id ?? full.voice_id})`,
-      );
-    } else {
-      console.log(
-        `${locale.agentName}: exists, agent_id=${existing.agent_id}, voice=${full.voice_id}`,
+        `${locale.agentName}: exists, agent_id=${existing.agent_id}, convergence skipped — ${step} failed with ${status}`,
       );
     }
     continue;
