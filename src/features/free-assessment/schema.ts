@@ -101,7 +101,7 @@ export const answerIds = {
   ],
 } as const;
 
-const answersSchema = z
+export const answersSchema = z
   .strictObject({
     Q01: z.enum(answerIds.businessType),
     businessTypeOther: z.string().trim().max(80).optional(),
