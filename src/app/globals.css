@@ -1211,3 +1211,62 @@ h2 {
   color: var(--muted);
   font-size: 0.9rem;
 }
+
+.report-view {
+  display: grid;
+  gap: 22px;
+}
+
+.report-view section {
+  display: grid;
+  gap: 12px;
+}
+
+.report-item {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.report-item h3 {
+  margin: 0 0 6px;
+}
+
+.report-meta {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.review-table th,
+.review-table td {
+  border-bottom: 1px solid var(--border);
+  padding: 10px 8px;
+  text-align: left;
+}
+
+.review-actions {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.review-changes-form {
+  display: grid;
+  gap: 10px;
+}
+
+.review-changes-form textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface-elevated);
+  padding: 10px 12px;
+  color: var(--text);
+  font: inherit;
+}
