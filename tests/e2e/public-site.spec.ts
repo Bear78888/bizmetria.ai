@@ -66,7 +66,10 @@ test('11-question assessment calculates a deterministic result in preview mode',
   await expect(page.getByLabel('100 out of 100')).toBeVisible();
   await expect(page.getByText('Included in the full Business Assessment')).toBeVisible();
   await expect(page.getByRole('link', { name: 'Get the full assessment — $299' })).toBeVisible();
-  await expect(page.locator('.opportunity-card')).toHaveCount(3);
+  // Soft gate: a signed-out visitor sees the score but the area breakdown is
+  // masked behind the create-account invitation.
+  await expect(page.locator('.opportunity-card-locked')).toHaveCount(3);
+  await expect(page.getByRole('link', { name: 'Create my free account' })).toBeVisible();
 });
 
 test('health endpoint reports adapters without environment names or values', async ({
@@ -113,10 +116,11 @@ test('health endpoint reports adapters without environment names or values', asy
   }
 });
 
-test('sandbox authentication surface remains available', async ({ page }) => {
+test('authentication surface remains available', async ({ page }) => {
   await page.goto('/en/auth');
   await expect(
-    page.getByRole('heading', { level: 1, name: 'Access your assessment' }),
+    page.getByRole('heading', { level: 1, name: 'Your BizMetria account' }),
   ).toBeVisible();
   await expect(page.getByRole('button', { name: 'Sign in' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Create account' })).toBeVisible();
 });

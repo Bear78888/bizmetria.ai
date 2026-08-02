@@ -462,6 +462,11 @@ export const resultContent = {
     restart: 'Take the check again',
     unavailableTitle: 'Your result is no longer available in this browser.',
     unavailableText: 'Retake the free check to create a new result.',
+    gateTitle: 'Your area breakdown is ready',
+    gateText:
+      'Create a free account to unlock your opportunity areas, keep your score in your account, and get your mini-report by email.',
+    gateAction: 'Create my free account',
+    gateSignedInHint: 'Signed in — your breakdown is unlocked and saved to your account.',
   },
   es: {
     eyebrow: 'Su resultado gratuito',
@@ -493,6 +498,11 @@ export const resultContent = {
     restart: 'Repetir el chequeo',
     unavailableTitle: 'Su resultado ya no está disponible en este navegador.',
     unavailableText: 'Repita el chequeo gratuito para crear un resultado nuevo.',
+    gateTitle: 'Su desglose por áreas está listo',
+    gateText:
+      'Cree una cuenta gratuita para desbloquear sus áreas de oportunidad, guardar su puntuación en su cuenta y recibir su mini-informe por correo.',
+    gateAction: 'Crear mi cuenta gratuita',
+    gateSignedInHint: 'Sesión iniciada — su desglose está desbloqueado y guardado en su cuenta.',
   },
 } as const;
 
