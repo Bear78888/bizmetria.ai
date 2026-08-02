@@ -16,6 +16,11 @@ on:
         description: 'Type "PROVISION FREE PHONE AGENT" to proceed'
         required: true
         type: string
+      area_code:
+        description: US area code for the inbound number
+        required: true
+        default: '415'
+        type: string
 
 permissions:
   contents: read
@@ -31,6 +36,7 @@ jobs:
       VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       CONFIRMATION: ${{ inputs.confirm }}
+      FREE_CHECK_AREA_CODE: ${{ inputs.area_code }}
 
     steps:
       - name: Require the confirmation phrase

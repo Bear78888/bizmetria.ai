@@ -15,7 +15,7 @@ const API = 'https://api.retellai.com';
 const AGENT_NAME = 'BizMetria Free Check Phone Agent';
 const WEBHOOK_URL = 'https://bizmetria.com/api/webhooks/retell';
 const VOICE_ID = '11labs-Adrian';
-const AREA_CODE = Number(process.env.FREE_CHECK_AREA_CODE ?? '305');
+const AREA_CODE = Number(process.env.FREE_CHECK_AREA_CODE ?? '415');
 
 const PROMPT = `You are the BizMetria free AI Opportunity Check agent. Callers dialled this number to take a free, 11-question check by voice instead of the web form. Be warm, efficient, and plain-spoken; one question at a time; short acknowledgements. The whole call should take about 5–10 minutes.
 
