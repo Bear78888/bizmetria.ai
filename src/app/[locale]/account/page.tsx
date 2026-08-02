@@ -1,6 +1,12 @@
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 
+import { ScoreDial } from '@/components/account/ScoreDial';
+import { resultContent } from '@/features/free-assessment/content';
+import { linkFreeWorkToProfile } from '@/features/free-assessment/link';
+import { sendMiniReportEmail } from '@/features/free-assessment/mini-report-email';
+import { CheckoutButton } from '@/features/free-assessment/ResultClient';
+import type { ScoreBlockId } from '@/features/free-assessment/score';
 import { isLocale } from '@/i18n/config';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
 
@@ -52,6 +58,53 @@ function nextStep(locale: string, assessment: { id: string; status: string }) {
   }
 }
 
+interface FreeScoreView {
+  readonly assessmentId: string;
+  readonly locale: 'en' | 'es';
+  readonly total: number;
+  readonly areaLabels: readonly string[];
+}
+
+interface OpportunityScoreRow {
+  readonly total_score: number;
+  readonly opportunity_areas: readonly { readonly id: string }[] | null;
+}
+
+// PostgREST returns the unique one-to-one relation as an object, but typing
+// without generated schema types leaves both shapes possible.
+function scoreRowOf(relation: unknown): OpportunityScoreRow | null {
+  if (Array.isArray(relation)) return (relation[0] as OpportunityScoreRow | undefined) ?? null;
+  if (relation && typeof relation === 'object') return relation as OpportunityScoreRow;
+  return null;
+}
+
+async function loadFreeScore(
+  supabase: Awaited<ReturnType<typeof createSupabaseServerClient>>,
+): Promise<FreeScoreView | null> {
+  const { data } = await supabase
+    .from('free_assessments')
+    .select('id, preferred_locale, opportunity_scores(total_score, opportunity_areas)')
+    .eq('status', 'scored')
+    .order('scored_at', { ascending: false })
+    .limit(1);
+
+  const row = data?.[0];
+  if (!row) return null;
+  const score = scoreRowOf(row.opportunity_scores);
+  if (!score) return null;
+
+  const scoreLocale = row.preferred_locale === 'es' ? 'es' : 'en';
+  const labels = resultContent[scoreLocale].areaLabels;
+  return {
+    assessmentId: row.id,
+    locale: scoreLocale,
+    total: score.total_score,
+    areaLabels: (score.opportunity_areas ?? [])
+      .map((area) => labels[area.id as ScoreBlockId])
+      .filter((label): label is string => Boolean(label)),
+  };
+}
+
 export default async function AccountPage({ params }: AccountPageProps) {
   const { locale: localeParameter } = await params;
 
@@ -66,7 +119,37 @@ export default async function AccountPage({ params }: AccountPageProps) {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect(`/${locale}/auth`);
+    redirect(`/${locale}/auth?next=${encodeURIComponent(`/${locale}/account`)}`);
+  }
+
+  // The soft gate pay-off: attach any free results captured under this
+  // confirmed email to the account, so row-level security starts exposing
+  // them below. Best-effort — the cabinet still renders if linking fails.
+  let newlyLinked = 0;
+  if (user.email) {
+    try {
+      const outcome = await linkFreeWorkToProfile({ id: user.id, email: user.email });
+      newlyLinked = outcome.newlyLinked;
+    } catch (error) {
+      console.error('free-result linking failed', error);
+    }
+  }
+
+  const freeScore = await loadFreeScore(supabase);
+
+  // The mini-report email goes out once, when the result first becomes part
+  // of the account. Delivery problems never break the page.
+  if (newlyLinked > 0 && freeScore && user.email) {
+    try {
+      await sendMiniReportEmail(user.email, {
+        locale: freeScore.locale,
+        totalScore: freeScore.total,
+        areaLabels: freeScore.areaLabels,
+        limitation: resultContent[freeScore.locale].limitation,
+      });
+    } catch (error) {
+      console.error('mini-report email failed', error);
+    }
   }
 
   // The user-scoped client: row-level security limits this to the customer's
@@ -77,7 +160,51 @@ export default async function AccountPage({ params }: AccountPageProps) {
     .is('deleted_at', null)
     .order('created_at', { ascending: false });
 
+  const paidList = assessments ?? [];
+  const hasPaid = paidList.length > 0;
+  const hasReport = paidList.some((assessment) => assessment.status === 'completed');
   const isSpanish = locale === 'es';
+
+  const journey = [
+    {
+      key: 'free',
+      title: isSpanish ? 'Chequeo gratuito' : 'Free check',
+      state: freeScore ? 'done' : 'next',
+      detail: freeScore
+        ? isSpanish
+          ? `Puntuación ${freeScore.total}/100`
+          : `Score ${freeScore.total}/100`
+        : isSpanish
+          ? 'Responda 11 preguntas y obtenga su puntuación.'
+          : 'Answer 11 questions and get your score.',
+    },
+    {
+      key: 'paid',
+      title: isSpanish ? 'Evaluación Empresarial — $299' : 'Business Assessment — $299',
+      state: hasReport ? 'done' : hasPaid ? 'active' : 'next',
+      detail: hasPaid
+        ? isSpanish
+          ? 'En curso — continúe abajo.'
+          : 'In progress — continue below.'
+        : isSpanish
+          ? 'Análisis profundo con informe revisado por expertos.'
+          : 'Deep analysis with an expert-reviewed report.',
+    },
+    {
+      key: 'sprint',
+      title: isSpanish ? 'Plan de implementación' : 'Implementation plan',
+      state: hasReport ? 'done' : 'pending',
+      detail: isSpanish ? 'Incluido en su informe.' : 'Included with your report.',
+    },
+    {
+      key: 'solutions',
+      title: isSpanish ? 'Implementación' : 'Implementation',
+      state: 'pending',
+      detail: isSpanish
+        ? 'Después de su informe: encargue soluciones listas para usar.'
+        : 'After your report: order ready-made solutions.',
+    },
+  ] as const;
 
   return (
     <section className="account-shell">
@@ -91,8 +218,65 @@ export default async function AccountPage({ params }: AccountPageProps) {
           </div>
         </dl>
 
+        {freeScore ? (
+          <div className="cabinet-score">
+            <h2>{isSpanish ? 'Su puntuación de oportunidad' : 'Your opportunity score'}</h2>
+            <ScoreDial
+              score={freeScore.total}
+              label={isSpanish ? 'Puntuación de oportunidad de IA' : 'AI Opportunity Score'}
+              outOf={isSpanish ? 'de 100' : 'out of 100'}
+            />
+            {freeScore.areaLabels.length > 0 ? (
+              <>
+                <h3>{resultContent[locale].areasTitle}</h3>
+                <ul className="cabinet-areas">
+                  {freeScore.areaLabels.map((label) => (
+                    <li key={label}>{label}</li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
+            {!hasPaid ? (
+              <div className="cabinet-upsell">
+                <p>
+                  {isSpanish
+                    ? 'Convierta su puntuación en un plan práctico con la Evaluación Empresarial completa.'
+                    : 'Turn your score into a practical plan with the full Business Assessment.'}
+                </p>
+                <CheckoutButton
+                  locale={locale}
+                  assessmentId={freeScore.assessmentId}
+                  label={resultContent[locale].offerAction}
+                />
+              </div>
+            ) : null}
+          </div>
+        ) : (
+          <div className="cabinet-score">
+            <h2>{isSpanish ? 'Su puntuación de oportunidad' : 'Your opportunity score'}</h2>
+            <p>
+              {isSpanish
+                ? 'Aún no hay un chequeo gratuito vinculado a esta cuenta.'
+                : 'No free check is linked to this account yet.'}{' '}
+              <Link href={`/${locale}/assessment`}>
+                {isSpanish ? 'Hacer el chequeo gratuito' : 'Take the free check'}
+              </Link>
+            </p>
+          </div>
+        )}
+
+        <h2>{isSpanish ? 'Su recorrido' : 'Your journey'}</h2>
+        <ol className="journey-steps">
+          {journey.map((step) => (
+            <li className={`journey-step journey-step-${step.state}`} key={step.key}>
+              <strong>{step.title}</strong>
+              <span>{step.detail}</span>
+            </li>
+          ))}
+        </ol>
+
         <h2>{isSpanish ? 'Sus evaluaciones' : 'Your assessments'}</h2>
-        {(assessments ?? []).length === 0 ? (
+        {paidList.length === 0 ? (
           <p>
             {isSpanish
               ? 'Aún no hay evaluaciones en esta cuenta. Después de una compra, use el enlace de su confirmación de pago para vincularla.'
@@ -100,7 +284,7 @@ export default async function AccountPage({ params }: AccountPageProps) {
           </p>
         ) : (
           <div className="account-details">
-            {(assessments ?? []).map((assessment) => {
+            {paidList.map((assessment) => {
               const step = nextStep(locale, assessment);
               const label = statusCopy[assessment.status];
               return (

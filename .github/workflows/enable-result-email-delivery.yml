@@ -1,0 +1,217 @@
+name: Enable result email delivery
+
+# Sets RESEND_DELIVERY_MODE on Vercel Production, so the free-check score
+# email and the account mini-report email are actually sent through Resend
+# instead of being skipped (Phase 1 of the customer cabinet, DEC-033:
+# transactional email only).
+#
+# The redeploy is optional because Vercel's Hobby daily deployment limit can
+# be exhausted: with redeploy=false the variable is staged and the next
+# production deployment (deploy-production.yml) picks it up.
+#
+# Reverting is the same workflow with mode=skip.
+
+'on':
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Email delivery mode for Production
+        required: true
+        default: send
+        type: choice
+        options:
+          - send
+          - skip
+      redeploy:
+        description: Redeploy production immediately so the value takes effect
+        required: true
+        default: true
+        type: boolean
+      confirm:
+        description: Type ENABLE RESULT EMAILS to proceed
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: enable-result-email-delivery
+  cancel-in-progress: false
+
+jobs:
+  configure:
+    name: Set the Production email delivery mode
+    if: github.repository == 'Bear78888/bizmetria.ai'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: development
+    env:
+      VERCEL_TEAM_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
+      VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      TARGET_MODE: ${{ inputs.mode }}
+      DO_REDEPLOY: ${{ inputs.redeploy }}
+      CONFIRMATION: ${{ inputs.confirm }}
+
+    steps:
+      - name: Require the confirmation phrase
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "$CONFIRMATION" != "ENABLE RESULT EMAILS" ]; then
+            echo "Confirmation phrase did not match. Nothing was changed." >&2
+            exit 1
+          fi
+
+      - name: Set RESEND_DELIVERY_MODE on Production
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$VERCEL_TOKEN" || { echo "VERCEL_TOKEN is missing." >&2; exit 1; }
+          echo "::add-mask::$VERCEL_TOKEN"
+
+          node <<'NODE'
+          (async () => {
+            const token = process.env.VERCEL_TOKEN;
+            const teamId = process.env.VERCEL_TEAM_ID;
+            const projectId = process.env.VERCEL_PROJECT_ID;
+            const mode = process.env.TARGET_MODE;
+            const base = `https://api.vercel.com/v9/projects/${encodeURIComponent(projectId)}/env`;
+            const query = `teamId=${encodeURIComponent(teamId)}`;
+            const headers = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
+
+            const listResponse = await fetch(`${base}?${query}&decrypt=false`, { headers });
+            if (!listResponse.ok) {
+              throw new Error(`Listing environment variables failed: ${listResponse.status}`);
+            }
+            const { envs = [] } = await listResponse.json();
+
+            // Sending requires the Resend credentials to already exist on
+            // Production; enabling "send" without them would silently keep
+            // skipping, which this check turns into a loud failure instead.
+            if (mode === 'send') {
+              for (const required of ['RESEND_API_KEY', 'RESEND_FROM_EMAIL']) {
+                const present = envs.some(
+                  (env) =>
+                    env.key === required &&
+                    Array.isArray(env.target) &&
+                    env.target.includes('production'),
+                );
+                if (!present) {
+                  throw new Error(`${required} is not configured on Production; refusing to enable send mode.`);
+                }
+              }
+            }
+
+            // Only a plain, project-owned Production variable is touched. An
+            // integration-owned value (configurationId set) belongs to whoever
+            // installed it and must not be overwritten from here.
+            const existing = envs.find(
+              (env) =>
+                env.key === 'RESEND_DELIVERY_MODE' &&
+                Array.isArray(env.target) &&
+                env.target.includes('production') &&
+                !env.gitBranch &&
+                !env.configurationId,
+            );
+
+            if (existing) {
+              const patch = await fetch(`${base}/${encodeURIComponent(existing.id)}?${query}`, {
+                method: 'PATCH',
+                headers,
+                body: JSON.stringify({ value: mode }),
+              });
+              if (!patch.ok) {
+                throw new Error(`Updating the variable failed: ${patch.status} ${await patch.text()}`);
+              }
+              console.log(`Updated RESEND_DELIVERY_MODE to "${mode}" on Production.`);
+            } else {
+              const create = await fetch(`${base}?${query}`, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({
+                  key: 'RESEND_DELIVERY_MODE',
+                  value: mode,
+                  type: 'plain',
+                  target: ['production'],
+                }),
+              });
+              if (!create.ok) {
+                throw new Error(`Creating the variable failed: ${create.status} ${await create.text()}`);
+              }
+              console.log(`Created RESEND_DELIVERY_MODE="${mode}" on Production.`);
+            }
+          })().catch((error) => {
+            console.error(error.message);
+            process.exit(1);
+          });
+          NODE
+
+      - name: Redeploy production so the new value takes effect
+        if: ${{ inputs.redeploy }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "::add-mask::$VERCEL_TOKEN"
+
+          # A redeploy clones the SOURCE of the current deployment: it picks up
+          # current environment variables but not current code. Use
+          # deploy-production.yml to ship main.
+          node <<'NODE'
+          (async () => {
+            const token = process.env.VERCEL_TOKEN;
+            const teamId = process.env.VERCEL_TEAM_ID;
+            const projectId = process.env.VERCEL_PROJECT_ID;
+            const headers = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
+            const team = `teamId=${encodeURIComponent(teamId)}`;
+
+            const listUrl =
+              `https://api.vercel.com/v6/deployments?${team}` +
+              `&projectId=${encodeURIComponent(projectId)}&target=production&state=READY&limit=1`;
+            const listResponse = await fetch(listUrl, { headers });
+            if (!listResponse.ok) {
+              throw new Error(`Listing production deployments failed: ${listResponse.status}`);
+            }
+            const { deployments = [] } = await listResponse.json();
+            const current = deployments[0];
+            if (!current) throw new Error('No ready production deployment to redeploy.');
+            console.log(`Redeploying ${current.uid} (${current.url}).`);
+
+            const createResponse = await fetch(`https://api.vercel.com/v13/deployments?${team}`, {
+              method: 'POST',
+              headers,
+              body: JSON.stringify({
+                name: 'bizmetria-ai',
+                deploymentId: current.uid,
+                target: 'production',
+              }),
+            });
+            const created = await createResponse.json();
+            if (!createResponse.ok) {
+              throw new Error(
+                `Creating the redeployment failed: ${createResponse.status} ${created?.error?.message ?? ''}`,
+              );
+            }
+            console.log(`Created deployment ${created.id}.`);
+
+            for (let attempt = 0; attempt < 60; attempt += 1) {
+              await new Promise((resolve) => setTimeout(resolve, 10_000));
+              const stateResponse = await fetch(
+                `https://api.vercel.com/v13/deployments/${encodeURIComponent(created.id)}?${team}`,
+                { headers },
+              );
+              if (!stateResponse.ok) continue;
+              const deployment = await stateResponse.json();
+              console.log(`build state: ${deployment.readyState}`);
+              if (deployment.readyState === 'READY') return;
+              if (deployment.readyState === 'ERROR' || deployment.readyState === 'CANCELED') {
+                throw new Error(`Redeployment finished as ${deployment.readyState}.`);
+              }
+            }
+            throw new Error('Redeployment did not reach READY within the wait budget.');
+          })().catch((error) => {
+            console.error(error.message);
+            process.exit(1);
+          });
+          NODE

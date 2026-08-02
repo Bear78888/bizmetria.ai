@@ -11,24 +11,28 @@ interface AuthPageProps {
 
 const copy = {
   en: {
-    title: 'Access your assessment',
-    description: 'Use a sandbox account. Live customer access is not enabled.',
+    eyebrow: 'Account',
+    title: 'Your BizMetria account',
+    description:
+      'Sign in or create a free account to unlock your results and keep your reports in one place.',
     email: 'Email',
     password: 'Password',
     signIn: 'Sign in',
     signUp: 'Create account',
-    checkEmail: 'Check your email to confirm the sandbox account.',
+    checkEmail: 'Check your email to confirm your account.',
     error: 'Authentication could not be completed. Check the details and try again.',
   },
   es: {
-    title: 'Accede a tu evaluación',
-    description: 'Usa una cuenta sandbox. El acceso para clientes reales no está habilitado.',
+    eyebrow: 'Cuenta',
+    title: 'Su cuenta de BizMetria',
+    description:
+      'Inicie sesión o cree una cuenta gratuita para desbloquear sus resultados y guardar sus informes en un solo lugar.',
     email: 'Correo electrónico',
     password: 'Contraseña',
     signIn: 'Iniciar sesión',
     signUp: 'Crear cuenta',
-    checkEmail: 'Revisa tu correo para confirmar la cuenta sandbox.',
-    error: 'No se pudo completar la autenticación. Revisa los datos e inténtalo de nuevo.',
+    checkEmail: 'Revise su correo para confirmar su cuenta.',
+    error: 'No se pudo completar la autenticación. Revise los datos e inténtelo de nuevo.',
   },
 } as const;
 
@@ -46,7 +50,7 @@ export default async function AuthPage({ params, searchParams }: AuthPageProps) 
   return (
     <section className="auth-shell">
       <div className="auth-card">
-        <p className="eyebrow">Sandbox Auth</p>
+        <p className="eyebrow">{messages.eyebrow}</p>
         <h1>{messages.title}</h1>
         <p>{messages.description}</p>
         {query.message === 'check_email' ? (

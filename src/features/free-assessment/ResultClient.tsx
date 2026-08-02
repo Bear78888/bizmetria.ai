@@ -9,6 +9,8 @@ import type { AssessmentLocale } from './schema';
 
 interface ResultClientProps {
   readonly locale: AssessmentLocale;
+  /** Soft gate: signed-in visitors see the area breakdown directly. */
+  readonly authenticated: boolean;
 }
 
 function subscribeToSessionStorage() {
@@ -23,7 +25,7 @@ function readServerResult() {
   return undefined;
 }
 
-export function ResultClient({ locale }: ResultClientProps) {
+export function ResultClient({ locale, authenticated }: ResultClientProps) {
   const copy = resultContent[locale];
   const storedResult = useSyncExternalStore(
     subscribeToSessionStorage,
@@ -72,15 +74,38 @@ export function ResultClient({ locale }: ResultClientProps) {
       </section>
 
       <section className="result-section" aria-labelledby="opportunity-area-heading">
-        <h2 id="opportunity-area-heading">{copy.areasTitle}</h2>
-        <div className="opportunity-grid">
-          {result.opportunityAreas.map((area, index) => (
-            <div className="opportunity-card" key={area.id}>
-              <span>0{index + 1}</span>
-              <h3>{area.label}</h3>
+        <h2 id="opportunity-area-heading">{authenticated ? copy.areasTitle : copy.gateTitle}</h2>
+        {authenticated ? (
+          <>
+            <div className="opportunity-grid">
+              {result.opportunityAreas.map((area, index) => (
+                <div className="opportunity-card" key={area.id}>
+                  <span>0{index + 1}</span>
+                  <h3>{area.label}</h3>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+            <p className="gate-hint">{copy.gateSignedInHint}</p>
+          </>
+        ) : (
+          <div className="gate-panel">
+            <div className="opportunity-grid" aria-hidden="true">
+              {result.opportunityAreas.map((area, index) => (
+                <div className="opportunity-card opportunity-card-locked" key={area.id}>
+                  <span>0{index + 1}</span>
+                  <h3>••••••••</h3>
+                </div>
+              ))}
+            </div>
+            <p>{copy.gateText}</p>
+            <Link
+              className="button button-primary"
+              href={`/${locale}/auth?intent=free-report&next=${encodeURIComponent(`/${locale}/account`)}`}
+            >
+              {copy.gateAction}
+            </Link>
+          </div>
+        )}
       </section>
 
       <p className="result-limitation">{result.limitation}</p>
@@ -134,7 +159,7 @@ const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{
  * attach to; the button then links to the auth page as before instead of
  * offering a checkout that would be refused.
  */
-function CheckoutButton({ locale, assessmentId, label }: CheckoutButtonProps) {
+export function CheckoutButton({ locale, assessmentId, label }: CheckoutButtonProps) {
   const [state, setState] = useState<'idle' | 'starting' | 'failed'>('idle');
   const purchasable = UUID_PATTERN.test(assessmentId);
 
