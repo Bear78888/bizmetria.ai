@@ -120,6 +120,32 @@ export async function signUp(formData: FormData) {
   redirect(`/${locale}/auth?message=check_email`);
 }
 
+/**
+ * Google OAuth entrance. Dormant until the Google provider is configured in
+ * Supabase Auth and NEXT_PUBLIC_AUTH_GOOGLE=enabled is set — the auth page
+ * only renders the button then. The callback route already exchanges the
+ * OAuth code, so no other wiring changes when it switches on.
+ */
+export async function signInWithGoogle(formData: FormData) {
+  const locale = localeFromForm(formData);
+  const nextPath = nextPathFromForm(formData) ?? `/${locale}/account`;
+
+  const supabase = await createSupabaseServerClient();
+  const origin = await requestOrigin();
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${origin}/auth/callback?next=${encodeURIComponent(nextPath)}`,
+    },
+  });
+
+  if (error || !data.url) {
+    redirect(`/${locale}/auth?error=oauth_unavailable`);
+  }
+
+  redirect(data.url);
+}
+
 export async function signOut(formData: FormData) {
   const locale = localeFromForm(formData);
   const supabase = await createSupabaseServerClient();

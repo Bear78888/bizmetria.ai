@@ -100,7 +100,7 @@ export function ResultClient({ locale, authenticated }: ResultClientProps) {
             <p>{copy.gateText}</p>
             <Link
               className="button button-primary"
-              href={`/${locale}/auth?intent=free-report&next=${encodeURIComponent(`/${locale}/account`)}`}
+              href={`/${locale}/auth?mode=register&intent=free-report&next=${encodeURIComponent(`/${locale}/account`)}`}
             >
               {copy.gateAction}
             </Link>
