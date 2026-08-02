@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 
 import ChatWidget from '@/features/chatbot/ChatWidget';
 import { isLocale, locales } from '@/i18n/config';
+import { getHomeContent } from '@/i18n/home';
 import { getMessages } from '@/i18n/messages';
 
 interface LocaleLayoutProps {
@@ -24,6 +25,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   const locale = localeParameter;
   const messages = getMessages(locale);
+  const footer = getHomeContent(locale).footer;
   const alternateLocale = locale === 'en' ? 'es' : 'en';
 
   return (
@@ -43,7 +45,16 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
         </nav>
       </header>
       <main>{children}</main>
-      <footer className="site-footer">{messages.footer}</footer>
+      <footer className="site-footer">
+        <p>{footer.about}</p>
+        <p>{footer.contact}</p>
+        <div className="footer-meta">
+          <span className="mono-label">{footer.rights}</span>
+          <Link className="language-link" href={`/${alternateLocale}`}>
+            {footer.language}
+          </Link>
+        </div>
+      </footer>
       <ChatWidget locale={locale} />
     </div>
   );

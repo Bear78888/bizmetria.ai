@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import FocusDiagram from '@/components/home/FocusDiagram';
+import HeroGauge from '@/components/home/HeroGauge';
+import ReportPreview from '@/components/home/ReportPreview';
 import { isLocale } from '@/i18n/config';
-import { getMessages } from '@/i18n/messages';
+import { getHomeContent } from '@/i18n/home';
 
 interface HomePageProps {
   readonly params: Promise<{ locale: string }>;
@@ -13,110 +16,151 @@ export default async function HomePage({ params }: HomePageProps) {
   if (!isLocale(localeParameter)) notFound();
 
   const locale = localeParameter;
-  const messages = getMessages(locale);
+  const content = getHomeContent(locale);
   const assessmentHref = `/${locale}/assessment`;
+  const otherLocaleAssessmentHref = locale === 'en' ? '/es/assessment' : '/en/assessment';
 
   return (
     <>
+      {/* §3.1 Hero: copy left, the working gauge right. */}
       <section className="hero">
         <div className="hero-copy">
-          <p className="eyebrow">{messages.hero.eyebrow}</p>
-          <h1>{messages.hero.title}</h1>
-          <p className="hero-description">{messages.hero.description}</p>
+          <p className="mono-label">{content.hero.eyebrow}</p>
+          <h1>{content.hero.title}</h1>
+          <p className="hero-subhead">{content.hero.subhead}</p>
           <div className="actions">
             <Link className="button button-primary" href={assessmentHref}>
-              {messages.hero.primaryAction}
+              {content.hero.primaryCta}
             </Link>
-            <Link className="button button-secondary" href="#how-it-works">
-              {messages.hero.secondaryAction}
-            </Link>
+            <a className="button button-secondary" href="#report">
+              {content.hero.secondaryCta}
+            </a>
           </div>
-          <p className="hero-trust">
-            <span aria-hidden="true">●</span> {messages.hero.trust}
-          </p>
+          <p className="hero-trust mono-label">{content.hero.trust}</p>
         </div>
-        <div className="score-card" aria-label={messages.hero.scoreLabel}>
-          <div className="score-card-topline">
-            <p>{messages.hero.scoreLabel}</p>
-            <span>{messages.hero.freeLabel}</span>
-          </div>
-          <strong>{messages.hero.scoreRange}</strong>
-          <span>{messages.hero.scoreNote}</span>
-          <div className="score-bars" aria-hidden="true">
-            {[58, 76, 42, 88, 66].map((height, index) => (
-              <i key={index} style={{ height: `${height}%` }} />
-            ))}
-          </div>
-        </div>
+        <HeroGauge
+          bars={content.hero.gauge.bars}
+          caption={content.hero.gauge.caption}
+          cta={content.hero.gauge.cta}
+          ctaHref={assessmentHref}
+          label={content.hero.gauge.label}
+        />
       </section>
 
-      <section className="metric-strip" aria-label="Assessment facts">
-        {messages.metrics.map(([value, label]) => (
-          <div key={label}>
-            <strong>{value}</strong>
-            <span>{label}</span>
-          </div>
-        ))}
-      </section>
-
-      <section className="home-section" id="how-it-works">
-        <p className="eyebrow">{messages.process.eyebrow}</p>
-        <h2>{messages.process.title}</h2>
-        <div className="process-grid">
-          {messages.process.items.map((item) => (
-            <article key={item.number}>
-              <span>{item.number}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
+      {/* §3.2 Honest proof strip: industry tags, no invented logos. */}
+      <section className="proof-strip" aria-label={content.proof.lead}>
+        <span>{content.proof.lead}</span>
+        <ul>
+          {content.proof.chips.map((chip) => (
+            <li key={chip} className="mono-label">
+              {chip}
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
-      <section className="home-section benefits-section">
-        <div className="section-heading">
-          <p className="eyebrow">{messages.benefits.eyebrow}</p>
-          <h2>{messages.benefits.title}</h2>
+      {/* §3.3 The one and only numbered section: a connected timeline. */}
+      <section className="home-section" id="how-it-works">
+        <p className="mono-label">{content.steps.eyebrow}</p>
+        <h2>{content.steps.title}</h2>
+        <ol className="steps-timeline">
+          {content.steps.items.map((step) => (
+            <li key={step.number}>
+              <span className="mono-label">{step.number}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* §3.4 Report preview: what $299 actually buys. */}
+      <section className="home-section report-section" id="report">
+        <div className="report-intro">
+          <p className="mono-label">{content.report.eyebrow}</p>
+          <h2>{content.report.title}</h2>
+          <p>{content.report.text}</p>
+          <p className="report-note">{content.report.note}</p>
+          <Link className="button button-primary" href={assessmentHref}>
+            {content.report.cta}
+          </Link>
         </div>
-        <div className="benefit-list">
-          {messages.benefits.items.map(([title, text], index) => (
-            <article key={title}>
-              <span>0{index + 1}</span>
+        <ReportPreview content={content.report} />
+      </section>
+
+      {/* §3.5 Focus areas as alternating rows; categories, not a sequence. */}
+      <section className="home-section">
+        <p className="mono-label">{content.focus.eyebrow}</p>
+        <h2>{content.focus.title}</h2>
+        <div className="focus-rows">
+          {content.focus.rows.map((row) => (
+            <article key={row.title} className="focus-row">
+              <FocusDiagram kind={row.diagram} />
               <div>
-                <h3>{title}</h3>
-                <p>{text}</p>
+                <h3>{row.title}</h3>
+                <p>{row.text}</p>
+                <p className="focus-sign">{row.sign}</p>
               </div>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="offer-section">
-        <div>
-          <p className="eyebrow">{messages.offer.eyebrow}</p>
-          <h2>{messages.offer.title}</h2>
-          <p>{messages.offer.description}</p>
-          <Link className="button button-secondary" href={assessmentHref}>
-            {messages.offer.action}
-          </Link>
+      {/* §3.6 Pricing with anchors. */}
+      <section className="home-section">
+        <p className="mono-label">{content.pricing.eyebrow}</p>
+        <h2>{content.pricing.title}</h2>
+        <div className="pricing-grid">
+          {content.pricing.columns.map((column) => (
+            <article
+              key={column.name}
+              className={`pricing-card${column.highlighted ? ' pricing-card-highlighted' : ''}`}
+            >
+              <h3>{column.name}</h3>
+              <p className="pricing-price mono-label">{column.price}</p>
+              <p>{column.detail}</p>
+              {column.cta ? (
+                <Link className="button button-primary" href={assessmentHref}>
+                  {column.cta}
+                </Link>
+              ) : null}
+            </article>
+          ))}
         </div>
-        <aside>
-          <span>{messages.offer.product}</span>
-          <strong>{messages.offer.price}</strong>
-          <p>{messages.offer.note}</p>
-          <ul>
-            {messages.offer.items.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </aside>
+        <p className="pricing-note">{content.pricing.note}</p>
       </section>
 
+      {/* §3.8 FAQ as native accordions. */}
+      <section className="home-section faq-section">
+        <p className="mono-label">{content.faq.eyebrow}</p>
+        <h2>{content.faq.title}</h2>
+        <div className="faq-list">
+          {content.faq.items.map((item) => (
+            <details key={item.q}>
+              <summary>{item.q}</summary>
+              <p>{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      {/* §3.9 The bilingual band, in the other language on purpose. */}
+      <section className="bilingual-band">
+        <div>
+          <h2>{content.bilingual.title}</h2>
+          <p>{content.bilingual.text}</p>
+        </div>
+        <Link className="button button-secondary" href={otherLocaleAssessmentHref}>
+          {content.bilingual.cta}
+        </Link>
+      </section>
+
+      {/* §3.10 Final CTA. */}
       <section className="final-cta">
-        <h2>{messages.finalCta.title}</h2>
-        <p>{messages.finalCta.text}</p>
+        <h2>{content.finalCta.title}</h2>
+        <p>{content.finalCta.text}</p>
         <Link className="button button-primary" href={assessmentHref}>
-          {messages.finalCta.action}
+          {content.finalCta.cta}
         </Link>
       </section>
     </>
