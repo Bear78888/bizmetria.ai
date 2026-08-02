@@ -90,6 +90,39 @@ export async function processStripeEvent(
       return { outcome: 'ignored', reason: 'not_paid' };
     }
 
+    // Solution orders (catalog implementations) share the webhook but live in
+    // their own table with their own lifecycle; the session metadata this
+    // application wrote at creation says which flow the payment belongs to.
+    if (session.metadata.bizmetria_kind === 'solution_order') {
+      const solutionOrder = await store.findSolutionOrderByCheckoutSession(session.id);
+      if (!solutionOrder) {
+        // The order upsert and the webhook race; a retry lands after commit.
+        throw new WebhookProcessingError('solution_order_not_found', 'No solution order.', true);
+      }
+
+      if (session.amount_total !== solutionOrder.amountTotalCents) {
+        throw new WebhookProcessingError(
+          'amount_mismatch',
+          `Session total ${session.amount_total} does not equal solution order total ${solutionOrder.amountTotalCents}.`,
+          false,
+        );
+      }
+
+      if (['created', 'checkout_open', 'checkout_expired'].includes(solutionOrder.status)) {
+        const paymentIntentId =
+          typeof session.payment_intent === 'string'
+            ? session.payment_intent
+            : (session.payment_intent?.id ?? null);
+        await store.markSolutionOrderPaid(solutionOrder.id, {
+          paidAt: new Date(event.created * 1000).toISOString(),
+          stripePaymentIntentId: paymentIntentId,
+        });
+      }
+
+      await store.finishWebhookEvent(event.id, 'processed');
+      return { outcome: 'processed', orderId: solutionOrder.id };
+    }
+
     const order = await store.findOrderByCheckoutSession(session.id);
     if (!order) {
       // The order insert and the webhook race; a retry lands after commit.

@@ -159,6 +159,33 @@ export function createSupabaseCheckoutStore(): CheckoutStore {
       if (error) throw storeError('payment', error);
     },
 
+    async findSolutionOrderByCheckoutSession(sessionId) {
+      const { data, error } = await supabase
+        .from('solution_orders')
+        .select('id, status, amount_total')
+        .eq('stripe_checkout_session_id', sessionId)
+        .maybeSingle();
+      if (error) throw storeError('solution order lookup', error);
+      return data
+        ? { id: data.id, status: data.status, amountTotalCents: data.amount_total }
+        : null;
+    },
+
+    async markSolutionOrderPaid(solutionOrderId, paid) {
+      // The status filter keeps this from regressing a row the owner already
+      // moved into build or delivery.
+      const { error } = await supabase
+        .from('solution_orders')
+        .update({
+          status: 'paid',
+          paid_at: paid.paidAt,
+          stripe_payment_intent_id: paid.stripePaymentIntentId,
+        })
+        .eq('id', solutionOrderId)
+        .in('status', ['created', 'checkout_open', 'checkout_expired']);
+      if (error) throw storeError('solution order paid', error);
+    },
+
     async recordPromotionRedemption(redemption) {
       const { error } = await supabase.from('promotion_redemptions').upsert(
         {
