@@ -2310,3 +2310,25 @@ main p a:hover,
   color: var(--muted);
   font-size: 0.9rem;
 }
+
+/* Free-check phone alternative banner */
+
+.call-option {
+  margin: 18px auto 0;
+  width: min(1160px, calc(100% - 40px));
+  border: 1px solid var(--metric);
+  border-radius: 14px;
+  background: rgb(27 91 255 / 6%);
+  padding: 14px 18px;
+}
+
+.call-option p {
+  margin: 0;
+  font-size: 0.94rem;
+}
+
+.call-option a {
+  color: var(--metric);
+  font-weight: 750;
+  white-space: nowrap;
+}
