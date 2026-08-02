@@ -1,0 +1,86 @@
+# Diagnoses result-email delivery: reads the Resend credentials from Vercel
+# Production, lists the account's domains with their verification status, and
+# sends one test message to Resend's own test recipient, printing the API's
+# response. No customer data involved; the API key never leaves the job.
+
+name: Diagnose Resend delivery
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    if: github.repository == 'Bear78888/bizmetria.ai'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: development
+    env:
+      VERCEL_TEAM_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
+      VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+    steps:
+      - name: Query Resend with credentials read from Vercel
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$VERCEL_TOKEN" || { echo "VERCEL_TOKEN is missing." >&2; exit 1; }
+          echo "::add-mask::$VERCEL_TOKEN"
+
+          node <<'NODE'
+          const token = process.env.VERCEL_TOKEN;
+          const teamId = process.env.VERCEL_TEAM_ID;
+          const projectId = process.env.VERCEL_PROJECT_ID;
+          const base = `https://api.vercel.com/v9/projects/${encodeURIComponent(projectId)}/env`;
+          const query = `teamId=${encodeURIComponent(teamId)}`;
+
+          async function readVar(key) {
+            const listResponse = await fetch(`${base}?${query}`, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            if (!listResponse.ok) throw new Error(`env list failed: ${listResponse.status}`);
+            const { envs = [] } = await listResponse.json();
+            const entry = envs.find(
+              (env) =>
+                env.key === key &&
+                Array.isArray(env.target) &&
+                env.target.includes('production') &&
+                !env.gitBranch &&
+                !env.configurationId,
+            );
+            if (!entry) return null;
+            const detail = await fetch(`${base}/${entry.id}?${query}&decrypt=true`, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            if (!detail.ok) throw new Error(`env read ${key} failed: ${detail.status}`);
+            return (await detail.json()).value ?? null;
+          }
+
+          const apiKey = await readVar('RESEND_API_KEY');
+          const from = await readVar('RESEND_FROM_EMAIL');
+          console.log(`::add-mask::${apiKey}`);
+          console.log(`RESEND_FROM_EMAIL = ${JSON.stringify(from)}`);
+          console.log(`RESEND_API_KEY present: ${Boolean(apiKey)}, prefix ok: ${apiKey?.startsWith('re_')}`);
+
+          const domains = await fetch('https://api.resend.com/domains', {
+            headers: { Authorization: `Bearer ${apiKey}` },
+          });
+          console.log(`GET /domains -> ${domains.status}`);
+          console.log((await domains.text()).slice(0, 800));
+
+          const send = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              from,
+              to: ['delivered@resend.dev'],
+              subject: 'BizMetria delivery diagnostic',
+              html: '<p>Diagnostic message.</p>',
+            }),
+          });
+          console.log(`POST /emails -> ${send.status}`);
+          console.log((await send.text()).slice(0, 800));
+          NODE
