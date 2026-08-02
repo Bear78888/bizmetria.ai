@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { ReactNode } from 'react';
 
+import ChatWidget from '@/features/chatbot/ChatWidget';
 import { isLocale, locales } from '@/i18n/config';
 import { getMessages } from '@/i18n/messages';
 
@@ -43,6 +44,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
       </header>
       <main>{children}</main>
       <footer className="site-footer">{messages.footer}</footer>
+      <ChatWidget locale={locale} />
     </div>
   );
 }
