@@ -13,6 +13,11 @@ on:
         description: 'Optional: new Resend API key (re_...). Leave empty to keep the current one.'
         required: false
         type: string
+      from_email:
+        description: Bare sender address (must be on a domain verified in Resend)
+        required: true
+        default: no-reply@bizmetria.com
+        type: string
 
 permissions:
   contents: read
@@ -28,6 +33,7 @@ jobs:
       VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
       NEW_API_KEY: ${{ inputs.new_api_key }}
+      FROM_EMAIL: ${{ inputs.from_email }}
 
     steps:
       - name: Replace the sender variable (and the key when provided)
@@ -79,7 +85,7 @@ jobs:
 
           const newKey = process.env.NEW_API_KEY;
           // The env schema validates a bare address (z.email), so no display name.
-          await replaceVar('RESEND_FROM_EMAIL', 'no-reply@bizmetria.com');
+          await replaceVar('RESEND_FROM_EMAIL', process.env.FROM_EMAIL);
           if (newKey) {
             if (!newKey.startsWith('re_')) throw new Error('New key does not look like a Resend key.');
             await replaceVar('RESEND_API_KEY', newKey);
