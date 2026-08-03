@@ -46,10 +46,17 @@ export function buildPaidAnalysisInput(input: {
  */
 export function describeInputEvidence(
   input: PaidAnalysisInput,
-  transcriptId: string,
+  transcriptId: string | null,
 ): readonly Record<string, unknown>[] {
-  return [
+  const evidence: Record<string, unknown>[] = [
     { kind: 'questionnaire_fields', fields: input.questionnaire.map((entry) => entry.field) },
-    { kind: 'transcript', transcript_id: transcriptId, characters: input.transcript.length },
   ];
+  if (transcriptId !== null) {
+    evidence.push({
+      kind: 'transcript',
+      transcript_id: transcriptId,
+      characters: input.transcript.length,
+    });
+  }
+  return evidence;
 }

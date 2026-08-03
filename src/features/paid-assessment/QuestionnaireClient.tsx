@@ -47,6 +47,8 @@ interface InventoryRow {
 
 const fieldSchemas = paidQuestionnaireSchema.shape;
 
+const EDITABLE_STATUSES = new Set(['not_started', 'in_progress', 'correction_required']);
+
 /** A field is sent to the server only once its current value parses. */
 function fieldIsValid(fieldId: string, value: unknown): boolean {
   const schema = fieldSchemas[fieldId as keyof typeof fieldSchemas];
@@ -81,7 +83,27 @@ export default function QuestionnaireClient({
   const answersRef = useRef(initialData);
   const conflictRef = useRef(false);
 
-  const readOnly = status === 'questionnaire_complete' || conflict;
+  // Any status past the editable ones means the answers are locked in and the
+  // report pipeline owns the assessment (submitted, analysing, under review).
+  const submitted = !EDITABLE_STATUSES.has(status);
+  const readOnly = submitted || conflict;
+
+  // The report is generated straight from the written answers — the server
+  // dedupes, so re-kicking after a reload or a lost request is harmless.
+  const kickAnalysis = () => {
+    void fetch('/api/paid-analysis/run', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ assessmentId }),
+    }).catch(() => undefined);
+  };
+
+  useEffect(() => {
+    if (submitted) kickAnalysis();
+    // Mount-only on purpose: one safety kick covers a submit whose kick was
+    // lost (closed tab); later status changes kick from the submit handler.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const flush = async () => {
     if (savingRef.current || conflictRef.current) return;
@@ -178,6 +200,7 @@ export default function QuestionnaireClient({
       if (response.ok && body.status) {
         versionRef.current = body.version ?? versionRef.current;
         setStatus(body.status);
+        kickAnalysis();
         return;
       }
       setSubmitIssues(body.issues ?? []);
@@ -188,16 +211,13 @@ export default function QuestionnaireClient({
 
   const text = (entry: { en: string; es: string } | undefined) => label(entry, locale);
 
-  if (status === 'questionnaire_complete') {
+  if (submitted) {
     return (
       <section className="result-section" aria-labelledby="questionnaire-done">
         <h1 id="questionnaire-done">{text(uiCopy.pageTitle)}</h1>
         <p role="status">{text(uiCopy.submitted)}</p>
-        <a
-          className="button button-primary"
-          href={`/${locale}/assessment/paid/interview?id=${assessmentId}`}
-        >
-          {text(uiCopy.toInterview)}
+        <a className="button button-primary" href={`/${locale}/account`}>
+          {text(uiCopy.toAccount)}
         </a>
       </section>
     );
