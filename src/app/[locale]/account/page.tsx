@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 
+import JourneyBuyStep from '@/components/account/JourneyBuyStep';
 import { ScoreDial } from '@/components/account/ScoreDial';
 import { resultContent } from '@/features/free-assessment/content';
 import { findSolution } from '@/features/solutions/catalog';
@@ -185,41 +186,61 @@ export default async function AccountPage({ params }: AccountPageProps) {
   const hasReport = paidList.some((assessment) => assessment.status === 'completed');
   const isSpanish = locale === 'es';
 
+  // The first two steps are entrances, not just status: the free check leads
+  // to the questionnaire page (form + call option), and the $299 step either
+  // continues an assessment (voice-or-questionnaire choice) or starts the
+  // checkout in one click.
   const journey = [
     {
       key: 'free',
       title: isSpanish ? 'Chequeo gratuito' : 'Free check',
       state: freeScore ? 'done' : 'next',
+      href: `/${locale}/assessment` as string | null,
+      buyFrom: null as string | null,
       detail: freeScore
         ? isSpanish
-          ? `Puntuación ${freeScore.total}/100`
-          : `Score ${freeScore.total}/100`
+          ? `Puntuación ${freeScore.total}/100 — repetir el chequeo`
+          : `Score ${freeScore.total}/100 — retake the check`
         : isSpanish
-          ? 'Responda 11 preguntas y obtenga su puntuación.'
-          : 'Answer 11 questions and get your score.',
+          ? 'Responda 11 preguntas o llame a nuestro agente.'
+          : 'Answer 11 questions or call our agent.',
     },
     {
       key: 'paid',
       title: isSpanish ? 'Evaluación Empresarial — $299' : 'Business Assessment — $299',
       state: hasReport ? 'done' : hasPaid ? 'active' : 'next',
+      href: hasPaid
+        ? `/${locale}/assessment/paid/begin?id=${paidList[0]?.id}`
+        : freeScore
+          ? null
+          : `/${locale}/assessment`,
+      buyFrom: !hasPaid && freeScore ? freeScore.assessmentId : null,
       detail: hasPaid
         ? isSpanish
-          ? 'En curso — continúe abajo.'
-          : 'In progress — continue below.'
-        : isSpanish
-          ? 'Análisis profundo con informe revisado por expertos.'
-          : 'Deep analysis with an expert-reviewed report.',
+          ? 'En curso — responder por voz o por escrito.'
+          : 'In progress — answer by voice or in writing.'
+        : freeScore
+          ? isSpanish
+            ? 'Comprar y empezar: entrevista de voz o cuestionario.'
+            : 'Buy and start: voice interview or questionnaire.'
+          : isSpanish
+            ? 'Primero el chequeo gratuito, luego la evaluación.'
+            : 'Free check first, then the assessment.',
     },
     {
       key: 'sprint',
       title: isSpanish ? 'Plan de implementación' : 'Implementation plan',
       state: hasReport ? 'done' : 'pending',
+      href: null as string | null,
+      buyFrom: null as string | null,
       detail: isSpanish ? 'Incluido en su informe.' : 'Included with your report.',
     },
     {
       key: 'solutions',
       title: isSpanish ? 'Implementación' : 'Implementation',
       state: 'pending',
+      href: null as string | null,
+      buyFrom: null as string | null,
       detail: isSpanish
         ? 'Después de su informe: encargue soluciones listas para usar.'
         : 'After your report: order ready-made solutions.',
@@ -287,12 +308,35 @@ export default async function AccountPage({ params }: AccountPageProps) {
 
         <h2>{isSpanish ? 'Su recorrido' : 'Your journey'}</h2>
         <ol className="journey-steps">
-          {journey.map((step) => (
-            <li className={`journey-step journey-step-${step.state}`} key={step.key}>
-              <strong>{step.title}</strong>
-              <span>{step.detail}</span>
-            </li>
-          ))}
+          {journey.map((step) => {
+            if (step.buyFrom) {
+              return (
+                <JourneyBuyStep
+                  key={step.key}
+                  locale={locale}
+                  assessmentId={step.buyFrom}
+                  title={step.title}
+                  detail={step.detail}
+                  stateClass={`journey-step-${step.state}`}
+                />
+              );
+            }
+            return (
+              <li className={`journey-step journey-step-${step.state}`} key={step.key}>
+                {step.href ? (
+                  <Link className="journey-step-action" href={step.href}>
+                    <strong>{step.title}</strong>
+                    <span>{step.detail}</span>
+                  </Link>
+                ) : (
+                  <>
+                    <strong>{step.title}</strong>
+                    <span>{step.detail}</span>
+                  </>
+                )}
+              </li>
+            );
+          })}
         </ol>
 
         <h2>{isSpanish ? 'Sus evaluaciones' : 'Your assessments'}</h2>
