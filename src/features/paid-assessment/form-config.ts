@@ -80,12 +80,12 @@ export const formSections: readonly SectionConfig[] = [
       },
       {
         id: 'decision_authority',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'decision_authority', options: decisionAuthorities },
       },
       {
         id: 'assessment_scope',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'assessment_scope', options: assessmentScopes },
       },
       {
@@ -95,12 +95,12 @@ export const formSections: readonly SectionConfig[] = [
       },
       {
         id: 'business_model',
-        required: true,
+        required: false,
         control: { kind: 'multi', registry: 'business_model', options: businessModels, max: 3 },
       },
       {
         id: 'service_delivery_mode',
-        required: true,
+        required: false,
         control: {
           kind: 'select',
           registry: 'service_delivery_mode',
@@ -117,25 +117,25 @@ export const formSections: readonly SectionConfig[] = [
         required: true,
         control: { kind: 'select', registry: 'objective', options: objectives },
       },
-      { id: 'objective_detail', required: true, control: { kind: 'textarea', maxLength: 500 } },
+      { id: 'objective_detail', required: false, control: { kind: 'textarea', maxLength: 500 } },
       {
         id: 'priority_horizon',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'priority_horizon', options: priorityHorizons },
       },
       {
         id: 'target_outcomes',
-        required: true,
+        required: false,
         control: { kind: 'multi', registry: 'objective', options: objectives, max: 3 },
       },
       {
         id: 'success_measure_ids',
-        required: true,
+        required: false,
         control: { kind: 'multi', registry: 'success_measure', options: successMeasures, max: 5 },
       },
       {
         id: 'baseline_availability',
-        required: true,
+        required: false,
         control: {
           kind: 'select',
           registry: 'baseline_availability',
@@ -150,7 +150,7 @@ export const formSections: readonly SectionConfig[] = [
       },
       {
         id: 'nonnegotiable_constraints',
-        required: true,
+        required: false,
         control: { kind: 'multi', registry: 'constraint', options: constraints, max: 8 },
       },
     ],
@@ -160,40 +160,40 @@ export const formSections: readonly SectionConfig[] = [
     fields: [
       {
         id: 'workflow_focus_areas',
-        required: true,
+        required: false,
         control: { kind: 'multi', registry: 'workflow_area', options: workflowAreas, max: 3 },
       },
       { id: 'primary_workflow_name', required: true, control: { kind: 'text', maxLength: 80 } },
-      { id: 'workflow_trigger', required: true, control: { kind: 'textarea', maxLength: 300 } },
+      { id: 'workflow_trigger', required: false, control: { kind: 'textarea', maxLength: 300 } },
       {
         id: 'workflow_desired_outcome',
-        required: true,
+        required: false,
         control: { kind: 'textarea', maxLength: 300 },
       },
-      { id: 'workflow_steps', required: true, control: { kind: 'steps' } },
+      { id: 'workflow_steps', required: false, control: { kind: 'steps' } },
       {
         id: 'workflow_frequency',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'workflow_frequency', options: workflowFrequencies },
       },
       {
         id: 'workflow_volume_band',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'workflow_volume', options: workflowVolumes },
       },
       {
         id: 'handoff_count_band',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'handoff_count', options: handoffCounts },
       },
       {
         id: 'exception_frequency',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'exception_frequency', options: exceptionFrequencies },
       },
       {
         id: 'primary_bottleneck',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'bottleneck', options: bottlenecks },
       },
       { id: 'bottleneck_detail', required: false, control: { kind: 'textarea', maxLength: 500 } },
@@ -219,33 +219,33 @@ export const formSections: readonly SectionConfig[] = [
     fields: [
       {
         id: 'system_categories',
-        required: true,
+        required: false,
         control: { kind: 'multi', registry: 'system_category', options: systemCategories, max: 10 },
       },
       { id: 'system_inventory', required: false, control: { kind: 'inventory' } },
       {
         id: 'integration_state',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'integration_state', options: integrationStates },
       },
       {
         id: 'data_source_categories',
-        required: true,
+        required: false,
         control: { kind: 'multi', registry: 'data_source', options: dataSources, max: 10 },
       },
       {
         id: 'data_quality_state',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'data_quality_state', options: dataQualityStates },
       },
       {
         id: 'data_access_state',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'data_access_state', options: dataAccessStates },
       },
       {
         id: 'regulated_data_categories',
-        required: true,
+        required: false,
         control: {
           kind: 'multi',
           registry: 'regulated_data',
@@ -258,15 +258,15 @@ export const formSections: readonly SectionConfig[] = [
   {
     id: 'capacity',
     fields: [
-      { id: 'process_owner_role', required: true, control: { kind: 'text', maxLength: 80 } },
+      { id: 'process_owner_role', required: false, control: { kind: 'text', maxLength: 80 } },
       {
         id: 'change_capacity',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'change_capacity', options: changeCapacities },
       },
       {
         id: 'implementation_timing',
-        required: true,
+        required: false,
         control: { kind: 'select', registry: 'priority_horizon', options: implementationTimings },
       },
       {
