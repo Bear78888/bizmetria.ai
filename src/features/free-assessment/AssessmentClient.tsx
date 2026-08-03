@@ -1,11 +1,14 @@
 'use client';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { assessmentContent } from './content';
 import type { PublicAssessmentResult } from './result';
 import type { AssessmentLocale, QuestionId } from './schema';
+
+const DRAFT_KEY = 'bizmetria-free-draft/free-audit-schema/1.0.0';
 
 interface AssessmentClientProps {
   readonly locale: AssessmentLocale;
@@ -43,6 +46,50 @@ export function AssessmentClient({ locale }: AssessmentClientProps) {
   const [companyWebsite, setCompanyWebsite] = useState('');
   const [status, setStatus] = useState<'idle' | 'submitting' | 'error'>('idle');
   const [validationMessage, setValidationMessage] = useState('');
+
+  // Draft persistence: a refresh mid-questionnaire restores step, answers,
+  // and contact fields. The key carries the schema version, so a schema
+  // change silently discards stale drafts. Restore runs in a frame callback
+  // (never synchronously inside the effect), save follows state changes.
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      try {
+        const raw = localStorage.getItem(DRAFT_KEY);
+        if (!raw) return;
+        const draft = JSON.parse(raw) as {
+          step?: number;
+          answers?: SelectedAnswers;
+          businessTypeOther?: string;
+          contact?: ContactState;
+        };
+        if (draft.answers && typeof draft.step === 'number') {
+          setAnswers(draft.answers);
+          setStep(Math.max(0, Math.min(draft.step, 11)));
+          if (typeof draft.businessTypeOther === 'string') {
+            setBusinessTypeOther(draft.businessTypeOther);
+          }
+          if (draft.contact) setContact({ ...emptyContact(locale), ...draft.contact });
+        }
+      } catch {
+        // An unreadable draft is discarded, never surfaced.
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+    // Mount-only: the draft belongs to whatever locale the visitor started in.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (Object.keys(answers).length === 0 && step === 0) return;
+    try {
+      localStorage.setItem(
+        DRAFT_KEY,
+        JSON.stringify({ step, answers, businessTypeOther, contact }),
+      );
+    } catch {
+      // Storage unavailable (private mode, quota): drafts are best-effort.
+    }
+  }, [step, answers, businessTypeOther, contact]);
 
   const question = copy.questions[step];
   const isContactStep = step === copy.questions.length;
@@ -152,7 +199,19 @@ export function AssessmentClient({ locale }: AssessmentClientProps) {
       if (!response.ok) throw new Error('assessment_unavailable');
       const body = (await response.json()) as { result: PublicAssessmentResult };
       sessionStorage.setItem('bizmetria-free-result', JSON.stringify(body.result));
-      router.push(`/${locale}/assessment/result`);
+      try {
+        localStorage.removeItem(DRAFT_KEY);
+      } catch {
+        // Best-effort cleanup.
+      }
+      // A stored result gets its permanent address (works from any device and
+      // from the email); preview-mode results keep the session-only screen.
+      const assessmentId: string = body.result.assessmentId;
+      router.push(
+        /^[0-9a-f-]{36}$/iu.test(assessmentId)
+          ? `/${locale}/assessment/result/${assessmentId}`
+          : `/${locale}/assessment/result`,
+      );
     } catch {
       setStatus('error');
       setValidationMessage(copy.submitError);
@@ -326,6 +385,11 @@ export function AssessmentClient({ locale }: AssessmentClientProps) {
               <span>{copy.smsConsent}</span>
             </label>
             <p className="service-notice">{copy.serviceNotice}</p>
+            <p className="service-notice">
+              <Link href={`/${locale}/privacy`}>
+                {locale === 'es' ? 'Política de privacidad' : 'Privacy Policy'}
+              </Link>
+            </p>
             <label className="honeypot" aria-hidden="true">
               Company website
               <input

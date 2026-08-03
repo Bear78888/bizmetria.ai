@@ -30,6 +30,7 @@ export async function sendResultEmail(
   if (!apiKey || !from || process.env.RESEND_DELIVERY_MODE !== 'send') return 'skipped';
 
   const spanish = result.locale === 'es';
+  const resultUrl = `${CANONICAL_SITE_URL}/${result.locale}/assessment/result/${result.assessmentId}`;
   const registerUrl = `${CANONICAL_SITE_URL}/${result.locale}/auth?mode=register&intent=free-report`;
   const subject = spanish
     ? `Su puntuación de oportunidad de IA: ${result.score.total}/100`
@@ -45,10 +46,13 @@ export async function sendResultEmail(
           : 'Create a free account to unlock your area breakdown, keep your score, and get your mini-report by email.'
       }</p>
       <p style="margin:24px 0">
-        <a href="${registerUrl}" style="background:#1B5BFF;color:#ffffff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:700">${
-          spanish ? 'Crear mi cuenta gratuita' : 'Create my free account'
+        <a href="${resultUrl}" style="background:#1B5BFF;color:#ffffff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:700">${
+          spanish ? 'Ver mi resultado' : 'View my result'
         }</a>
       </p>
+      <p><a href="${registerUrl}" style="color:#1B5BFF;font-weight:700">${
+        spanish ? 'Crear mi cuenta gratuita' : 'Create my free account'
+      }</a></p>
       <p style="color:#667085;font-size:12px">${escapeHtml(result.limitation)}</p>
       <p style="color:#667085;font-size:12px">${
         spanish

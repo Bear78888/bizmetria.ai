@@ -3,6 +3,7 @@
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
+import { sendReportReadyEmail } from '@/features/report-review/notify';
 import { approveReport, requestChanges } from '@/features/report-review/review';
 import { createSupabaseReportReviewStore } from '@/features/report-review/supabase-store';
 import { createSupabaseServerClient } from '@/lib/supabase/server';
@@ -41,6 +42,14 @@ export async function approveReportAction(formData: FormData) {
   if (rejection) {
     redirect(`/${locale}/admin/reviews/${assessmentId}?error=${rejection}`);
   }
+
+  // Notification only — a mail refusal must never undo a finished review.
+  try {
+    await sendReportReadyEmail(assessmentId);
+  } catch (error) {
+    console.error('report-ready email failed', error);
+  }
+
   redirect(`/${locale}/admin/reviews?approved=${assessmentId}`);
 }
 
