@@ -2454,3 +2454,58 @@ main p a:hover,
 .journey-step-action strong {
   color: var(--metric);
 }
+
+/* Report page topline and the print (save-as-PDF) layout */
+
+.report-topline {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media print {
+  .site-header,
+  .site-footer,
+  .chat-launcher,
+  .report-solutions,
+  .result-restart,
+  .print-hidden,
+  .button {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff;
+  }
+
+  main,
+  .page-shell {
+    width: 100%;
+    max-width: none;
+  }
+
+  .result-section {
+    border: 0;
+    padding: 0;
+  }
+
+  .report-view section {
+    break-inside: avoid-page;
+    margin-bottom: 18pt;
+  }
+
+  .report-item {
+    break-inside: avoid;
+  }
+
+  h1 {
+    font-size: 22pt;
+  }
+
+  h2 {
+    font-size: 15pt;
+    margin-bottom: 8pt;
+  }
+}

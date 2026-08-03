@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
 
 import { parseAnalysisContent } from '@/features/analysis/contract';
+import PrintButton from '@/features/report-review/PrintButton';
 import ReportView from '@/features/report-review/ReportView';
 import SolutionsGrid from '@/features/solutions/SolutionsGrid';
 import { isLocale } from '@/i18n/config';
@@ -72,8 +73,13 @@ export default async function CustomerReportPage({ params }: PageProps) {
   return (
     <main className="page-shell">
       <section className="result-section">
-        <p className="eyebrow">{spanish ? 'Su informe' : 'Your report'}</p>
-        <h1>{spanish ? 'Evaluación Empresarial' : 'Business Assessment'}</h1>
+        <div className="report-topline">
+          <div>
+            <p className="eyebrow">{spanish ? 'Su informe' : 'Your report'}</p>
+            <h1>{spanish ? 'Evaluación Empresarial' : 'Business Assessment'}</h1>
+          </div>
+          <PrintButton locale={locale} />
+        </div>
         <ReportView content={content} locale={report.preferred_locale === 'es' ? 'es' : 'en'} />
 
         <div className="report-solutions">
