@@ -78,7 +78,8 @@ jobs:
           }
 
           const newKey = process.env.NEW_API_KEY;
-          await replaceVar('RESEND_FROM_EMAIL', 'BizMetria <no-reply@bizmetria.com>');
+          // The env schema validates a bare address (z.email), so no display name.
+          await replaceVar('RESEND_FROM_EMAIL', 'no-reply@bizmetria.com');
           if (newKey) {
             if (!newKey.startsWith('re_')) throw new Error('New key does not look like a Resend key.');
             await replaceVar('RESEND_API_KEY', newKey);
