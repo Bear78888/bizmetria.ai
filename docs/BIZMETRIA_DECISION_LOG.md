@@ -59,3 +59,15 @@ This log records approved decisions recoverable from the available project conte
 ## Change rule
 
 New decisions require a proposed entry, evidence or rationale, affected-workstream review, and Master Control/owner approval. Until merged as approved, they remain proposals. The [Delivery Roadmap](control/DELIVERY_ROADMAP.md) routes open questions but does not approve their answers.
+
+## DEC-034 — Temporary email sender (2026-08-02)
+Owner decision: keep transactional email sending from
+`no-reply@refundmylead.com` (the only verified domain in the active Resend
+team) so delivery works now. **MUST FIX BEFORE LAUNCH:** move sending to
+`no-reply@bizmetria.com`. The domain is verified in a different Resend
+account/team; options in order of preference: (1) locate that account and
+issue an API key there, (2) upgrade Resend to Pro and claim the domain into
+the active team, (3) free the single-domain slot if refundmylead.com sending
+is not needed. Related: the Resend API key pasted into chat on 2026-08-02
+goes on the pre-launch rotation list together with the previously listed
+Anthropic, Stripe test, Retell, and Google client secrets.
