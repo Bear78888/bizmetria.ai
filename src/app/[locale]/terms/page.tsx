@@ -40,11 +40,9 @@ export default async function TermsPage({ params }: LegalPageProps) {
 
       <h2>{es ? 'Pagos y reembolsos' : 'Payments and refunds'}</h2>
       <p>
-        {es ? 'Los pagos se procesan mediante Stripe.' : 'Payments are processed by Stripe.'}{' '}
-        {/* TODO: refund policy pending owner decision (proposed: full refund before work starts) */}
         {es
-          ? 'La política de reembolsos se publicará aquí.'
-          : 'The refund policy will be published here.'}
+          ? 'Los pagos se procesan mediante Stripe. Evaluación Empresarial: reembolso completo disponible en cualquier momento antes de que comience el trabajo en su informe. Para solicitar un reembolso, escríbanos.'
+          : 'Payments are processed by Stripe. Business Assessment: a full refund is available at any time before work on your report begins. To request a refund, contact us.'}
       </p>
 
       <h2>{es ? 'Cuentas' : 'Accounts'}</h2>
@@ -55,7 +53,7 @@ export default async function TermsPage({ params }: LegalPageProps) {
       </p>
 
       <h2>{es ? 'Contacto' : 'Contact'}</h2>
-      <p>support@bizmetria.com {/* TODO: confirm with owner */}</p>
+      <p>support@bizmetria.com</p>
     </main>
   );
 }
