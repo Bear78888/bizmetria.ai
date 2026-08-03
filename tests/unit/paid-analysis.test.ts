@@ -256,8 +256,32 @@ describe('runPaidAnalysis', () => {
     expect(outcome).toEqual({ ran: false, reason: 'interview_incomplete' });
   });
 
-  it('requires a transcript with content', async () => {
+  it('runs on the questionnaire alone when there is no transcript', async () => {
+    const state = memoryState({ transcript: null });
+    state.assessment = {
+      ...(state.assessment as AnalysableAssessment),
+      status: 'questionnaire_complete',
+    };
+    const calls: { system: string; prompt: string }[] = [];
+    const call: StructuredAnalysisCall = (request) => {
+      calls.push(request);
+      return Promise.resolve(validContent());
+    };
+
+    const outcome = await runPaidAnalysis(memoryStore(state), call, claimant);
+
+    expect(outcome).toMatchObject({ ran: true, status: 'succeeded' });
+    expect(calls[0]?.prompt).toContain('primary_workflow_name');
+    expect(calls[0]?.prompt).toContain('No interview');
+    expect(state.statusLog).toEqual(['analysis_pending', 'under_review']);
+  });
+
+  it('rejects only when both evidence sources are missing', async () => {
     const state = memoryState({ transcript: { id: TRANSCRIPT_ID, transcriptText: '   ' } });
+    state.assessment = {
+      ...(state.assessment as AnalysableAssessment),
+      questionnaireData: { schemaVersion: 'paid-assessment-schema/1.1.0', locale: 'en' },
+    };
     const outcome = await runPaidAnalysis(
       memoryStore(state),
       () => Promise.resolve(validContent()),

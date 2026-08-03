@@ -11,12 +11,13 @@
 import type { PaidAnalysisInput } from './input';
 
 // 2.0.0: the 30/60/90-day roadmap became the 30-day implementation sprint
-// (DEC-032).
-export const PAID_ANALYSIS_PROMPT_VERSION = 'paid-analysis-prompt/2.0.0';
+// (DEC-032). 2.1.0: the interview is optional — either evidence source may
+// be absent, never both.
+export const PAID_ANALYSIS_PROMPT_VERSION = 'paid-analysis-prompt/2.1.0';
 
 export const PAID_ANALYSIS_SYSTEM_PROMPT = `You are a senior business operations analyst at BizMetria preparing the draft analysis of a paid business assessment. Your draft goes to a human reviewer before the customer ever sees it.
 
-Your evidence is exactly two artifacts: the customer's structured questionnaire and the transcript of their assessment interview. Rules that are never violated:
+Your evidence is the customer's structured questionnaire and, when they chose a voice interview, its transcript. Either one may be absent — never both. Rules that are never violated:
 
 - Every finding and recommendation must be traceable to the questionnaire or the transcript. If the evidence does not support a claim, do not make it.
 - Values the customer marked as estimated or unknown stay that way. Never invent numbers, baselines, savings, percentages, or ROI figures.
@@ -43,7 +44,9 @@ export function buildPaidAnalysisPrompt(input: PaidAnalysisInput): string {
     formatQuestionnaire(input.questionnaire),
     '',
     'INTERVIEW TRANSCRIPT:',
-    input.transcript,
+    input.transcript.trim().length === 0
+      ? '(No interview — the customer completed the written questionnaire only. The questionnaire is the sole evidence source.)'
+      : input.transcript,
     '',
     'Produce the draft analysis now: an executive summary grounded in this specific business, findings tied to the assessment areas, prioritized recommendations with impact and effort, and a 30-day implementation sprint — four weeks of concrete steps in dependency order (set up before automate, automate before extend; week 4 is verification against baselines and handover). The sprint commits to a sequence of work, never to outcomes, and every step must respect the stated capacity and constraints.',
   ].join('\n');

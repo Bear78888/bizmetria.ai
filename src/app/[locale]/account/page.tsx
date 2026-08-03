@@ -34,7 +34,10 @@ const solutionStatusCopy: Record<string, { en: string; es: string }> = {
 const statusCopy: Record<string, { en: string; es: string }> = {
   not_started: { en: 'Questionnaire not started', es: 'Cuestionario sin comenzar' },
   in_progress: { en: 'Questionnaire in progress', es: 'Cuestionario en curso' },
-  questionnaire_complete: { en: 'Ready for the interview', es: 'Lista para la entrevista' },
+  questionnaire_complete: {
+    en: 'Answers submitted — report in preparation',
+    es: 'Respuestas enviadas — informe en preparación',
+  },
   interview_ready: { en: 'Ready for the interview', es: 'Lista para la entrevista' },
   interview_complete: {
     en: 'Interview complete — analysis running',
@@ -56,6 +59,12 @@ function nextStep(locale: string, assessment: { id: string; status: string }) {
         label: spanish ? 'Responder: voz o cuestionario' : 'Answer: voice or questionnaire',
       };
     case 'questionnaire_complete':
+      // Revisiting the questionnaire page re-kicks the analysis if the
+      // original request was lost, so this link doubles as self-healing.
+      return {
+        href: `/${locale}/assessment/paid/questionnaire?id=${assessment.id}`,
+        label: spanish ? 'Ver sus respuestas' : 'View your answers',
+      };
     case 'interview_ready':
       return {
         href: `/${locale}/assessment/paid/interview?id=${assessment.id}`,

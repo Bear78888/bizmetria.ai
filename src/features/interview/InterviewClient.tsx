@@ -27,6 +27,8 @@ const copy = {
       'The interview has ended. Your transcript is being processed; you can see your assessment status in your account.',
     account: 'Go to your account',
     failed: 'The interview could not be started. Please try again in a moment.',
+    micDenied:
+      'Microphone access is blocked. Allow the microphone for this site in your browser (the icon near the address bar) and try again.',
     micHint: 'Your browser will ask for microphone access.',
   },
   es: {
@@ -45,11 +47,13 @@ const copy = {
       'La entrevista ha terminado. Su transcripción se está procesando; puede ver el estado de su evaluación en su cuenta.',
     account: 'Ir a su cuenta',
     failed: 'No se pudo iniciar la entrevista. Inténtelo de nuevo en un momento.',
+    micDenied:
+      'El acceso al micrófono está bloqueado. Permita el micrófono para este sitio en su navegador (el icono junto a la barra de direcciones) e inténtelo de nuevo.',
     micHint: 'Su navegador pedirá acceso al micrófono.',
   },
 } as const;
 
-type CallState = 'consent' | 'connecting' | 'in_call' | 'ended' | 'error';
+type CallState = 'consent' | 'connecting' | 'in_call' | 'ended' | 'error' | 'mic_denied';
 
 export default function InterviewClient({ locale, assessmentId }: InterviewClientProps) {
   const text = copy[locale];
@@ -100,6 +104,18 @@ export default function InterviewClient({ locale, assessmentId }: InterviewClien
   const start = async () => {
     if (!consented || callState === 'connecting' || callState === 'in_call') return;
     setCallState('connecting');
+
+    // Confirm microphone access before creating the provider call: a blocked
+    // mic otherwise burns an attempt and surfaces only as a generic failure
+    // (the call dies provider-side as "user not joined").
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      for (const track of stream.getTracks()) track.stop();
+    } catch {
+      setCallState('mic_denied');
+      return;
+    }
+
     try {
       // Consent travels explicitly; the server refuses to create a call
       // without it (PS-004 §9.1 — capture stays off until consent is true).
@@ -165,9 +181,9 @@ export default function InterviewClient({ locale, assessmentId }: InterviewClien
       <p className="form-message" role="note">
         {text.warning}
       </p>
-      {callState === 'error' ? (
+      {callState === 'error' || callState === 'mic_denied' ? (
         <p className="form-message form-message-error" role="alert">
-          {text.failed}
+          {callState === 'mic_denied' ? text.micDenied : text.failed}
         </p>
       ) : null}
       <label className="checkbox-option">

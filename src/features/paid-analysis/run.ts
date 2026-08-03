@@ -35,6 +35,13 @@ export interface AnalysableTranscript {
   readonly transcriptText: string;
 }
 
+/** Answer keys only — server bookkeeping never counts as evidence. */
+function hasQuestionnaireEvidence(data: Readonly<Record<string, unknown>>): boolean {
+  return Object.entries(data).some(
+    ([key, value]) => key !== 'schemaVersion' && key !== 'locale' && value !== undefined,
+  );
+}
+
 export interface AnalysisRunRecord {
   readonly id: string;
   readonly status: string;
@@ -55,7 +62,7 @@ export interface PaidAnalysisStore {
 
   createRun(input: {
     readonly assessmentId: string;
-    readonly transcriptId: string;
+    readonly transcriptId: string | null;
     readonly attemptNumber: number;
     readonly promptVersion: string;
     readonly modelVersion: string;
@@ -90,7 +97,14 @@ export type RunOutcome =
       readonly errorCode: string;
     };
 
-const ANALYSABLE_STATUSES = new Set(['interview_complete', 'analysis_pending']);
+// The interview is optional: a submitted questionnaire is enough evidence to
+// analyse. Voice-only assessments still arrive via interview_complete.
+const ANALYSABLE_STATUSES = new Set([
+  'questionnaire_complete',
+  'interview_ready',
+  'interview_complete',
+  'analysis_pending',
+]);
 
 export async function runPaidAnalysis(
   store: PaidAnalysisStore,
@@ -115,23 +129,27 @@ export async function runPaidAnalysis(
   }
 
   const transcript = await store.findLatestTranscript(assessment.id);
-  if (!transcript || transcript.transcriptText.trim().length === 0) {
+  const hasTranscript = Boolean(transcript && transcript.transcriptText.trim().length > 0);
+  // At least one evidence source must exist; with a questionnaire on file the
+  // interview is optional and the analysis runs on the written answers alone.
+  if (!hasTranscript && !hasQuestionnaireEvidence(assessment.questionnaireData)) {
     return { ran: false, reason: 'transcript_missing' };
   }
 
   const analysisInput = buildPaidAnalysisInput({
     locale: assessment.preferredLocale,
     questionnaireData: assessment.questionnaireData,
-    transcriptText: transcript.transcriptText,
+    transcriptText: hasTranscript && transcript ? transcript.transcriptText : '',
   });
 
+  const transcriptId = hasTranscript && transcript ? transcript.id : null;
   const runId = await store.createRun({
     assessmentId: assessment.id,
-    transcriptId: transcript.id,
+    transcriptId,
     attemptNumber: runs.length + 1,
     promptVersion: PAID_ANALYSIS_PROMPT_VERSION,
     modelVersion: CLAUDE_ANALYSIS_MODEL,
-    inputEvidence: describeInputEvidence(analysisInput, transcript.id),
+    inputEvidence: describeInputEvidence(analysisInput, transcriptId),
   });
   await store.updateAssessmentStatus(assessment.id, 'analysis_pending');
 
