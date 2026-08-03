@@ -2455,6 +2455,21 @@ main p a:hover,
   color: var(--metric);
 }
 
+/* Admin solution-orders desk */
+
+.order-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+  vertical-align: middle;
+}
+
+.order-actions form {
+  display: inline-flex;
+  margin: 0;
+}
+
 /* Report page topline and the print (save-as-PDF) layout */
 
 .report-topline {
