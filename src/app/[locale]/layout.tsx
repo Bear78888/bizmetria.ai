@@ -28,8 +28,8 @@ export async function generateMetadata({
   const es = locale === 'es';
   return {
     title: es
-      ? 'Puntuación de oportunidad de IA para su negocio — chequeo gratuito de 11 preguntas | BizMetria'
-      : 'AI Opportunity Score for Your Business — Free 11-Question Check | BizMetria',
+      ? 'Puntuación de oportunidad de IA para su negocio — chequeo gratuito de 11 preguntas'
+      : 'AI Opportunity Score for Your Business — Free 11-Question Check',
     description: es
       ? 'Responda 11 preguntas y obtenga una puntuación determinista de 0 a 100 y hasta 3 áreas prioritarias. Gratis, bilingüe (English y Español), sin tarjeta.'
       : 'Answer 11 questions, get a deterministic 0–100 AI Opportunity Score and up to 3 priority areas. Free, bilingual (English & Español), no credit card.',
