@@ -89,13 +89,48 @@ describe('paid questionnaire schema', () => {
     expect(result.success).toBe(true);
   });
 
-  it('requires every R field', () => {
+  it('requires only the small core; everything else may be blank', () => {
     const paths = expectRejected((questionnaire) => {
-      delete questionnaire.objective_detail;
-      delete questionnaire.process_owner_role;
+      delete questionnaire.participant_role;
+      delete questionnaire.industry_category;
+      delete questionnaire.primary_objective;
+      delete questionnaire.primary_workflow_name;
     });
-    expect(paths).toContain('objective_detail');
-    expect(paths).toContain('process_owner_role');
+    expect(paths).toContain('participant_role');
+    expect(paths).toContain('industry_category');
+    expect(paths).toContain('primary_objective');
+    expect(paths).toContain('primary_workflow_name');
+  });
+
+  it('accepts a submission with only the required core', () => {
+    const result = paidQuestionnaireSchema.safeParse({
+      schemaVersion: PAID_ASSESSMENT_SCHEMA_VERSION,
+      locale: 'en',
+      participant_role: 'owner_executive',
+      industry_category: 'home_field_services',
+      primary_objective: 'respond_faster',
+      primary_workflow_name: 'New enquiry handling',
+      prohibited_data_acknowledgement: true,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('accepts partially filled repeater rows', () => {
+    const questionnaire = validQuestionnaire() as Record<string, unknown>;
+    questionnaire.workflow_steps = [{ step_id: 'step-1', sequence: 1, step_label: 'Receive' }];
+    questionnaire.system_inventory = [{ product_label: 'Google Sheets' }];
+    const result = paidQuestionnaireSchema.safeParse(questionnaire);
+    expect(result.success).toBe(true);
+  });
+
+  it('drops blank stakeholder rows instead of rejecting the field', () => {
+    const questionnaire = validQuestionnaire() as Record<string, unknown>;
+    questionnaire.stakeholder_roles = ['Operations Manager', '', '  '];
+    const result = paidQuestionnaireSchema.safeParse(questionnaire);
+    expect(result.success).toBe(true);
+    if (result.success) {
+      expect(result.data.stakeholder_roles).toEqual(['Operations Manager']);
+    }
   });
 
   it('rejects unknown enum ids', () => {
@@ -131,11 +166,12 @@ describe('paid questionnaire schema', () => {
     });
   });
 
-  it('rejects baseline metrics when no baseline is available', () => {
-    const paths = expectRejected((questionnaire) => {
-      questionnaire.baseline_availability = 'not_measured';
-    });
-    expect(paths).toContain('baseline_metrics');
+  it('accepts baseline metrics even after the baseline answer changes', () => {
+    // The metrics control hides when no baseline is available; already-saved
+    // rows must not invalidate the stored draft.
+    const questionnaire = validQuestionnaire() as Record<string, unknown>;
+    questionnaire.baseline_availability = 'not_measured';
+    expect(paidQuestionnaireSchema.safeParse(questionnaire).success).toBe(true);
   });
 
   it('rejects a metric claiming the not_currently_measured id', () => {
@@ -145,32 +181,10 @@ describe('paid questionnaire schema', () => {
     });
   });
 
-  it('rejects non-contiguous or duplicate step sequences', () => {
-    expectRejected((questionnaire) => {
-      (questionnaire.workflow_steps as Record<string, unknown>[])[1]!.sequence = 3;
-    });
-    expectRejected((questionnaire) => {
-      (questionnaire.workflow_steps as Record<string, unknown>[])[1]!.sequence = 1;
-    });
-  });
-
   it('rejects duplicate step ids', () => {
     expectRejected((questionnaire) => {
       (questionnaire.workflow_steps as Record<string, unknown>[])[1]!.step_id = 'step-1';
     });
-  });
-
-  it('requires at least two workflow steps', () => {
-    expectRejected((questionnaire) => {
-      questionnaire.workflow_steps = (questionnaire.workflow_steps as unknown[]).slice(0, 1);
-    });
-  });
-
-  it('rejects an inventory row whose category was not selected', () => {
-    const paths = expectRejected((questionnaire) => {
-      questionnaire.system_inventory = [{ category_id: 'crm', purpose: 'Customer records' }];
-    });
-    expect(paths).toContain('system_inventory.0.category_id');
   });
 
   it('rejects "none" as an inventory category outright', () => {
@@ -184,7 +198,7 @@ describe('paid questionnaire schema', () => {
 
   it('enforces text bounds', () => {
     expectRejected((questionnaire) => {
-      questionnaire.objective_detail = 'too short';
+      questionnaire.primary_workflow_name = 'ab';
     });
     expectRejected((questionnaire) => {
       questionnaire.additional_context = 'x'.repeat(1001);

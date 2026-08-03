@@ -284,14 +284,14 @@ describe('submitQuestionnaire', () => {
       submittedAt: 'now',
     });
     // The stored submission is the schema-pinned parse, not the raw draft.
-    expect(store.row?.data.schemaVersion).toBe('paid-assessment-schema/1.0.0');
+    expect(store.row?.data.schemaVersion).toBe('paid-assessment-schema/1.1.0');
     expect(store.row?.data.locale).toBe('en');
   });
 
   it('returns field paths — never values — when the draft is incomplete', async () => {
     const incomplete = completeAnswers();
     delete incomplete.prohibited_data_acknowledgement;
-    delete incomplete.workflow_steps;
+    delete incomplete.primary_workflow_name;
     const store = memoryStore(freshRow({ status: 'in_progress', version: 2, data: incomplete }));
 
     const outcome = await submitQuestionnaire(store, {
@@ -305,7 +305,7 @@ describe('submitQuestionnaire', () => {
       expect(outcome.reason).toBe('invalid');
       const paths = outcome.issues.map((issue) => issue.path);
       expect(paths).toContain('prohibited_data_acknowledgement');
-      expect(paths).toContain('workflow_steps');
+      expect(paths).toContain('primary_workflow_name');
       const serialized = JSON.stringify(outcome.issues);
       expect(serialized).not.toContain('owner_executive');
       expect(serialized).not.toContain('New client intake');
@@ -313,11 +313,20 @@ describe('submitQuestionnaire', () => {
     expect(store.row?.status).toBe('in_progress');
   });
 
-  it('enforces cross-field rules at submission, not save', async () => {
-    const answers = completeAnswers();
-    answers.baseline_availability = 'not_measured';
-    // baseline_metrics stays present — valid alone, invalid with not_measured.
-    const store = memoryStore(freshRow({ status: 'in_progress', version: 1, data: answers }));
+  it('accepts a draft that only carries the required core', async () => {
+    const store = memoryStore(
+      freshRow({
+        status: 'in_progress',
+        version: 1,
+        data: {
+          participant_role: 'owner_executive',
+          industry_category: 'home_field_services',
+          primary_objective: 'respond_faster',
+          primary_workflow_name: 'New enquiry handling',
+          prohibited_data_acknowledgement: true,
+        },
+      }),
+    );
 
     const outcome = await submitQuestionnaire(store, {
       assessmentId: ASSESSMENT_ID,
@@ -325,10 +334,7 @@ describe('submitQuestionnaire', () => {
       expectedVersion: 1,
     });
 
-    expect(outcome.submitted).toBe(false);
-    if (!outcome.submitted) {
-      expect(outcome.issues.map((issue) => issue.path)).toContain('baseline_metrics');
-    }
+    expect(outcome).toMatchObject({ submitted: true, status: 'questionnaire_complete' });
   });
 
   it('treats a repeat submission as a no-op success', async () => {

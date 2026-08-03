@@ -1,12 +1,12 @@
 import { z } from 'zod';
 
 /**
- * The paid questionnaire, transcribed from the approved PS-004 contract
- * (paid-assessment-schema/1.0.0). Field IDs, enum IDs, bounds and the
- * cross-field rules all come from that document — nothing here is invented,
- * and a change to this file that is not a change to the contract is a bug.
+ * The paid questionnaire. Field IDs, enum IDs and bounds come from the PS-004
+ * contract; 1.1.0 relaxes it so that only a small core is required and a
+ * partially filled repeater row never blocks saving — the interview covers
+ * whatever the customer leaves blank.
  */
-export const PAID_ASSESSMENT_SCHEMA_VERSION = 'paid-assessment-schema/1.0.0';
+export const PAID_ASSESSMENT_SCHEMA_VERSION = 'paid-assessment-schema/1.1.0';
 
 // --- Canonical enum registry (contract §7). IDs are language-neutral. ---
 
@@ -307,27 +307,31 @@ function multi<T extends readonly [string, ...string[]]>(
 
 // --- Structured objects (contract §6.8) ---
 
+// Rows are tolerant on purpose: a half-filled row still saves, and whatever
+// is missing gets covered in the interview instead of blocking the form.
 const baselineMetricSchema = z.object({
-  metric_id: z.enum(successMeasures.filter((id) => id !== 'not_currently_measured') as never),
-  value_band_or_text: trimmed(1, 80),
-  unit: trimmed(1, 40),
-  period: trimmed(1, 40),
-  quality: z.enum(['measured', 'estimated']),
+  metric_id: z
+    .enum(successMeasures.filter((id) => id !== 'not_currently_measured') as never)
+    .optional(),
+  value_band_or_text: optionalTrimmed(80),
+  unit: optionalTrimmed(40),
+  period: optionalTrimmed(40),
+  quality: z.enum(['measured', 'estimated']).optional(),
 });
 
 const workflowStepSchema = z.object({
   step_id: trimmed(1, 80),
   sequence: z.number().int().min(1),
-  step_label: trimmed(2, 80),
-  owner_role: trimmed(2, 80),
-  work_mode: z.enum(workModes),
-  system_category: z.enum(systemCategories),
+  step_label: optionalTrimmed(80),
+  owner_role: optionalTrimmed(80),
+  work_mode: z.enum(workModes).optional(),
+  system_category: z.enum(systemCategories).optional(),
 });
 
 const systemInventoryItemSchema = z.object({
-  category_id: z.enum(systemCategories.filter((id) => id !== 'none') as never),
-  product_label: optionalTrimmed(80).pipe(z.string().min(2).optional()),
-  purpose: trimmed(2, 120),
+  category_id: z.enum(systemCategories.filter((id) => id !== 'none') as never).optional(),
+  product_label: optionalTrimmed(80),
+  purpose: optionalTrimmed(120),
 });
 
 // --- The questionnaire ---
@@ -336,55 +340,65 @@ const questionnaireObject = z.object({
   schemaVersion: z.literal(PAID_ASSESSMENT_SCHEMA_VERSION),
   locale: z.enum(['en', 'es']),
 
-  // §6.2 Participant and scope
+  // §6.2 Participant and scope. Only the participant's role and the industry
+  // are required — without them the analysis has no frame at all.
   participant_role: z.enum(participantRoles),
-  decision_authority: z.enum(decisionAuthorities),
-  assessment_scope: z.enum(assessmentScopes),
+  decision_authority: z.enum(decisionAuthorities).optional(),
+  assessment_scope: z.enum(assessmentScopes).optional(),
   industry_category: z.enum(industryCategories),
-  business_model: multi(businessModels, 1, 3),
-  service_delivery_mode: z.enum(serviceDeliveryModes),
+  business_model: multi(businessModels, 1, 3).optional(),
+  service_delivery_mode: z.enum(serviceDeliveryModes).optional(),
 
   // §6.3 Objectives and success
   primary_objective: z.enum(objectives),
-  objective_detail: trimmed(20, 500),
-  priority_horizon: z.enum(priorityHorizons),
-  target_outcomes: multi(objectives, 1, 3),
-  success_measure_ids: multi(successMeasures, 1, 5, ['not_currently_measured']),
-  baseline_availability: z.enum(baselineAvailabilities),
+  objective_detail: optionalTrimmed(500),
+  priority_horizon: z.enum(priorityHorizons).optional(),
+  target_outcomes: multi(objectives, 1, 3).optional(),
+  success_measure_ids: multi(successMeasures, 1, 5, ['not_currently_measured']).optional(),
+  baseline_availability: z.enum(baselineAvailabilities).optional(),
   baseline_metrics: z.array(baselineMetricSchema).max(5).optional(),
-  nonnegotiable_constraints: multi(constraints, 1, 8, ['none']),
+  nonnegotiable_constraints: multi(constraints, 1, 8, ['none']).optional(),
 
   // §6.4 Primary workflow
-  workflow_focus_areas: multi(workflowAreas, 1, 3),
+  workflow_focus_areas: multi(workflowAreas, 1, 3).optional(),
   primary_workflow_name: trimmed(3, 80),
-  workflow_trigger: trimmed(10, 300),
-  workflow_desired_outcome: trimmed(10, 300),
-  workflow_steps: z.array(workflowStepSchema).min(2).max(12),
-  workflow_frequency: z.enum(workflowFrequencies),
-  workflow_volume_band: z.enum(workflowVolumes),
-  handoff_count_band: z.enum(handoffCounts),
-  exception_frequency: z.enum(exceptionFrequencies),
-  primary_bottleneck: z.enum(bottlenecks),
+  workflow_trigger: optionalTrimmed(300),
+  workflow_desired_outcome: optionalTrimmed(300),
+  workflow_steps: z.array(workflowStepSchema).max(12).optional(),
+  workflow_frequency: z.enum(workflowFrequencies).optional(),
+  workflow_volume_band: z.enum(workflowVolumes).optional(),
+  handoff_count_band: z.enum(handoffCounts).optional(),
+  exception_frequency: z.enum(exceptionFrequencies).optional(),
+  primary_bottleneck: z.enum(bottlenecks).optional(),
   bottleneck_detail: optionalTrimmed(500),
   delay_band: z.enum(delayBands).optional(),
   manual_effort_band: z.enum(manualEfforts).optional(),
   rework_frequency: z.enum(reworkFrequencies).optional(),
 
   // §6.5 Systems and data
-  system_categories: multi(systemCategories, 1, 10, ['none']),
+  system_categories: multi(systemCategories, 1, 10, ['none']).optional(),
   system_inventory: z.array(systemInventoryItemSchema).max(10).optional(),
-  integration_state: z.enum(integrationStates),
-  data_source_categories: multi(dataSources, 1, 10, ['none']),
-  data_quality_state: z.enum(dataQualityStates),
-  data_access_state: z.enum(dataAccessStates),
-  regulated_data_categories: multi(regulatedDataCategories, 1, 8, ['none']),
+  integration_state: z.enum(integrationStates).optional(),
+  data_source_categories: multi(dataSources, 1, 10, ['none']).optional(),
+  data_quality_state: z.enum(dataQualityStates).optional(),
+  data_access_state: z.enum(dataAccessStates).optional(),
+  regulated_data_categories: multi(regulatedDataCategories, 1, 8, ['none']).optional(),
 
   // §6.6 Capacity and constraints
-  process_owner_role: trimmed(2, 80),
-  change_capacity: z.enum(changeCapacities),
-  implementation_timing: z.enum(implementationTimings),
+  process_owner_role: optionalTrimmed(80),
+  change_capacity: z.enum(changeCapacities).optional(),
+  implementation_timing: z.enum(implementationTimings).optional(),
   investment_constraint: z.enum(investmentConstraints).optional(),
-  stakeholder_roles: z.array(trimmed(2, 80)).max(8).optional(),
+  // Blank rows are dropped rather than rejected: an extra empty "Add" row
+  // must never invalidate the whole field.
+  stakeholder_roles: z
+    .array(z.string().trim().max(80))
+    .max(8)
+    .transform((roles) => {
+      const filled = roles.filter((role) => role.length > 0);
+      return filled.length > 0 ? filled : undefined;
+    })
+    .optional(),
   known_dependencies: optionalTrimmed(500),
   known_risks: optionalTrimmed(500),
 
@@ -394,32 +408,11 @@ const questionnaireObject = z.object({
 });
 
 export const paidQuestionnaireSchema = questionnaireObject.superRefine((value, context) => {
-  // §6.8: metrics are only meaningful against a measured or estimated baseline.
-  if (
-    (value.baseline_availability === 'not_measured' || value.baseline_availability === 'unknown') &&
-    value.baseline_metrics !== undefined &&
-    value.baseline_metrics.length > 0
-  ) {
-    context.addIssue({
-      code: 'custom',
-      path: ['baseline_metrics'],
-      message: 'baseline_metrics must be absent when no baseline is available.',
-    });
-  }
-
-  // §6.8: step sequences must be exactly 1..n with no duplicates or gaps, and
-  // step ids must be unique.
-  const sequences = value.workflow_steps.map((step) => step.sequence).sort((a, b) => a - b);
-  const contiguous = sequences.every((sequence, index) => sequence === index + 1);
-  if (!contiguous) {
-    context.addIssue({
-      code: 'custom',
-      path: ['workflow_steps'],
-      message: 'Step sequences must be contiguous integers starting at 1.',
-    });
-  }
-  const stepIds = new Set(value.workflow_steps.map((step) => step.step_id));
-  if (stepIds.size !== value.workflow_steps.length) {
+  // §6.8: step ids must be unique — the client generates them, so a clash is
+  // a bug, not a customer mistake.
+  const steps = value.workflow_steps ?? [];
+  const stepIds = new Set(steps.map((step) => step.step_id));
+  if (stepIds.size !== steps.length) {
     context.addIssue({
       code: 'custom',
       path: ['workflow_steps'],
@@ -427,37 +420,14 @@ export const paidQuestionnaireSchema = questionnaireObject.superRefine((value, c
     });
   }
 
-  // §6.8: an inventory row must belong to a selected system category.
-  for (const [index, item] of (value.system_inventory ?? []).entries()) {
-    if (!value.system_categories.includes(item.category_id)) {
-      context.addIssue({
-        code: 'custom',
-        path: ['system_inventory', index, 'category_id'],
-        message: 'Inventory category must be one of the selected system categories.',
-      });
-    }
-  }
-
   // §7: for regulated_data, none and unknown are mutually exclusive (none is
   // already exclusive with everything via the multi helper).
-  if (
-    value.regulated_data_categories.includes('none') &&
-    value.regulated_data_categories.includes('unknown')
-  ) {
+  const regulated = value.regulated_data_categories ?? [];
+  if (regulated.includes('none') && regulated.includes('unknown')) {
     context.addIssue({
       code: 'custom',
       path: ['regulated_data_categories'],
       message: '"none" and "unknown" are mutually exclusive.',
-    });
-  }
-
-  // Stakeholder roles must be unique like every multi-value field.
-  const roles = value.stakeholder_roles ?? [];
-  if (new Set(roles).size !== roles.length) {
-    context.addIssue({
-      code: 'custom',
-      path: ['stakeholder_roles'],
-      message: 'Stakeholder roles must be unique.',
     });
   }
 });
