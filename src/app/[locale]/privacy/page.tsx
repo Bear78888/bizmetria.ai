@@ -61,11 +61,10 @@ export default async function PrivacyPage({ params }: LegalPageProps) {
         {es
           ? 'Puede solicitar una copia o la eliminación de sus datos escribiéndonos.'
           : 'You can request a copy of your data, or its deletion, by contacting us.'}
-        {/* TODO: confirm contact email with owner */}
       </p>
 
       <h2>{es ? 'Contacto' : 'Contact'}</h2>
-      <p>support@bizmetria.com {/* TODO: confirm with owner */}</p>
+      <p>support@bizmetria.com</p>
     </main>
   );
 }
