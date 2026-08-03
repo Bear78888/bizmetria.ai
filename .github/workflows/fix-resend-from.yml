@@ -1,0 +1,90 @@
+# Replaces RESEND_FROM_EMAIL on Vercel Production with the canonical sender,
+# stored as a readable (encrypted, not Sensitive) variable. The previous
+# entry was Sensitive, which made the delivery failure undiagnosable.
+# Optionally does the same for RESEND_API_KEY when a new key is pasted into
+# the dispatch input (the input is masked in logs).
+
+name: Fix Resend sender variable
+
+on:
+  workflow_dispatch:
+    inputs:
+      new_api_key:
+        description: 'Optional: new Resend API key (re_...). Leave empty to keep the current one.'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  fix:
+    if: github.repository == 'Bear78888/bizmetria.ai'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: development
+    env:
+      VERCEL_TEAM_ID: team_16CsPHPlAUmw7W3mN2Qpf6RL
+      VERCEL_PROJECT_ID: prj_HUVYbskD1dwszdohnm1zQ0wLqcA4
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      NEW_API_KEY: ${{ inputs.new_api_key }}
+
+    steps:
+      - name: Replace the sender variable (and the key when provided)
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$VERCEL_TOKEN" || { echo "VERCEL_TOKEN is missing." >&2; exit 1; }
+          echo "::add-mask::$VERCEL_TOKEN"
+          if [ -n "$NEW_API_KEY" ]; then echo "::add-mask::$NEW_API_KEY"; fi
+
+          node <<'NODE'
+          const token = process.env.VERCEL_TOKEN;
+          const teamId = process.env.VERCEL_TEAM_ID;
+          const projectId = process.env.VERCEL_PROJECT_ID;
+          const base = `https://api.vercel.com/v9/projects/${encodeURIComponent(projectId)}/env`;
+          const query = `teamId=${encodeURIComponent(teamId)}`;
+          const headers = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
+
+          async function replaceVar(key, value) {
+            const listResponse = await fetch(`${base}?${query}`, { headers });
+            if (!listResponse.ok) throw new Error(`env list failed: ${listResponse.status}`);
+            const { envs = [] } = await listResponse.json();
+            const entries = envs.filter(
+              (env) =>
+                env.key === key &&
+                Array.isArray(env.target) &&
+                env.target.includes('production') &&
+                !env.gitBranch &&
+                !env.configurationId,
+            );
+            for (const entry of entries) {
+              const del = await fetch(`${base}/${encodeURIComponent(entry.id)}?${query}`, {
+                method: 'DELETE',
+                headers,
+              });
+              if (!del.ok) throw new Error(`deleting ${key} (${entry.id}) failed: ${del.status}`);
+              console.log(`${key}: deleted old entry (type=${entry.type})`);
+            }
+            const create = await fetch(`${base}?${query}`, {
+              method: 'POST',
+              headers,
+              body: JSON.stringify({ key, value, type: 'encrypted', target: ['production'] }),
+            });
+            if (!create.ok) {
+              throw new Error(`creating ${key} failed: ${create.status} ${await create.text()}`);
+            }
+            console.log(`${key}: recreated as encrypted`);
+          }
+
+          const newKey = process.env.NEW_API_KEY;
+          await replaceVar('RESEND_FROM_EMAIL', 'BizMetria <no-reply@bizmetria.com>');
+          if (newKey) {
+            if (!newKey.startsWith('re_')) throw new Error('New key does not look like a Resend key.');
+            await replaceVar('RESEND_API_KEY', newKey);
+          } else {
+            console.log('RESEND_API_KEY: left unchanged (no new key provided).');
+          }
+          NODE
+
+          echo "Done. Run deploy-production.yml so the runtime picks the values up."
