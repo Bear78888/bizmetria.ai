@@ -2404,3 +2404,30 @@ main p a:hover,
   width: 100%;
   margin: 0 0 8px;
 }
+
+/* Legal skeleton pages */
+
+.legal-page {
+  max-width: 720px;
+  padding-block: 48px 80px;
+}
+
+.legal-page h2 {
+  margin-top: 34px;
+  font-size: 1.3rem;
+}
+
+.legal-note {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-style: italic;
+}
+
+.footer-meta a:not(.language-link) {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.footer-meta a:not(.language-link):hover {
+  color: var(--text);
+}
